@@ -11,6 +11,37 @@ export default function Navbar() {
 
       </Link>
 
+      <div className="flex gap-x-1.5">
+        <Link
+          href={"/store"}
+        >
+          <Button size="sm" variant={"secondary"}>Store</Button>
+
+        </Link>
+        <Link
+          href={"/store"}
+        >
+          <Button
+
+            size="sm"
+            variant={"ghost"}
+          >
+            About
+          </Button>
+
+        </Link>
+        <Link
+          href={"/store"}
+        >
+          <Button
+            size="sm"
+            variant={"ghost"}>
+            Contact
+          </Button>
+
+        </Link>
+      </div>
+
 
     </nav>
   );
