@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "../globals.css";
 import {ThemeProvider} from "@/components/ThemeProvider";
 import Container from "@/components/ui/container";
+import Navbar from "@/app/(root)/components/navbar";
 
 
 export const metadata: Metadata = {
@@ -22,9 +23,8 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem={true}
           storageKey="theme"
-
         >
-          {/* <Navbar /> */}
+          <Navbar />
 
           <Container>
             {children}
