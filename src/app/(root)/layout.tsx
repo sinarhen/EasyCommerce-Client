@@ -25,11 +25,7 @@ export default function RootLayout({
           storageKey="theme"
         >
           <Navbar />
-
-          <Container>
-            {children}
-
-          </Container>
+          {children}
 
           {/* <Footer /> */}
         </ThemeProvider>
