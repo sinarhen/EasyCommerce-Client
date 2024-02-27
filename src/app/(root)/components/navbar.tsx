@@ -8,53 +8,60 @@ import {Info, Phone, ShoppingCart } from "lucide-react";
 
 export default function Navbar() {
   return (
-    <nav className="dark:bg-black  flex items-center justify-between py-2 px-4 sm:px-16 md:px-32 lg:px-64 xl:px-72 text-white bg-zinc-900">
-      <Link href={"/"}>
-        <AnimatedLogo />
+    <nav className="dark:bg-black fixed w-full z-50 flex items-center justify-between py-2  text-white bg-zinc-900">
+      <div className="flex justify-between items-center w-full px-4 sm:px-16 md:px-32 lg:px-64 xl:px-72">
+        <Link href={"/"}>
+          <AnimatedLogo />
 
-      </Link>
+        </Link>
 
-      <div className="flex gap-x-1.5">
-        <Link
-          href={"/store"}
-        >
-          <Button
-            size="sm"
-            variant={"secondary"}
-            className={"flex gap-x-2 items-center"}
+
+        <div className="flex gap-x-1.5">
+          <Link
+            href={"/store"}
           >
-            <ShoppingCart size={12} />
-            Store
+            <Button
+              size="sm"
+              variant={"secondary"}
+              className={"flex gap-x-2 items-center"}
+            >
+              <ShoppingCart size={12} />
+              Store
 
-          </Button>
+            </Button>
 
-        </Link>
-        <Link
-          href={"/store"}
-        >
-          <Button
-
-            size="sm"
-            variant={"ghost"}
-            className="flex gap-x-2 items-center"
+          </Link>
+          <Link
+            href={"/store"}
           >
-            <Info size={12} />
-            About
-          </Button>
+            <Button
 
-        </Link>
-        <Link
-          href={"/store"}
-        >
+              size="sm"
+              variant={"ghost"}
+              className="flex gap-x-2 items-center"
+            >
+              <Info size={12} />
+              About
+            </Button>
 
-          <Button
-            size="sm"
-            variant={"ghost"} className='flex gap-x-2 items-center'>
-            <Phone size={12}/>
-            Contact
-          </Button>
+          </Link>
+          <Link
+            href={"/store"}
+          >
 
-        </Link>
+            <Button
+              size="sm"
+              variant={"ghost"} className='flex gap-x-2 items-center'>
+              <Phone size={12}/>
+              Contact
+            </Button>
+
+          </Link>
+        </div>
+
+      </div>
+      <div>
+
       </div>
 
 
