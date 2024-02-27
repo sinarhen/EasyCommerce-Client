@@ -21,29 +21,50 @@ export default function GridSmallBackgroundDemo() {
   const [isHovered, setIsHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState<any>({ x: null, y: null });
   const containerRef = useRef<any>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
   const updateMousePosition = (e: any) => {
     const rect = containerRef.current.getBoundingClientRect();
     setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
 
   useEffect(() => {
-    containerRef.current.addEventListener("mousemove", updateMousePosition);
-    return () => {
-      if (containerRef.current) {
-        containerRef.current.removeEventListener(
-          "mousemove",
-          updateMousePosition
-        );
-      }
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia("(max-width: 768px)").matches);
     };
+
+    window.addEventListener("resize", checkMobile);
+    checkMobile();
+
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const maskSize = isHovered ? 900 : 0; // revealSize from MaskContainer
-  const children = (
-    <div className={`text-sm text-orange-600`}>
-      Explore wide range of products with our free and easy to use platform.
-    </div>
-  );
+  useEffect(() => {
+    if (!isMobile) {
+      containerRef.current.addEventListener("mousemove", updateMousePosition);
+      return () => {
+        if (containerRef.current) {
+          containerRef.current.removeEventListener(
+            "mousemove",
+            updateMousePosition
+          );
+        }
+      };
+    }
+  }, [isMobile]);
+
+
+  const maskSize = isHovered && !isMobile ? 300 : 0; // revealSize from MaskContainer
+
+  const animations = !isMobile ? {
+    animate: {
+    WebkitMaskPosition: `${mousePosition.x - maskSize / 2}px ${
+      mousePosition.y - maskSize / 2
+    }px`,
+      WebkitMaskSize: `${maskSize}px`,
+  },
+    transition: { type: "tween", ease: "backOut", duration: 0.1 }
+  } : {};
 
   return (
     <div
@@ -60,21 +81,15 @@ export default function GridSmallBackgroundDemo() {
       >
         <div>
           <motion.div
+            {...animations}
             className={
-              "w-full h-full flex   absolute bg-black bg-grid-white/[0.2] text-white [mask-image:url(/mask.svg)] [mask-size:40px] [mask-repeat:no-repeat]"
+              "w-full h-full flex absolute bg-black  bg-grid-white/[0.2] dark:bg-white dark:bg-grid-black/[0.2] text-white [mask-image:url(/mask.svg)] [mask-size:40px] [mask-repeat:no-repeat]"
             }
-            animate={{
-              WebkitMaskPosition: `${mousePosition.x - maskSize / 2}px ${
-                mousePosition.y - maskSize / 2
-              }px`,
-              WebkitMaskSize: `${maskSize}px`,
-            }}
-            transition={{ type: "tween", ease: "backOut", duration: 0.1 }}
           >
-            <div className="absolute  bg-black h-full w-full z-10 opacity-50" />
+          <div className={cn(`absolute  bg-black h-full w-full z-10 opacity-50`, isMobile ? "hidden" : "")} />
             <div
               className={cn(
-                "inline   font-bold z-20 px-4 w-full md:py-16 py-4 md:w-3/4"
+                `inline z-20 px-4 w-full md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} md:w-3/4`
               )}
             >
               Explore wide range of products with
@@ -85,28 +100,37 @@ export default function GridSmallBackgroundDemo() {
               >
                 {" EasyCommerce."}
               </span>
-              {children}
+              <div className={`text-sm font-medium text-gradient animate-gradient`}>
+                Explore wide range of products with our
+                free and easy to use platform.
+              </div>
             </div>
           </motion.div>
 
           <div
             className={cn(
-              "w-full h-full  inline items-center font-bold dark:text-white w-3/4 md:w-3/4 w-full md:py-16 py-4 px-4"
+              " h-full items-center font-bold dark:text-white md:w-3/4 w-full md:py-16 py-4 px-4"
             )}
           >
             Explore wide range of products with
             <span className="text-gradient animate-gradient">
               {" EasyCommerce."}
-              {children}
             </span>
+
+              <div className={`text-sm font-medium`}>
+                Explore wide range of products with our
+                free and easy to use platform.
+              </div>
           </div>
         </div>
+
       </motion.div>
-      <div className={`px-4 py-4 md:py-6 lg:py-8 xl:py-10`}>
-        <Button size="lg" variant="default" className="absolute flex gap-x-2 z-10">
+      <div className={`mt-2 px-${backgroundPaddingX._}`}>
+        <Button size="lg" variant="default" className="flex gap-x-2 z-10">
           <ShoppingBag /> Shop Now
         </Button>
       </div>
+
     </div>
   );
 }
