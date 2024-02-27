@@ -7,11 +7,12 @@ import {SunMoon} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
 
 const ThemeToggle = () => {
+  const { theme, setTheme } = useTheme();
 
   return (
     <Button
       onClick={() => {
-        // setTheme(theme === "dark" ? "light" : "dark");
+        setTheme(theme === "dark" ? "light" : "dark");
       }}
       variant="ghost" className={"mr-4"}
     >
