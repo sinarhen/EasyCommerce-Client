@@ -1,7 +1,7 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import {useEffect, useRef, useState} from "react";
+import {motion} from "framer-motion";
+import {cn} from "@/lib/utils";
 
 export const MaskContainer = ({
                                 children,
@@ -24,11 +24,11 @@ export const MaskContainer = ({
   hoverableClassName?: string;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [mousePosition, setMousePosition] = useState<any>({ x: null, y: null });
+  const [mousePosition, setMousePosition] = useState<any>({x: null, y: null});
   const containerRef = useRef<any>(null);
   const updateMousePosition = (e: any) => {
     const rect = containerRef.current.getBoundingClientRect();
-    setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    setMousePosition({x: e.clientX - rect.left, y: e.clientY - rect.top});
   };
 
   useEffect(() => {
@@ -61,11 +61,11 @@ export const MaskContainer = ({
             }px`,
             WebkitMaskSize: `${maskSize}px`,
           }}
-          transition={{ type: "tween", ease: "backOut", duration: 0.1 }}
+          transition={{type: "tween", ease: "backOut", duration: 0.1}}
         >
-          <div className="absolute inset-0 bg-black h-full w-full z-10 opacity-50" />
+          <div className="absolute inset-0 bg-black h-full w-full z-10 opacity-50"/>
           <div
-            className={cn("inline  justify-center items-center   font-bold z-20", hoverableClassName) }
+            className={cn("inline  justify-center items-center   font-bold z-20", hoverableClassName)}
           >
             {children}
             <span

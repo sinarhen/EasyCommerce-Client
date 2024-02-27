@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss"
+import type {Config} from "tailwindcss"
 
 const svgToDataUri = require("mini-svg-data-uri");
 
@@ -14,7 +14,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   prefix: "",
   theme: {
     container: {
@@ -67,12 +67,12 @@ const config = {
       },
       keyframes: {
         "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+          from: {height: "0"},
+          to: {height: "var(--radix-accordion-content-height)"},
         },
         "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+          from: {height: "var(--radix-accordion-content-height)"},
+          to: {height: "0"},
         },
         gradient: {
           "0": {backgroundPosition: "0% 50%"},
@@ -89,7 +89,7 @@ const config = {
   },
   plugins: [
     require("tailwindcss-animate"),
-    function ({ matchUtilities, theme }: any) {
+    function ({matchUtilities, theme}: any) {
       matchUtilities(
         {
           "bg-grid": (value: any) => ({
@@ -108,7 +108,7 @@ const config = {
             )}")`,
           }),
         },
-        { values: flattenColorPalette(theme("backgroundColor")), type: "color" }
+        {values: flattenColorPalette(theme("backgroundColor")), type: "color"}
       );
     },
   ],

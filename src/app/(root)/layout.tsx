@@ -1,7 +1,6 @@
-import type { Metadata } from "next";
+import type {Metadata} from "next";
 import "../globals.css";
 import {ThemeProvider} from "@/components/ThemeProvider";
-import Container from "@/components/ui/container";
 import Navbar from "@/app/(root)/components/navbar";
 
 
@@ -11,25 +10,25 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
+                                     children,
+                                   }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem={true}
-          storageKey="theme"
-        >
-          <Navbar />
-          {children}
+    <body>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem={true}
+      storageKey="theme"
+    >
+      <Navbar/>
+      {children}
 
-          {/* <Footer /> */}
-        </ThemeProvider>
-      </body>
+      {/* <Footer /> */}
+    </ThemeProvider>
+    </body>
     </html>
   );
 }
