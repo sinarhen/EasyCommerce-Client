@@ -47,7 +47,7 @@ export const MaskContainer = ({
   return (
     <motion.div
       ref={containerRef}
-      className={cn("h-screen", className)}
+      className={cn("h-3/4", className)}
       animate={{
         backgroundColor: isHovered ? "var(--slate-900)" : "var(--white)",
       }}
@@ -72,7 +72,9 @@ export const MaskContainer = ({
               className="text-gradient animate-gradient"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
-            > EasyCommerce</span>
+            >
+              {hoverable}
+            </span>
 
           </div>
 

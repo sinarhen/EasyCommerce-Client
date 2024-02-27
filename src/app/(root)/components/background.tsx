@@ -9,12 +9,12 @@ export default function GridSmallBackgroundDemo() {
       <div className="text-5xl font-bold sm:4xl md:text-6xl w-full lg:text-7xl xl:text-9xl">
         <MaskContainer
           hoverable={" EasyCommerce"}
-          hoverableClassName={"px-9"}
-          revealSize={300}
+          hoverableClassName={"px-9 py-2.5"}
+          revealSize={200}
           size={40}
           revealText=
             {
-              <div className=' px-9'>
+              <div className='py-2.5 px-9'>
                 Explore wide range of products with
                 <span className='text-gradient animate-gradient'>
                   {" EasyCommerce"}
