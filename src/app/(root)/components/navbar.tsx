@@ -4,10 +4,12 @@ import React from "react";
 import AnimatedLogo from "./animated-logo";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
-import {Info, Phone, ShoppingCart} from "lucide-react";
+import {Info, Phone, ShoppingCart, SunMoon} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
+import {useTheme} from "next-themes";
 
 export default function Navbar() {
+  const {theme, setTheme} = useTheme();
   return (
     <nav className="dark:bg-black fixed w-full z-50 flex items-center justify-between py-2  text-white bg-zinc-900">
       <div className="flex justify-between items-center w-full px-4 sm:px-16 md:px-32 lg:px-64 xl:px-72">
@@ -64,8 +66,13 @@ export default function Navbar() {
       <div>
 
       </div>
-
-
-    </nav>
+      <Button
+        onClick={() => {
+          setTheme(theme === "dark" ? "light" : "dark");
+        }}
+        variant="ghost" className={"mr-4"}>
+        <SunMoon className={"hover:text-black text-white"} size={iconSizes.sm}/>
+      </Button>
+  </nav>
   );
 }
