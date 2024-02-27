@@ -5,6 +5,7 @@ import AnimatedLogo from "./animated-logo";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
 import {Info, Phone, ShoppingCart} from "lucide-react";
+import {iconSizes} from "@/lib/constants";
 
 export default function Navbar() {
   return (
@@ -25,7 +26,7 @@ export default function Navbar() {
               variant={"secondary"}
               className={"flex gap-x-2 items-center"}
             >
-              <ShoppingCart size={12}/>
+              <ShoppingCart size={iconSizes.sm}/>
               Store
 
             </Button>
@@ -40,7 +41,7 @@ export default function Navbar() {
               variant={"ghost"}
               className="flex gap-x-2 items-center"
             >
-              <Info size={12}/>
+              <Info size={iconSizes.sm}/>
               About
             </Button>
 
@@ -52,7 +53,7 @@ export default function Navbar() {
             <Button
               size="sm"
               variant={"ghost"} className='flex gap-x-2 items-center'>
-              <Phone size={12}/>
+              <Phone size={iconSizes.sm} />
               Contact
             </Button>
 

@@ -1,6 +1,6 @@
 "use client";
 import {useEffect, useRef, useState} from "react";
-import {motion} from "framer-motion";
+import {motion, useInView} from "framer-motion";
 import {cn} from "@/lib/utils";
 
 export const MaskContainer = ({
@@ -42,7 +42,7 @@ export const MaskContainer = ({
       }
     };
   }, []);
-  let maskSize = isHovered ? revealSize : size;
+  let maskSize = isHovered ? revealSize : 0;
 
   return (
     <motion.div
@@ -54,7 +54,7 @@ export const MaskContainer = ({
     >
       <div>
         <motion.div
-          className={"w-full h-full flex justify-center absolute bg-black bg-grid-white/[0.2] text-white [mask-image:url(/mask.svg)] [mask-size:40px] [mask-repeat:no-repeat]"}
+          className={"w-full h-full flex   absolute bg-black bg-grid-white/[0.2] text-white [mask-image:url(/mask.svg)] [mask-size:40px] [mask-repeat:no-repeat]"}
           animate={{
             WebkitMaskPosition: `${mousePosition.x - maskSize / 2}px ${
               mousePosition.y - maskSize / 2
