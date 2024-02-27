@@ -63,9 +63,9 @@ export const MaskContainer = ({
           }}
           transition={{type: "tween", ease: "backOut", duration: 0.1}}
         >
-          <div className="absolute inset-0 bg-black h-full w-full z-10 opacity-50"/>
+          <div className="absolute  bg-black h-full w-full z-10 opacity-50"/>
           <div
-            className={cn("inline  justify-center items-center   font-bold z-20", hoverableClassName)}
+            className={cn("inline   font-bold z-20", hoverableClassName)}
           >
             {children}
             <span
@@ -82,7 +82,7 @@ export const MaskContainer = ({
 
         <div
 
-          className={cn("w-full h-full  inline items-center font-bold justify-center  dark:text-white", revealClassName)}>
+          className={cn("w-full h-full  inline items-center font-bold dark:text-white", revealClassName)}>
           {revealText}
         </div>
       </div>
