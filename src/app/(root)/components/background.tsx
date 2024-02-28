@@ -17,6 +17,13 @@ const backgroundPaddingY = {
   xl: 72,
 };
 
+const headerVariants = {
+  hidden: { opacity: 0, x: -40},
+  visible: { opacity: 1,x: 0}
+};
+
+const transitionDuration = 0.7;
+
 export default function GridSmallBackgroundDemo() {
   const [isHovered, setIsHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState<any>({ x: null, y: null });
@@ -68,7 +75,7 @@ export default function GridSmallBackgroundDemo() {
 
   return (
     <div
-      className="md:h-max duration-700 transition-colors overflow-hidden h-[40rem] md:text-start w-full py-32 md:py-32 dark:bg-black bg-white relative dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2]"
+      className="md:h- duration-700 transition-colors overflow-hidden flex items-center text-center h-screen md:text-start w-full  dark:bg-black bg-white relative dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2]"
     >
       <motion.div
         ref={containerRef}
@@ -94,7 +101,7 @@ export default function GridSmallBackgroundDemo() {
                   `inline z-20 px-${backgroundPaddingX._} w-full md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} md:w-3/4`
                 )}
               >
-                Explore wide range of products with
+                Welcome to
                 <span
                   className="text-gradient animate-gradient"
                   onMouseEnter={() => setIsHovered(true)}
@@ -102,9 +109,10 @@ export default function GridSmallBackgroundDemo() {
                 >
                 {" EasyCommerce."}
               </span>
-                <div className={`text-sm font-medium text-gradient animate-gradient`}>
-                  Explore wide range of products with our
-                  free and easy to use platform.
+                <div className={`text-sm w-full mt-2 md:w-1/2 font-medium text-gradient animate-gradient`}>
+
+                  Your one-stop solution for all your ecommerce needs. Explore our wide range of products and become a seller today.
+
                 </div>
               </div>
             </motion.div>
@@ -114,20 +122,39 @@ export default function GridSmallBackgroundDemo() {
 
           <div
             className={cn(
-              `transition-colors duration-300 h-full items-center overflow-hidden font-bold dark:text-white md:w-3/4 w-full md:py-16 py-4 px-${backgroundPaddingX._}`
+              `transition-all duration-300 h-full items-center overflow-hidden font-bold dark:text-white md:w-3/4 w-full md:py-16 py-4 px-${backgroundPaddingX._}`
             )}
           >
-            Explore wide range of products with
-            <span className="text-gradient animate-gradient">
+            <motion.div
+              variants={headerVariants}
+              initial="hidden"
+              animate="visible"
+              transition={{ duration: transitionDuration, delay: 0.3}}
+            >
+              Welcome to
+
+            </motion.div>
+            <motion.div
+              variants={headerVariants}
+              initial="hidden"
+              animate="visible"
+              transition={{ duration: transitionDuration, delay: 0.5}}
+              className="text-gradient  translate-x-12 animate-gradient">
               {" EasyCommerce."}
-            </span>
+            </motion.div>
 
-              <div className={`text-sm font-medium`}>
-                Explore wide range of products with our
-                free and easy to use platform.
-              </div>
+            <motion.div
+              className={`text-sm font-medium px-[20%] md:px-0 w-full md:w-1/2 mt-2`}
+              initial={{ opacity: 0}}
+              animate={{ opacity: 1}}
+              transition={{ duration: transitionDuration, delay: 0.8}}
 
-            <div className="flex relative flex-col sm:flex-row w-full mt-6 sm:mt-4  sm:w-fit gap-x-2 z-10">
+            >
+              Your one-stop solution for all your ecommerce needs. Explore our wide range of products and become a seller today.
+
+            </motion.div>
+
+            <div className="flex relative flex-col sm:flex-row w-full mt-6 sm:mt-4  md:w-fit gap-x-2 z-10">
               <Button size="lg" variant="default" className="gap-x-2 w-full ">
                 <ShoppingBag /> Shop Now
               </Button>
