@@ -134,13 +134,13 @@ export default function GridSmallBackgroundDemo() {
                 )}
               >
                 Welcome to
-                <span
+                <div
                   className="text-gradient animate-gradient"
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                 >
                 {" EasyCommerce."}
-              </span>
+              </div>
                 <div className={`text-sm w-full mt-2 md:w-1/2 font-medium text-gradient animate-gradient`}>
                   Your one-stop solution for all your ecommerce needs. Explore our wide range of products and become a seller today.
                 </div>
@@ -150,7 +150,7 @@ export default function GridSmallBackgroundDemo() {
 
           <div
             className={cn(
-              `transition-all duration-300 h-full items-center overflow-hidden font-bold dark:text-white w-full md:py-16 py-4 px-${backgroundPaddingX._}`
+              `transition-all duration-300 h-full items-center overflow-hidden font-bold dark:text-white md:w-3/4 w-full md:py-16 py-4 px-${backgroundPaddingX._}`
             )}
           >
             <motion.div
