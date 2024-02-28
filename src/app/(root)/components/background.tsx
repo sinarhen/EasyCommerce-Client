@@ -141,7 +141,7 @@ export default function GridSmallBackgroundDemo() {
                 >
                 {" EasyCommerce."}
               </div>
-                <div className={`text-sm w-full mt-2 md:w-1/2 font-medium text-gradient animate-gradient`}>
+                <div className={`text-sm w-full mt-2 px-[20%] md:px-0 md:w-1/2 font-medium text-gradient animate-gradient`}>
                   Your one-stop solution for all your ecommerce needs. Explore our wide range of products and become a seller today.
                 </div>
               </div>
@@ -150,7 +150,7 @@ export default function GridSmallBackgroundDemo() {
 
           <div
             className={cn(
-              `transition-all duration-300 h-full items-center overflow-hidden font-bold dark:text-white md:w-3/4 w-full md:py-16 py-4 px-${backgroundPaddingX._}`
+              `transition-all duration-300 h-full items-center overflow-hidden font-bold dark:text-white w-full md:py-16 py-4 px-${backgroundPaddingX._}`
             )}
           >
             <motion.div
