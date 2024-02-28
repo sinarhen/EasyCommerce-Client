@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from "react";
+import React, {memo, useEffect, useRef, useState} from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -32,10 +32,7 @@ function useMobileDetection() {
       setIsMobile(window.matchMedia("(max-width: 768px)").matches);
     };
 
-    window.addEventListener("resize", checkMobile);
     checkMobile();
-
-    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   return isMobile;
@@ -81,7 +78,7 @@ interface MaskContainerProps {
   children: React.ReactNode;
 }
 
-function MaskContainer({ isMobile, mousePosition, isHovered, children }: MaskContainerProps) {
+const MaskContainer = memo(({ isMobile, mousePosition, isHovered, children }: MaskContainerProps) => {
   const maskSize = isHovered && !isMobile ? 300 : 0;
 
   const animations = !isMobile ? {
@@ -104,7 +101,9 @@ function MaskContainer({ isMobile, mousePosition, isHovered, children }: MaskCon
       {children}
     </motion.div>
   );
-}
+});
+
+MaskContainer.displayName = "MaskContainer";
 
 export default function GridSmallBackgroundDemo() {
   const [isHovered, setIsHovered] = useState(false);
