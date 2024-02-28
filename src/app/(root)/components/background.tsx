@@ -24,16 +24,8 @@ const headerVariants = {
 
 const transitionDuration = 0.7;
 
-export default function GridSmallBackgroundDemo() {
-  const [isHovered, setIsHovered] = useState(false);
-  const [mousePosition, setMousePosition] = useState<any>({ x: null, y: null });
-  const containerRef = useRef<any>(null);
+function useMobileDetection() {
   const [isMobile, setIsMobile] = useState(false);
-
-  const updateMousePosition = (e: any) => {
-    const rect = containerRef.current.getBoundingClientRect();
-    setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  };
 
   useEffect(() => {
     const checkMobile = () => {
@@ -46,8 +38,27 @@ export default function GridSmallBackgroundDemo() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  return isMobile;
+}
+
+interface MousePosition {
+  x: number | null;
+  y: number | null;
+}
+
+function useMousePosition(isMobile: boolean, containerRef: React.RefObject<HTMLDivElement>) {
+  const [mousePosition, setMousePosition] = useState<MousePosition>({ x: null, y: null });
+
   useEffect(() => {
-    if (!isMobile) {
+    if (!isMobile && containerRef.current) {
+      const updateMousePosition = (e: MouseEvent) => {
+        const rect = containerRef?.current?.getBoundingClientRect();
+        if (rect)
+        {
+          setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+        }
+      };
+
       containerRef.current.addEventListener("mousemove", updateMousePosition);
       return () => {
         if (containerRef.current) {
@@ -58,20 +69,48 @@ export default function GridSmallBackgroundDemo() {
         }
       };
     }
-  }, [isMobile]);
+  }, [isMobile, containerRef]);
 
+  return mousePosition;
+}
 
-  const maskSize = isHovered && !isMobile ? 300 : 0; // revealSize from MaskContainer
+interface MaskContainerProps {
+  isMobile: boolean;
+  mousePosition: MousePosition;
+  isHovered: boolean;
+  children: React.ReactNode;
+}
+
+function MaskContainer({ isMobile, mousePosition, isHovered, children }: MaskContainerProps) {
+  const maskSize = isHovered && !isMobile ? 300 : 0;
 
   const animations = !isMobile ? {
     animate: {
-    WebkitMaskPosition: `${mousePosition.x - maskSize / 2}px ${
-      mousePosition.y - maskSize / 2
-    }px`,
+      WebkitMaskPosition: `${mousePosition?.x ? mousePosition.x - maskSize / 2 : 0}px ${
+        mousePosition?.y ? mousePosition.y - maskSize / 2 : 0
+      }px`,
       WebkitMaskSize: `${maskSize}px`,
-  },
+    },
     transition: { type: "tween", ease: "backOut", duration: 0.1 }
   } : {};
+
+  return (
+    <motion.div
+      {...animations}
+      className={
+        "w-full h-full flex absolute bg-black  bg-grid-white/[0.2] dark:bg-white dark:bg-grid-black/[0.2] text-white [mask-image:url(/mask.svg)] [mask-size:40px] [mask-repeat:no-repeat]"
+      }
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export default function GridSmallBackgroundDemo() {
+  const [isHovered, setIsHovered] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isMobile = useMobileDetection();
+  const mousePosition = useMousePosition(isMobile, containerRef);
 
   return (
     <div
@@ -87,14 +126,8 @@ export default function GridSmallBackgroundDemo() {
         }}
       >
         <div>
-
           {!isMobile && (
-            <motion.div
-              {...animations}
-              className={
-                "w-full h-full flex absolute bg-black  bg-grid-white/[0.2] dark:bg-white dark:bg-grid-black/[0.2] text-white [mask-image:url(/mask.svg)] [mask-size:40px] [mask-repeat:no-repeat]"
-              }
-            >
+            <MaskContainer isMobile={isMobile} mousePosition={mousePosition} isHovered={isHovered}>
               <div className={cn(`absolute  bg-black h-full w-full z-10 opacity-50`, isMobile ? "hidden" : "")} />
               <div
                 className={cn(
@@ -110,14 +143,10 @@ export default function GridSmallBackgroundDemo() {
                 {" EasyCommerce."}
               </span>
                 <div className={`text-sm w-full mt-2 md:w-1/2 font-medium text-gradient animate-gradient`}>
-
                   Your one-stop solution for all your ecommerce needs. Explore our wide range of products and become a seller today.
-
                 </div>
               </div>
-            </motion.div>
-
-
+            </MaskContainer>
           )}
 
           <div
@@ -132,7 +161,6 @@ export default function GridSmallBackgroundDemo() {
               transition={{ duration: transitionDuration, delay: 0.3}}
             >
               Welcome to
-
             </motion.div>
             <motion.div
               variants={headerVariants}
@@ -148,18 +176,14 @@ export default function GridSmallBackgroundDemo() {
               initial={{ opacity: 0}}
               animate={{ opacity: 1}}
               transition={{ duration: transitionDuration, delay: 0.8}}
-
             >
               Your one-stop solution for all your ecommerce needs. Explore our wide range of products and become a seller today.
-
             </motion.div>
-
 
             <motion.div
               initial={{ opacity: 0, y: 20}}
               animate={{ opacity: 1, y: 0}}
               transition={{ duration: transitionDuration, delay: 1}}
-
               className="flex relative flex-col sm:flex-row w-full mt-6 sm:mt-4  md:w-fit gap-x-2 z-10">
               <Button size="lg" variant="default" className="gap-x-2 w-full ">
                 <ShoppingBag /> Shop Now
@@ -168,13 +192,10 @@ export default function GridSmallBackgroundDemo() {
               <Button size="lg" variant="outline" className="gap-x-2 w-full ">
                 <DollarSign /> Become a Seller
               </Button>
-
             </motion.div>
           </div>
         </div>
-
       </motion.div>
-
     </div>
   );
 }
