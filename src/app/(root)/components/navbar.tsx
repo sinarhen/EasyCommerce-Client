@@ -3,11 +3,12 @@ import React from "react";
 import {Info, Phone, ShoppingCart} from "lucide-react";
 import NavButton from "./nav-button";
 import Logo from "./logo";
-import ThemeToggle from "./theme-toggle";
 import {NavButtonProps} from "@/types/nav-button";
 import { motion } from "framer-motion";
+import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
+import dynamic from 'next/dynamic';
 
-
+const ThemeToggle = dynamic(() => import('./theme-toggle'), {ssr: false})
 
 const navButtons = [
   { href: "/store", icon: ShoppingCart, text: "Store", variant: "secondary" },
@@ -42,7 +43,14 @@ export default function Navbar() {
             ))}
         </div>
       </div>
-      <ThemeToggle />
+      <Tooltip>
+        <TooltipTrigger>
+          <ThemeToggle />
+        </TooltipTrigger>
+        <TooltipContent>
+          Toggle Theme
+        </TooltipContent>
+      </Tooltip>
     </nav>
   );
 }

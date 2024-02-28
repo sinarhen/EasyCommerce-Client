@@ -2,6 +2,7 @@ import type {Metadata} from "next";
 import "../globals.css";
 import {ThemeProvider} from "@/components/ThemeProvider";
 import Navbar from "@/app/(root)/components/navbar";
+import {TooltipProvider} from "@/components/ui/tooltip";
 
 
 export const metadata: Metadata = {
@@ -16,19 +17,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-    <body>
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem={true}
-      storageKey="theme"
-    >
-      <Navbar/>
-      {children}
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem={true}
+          storageKey="theme"
+        >
+          <TooltipProvider>
 
-      {/* <Footer /> */}
-    </ThemeProvider>
-    </body>
+            <Navbar/>
+
+            {children}
+
+            {/* <Footer /> */}
+
+          </TooltipProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
