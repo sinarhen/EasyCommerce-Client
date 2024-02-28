@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import {DollarSign, ShoppingBag, Store} from "lucide-react";
+import {DollarSign, ShoppingBag} from "lucide-react";
 
 const backgroundPaddingX = {
   _: 4,
@@ -68,12 +68,12 @@ export default function GridSmallBackgroundDemo() {
 
   return (
     <div
-      className="md:h-max transition-colors overflow-hidden h-[40rem] md:text-start w-full py-32 md:py-32 dark:bg-black bg-white relative dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2]"
+      className="md:h-max duration-700 transition-colors overflow-hidden h-[40rem] md:text-start w-full py-32 md:py-32 dark:bg-black bg-white relative dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2]"
     >
       <motion.div
         ref={containerRef}
         className={cn(
-          "h-3/4 text-6xl font-bold sm:text-5xl md:text-6xl w-full lg:text-7xl xl:text-8xl"
+          "h-3/4 text-6xl font-bold sm:text-6xl md:text-7xl w-full xl:text-8xl"
         )}
         animate={{
           backgroundColor: isHovered ? "var(--slate-900)" : "var(--white)",
@@ -91,7 +91,7 @@ export default function GridSmallBackgroundDemo() {
               <div className={cn(`absolute  bg-black h-full w-full z-10 opacity-50`, isMobile ? "hidden" : "")} />
               <div
                 className={cn(
-                  `inline z-20 px-4 w-full md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} md:w-3/4`
+                  `inline z-20 px-${backgroundPaddingX._} w-full md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} md:w-3/4`
                 )}
               >
                 Explore wide range of products with
@@ -114,7 +114,7 @@ export default function GridSmallBackgroundDemo() {
 
           <div
             className={cn(
-              " h-full items-center overflow-hidden font-bold dark:text-white md:w-3/4 w-full md:py-16 py-4 px-4"
+              `transition-colors duration-300 h-full items-center overflow-hidden font-bold dark:text-white md:w-3/4 w-full md:py-16 py-4 px-${backgroundPaddingX._}`
             )}
           >
             Explore wide range of products with
@@ -127,11 +127,12 @@ export default function GridSmallBackgroundDemo() {
                 free and easy to use platform.
               </div>
 
-            <div className="flex relative flex-col sm:flex-row w-full sm:w-fit gap-x-2 z-10">
-              <Button size="lg" variant="default" className="mt-3.5 gap-x-2 w-full ">
+            <div className="flex relative flex-col sm:flex-row w-full mt-6 sm:mt-4  sm:w-fit gap-x-2 z-10">
+              <Button size="lg" variant="default" className="gap-x-2 w-full ">
                 <ShoppingBag /> Shop Now
               </Button>
-              <Button size="lg" variant="outline" className="mt-3.5 gap-x-2 w-full ">
+                <span className="text-sm my-3 sm:hidden font-medium text-center ">or</span>
+              <Button size="lg" variant="outline" className="gap-x-2 w-full ">
                 <DollarSign /> Become a Seller
               </Button>
 
