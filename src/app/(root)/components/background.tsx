@@ -130,7 +130,7 @@ export default function GridSmallBackgroundDemo() {
               <div className={cn(`absolute  bg-black h-full w-full z-10 opacity-50`, isMobile ? "hidden" : "")} />
               <div
                 className={cn(
-                  `inline z-20 px-${backgroundPaddingX._} w-full md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} md:w-3/4`
+                  `inline z-20 px-${backgroundPaddingX._} w-full md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} `
                 )}
               >
                 Welcome to
@@ -150,7 +150,7 @@ export default function GridSmallBackgroundDemo() {
 
           <div
             className={cn(
-              `transition-all duration-300 h-full items-center overflow-hidden font-bold dark:text-white md:w-3/4 w-full md:py-16 py-4 px-${backgroundPaddingX._}`
+              `transition-all duration-300 h-full items-center overflow-hidden font-bold dark:text-white w-full md:py-16 py-4 px-${backgroundPaddingX._}`
             )}
           >
             <motion.div
