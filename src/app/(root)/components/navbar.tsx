@@ -1,9 +1,11 @@
+'use client'
 import React from "react";
 import {Info, Phone, ShoppingCart} from "lucide-react";
 import NavButton from "./nav-button";
 import Logo from "./logo";
 import ThemeToggle from "./theme-toggle";
 import {NavButtonProps} from "@/types/nav-button";
+import { motion } from "framer-motion";
 
 
 
@@ -13,6 +15,12 @@ const navButtons = [
   { href: "/contact", icon: Phone, text: "Contact", variant: "ghost" },
 ] as NavButtonProps[];
 
+const transitionDuration = 1;
+
+const buttonVariants = {
+  hidden: {opacity: 0, x: 10},
+  visible: {opacity: 1, x: 0},
+};
 
 export default function Navbar() {
   return (
@@ -21,10 +29,17 @@ export default function Navbar() {
         <Logo />
         <div className="flex gap-x-1.5">
           {navButtons.map((button, idx) => (
-            <NavButton
+            <motion.div
+              key={idx}
+              initial="hidden"
+              animate="visible"
+              variants={buttonVariants}
+              transition={{delay: idx * 0.2, duration: transitionDuration}}
+            >
+              <NavButton {...button} />
 
-              key={idx} {...button} />
-          ))}
+            </motion.div>
+            ))}
         </div>
       </div>
       <ThemeToggle />
