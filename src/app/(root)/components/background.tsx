@@ -154,7 +154,13 @@ export default function GridSmallBackgroundDemo() {
 
             </motion.div>
 
-            <div className="flex relative flex-col sm:flex-row w-full mt-6 sm:mt-4  md:w-fit gap-x-2 z-10">
+
+            <motion.div
+              initial={{ opacity: 0, y: 20}}
+              animate={{ opacity: 1, y: 0}}
+              transition={{ duration: transitionDuration, delay: 1}}
+
+              className="flex relative flex-col sm:flex-row w-full mt-6 sm:mt-4  md:w-fit gap-x-2 z-10">
               <Button size="lg" variant="default" className="gap-x-2 w-full ">
                 <ShoppingBag /> Shop Now
               </Button>
@@ -163,7 +169,7 @@ export default function GridSmallBackgroundDemo() {
                 <DollarSign /> Become a Seller
               </Button>
 
-            </div>
+            </motion.div>
           </div>
         </div>
 
