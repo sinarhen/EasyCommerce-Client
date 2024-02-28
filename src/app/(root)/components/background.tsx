@@ -4,7 +4,8 @@ import React, {memo, useEffect, useRef, useState} from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import {DollarSign, ShoppingBag} from "lucide-react";
+import {DollarSign, Shirt, ShoppingBag, ShoppingCart} from "lucide-react";
+import {iconSizes} from "@/lib/constants";
 
 const backgroundPaddingX = {
   _: 4,
@@ -135,13 +136,13 @@ export default function GridSmallBackgroundDemo() {
               >
                 Welcome to
                 <div
-                  className="text-gradient animate-gradient"
+                  className="text-gradient md:w-fit  animate-gradient"
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                 >
                 {" EasyCommerce."}
               </div>
-                <div className={`text-sm w-full mt-2 px-[20%] md:px-0 md:w-1/2 font-medium text-gradient animate-gradient`}>
+                <div className={`text-sm w-full mt-2 px-[20%] md:px-0 md:w-[37.5%] font-medium text-gradient animate-gradient`}>
                   Your one-stop solution for all your ecommerce needs. Explore our wide range of products and become a seller today.
                 </div>
               </div>
@@ -150,50 +151,58 @@ export default function GridSmallBackgroundDemo() {
 
           <div
             className={cn(
-              `transition-all duration-300 h-full items-center overflow-hidden font-bold dark:text-white w-full md:py-16 py-4 px-${backgroundPaddingX._}`
+              `transition-all flex flex-col md:flex-row duration-300 h-full items-center overflow-hidden font-bold dark:text-white w-full md:py-16 py-4 px-${backgroundPaddingX._}`
             )}
           >
-            <motion.div
-              variants={headerVariants}
-              initial="hidden"
-              animate="visible"
-              transition={{ duration: transitionDuration, delay: 0.3}}
-            >
-              Welcome to
-            </motion.div>
-            <motion.div
-              variants={headerVariants}
-              initial="hidden"
-              animate="visible"
-              transition={{ duration: transitionDuration, delay: 0.5}}
-              className="text-gradient  translate-x-12 animate-gradient">
-              {" EasyCommerce."}
-            </motion.div>
+            <div className="h-full md:w-3/4">
+              <motion.div
+                variants={headerVariants}
+                initial="hidden"
+                animate="visible"
+                transition={{ duration: transitionDuration, delay: 0.3}}
+              >
+                Welcome to
+              </motion.div>
+              <motion.div
+                variants={headerVariants}
+                initial="hidden"
+                animate="visible"
+                transition={{ duration: transitionDuration, delay: 0.5}}
+                className="text-gradient  translate-x-12 animate-gradient">
+                {" EasyCommerce."}
+              </motion.div>
 
-            <motion.div
-              className={`text-sm font-medium px-[20%] md:px-0 w-full md:w-1/2 mt-2`}
-              initial={{ opacity: 0}}
-              animate={{ opacity: 1}}
-              transition={{ duration: transitionDuration, delay: 0.8}}
-            >
-              Your one-stop solution for all your ecommerce needs. Explore our wide range of products and become a seller today.
-            </motion.div>
+              <motion.div
+                className={`text-sm font-medium px-[20%] md:px-0 w-full md:w-1/2 mt-2`}
+                initial={{ opacity: 0}}
+                animate={{ opacity: 1}}
+                transition={{ duration: transitionDuration, delay: 0.8}}
+              >
+                Your one-stop solution for all your ecommerce needs. Explore our wide range of products and become a seller today.
+              </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20}}
-              animate={{ opacity: 1, y: 0}}
-              transition={{ duration: transitionDuration, delay: 1}}
-              className="flex relative flex-col sm:flex-row w-full mt-6 sm:mt-4  md:w-fit gap-x-2 z-10">
-              <Button size="lg" variant="default" className="gap-x-2 w-full ">
-                <ShoppingBag /> Shop Now
-              </Button>
+              <motion.div
+                initial={{ opacity: 0, y: 20}}
+                animate={{ opacity: 1, y: 0}}
+                transition={{ duration: transitionDuration, delay: 1}}
+                className="flex relative flex-col sm:flex-row w-full mt-6 sm:mt-4  md:w-fit gap-x-2 z-10">
+                <Button size="lg" variant="default" className="gap-x-2 w-full ">
+                  <ShoppingBag /> Shop Now
+                </Button>
                 <span className="text-sm my-3 sm:hidden font-medium text-center ">or</span>
-              <Button size="lg" variant="outline" className="gap-x-2 w-full ">
-                <DollarSign /> Become a Seller
-              </Button>
-            </motion.div>
+                <Button size="lg" variant="outline" className="gap-x-2 w-full ">
+                  <DollarSign /> Become a Seller
+                </Button>
+              </motion.div>
+            </div>
+            <div className='relative h-3/4'>
+              <Shirt className="absolute -top-32 "  size={100}/>
+              <ShoppingBag size={150} strokeWidth={2}/>
+            </div>
+
           </div>
         </div>
+
       </motion.div>
     </div>
   );

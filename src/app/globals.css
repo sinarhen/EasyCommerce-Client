@@ -88,7 +88,6 @@
     );
     background-size: 300% 300%;
     -webkit-background-clip: text;
-
     -webkit-text-fill-color: transparent;
     color: transparent; /* This is equivalent to Tailwind's text-transparent */
 }
