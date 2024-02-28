@@ -24,7 +24,7 @@ const logoTransition = {
 };
 
 const textTransition = {
-  delay: transitionDuration - 0.2,
+  delay: transitionDuration - 0.3,
   duration: 0.5,
   type: "spring",
   stiffness: 120,
@@ -38,12 +38,11 @@ export default function AnimatedLogo() {
         animate="visible"
         variants={logoVariants}
         transition={logoTransition}
-        className="flex items-center hover:text-gray-400 transition-colors justify-center w-12 h-12 bg-zinc-900 rounded-full"
       >
         <Store size={24}/>
       </motion.div>
       <motion.div
-        className="text-gradient transition-all text-sm font-bold animate-gradient"
+        className="text-gradient ml-2 transition-all text-sm font-bold animate-gradient"
         initial="hidden"
         animate="visible"
         variants={textVariants}

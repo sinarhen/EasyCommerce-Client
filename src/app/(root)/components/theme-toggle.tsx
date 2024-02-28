@@ -14,7 +14,7 @@ const ThemeToggle = () => {
       onClick={() => {
         setTheme(theme === "dark" ? "light" : "dark");
       }}
-      variant="ghost" className={"mr-4"}
+      variant="ghost" className={"mr-4 animate-fade-in"}
     >
       <SunMoon className={"hover:text-black text-white"} size={iconSizes.sm}/>
     </Button>
