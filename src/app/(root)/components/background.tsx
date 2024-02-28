@@ -23,6 +23,7 @@ const headerVariants = {
   visible: { opacity: 1,x: 0}
 };
 
+
 const transitionDuration = 0.7;
 
 function useMobileDetection() {
@@ -195,10 +196,48 @@ export default function GridSmallBackgroundDemo() {
                 </Button>
               </motion.div>
             </div>
-            <div className='relative h-3/4'>
-              <Shirt className="absolute -top-32 "  size={100}/>
-              <ShoppingBag size={150} strokeWidth={2}/>
-            </div>
+            <div className='relative flex items-center justify-center mt-32 w-full'>
+              <motion.div
+                className={"absolute inset-0 mx-auto right-40 h-20 w-auto -top-24 "}
+                initial={{x: 0, y: "0%", opacity: 0}}
+                animate={{ y: ["0%", "100%", "0%"], x:["0%", "25%", "0%"], scale: [1, 0.5, 1], opacity: [0, 1, 0.05, 0, 0] }}
+                transition={{ repeat: Infinity, duration: 2, delay: 0.5, ease: "easeInOut"}}
+              >
+                <Shirt className="h-full w-full"   strokeWidth={1} />
+              </motion.div>
+
+              <motion.div
+                className={"absolute inset-0 mx-auto -top-24 h-20 w-auto"}
+                initial={{y: "0%", opacity: 0}}
+                animate={{ y: ["0%", "100%", "0%"], scale: [1, 0.5, 1], opacity: [0, 1, 0.05, 0, 0] }}
+                transition={{ repeat: Infinity, duration: 2, delay: 1, ease: "easeInOut"}}
+              >
+                <Shirt className="h-full w-full"    strokeWidth={1}/>
+              </motion.div>
+
+              <motion.div
+                className={"absolute inset-0 mx-auto h-20 w-auto left-40 -top-24"}
+                initial={{x: 0, y: "0%", opacity: 0}}
+                animate={{ y: ["0%", "100%", "0%"], x:["0%", "-25%", "0%"], scale: [1, 0.5, 1], opacity: [0, 1, 0.05, 0, 0] }}
+                transition={{ repeat: Infinity, duration: 2, delay: 1.5, ease: "easeInOut"}}
+              >
+                <Shirt className="h-full w-full"  strokeWidth={1} />
+              </motion.div>
+
+
+              <motion.div
+                className={"w-24 h-24 mt-3"}
+
+              >
+                <ShoppingBag
+                  className={"w-full h-full"}
+                  strokeWidth={1}
+
+
+                />
+
+              </motion.div>
+              </div>
 
           </div>
         </div>
