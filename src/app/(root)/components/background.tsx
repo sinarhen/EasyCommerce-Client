@@ -198,9 +198,9 @@ export default function GridSmallBackgroundDemo() {
             </div>
             <div className='relative flex items-center justify-center mt-32 w-full'>
               <motion.div
-                className={"absolute inset-0 mx-auto right-40 h-20 w-auto -top-24 "}
-                initial={{x: 0, y: "0%", opacity: 0}}
-                animate={{ y: ["0%", "100%", "0%"], x:["0%", "25%", "0%"], scale: [1, 0.5, 1], opacity: [0, 1, 0.05, 0, 0] }}
+                className={"absolute inset-0 mx-auto h-20 w-auto -top-24 "}
+                initial={{x: "-100px", y: "0%", opacity: 0, }}
+                animate={{ y: ["0%", "100%", "0%"], x:["-100px", "0px", "-100px"], scale: [1, 0.5, 1], opacity: [0, 1, 0.05, 0, 0] }}
                 transition={{ repeat: Infinity, duration: 2, delay: 0.5, ease: "easeInOut"}}
               >
                 <Shirt className="h-full w-full"   strokeWidth={1} />
@@ -216,9 +216,9 @@ export default function GridSmallBackgroundDemo() {
               </motion.div>
 
               <motion.div
-                className={"absolute inset-0 mx-auto h-20 w-auto left-40 -top-24"}
-                initial={{x: 0, y: "0%", opacity: 0}}
-                animate={{ y: ["0%", "100%", "0%"], x:["0%", "-25%", "0%"], scale: [1, 0.5, 1], opacity: [0, 1, 0.05, 0, 0] }}
+                className={"absolute inset-0 mx-auto h-20 w-auto -top-24"}
+                initial={{x: "100px", y: "0%", opacity: 0}}
+                animate={{ y: ["0%", "100%", "0%"], x:["100px", "0px", "100px"], scale: [1, 0.5, 1], opacity: [0, 1, 0.05, 0, 0] }}
                 transition={{ repeat: Infinity, duration: 2, delay: 1.5, ease: "easeInOut"}}
               >
                 <Shirt className="h-full w-full"  strokeWidth={1} />
