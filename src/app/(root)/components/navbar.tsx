@@ -3,6 +3,16 @@ import {Info, Phone, ShoppingCart} from "lucide-react";
 import NavButton from "./nav-button";
 import Logo from "./logo";
 import ThemeToggle from "./theme-toggle";
+import {NavButtonProps} from "@/types/nav-button";
+
+
+
+const navButtons = [
+  { href: "/store", icon: ShoppingCart, text: "Store", variant: "secondary" },
+  { href: "/about", icon: Info, text: "About", variant: "ghost" },
+  { href: "/contact", icon: Phone, text: "Contact", variant: "ghost" },
+] as NavButtonProps[];
+
 
 export default function Navbar() {
   return (
@@ -10,9 +20,11 @@ export default function Navbar() {
       <div className="flex justify-between items-center w-full px-4 sm:px-16 md:px-32 lg:px-64 xl:px-72">
         <Logo />
         <div className="flex gap-x-1.5">
-          <NavButton href="/store" icon={ShoppingCart} text="Store" variant="secondary" />
-          <NavButton href="/store" icon={Info} text="About" variant="ghost" />
-          <NavButton href="/store" icon={Phone} text="Contact" variant="ghost" />
+          {navButtons.map((button, idx) => (
+            <NavButton
+
+              key={idx} {...button} />
+          ))}
         </div>
       </div>
       <ThemeToggle />

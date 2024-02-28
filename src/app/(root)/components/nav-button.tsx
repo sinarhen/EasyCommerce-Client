@@ -1,13 +1,10 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import {iconSizes} from "@/lib/constants";
+import {NavButtonProps} from "@/types/nav-button";
 
-const NavButton = ({ href, icon: Icon, text, variant }: {
-  href: string;
-  icon: any;
-  text: string;
-  variant: "secondary" | "ghost" | "destructive" | "outline" | "link" | "default";
-}) => (
+
+const NavButton = ({ href, icon: Icon, text, variant }: Readonly<NavButtonProps>) => (
   <Link href={href}>
     <Button size="sm" variant={variant} className="flex gap-x-2 items-center">
       <Icon size={iconSizes.sm}/>
