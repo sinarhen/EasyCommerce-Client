@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { ShoppingBag, Store } from "lucide-react";
+import {DollarSign, ShoppingBag, Store} from "lucide-react";
 
 const backgroundPaddingX = {
   _: 4,
@@ -68,48 +68,53 @@ export default function GridSmallBackgroundDemo() {
 
   return (
     <div
-      className="md:h-max h-[40rem] md:text-start w-full py-32 md:py-32 dark:bg-black bg-white relative dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2]"
+      className="md:h-max transition-colors overflow-hidden h-[40rem] md:text-start w-full py-32 md:py-32 dark:bg-black bg-white relative dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2]"
     >
       <motion.div
         ref={containerRef}
         className={cn(
-          "h-3/4 text-5xl font-bold sm:4xl md:text-6xl w-full lg:text-7xl xl:text-8xl"
+          "h-3/4 text-6xl font-bold sm:text-5xl md:text-6xl w-full lg:text-7xl xl:text-8xl"
         )}
         animate={{
           backgroundColor: isHovered ? "var(--slate-900)" : "var(--white)",
         }}
       >
         <div>
-          <motion.div
-            {...animations}
-            className={
-              "w-full h-full flex absolute bg-black  bg-grid-white/[0.2] dark:bg-white dark:bg-grid-black/[0.2] text-white [mask-image:url(/mask.svg)] [mask-size:40px] [mask-repeat:no-repeat]"
-            }
-          >
-          <div className={cn(`absolute  bg-black h-full w-full z-10 opacity-50`, isMobile ? "hidden" : "")} />
-            <div
-              className={cn(
-                `inline z-20 px-4 w-full md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} md:w-3/4`
-              )}
+
+          {!isMobile && (
+            <motion.div
+              {...animations}
+              className={
+                "w-full h-full flex absolute bg-black  bg-grid-white/[0.2] dark:bg-white dark:bg-grid-black/[0.2] text-white [mask-image:url(/mask.svg)] [mask-size:40px] [mask-repeat:no-repeat]"
+              }
             >
-              Explore wide range of products with
-              <span
-                className="text-gradient animate-gradient"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+              <div className={cn(`absolute  bg-black h-full w-full z-10 opacity-50`, isMobile ? "hidden" : "")} />
+              <div
+                className={cn(
+                  `inline z-20 px-4 w-full md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} md:w-3/4`
+                )}
               >
+                Explore wide range of products with
+                <span
+                  className="text-gradient animate-gradient"
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
+                >
                 {" EasyCommerce."}
               </span>
-              <div className={`text-sm font-medium text-gradient animate-gradient`}>
-                Explore wide range of products with our
-                free and easy to use platform.
+                <div className={`text-sm font-medium text-gradient animate-gradient`}>
+                  Explore wide range of products with our
+                  free and easy to use platform.
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+
+
+          )}
 
           <div
             className={cn(
-              " h-full items-center font-bold dark:text-white md:w-3/4 w-full md:py-16 py-4 px-4"
+              " h-full items-center overflow-hidden font-bold dark:text-white md:w-3/4 w-full md:py-16 py-4 px-4"
             )}
           >
             Explore wide range of products with
@@ -121,15 +126,20 @@ export default function GridSmallBackgroundDemo() {
                 Explore wide range of products with our
                 free and easy to use platform.
               </div>
+
+            <div className="flex relative flex-col sm:flex-row w-full sm:w-fit gap-x-2 z-10">
+              <Button size="lg" variant="default" className="mt-3.5 gap-x-2 w-full ">
+                <ShoppingBag /> Shop Now
+              </Button>
+              <Button size="lg" variant="outline" className="mt-3.5 gap-x-2 w-full ">
+                <DollarSign /> Become a Seller
+              </Button>
+
+            </div>
           </div>
         </div>
 
       </motion.div>
-      <div className={`mt-2 px-${backgroundPaddingX._}`}>
-        <Button size="lg" variant="default" className="flex gap-x-2 z-10">
-          <ShoppingBag /> Shop Now
-        </Button>
-      </div>
 
     </div>
   );
