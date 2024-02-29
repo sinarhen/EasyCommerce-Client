@@ -1,5 +1,4 @@
-
-import { useState, useEffect, RefObject } from 'react';
+import {RefObject, useEffect, useState} from 'react';
 
 interface MousePosition {
   x: number | null;
@@ -7,14 +6,14 @@ interface MousePosition {
 }
 
 const useMousePosition = (isMobile: boolean, containerRef: RefObject<HTMLElement>) => {
-  const [mousePosition, setMousePosition] = useState<MousePosition>({ x: null, y: null });
+  const [mousePosition, setMousePosition] = useState<MousePosition>({x: null, y: null});
 
   useEffect(() => {
     if (!isMobile && containerRef.current) {
       const updateMousePosition = (ev: MouseEvent) => {
         const rect = containerRef.current?.getBoundingClientRect();
         if (rect) {
-          setMousePosition({ x: ev.clientX - rect.left, y: ev.clientY - rect.top });
+          setMousePosition({x: ev.clientX - rect.left, y: ev.clientY - rect.top});
         }
       };
 

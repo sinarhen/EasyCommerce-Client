@@ -4,16 +4,16 @@ import {Info, Phone, ShoppingCart} from "lucide-react";
 import NavButton from "./nav-button";
 import Logo from "./logo";
 import {NavButtonProps} from "@/types/nav-button";
-import { motion } from "framer-motion";
+import {motion} from "framer-motion";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import dynamic from 'next/dynamic';
 
 const ThemeToggle = dynamic(() => import('./theme-toggle'), {ssr: false})
 
 const navButtons = [
-  { href: "/store", icon: ShoppingCart, text: "Store", variant: "secondary" },
-  { href: "/about", icon: Info, text: "About", variant: "ghost" },
-  { href: "/contact", icon: Phone, text: "Contact", variant: "ghost" },
+  {href: "/store", icon: ShoppingCart, text: "Store", variant: "secondary"},
+  {href: "/about", icon: Info, text: "About", variant: "ghost"},
+  {href: "/contact", icon: Phone, text: "Contact", variant: "ghost"},
 ] as NavButtonProps[];
 
 const transitionDuration = 1;
@@ -27,7 +27,7 @@ export default function Navbar() {
   return (
     <nav className="dark:bg-black fixed w-full z-50 flex items-center justify-between py-2  text-white bg-zinc-900">
       <div className="flex justify-between items-center w-full px-4 sm:px-16 md:px-32 lg:px-64 xl:px-72">
-        <Logo />
+        <Logo/>
         <div className="flex gap-x-1.5">
           {navButtons.map((button, idx) => (
             <motion.div
@@ -40,12 +40,12 @@ export default function Navbar() {
               <NavButton {...button} />
 
             </motion.div>
-            ))}
+          ))}
         </div>
       </div>
       <Tooltip>
         <TooltipTrigger>
-          <ThemeToggle />
+          <ThemeToggle/>
         </TooltipTrigger>
         <TooltipContent>
           Toggle Theme

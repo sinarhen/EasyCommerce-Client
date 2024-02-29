@@ -11,7 +11,7 @@ interface MaskContainerProps {
 }
 
 
-const MaskContainer = memo(({ isMobile, mousePosition, isHovered, children }: MaskContainerProps) => {
+const MaskContainer = memo(({isMobile, mousePosition, isHovered, children}: MaskContainerProps) => {
   const maskSize = isHovered && !isMobile ? 300 : 0;
 
   const animations = !isMobile ? {
@@ -21,7 +21,7 @@ const MaskContainer = memo(({ isMobile, mousePosition, isHovered, children }: Ma
       }px`,
       WebkitMaskSize: `${maskSize}px`,
     },
-    transition: { type: "tween", ease: "backOut", duration: 0.1 }
+    transition: {type: "tween", ease: "backOut", duration: 0.1}
   } : {};
 
   return (

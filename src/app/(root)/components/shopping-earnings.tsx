@@ -13,7 +13,7 @@ const ShoppingEarnings = () => {
   const [dollarAmount, setDollarAmount] = useState(0);
 
   const countUpRef = useRef(null);
-  const { update } = useCountUp({
+  const {update} = useCountUp({
     start: 0,
     prefix: "$ ",
     end: dollarAmount,
@@ -52,9 +52,12 @@ const ShoppingEarnings = () => {
 
   return (
     <>
-      <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt1} initialX="-100px" delay={shirtDropDelay } />
-      <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt2} initialX="0px" delay={shirtDropDelay + 0.7} />
-      <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt3} initialX="100px" delay={shirtDropDelay + 1.4} />
+      <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt1} initialX="-100px"
+                     delay={shirtDropDelay}/>
+      <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt2} initialX="0px"
+                     delay={shirtDropDelay + 0.7}/>
+      <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt3} initialX="100px"
+                     delay={shirtDropDelay + 1.4}/>
 
       <motion.div
         className={"w-20 sm:w-24 md:w-28 lg:w-32 xl:w-36 h-auto mt-3"}

@@ -1,6 +1,7 @@
 # TODO
 
 ## Pages
+
 - [ ] Home Page
 - [ ] About Page
 - [ ] Contact Page
@@ -18,7 +19,9 @@
 - [ ] Category Listing Page
 
 ## Features
+
 Customer:
+
 - [ ] User Authentication (Login/Register)
 - [ ] User Authorization (SuperAdmin, Admin, Seller, Customer)
 - [ ] Product (Readonly operations)
@@ -33,6 +36,7 @@ Customer:
 - [ ] Wishlist (Add, Remove, View)
 
 Seller:
+
 - [ ] Seller Dashboard
 - [ ] Product (CRUD operations)
 - [ ] Category (CRUD operations)
@@ -47,13 +51,16 @@ Seller:
 - [ ] Seller info update (Change information about the seller)
 - [ ] Verify seller account
 
-
 ## State Management
-Zustand will be used for state management. It is a simple and lightweight library for managing state in React applications. It is inspired by the `useState` hook and it is built on top of the Context API.
+
+Zustand will be used for state management. It is a simple and lightweight library for managing state in React
+applications. It is inspired by the `useState` hook and it is built on top of the Context API.
+
 - [ ] Cart State Management
 - [ ] User State Management
 
 ## Other
+
 - [ ] Error handling and logging
 - [ ] Responsive design
 - [ ] Unit tests

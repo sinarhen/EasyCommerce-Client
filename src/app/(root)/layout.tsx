@@ -17,24 +17,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem={true}
-          storageKey="theme"
-        >
-          <TooltipProvider>
+    <body>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem={true}
+      storageKey="theme"
+    >
+      <TooltipProvider>
 
-            <Navbar/>
+        <Navbar/>
 
-            {children}
+        {children}
 
-            {/* <Footer /> */}
+        {/* <Footer /> */}
 
-          </TooltipProvider>
-        </ThemeProvider>
-      </body>
+      </TooltipProvider>
+    </ThemeProvider>
+    </body>
     </html>
   );
 }

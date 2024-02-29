@@ -8,7 +8,7 @@ import {iconSizes} from "@/lib/constants";
 
 
 const ThemeToggle = () => {
-  const { theme, setTheme } = useTheme();
+  const {theme, setTheme} = useTheme();
 
   return (
     <Button
