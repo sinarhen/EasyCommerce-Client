@@ -4,11 +4,11 @@ import React, {memo, useCallback, useEffect, useRef, useState} from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import {DollarSign, Shirt, ShoppingBag, ShoppingCart} from "lucide-react";
-import {iconSizes} from "@/lib/constants";
-import CountUp, {useCountUp} from "react-countup";
+import {DollarSign, ShoppingBag} from "lucide-react";
+import {useCountUp} from "react-countup";
 import MousePosition from "@/types/mouse-position";
 import MaskContainer from "@/app/(root)/components/mask-container";
+import DroppingShirt from "@/app/(root)/components/dropping-shirt";
 
 const backgroundPaddingX = {
   _: 4,
@@ -24,28 +24,6 @@ const backgroundPaddingY = {
 const shirtDropDuration = 3;
 const shirtDropDelay = 0.5;
 
-const ShirtComponent = ({initialX, delay, price}: {
-  initialX: string;
-  delay: number;
-  price?: number;
-}) => {
-  return (
-    <motion.div
-      className={"absolute inset-0 mx-auto  h-20 md:h-24 lg:h-28 xl:h-32 w-auto -top-24 md:-top-28 lg:-top-32 xl:-top-36"}
-      initial={{x: initialX, y: "0%", opacity: 0, }}
-      animate={{ y: ["0%", "100%", "0%"], x:[initialX, "0px", initialX], scale: [1, 0.5, 1], opacity: [0, 1, 0.05, 0, 0] }}
-      transition={{ repeat: Infinity, duration: shirtDropDuration, delay: delay, ease: "easeInOut"}}
-    >
-      <span className="text-xs absolute -rotate-45 -top-2   bg-white  px-2 py-1 text-white rounded">
-        <span className="text-gradient animate-gradient">
-          {price}$
-        </span>
-      </span>
-
-      <Shirt className="h-full w-full" strokeWidth={1} />
-    </motion.div>
-  );
-}
 
 const headerVariants = {
   hidden: { opacity: 0, x: -40},
@@ -114,15 +92,21 @@ export default function GridSmallBackgroundDemo() {
     ref: countUpRef,
   });
 
-  const [prices, setPrices] = useState({
-    shirt1: 40,
-    shirt2: 40,
-    shirt3: 40,
+  const [prices, setPrices] = useState<{
+    shirt1: number;
+    shirt2: number;
+    shirt3: number;
+  }>({
+    shirt1: 0,
+    shirt2: 0,
+    shirt3: 0,
   });
 
   useEffect(() => {
 
+
     const interval = setInterval(() => {
+      update(dollarAmount);
 
       const shirt1 = Math.floor(Math.random() * 100);
       const shirt2 = Math.floor(Math.random() * 100);
@@ -135,8 +119,7 @@ export default function GridSmallBackgroundDemo() {
       });
       const shirtSum = shirt1 + shirt2 + shirt3;
       setDollarAmount(prev => prev + shirtSum);
-      update(dollarAmount + shirtSum);
-    }, shirtDropDelay + shirtDropDuration * 1000)
+      }, shirtDropDelay + shirtDropDuration * 1000)
 
     return () => clearInterval(interval);
   }, [dollarAmount, update]);
@@ -227,13 +210,13 @@ export default function GridSmallBackgroundDemo() {
                 </Button>
               </motion.div>
             </div>
-              <div className='relative flex flex-col items-center justify-center mt-32 w-full'>
-                <ShirtComponent price={prices.shirt1} initialX="-100px" delay={0.5} />
-                <ShirtComponent price={prices.shirt2} initialX="0px" delay={1} />
-                <ShirtComponent price={prices.shirt3} initialX="100px" delay={1.5} />
+              <div className='relative flex flex-col items-center justify-center mt-24 md:mt-32 w-full'>
+                <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt1} initialX="-100px" delay={0.5} />
+                <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt2} initialX="0px" delay={1} />
+                <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt3} initialX="100px" delay={1.5} />
 
                 <motion.div
-                  className={"w-24 md:w-28 lg:w-32 xl:w-36 h-24 md:h-28 lg:h-32 xl:h-36 mt-3"}
+                  className={"w-20 sm:w-24 md:w-28 lg:w-32 xl:w-36 h-auto mt-3"}
                 >
                   <ShoppingBag
                     className={"w-full h-full"}
