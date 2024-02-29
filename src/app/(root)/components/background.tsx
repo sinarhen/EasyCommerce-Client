@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {DollarSign, Shirt, ShoppingBag, ShoppingCart} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
+import CountUp, {useCountUp} from "react-countup";
 
 const backgroundPaddingX = {
   _: 4,
@@ -17,6 +18,24 @@ const backgroundPaddingY = {
   lg: 32,
   xl: 72,
 };
+
+const shirtDropDuration = 2;
+const shirtDropDelay = 0.5;
+
+const ShirtComponent = ({initialX, delay}: {
+  initialX: string;
+  delay: number;
+}) => (
+  <motion.div
+    className={"absolute inset-0 mx-auto  h-20 md:h-24 lg:h-28 xl:h-32 w-auto -top-24 md:-top-28 lg:-top-32 xl:-top-36"}
+    initial={{x: initialX, y: "0%", opacity: 0, }}
+    animate={{ y: ["0%", "100%", "0%"], x:[initialX, "0px", initialX], scale: [1, 0.5, 1], opacity: [0, 1, 0.05, 0, 0] }}
+    transition={{ repeat: Infinity, duration: shirtDropDuration, delay: delay, ease: "easeInOut"}}
+  >
+    <Shirt className="h-full w-full" strokeWidth={1} />
+  </motion.div>
+);
+
 
 const headerVariants = {
   hidden: { opacity: 0, x: -40},
@@ -112,6 +131,25 @@ export default function GridSmallBackgroundDemo() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useMobileDetection();
   const mousePosition = useMousePosition(isMobile, containerRef);
+  const [dollarAmount, setDollarAmount] = useState(0);
+
+  const countUpRef = useRef(null);
+  const { update } = useCountUp({
+    start: 0,
+    prefix: "$ ",
+    end: dollarAmount,
+    duration: 2,
+    ref: countUpRef,
+  });
+
+
+
+
+  useEffect(() => {
+    // Updating value when shirt
+
+  }, [dollarAmount, update]);
+
 
   return (
     <div
@@ -196,50 +234,32 @@ export default function GridSmallBackgroundDemo() {
                 </Button>
               </motion.div>
             </div>
-            <div className='relative flex items-center justify-center mt-32 w-full'>
-              <motion.div
-                className={"absolute inset-0 mx-auto h-20 w-auto -top-24 "}
-                initial={{x: "-100px", y: "0%", opacity: 0, }}
-                animate={{ y: ["0%", "100%", "0%"], x:["-100px", "0px", "-100px"], scale: [1, 0.5, 1], opacity: [0, 1, 0.05, 0, 0] }}
-                transition={{ repeat: Infinity, duration: 2, delay: 0.5, ease: "easeInOut"}}
-              >
-                <Shirt className="h-full w-full"   strokeWidth={1} />
-              </motion.div>
+              <div className='relative flex flex-col items-center justify-center mt-32 w-full'>
+                <ShirtComponent initialX="-100px" delay={0.5} />
+                <ShirtComponent initialX="0px" delay={1} />
+                <ShirtComponent initialX="100px" delay={1.5} />
 
-              <motion.div
-                className={"absolute inset-0 mx-auto -top-24 h-20 w-auto"}
-                initial={{y: "0%", opacity: 0}}
-                animate={{ y: ["0%", "100%", "0%"], scale: [1, 0.5, 1], opacity: [0, 1, 0.05, 0, 0] }}
-                transition={{ repeat: Infinity, duration: 2, delay: 1, ease: "easeInOut"}}
-              >
-                <Shirt className="h-full w-full"    strokeWidth={1}/>
-              </motion.div>
-
-              <motion.div
-                className={"absolute inset-0 mx-auto h-20 w-auto -top-24"}
-                initial={{x: "100px", y: "0%", opacity: 0}}
-                animate={{ y: ["0%", "100%", "0%"], x:["100px", "0px", "100px"], scale: [1, 0.5, 1], opacity: [0, 1, 0.05, 0, 0] }}
-                transition={{ repeat: Infinity, duration: 2, delay: 1.5, ease: "easeInOut"}}
-              >
-                <Shirt className="h-full w-full"  strokeWidth={1} />
-              </motion.div>
+                <motion.div
+                  className={"w-24 md:w-28 lg:w-32 xl:w-36 h-24 md:h-28 lg:h-32 xl:h-36 mt-3"}
+                >
+                  <ShoppingBag
+                    className={"w-full h-full"}
+                    strokeWidth={1}
+                  />
+                </motion.div>
+                <div className="flex w-full h-full text-sm justify-center ">
 
 
-              <motion.div
-                className={"w-24 h-24 mt-3"}
-
-              >
-                <ShoppingBag
-                  className={"w-full h-full"}
-                  strokeWidth={1}
+                  <span ref={countUpRef} className="bg-zinc-200  px-2 text-gradient animate-gradient py-1 rounded-xl ">
 
 
-                />
+                  </span>
+                </div>
 
-              </motion.div>
               </div>
 
           </div>
+
         </div>
 
       </motion.div>
