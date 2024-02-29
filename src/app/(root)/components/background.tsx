@@ -124,13 +124,18 @@ export default function GridSmallBackgroundDemo() {
 
     const interval = setInterval(() => {
 
+      const shirt1 = Math.floor(Math.random() * 100);
+      const shirt2 = Math.floor(Math.random() * 100);
+      const shirt3 = Math.floor(Math.random() * 100);
+
       setPrices({
-        shirt1: Math.floor(Math.random() * 100),
-        shirt2: Math.floor(Math.random() * 100),
-        shirt3: Math.floor(Math.random() * 100),
+        shirt1,
+        shirt2,
+        shirt3,
       });
-      setDollarAmount(prev => prev + 40);
-      update(dollarAmount + 40);
+      const shirtSum = shirt1 + shirt2 + shirt3;
+      setDollarAmount(prev => prev + shirtSum);
+      update(dollarAmount + shirtSum);
     }, shirtDropDelay + shirtDropDuration * 1000)
 
     return () => clearInterval(interval);
@@ -223,9 +228,9 @@ export default function GridSmallBackgroundDemo() {
               </motion.div>
             </div>
               <div className='relative flex flex-col items-center justify-center mt-32 w-full'>
-                <ShirtComponent price={40} initialX="-100px" delay={0.5} />
-                <ShirtComponent price={40} initialX="0px" delay={1} />
-                <ShirtComponent price={40} initialX="100px" delay={1.5} />
+                <ShirtComponent price={prices.shirt1} initialX="-100px" delay={0.5} />
+                <ShirtComponent price={prices.shirt2} initialX="0px" delay={1} />
+                <ShirtComponent price={prices.shirt3} initialX="100px" delay={1.5} />
 
                 <motion.div
                   className={"w-24 md:w-28 lg:w-32 xl:w-36 h-24 md:h-28 lg:h-32 xl:h-36 mt-3"}
