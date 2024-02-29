@@ -23,7 +23,7 @@ const backgroundPaddingY = {
 
 const shirtDropDuration = 3;
 const shirtDropDelay = 0.5;
-
+const shirtDropDelayDelta = 0.7;
 
 const headerVariants = {
   hidden: { opacity: 0, x: -40},
@@ -103,11 +103,10 @@ export default function GridSmallBackgroundDemo() {
   });
 
   useEffect(() => {
+    update(dollarAmount);
 
 
     const interval = setInterval(() => {
-      update(dollarAmount);
-
       const shirt1 = Math.floor(Math.random() * 100);
       const shirt2 = Math.floor(Math.random() * 100);
       const shirt3 = Math.floor(Math.random() * 100);
@@ -123,9 +122,6 @@ export default function GridSmallBackgroundDemo() {
 
     return () => clearInterval(interval);
   }, [dollarAmount, update]);
-
-
-
 
   return (
     <div
@@ -211,9 +207,9 @@ export default function GridSmallBackgroundDemo() {
               </motion.div>
             </div>
               <div className='relative flex flex-col items-center justify-center mt-24 md:mt-32 w-full'>
-                <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt1} initialX="-100px" delay={0.5} />
-                <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt2} initialX="0px" delay={1} />
-                <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt3} initialX="100px" delay={1.5} />
+                <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt1} initialX="-100px" delay={shirtDropDelay } />
+                <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt2} initialX="0px" delay={shirtDropDelay + shirtDropDelayDelta} />
+                <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt3} initialX="100px" delay={shirtDropDelay + shirtDropDelayDelta * 2} />
 
                 <motion.div
                   className={"w-20 sm:w-24 md:w-28 lg:w-32 xl:w-36 h-auto mt-3"}
