@@ -13,45 +13,42 @@ import {AnimatedTooltip} from "@/components/ui/animated-tooltip";
 const people = [
   {
     id: 1,
-    name: "John Doe",
-    designation: "Software Engineer",
+    name: "Louis Vuitton",
+    designation: "Clothing Designer",
     image:
-      "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3387&q=80",
+      "https://i.pinimg.com/280x280_RS/01/75/7b/01757bf368917fec3800a21f45fc6dda.jpg",
   },
   {
     id: 2,
-    name: "Robert Johnson",
-    designation: "Product Manager",
+    name: "Gucci",
+    designation: "Clothing Designer",
     image:
-      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+      "https://i.pinimg.com/564x/3d/75/47/3d7547509311922c64ec583b9fd11d59.jpg",
   },
   {
     id: 3,
-    name: "Jane Smith",
-    designation: "Data Scientist",
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YXZhdGFyfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+    name: "Polo Ralph Lauren",
+    designation: "Clothing Designer",
+    image: "https://i.pinimg.com/564x/e6/94/ab/e694ab1c10e809175fd0ea372439a24a.jpg"
   },
   {
     id: 4,
     name: "Emily Davis",
     designation: "UX Designer",
-    image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+    image:"https://i.pinimg.com/280x280_RS/01/75/7b/01757bf368917fec3800a21f45fc6dda.jpg"
   },
   {
     id: 5,
     name: "Tyler Durden",
     designation: "Soap Developer",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3540&q=80",
+    image: "https://i.pinimg.com/280x280_RS/01/75/7b/01757bf368917fec3800a21f45fc6dda.jpg"
   },
   {
     id: 6,
     name: "Dora",
     designation: "The Explorer",
     image:
-      "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3534&q=80",
+      "https://i.pinimg.com/280x280_RS/01/75/7b/01757bf368917fec3800a21f45fc6dda.jpg",
   },
 ];
 
@@ -219,8 +216,13 @@ export default function GridSmallBackgroundDemo() {
               <ShoppingEarnings/>
             </motion.div>
           </div>
-          <div className={`w-full h-full flex items-center px-${backgroundPaddingX._}`}>
-            <AnimatedTooltip items={people}/>
+          <div className={`w-full flex-col  font-medium text-lg h-full justify-center md:justify-end md:items-end mt-5 items-center px-${backgroundPaddingX._}`}>
+            <div className="flex">
+              <AnimatedTooltip items={people}/>
+            </div>
+            <div className="text-xs mt-2">
+              Our partners
+            </div>
           </div>
         </div>
 
