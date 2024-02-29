@@ -1,6 +1,3 @@
-'use client';
-
-
 import {motion} from "framer-motion";
 import {Store} from "lucide-react";
 import React from "react";
