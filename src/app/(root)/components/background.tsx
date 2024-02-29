@@ -103,10 +103,11 @@ export default function GridSmallBackgroundDemo() {
   });
 
   useEffect(() => {
-    update(dollarAmount);
-
-
+  }, [dollarAmount, update]);
+  
+  useEffect(() => {
     const interval = setInterval(() => {
+      update(dollarAmount);
       const shirt1 = Math.floor(Math.random() * 100);
       const shirt2 = Math.floor(Math.random() * 100);
       const shirt3 = Math.floor(Math.random() * 100);
@@ -117,8 +118,12 @@ export default function GridSmallBackgroundDemo() {
         shirt3,
       });
       const shirtSum = shirt1 + shirt2 + shirt3;
-      setDollarAmount(prev => prev + shirtSum);
-      }, shirtDropDelay + shirtDropDuration * 1000)
+      setDollarAmount(prev => {
+        const newVal = prev + shirtSum;
+        return newVal;
+
+      });
+      }, shirtDropDuration * 1000 );
 
     return () => clearInterval(interval);
   }, [dollarAmount, update]);
