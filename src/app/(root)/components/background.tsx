@@ -21,9 +21,8 @@ const backgroundPaddingY = {
   xl: 72,
 };
 
-const shirtDropDuration = 3;
+const shirtDropDuration = 2.5;
 const shirtDropDelay = 0.5;
-const shirtDropDelayDelta = 0.7;
 
 const headerVariants = {
   hidden: { opacity: 0, x: -40},
@@ -210,8 +209,8 @@ export default function GridSmallBackgroundDemo() {
             </div>
               <div className='relative flex flex-col items-center justify-center mt-24 md:mt-32 w-full'>
                 <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt1} initialX="-100px" delay={shirtDropDelay } />
-                <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt2} initialX="0px" delay={shirtDropDelay + shirtDropDelayDelta} />
-                <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt3} initialX="100px" delay={shirtDropDelay + shirtDropDelayDelta * 2} />
+                <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt2} initialX="0px" delay={shirtDropDelay + 0.7} />
+                <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt3} initialX="100px" delay={shirtDropDelay + 1.4} />
 
                 <motion.div
                   className={"w-20 sm:w-24 md:w-28 lg:w-32 xl:w-36 h-auto mt-3"}
