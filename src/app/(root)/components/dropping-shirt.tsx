@@ -3,6 +3,7 @@ import {Shirt} from "lucide-react";
 
 const DroppingShirt = ({initialX, delay, shirtDropDuration, price}: {
   initialX: string;
+  onDropEnd?: () => void;
   delay: number;
   price?: number;
   shirtDropDuration: number;
