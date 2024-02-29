@@ -103,9 +103,6 @@ export default function GridSmallBackgroundDemo() {
   });
 
   useEffect(() => {
-  }, [dollarAmount, update]);
-  
-  useEffect(() => {
     const interval = setInterval(() => {
       update(dollarAmount);
       const shirt1 = Math.floor(Math.random() * 100);
