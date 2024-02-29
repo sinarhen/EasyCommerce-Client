@@ -1,12 +1,14 @@
 'use client'
 
-import React, {memo, useEffect, useRef, useState} from "react";
+import React, {memo, useCallback, useEffect, useRef, useState} from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {DollarSign, Shirt, ShoppingBag, ShoppingCart} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
 import CountUp, {useCountUp} from "react-countup";
+import MousePosition from "@/types/mouse-position";
+import MaskContainer from "@/app/(root)/components/mask-container";
 
 const backgroundPaddingX = {
   _: 4,
@@ -19,23 +21,31 @@ const backgroundPaddingY = {
   xl: 72,
 };
 
-const shirtDropDuration = 2;
+const shirtDropDuration = 3;
 const shirtDropDelay = 0.5;
 
-const ShirtComponent = ({initialX, delay}: {
+const ShirtComponent = ({initialX, delay, price}: {
   initialX: string;
   delay: number;
-}) => (
-  <motion.div
-    className={"absolute inset-0 mx-auto  h-20 md:h-24 lg:h-28 xl:h-32 w-auto -top-24 md:-top-28 lg:-top-32 xl:-top-36"}
-    initial={{x: initialX, y: "0%", opacity: 0, }}
-    animate={{ y: ["0%", "100%", "0%"], x:[initialX, "0px", initialX], scale: [1, 0.5, 1], opacity: [0, 1, 0.05, 0, 0] }}
-    transition={{ repeat: Infinity, duration: shirtDropDuration, delay: delay, ease: "easeInOut"}}
-  >
-    <Shirt className="h-full w-full" strokeWidth={1} />
-  </motion.div>
-);
+  price?: number;
+}) => {
+  return (
+    <motion.div
+      className={"absolute inset-0 mx-auto  h-20 md:h-24 lg:h-28 xl:h-32 w-auto -top-24 md:-top-28 lg:-top-32 xl:-top-36"}
+      initial={{x: initialX, y: "0%", opacity: 0, }}
+      animate={{ y: ["0%", "100%", "0%"], x:[initialX, "0px", initialX], scale: [1, 0.5, 1], opacity: [0, 1, 0.05, 0, 0] }}
+      transition={{ repeat: Infinity, duration: shirtDropDuration, delay: delay, ease: "easeInOut"}}
+    >
+      <span className="text-xs absolute -rotate-45 -top-2   bg-white  px-2 py-1 text-white rounded">
+        <span className="text-gradient animate-gradient">
+          {price}$
+        </span>
+      </span>
 
+      <Shirt className="h-full w-full" strokeWidth={1} />
+    </motion.div>
+  );
+}
 
 const headerVariants = {
   hidden: { opacity: 0, x: -40},
@@ -57,11 +67,6 @@ function useMobileDetection() {
   }, []);
 
   return isMobile;
-}
-
-interface MousePosition {
-  x: number | null;
-  y: number | null;
 }
 
 function useMousePosition(isMobile: boolean, containerRef: React.RefObject<HTMLDivElement>) {
@@ -92,39 +97,6 @@ function useMousePosition(isMobile: boolean, containerRef: React.RefObject<HTMLD
   return mousePosition;
 }
 
-interface MaskContainerProps {
-  isMobile: boolean;
-  mousePosition: MousePosition;
-  isHovered: boolean;
-  children: React.ReactNode;
-}
-
-const MaskContainer = memo(({ isMobile, mousePosition, isHovered, children }: MaskContainerProps) => {
-  const maskSize = isHovered && !isMobile ? 300 : 0;
-
-  const animations = !isMobile ? {
-    animate: {
-      WebkitMaskPosition: `${mousePosition?.x ? mousePosition.x - maskSize / 2 : 0}px ${
-        mousePosition?.y ? mousePosition.y - maskSize / 2 : 0
-      }px`,
-      WebkitMaskSize: `${maskSize}px`,
-    },
-    transition: { type: "tween", ease: "backOut", duration: 0.1 }
-  } : {};
-
-  return (
-    <motion.div
-      {...animations}
-      className={
-        "w-full h-full flex absolute bg-black  bg-grid-white/[0.2] dark:bg-white dark:bg-grid-black/[0.2] text-white [mask-image:url(/mask.svg)] [mask-size:40px] [mask-repeat:no-repeat]"
-      }
-    >
-      {children}
-    </motion.div>
-  );
-});
-
-MaskContainer.displayName = "MaskContainer";
 
 export default function GridSmallBackgroundDemo() {
   const [isHovered, setIsHovered] = useState(false);
@@ -142,13 +114,29 @@ export default function GridSmallBackgroundDemo() {
     ref: countUpRef,
   });
 
-
-
+  const [prices, setPrices] = useState({
+    shirt1: 40,
+    shirt2: 40,
+    shirt3: 40,
+  });
 
   useEffect(() => {
-    // Updating value when shirt
 
+    const interval = setInterval(() => {
+
+      setPrices({
+        shirt1: Math.floor(Math.random() * 100),
+        shirt2: Math.floor(Math.random() * 100),
+        shirt3: Math.floor(Math.random() * 100),
+      });
+      setDollarAmount(prev => prev + 40);
+      update(dollarAmount + 40);
+    }, shirtDropDelay + shirtDropDuration * 1000)
+
+    return () => clearInterval(interval);
   }, [dollarAmount, update]);
+
+
 
 
   return (
@@ -235,9 +223,9 @@ export default function GridSmallBackgroundDemo() {
               </motion.div>
             </div>
               <div className='relative flex flex-col items-center justify-center mt-32 w-full'>
-                <ShirtComponent initialX="-100px" delay={0.5} />
-                <ShirtComponent initialX="0px" delay={1} />
-                <ShirtComponent initialX="100px" delay={1.5} />
+                <ShirtComponent price={40} initialX="-100px" delay={0.5} />
+                <ShirtComponent price={40} initialX="0px" delay={1} />
+                <ShirtComponent price={40} initialX="100px" delay={1.5} />
 
                 <motion.div
                   className={"w-24 md:w-28 lg:w-32 xl:w-36 h-24 md:h-28 lg:h-32 xl:h-36 mt-3"}
