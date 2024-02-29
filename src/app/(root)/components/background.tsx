@@ -165,9 +165,13 @@ export default function GridSmallBackgroundDemo() {
                 </Button>
               </motion.div>
             </div>
-            <div className='relative flex flex-col items-center justify-center mt-24 md:mt-32 w-full'>
+            <motion.div
+              initial={{opacity: 0, y: 20}}
+              animate={{opacity: 1, y: 0}}
+              transition={{duration: transitionDuration, delay: 1}}
+              className='relative flex flex-col items-center justify-center mt-24 md:mt-32 w-full'>
               <ShoppingEarnings/>
-            </div>
+            </motion.div>
           </div>
         </div>
 
