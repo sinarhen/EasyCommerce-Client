@@ -21,9 +21,9 @@ const DroppingShirt = ({initialX, delay, shirtDropDuration, price}: {
       transition={{repeat: Infinity, duration: shirtDropDuration, delay: delay, ease: "easeInOut"}}
     >
       <span
-        className="text-lg border-2 border-black lg:text-xl xl:text-2xl absolute -rotate-[40deg] -top-2 left-14    bg-white  px-2 py-1 text-white rounded">
+        className="text-lg border-2 dark:border-white dark:bg-black border-black lg:text-xl xl:text-2xl absolute -rotate-[40deg] -top-2 left-14    bg-white  px-2 py-1 text-white rounded">
         <span className="text-gradient animate-gradient">
-          {price}$
+          +${price}
         </span>
       </span>
 
