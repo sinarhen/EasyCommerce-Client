@@ -1,11 +1,10 @@
 'use client'
 
-import React, {useEffect, useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import {motion} from "framer-motion";
 import {cn} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
 import {DollarSign, ShoppingBag} from "lucide-react";
-import MousePosition from "@/types/mouse-position";
 import MaskContainer from "@/app/(root)/components/mask-container";
 import ShoppingEarnings from "@/app/(root)/components/shopping-earnings";
 import {AnimatedTooltip} from "@/components/ui/animated-tooltip";
@@ -13,6 +12,7 @@ import useMousePosition from "@/hooks/use-mouse-position";
 import useMobileDetection from "@/hooks/use-mobile-detection";
 import {partners} from "@/lib/constants";
 import GridBackground from "@/lib/grid-background";
+import Link from "next/link";
 
 const backgroundPaddingX = {
   _: 4,
@@ -40,7 +40,7 @@ const transitionDuration = 0.7;
 
 
 
-export default function GridSmallBackgroundDemo() {
+export default function HomePageContent() {
   const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useMobileDetection();
@@ -123,13 +123,17 @@ export default function GridSmallBackgroundDemo() {
                 animate={{opacity: 1, y: 0}}
                 transition={{duration: transitionDuration, delay: 1}}
                 className="flex relative flex-col sm:flex-row w-full mt-6 sm:mt-4  md:w-fit gap-x-2 z-10">
-                <Button size="lg" variant="default" className="gap-x-2 w-full ">
-                  <ShoppingBag/> Shop Now
-                </Button>
+                <Link className="w-full flex" href={"/store"}>
+                  <Button size="lg" variant="default" className="gap-x-2 w-full">
+                    <ShoppingBag/> Shop Now
+                  </Button>
+                </Link>
                 <span className="text-sm my-3 sm:hidden font-medium text-center ">or</span>
-                <Button size="lg" variant="outline" className="gap-x-2 w-full ">
-                  <DollarSign/> Become a Seller
-                </Button>
+                <Link href={"/seller"} className="w-full flex" >
+                  <Button size="lg" variant="outline" className="gap-x-2 w-full ">
+                    <DollarSign/> Become a Seller
+                  </Button>
+                </Link>
               </motion.div>
             </div>
             <motion.div
