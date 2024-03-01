@@ -5,11 +5,34 @@ import {motion} from "framer-motion";
 import {ShoppingBag} from "lucide-react";
 import React, {useEffect, useRef, useState} from "react";
 import {useCountUp} from "react-countup";
+import {cn} from "@/lib/utils";
+
+const iterablePrices = [
+  [33, 21, 89],
+  [45, 67, 23],
+  [100, 110, 120],
+  [60, 72, 80],
+  [27, 20, 89],
+  [15, 67, 90],
+]
+
+const iterableColors = [
+  ["#B45396", "#fff", "#000"],
+  ["red", "purple", "blue"],
+  ["orange", "#fff", "#000"],
+  ["black", "white", "green"],
+  ["#B45396", "#fff", "#000"],
+  ["red", "purple", "blue"],
+  ]
 
 
 const shirtDropDuration = 2.5;
-const shirtDropDelay = 0.5;
-const ShoppingEarnings = () => {
+const shirtDropDelay = 1;
+const ShoppingEarnings = ({
+    className
+                          }:{
+  className?: string
+}) => {
   const [dollarAmount, setDollarAmount] = useState(0);
 
   const countUpRef = useRef(null);
@@ -21,63 +44,58 @@ const ShoppingEarnings = () => {
     ref: countUpRef,
   });
 
-  const [prices, setPrices] = useState<{
-    shirt1: number;
-    shirt2: number;
-    shirt3: number;
-  }>({
-    shirt1: 0,
-    shirt2: 0,
-    shirt3: 0,
-  });
+  const [prices, setPrices] = useState([0, 0, 0]);
+  const [colors, setColors] = useState<string[]>(["#B45396", "#B45396", "#B45396"]);
+  const [iterIndex, setIterIndex] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const shirt1 = Math.floor(Math.random() * 100);
-      const shirt2 = Math.floor(Math.random() * 100);
-      const shirt3 = Math.floor(Math.random() * 100);
+      const interval = setInterval(() => {
+        const [shirt1, shirt2, shirt3] = iterablePrices[iterIndex % iterablePrices.length];
+        const [color1, color2, color3] = iterableColors[iterIndex % iterableColors.length];
 
-      setPrices({
-        shirt1,
-        shirt2,
-        shirt3,
-      });
-      const shirtSum = shirt1 + shirt2 + shirt3;
-      setDollarAmount(prev => prev + shirtSum);
-      update(dollarAmount + shirtSum);
-    }, (shirtDropDuration) * 1000)
+        setPrices([shirt1, shirt2, shirt3]);
+        setColors([color1, color2, color3]);
 
-    return () => clearInterval(interval);
-  }, [dollarAmount, update]);
+        const shirtSum = shirt1 + shirt2 + shirt3;
+        setDollarAmount(prev => prev + shirtSum);
+        update(dollarAmount + shirtSum);
 
+        // Update the index for the next iteration
+        setIterIndex(prev => prev + 1);
+      }, (shirtDropDuration + shirtDropDelay) * 1000)
+
+      return () => clearInterval(interval);
+  }, [dollarAmount, update, iterIndex]);
   return (
-    <>
-      <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt1} initialX="-100px"
-                     delay={shirtDropDelay}/>
-      <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt2} initialX="0px"
-                     delay={shirtDropDelay + 0.7}/>
-      <DroppingShirt shirtDropDuration={shirtDropDuration} price={prices.shirt3} initialX="100px"
-                     delay={shirtDropDelay + 1.4}/>
+    <div className={cn(" relative ", className)}>
+      <div className='relative'>
+        <DroppingShirt color={colors[0]} shirtDropDuration={shirtDropDuration} price={prices[0]} initialX="-100px"
+                       delay={shirtDropDelay}/>
+        <DroppingShirt color={colors[1]} shirtDropDuration={shirtDropDuration} price={prices[1]} initialX="0px"
+                       delay={shirtDropDelay + 0.7}/>
+        <DroppingShirt color={colors[2]} shirtDropDuration={shirtDropDuration} price={prices[2]} initialX="100px"
+                       delay={shirtDropDelay + 1.4}/>
 
-      <motion.div
-        className={"w-20 sm:w-24 md:w-28 lg:w-32 xl:w-36 h-auto mt-3"}
-      >
-        <ShoppingBag
-          fill={"black"}
-          className={"w-full h-full"}
-          strokeWidth={1}
-        />
-      </motion.div>
-      <div className="flex w-full h-full text-sm justify-center ">
+        <motion.div
+          className={"w-20 sm:w-24 md:w-28 lg:w-32 xl:w-36 h-auto mt-3"}
+        >
+          <ShoppingBag
+            className={"w-full h-full bg-clip-text text-transparent stroke-current text-purple-800"}
+            strokeWidth={1}
+          />
+        </motion.div>
+        <div className="flex w-full h-full text-sm justify-center ">
 
 
                   <span ref={countUpRef} className="bg-zinc-200  px-2 text-gradient animate-gradient py-1 rounded-xl ">
 
 
                   </span>
+        </div>
+
       </div>
 
-    </>
+    </div>
   )
 }
 

@@ -1,13 +1,15 @@
 import {motion} from "framer-motion";
 import {Shirt} from "lucide-react";
 
-const DroppingShirt = ({initialX, delay, shirtDropDuration, price}: {
+const DroppingShirt = ({color, initialX, delay, shirtDropDuration, price}: {
   initialX: string;
   onDropEnd?: () => void;
   delay: number;
   price?: number;
+  color?: string;
   shirtDropDuration: number;
 }) => {
+
   return (
     <motion.div
       className={"absolute flex items-center justify-center w-fit inset-0 mx-auto h-20 sm:h-24 md:h-28 lg:h-28 xl:h-32 -top-24 sm:-top-[7.5rem] md:-top-36  xl:-top-36"}
@@ -27,7 +29,7 @@ const DroppingShirt = ({initialX, delay, shirtDropDuration, price}: {
         </span>
       </span>
 
-      <Shirt className="h-full w-full" strokeWidth={1}/>
+      <Shirt fill={color} className="h-full dark:text-white text-black w-full" strokeWidth={1}/>
     </motion.div>
   );
 }
