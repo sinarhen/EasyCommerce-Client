@@ -47,7 +47,7 @@ export default function HomePageContent() {
   const mousePosition = useMousePosition(isMobile, containerRef);
 
   return (
-    <GridBackground>
+    <>
       <motion.div
         ref={containerRef}
         className={cn(
@@ -179,6 +179,6 @@ export default function HomePageContent() {
         </div>
 
       </motion.div>
-  </GridBackground>
+  </>
   )
 };
