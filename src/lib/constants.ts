@@ -4,3 +4,45 @@ export const iconSizes = {
   lg: 20,
   banner: 180,
 }
+
+export const partners = [
+  {
+    id: 1,
+    name: "Louis Vuitton",
+    designation: "Clothing Designer",
+    image:
+      "https://i.pinimg.com/280x280_RS/01/75/7b/01757bf368917fec3800a21f45fc6dda.jpg",
+  },
+  {
+    id: 2,
+    name: "Gucci",
+    designation: "Clothing Designer",
+    image:
+      "https://i.pinimg.com/564x/3d/75/47/3d7547509311922c64ec583b9fd11d59.jpg",
+  },
+  {
+    id: 3,
+    name: "Polo Ralph Lauren",
+    designation: "Clothing Designer",
+    image: "https://i.pinimg.com/564x/e6/94/ab/e694ab1c10e809175fd0ea372439a24a.jpg"
+  },
+  {
+    id: 4,
+    name: "Emily Davis",
+    designation: "UX Designer",
+    image: "https://i.pinimg.com/280x280_RS/01/75/7b/01757bf368917fec3800a21f45fc6dda.jpg"
+  },
+  {
+    id: 5,
+    name: "Tyler Durden",
+    designation: "Soap Developer",
+    image: "https://i.pinimg.com/280x280_RS/01/75/7b/01757bf368917fec3800a21f45fc6dda.jpg"
+  },
+  {
+    id: 6,
+    name: "Dora",
+    designation: "The Explorer",
+    image:
+      "https://i.pinimg.com/280x280_RS/01/75/7b/01757bf368917fec3800a21f45fc6dda.jpg",
+  },
+];
