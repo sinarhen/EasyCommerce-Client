@@ -3,7 +3,7 @@
 import DroppingShirt from "@/app/(root)/components/dropping-shirt";
 import {motion} from "framer-motion";
 import {ShoppingBag} from "lucide-react";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {useCountUp} from "react-countup";
 import {cn} from "@/lib/utils";
 
@@ -44,29 +44,32 @@ const ShoppingEarnings = ({
     ref: countUpRef,
   });
 
-  const [prices, setPrices] = useState([0, 0, 0]);
-  const [colors, setColors] = useState<string[]>(["#B45396", "#B45396", "#B45396"]);
+  const [prices, setPrices] = useState(iterablePrices[0]);
+  const [colors, setColors] = useState(iterableColors[0]);
+
   const [iterIndex, setIterIndex] = useState(0);
+  const getColorsAndPrices = useCallback((index: number) => {
+    const prices = iterablePrices[index % iterablePrices.length];
+    const colors = iterableColors[index % iterableColors.length];
+    return { randomPrices: prices, randomColors:colors};
+  }, []);
+
+  const { randomPrices, randomColors } = useMemo(() => getColorsAndPrices(iterIndex), [getColorsAndPrices, iterIndex]);
 
   useEffect(() => {
-      const interval = setInterval(() => {
-        const [shirt1, shirt2, shirt3] = iterablePrices[iterIndex % iterablePrices.length];
-        const [color1, color2, color3] = iterableColors[iterIndex % iterableColors.length];
+    const interval = setInterval(() => {
+      setPrices(randomPrices);
+      setColors(randomColors);
 
-        setPrices([shirt1, shirt2, shirt3]);
-        setColors([color1, color2, color3]);
+      const shirtSum = prices.reduce((a, b) => a + b, 0);
+      setDollarAmount(prev => prev + shirtSum);
+      update(dollarAmount + shirtSum);
+      setIterIndex(prev => prev + 1);
+    }, (shirtDropDuration + shirtDropDelay) * 1000);
 
-        const shirtSum = shirt1 + shirt2 + shirt3;
-        setDollarAmount(prev => prev + shirtSum);
-        update(dollarAmount + shirtSum);
-
-        // Update the index for the next iteration
-        setIterIndex(prev => prev + 1);
-      }, (shirtDropDuration + shirtDropDelay) * 1000)
-
-      return () => clearInterval(interval);
-  }, [dollarAmount, update, iterIndex]);
-  return (
+    return () => clearInterval(interval);
+  }, [dollarAmount, update, iterIndex, prices, colors, randomPrices, randomColors]);
+return (
     <div className={cn(" relative ", className)}>
       <div className='relative'>
         <DroppingShirt color={colors[0]} shirtDropDuration={shirtDropDuration} price={prices[0]} initialX="-100px"
