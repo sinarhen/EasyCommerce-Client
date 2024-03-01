@@ -12,6 +12,7 @@ import {AnimatedTooltip} from "@/components/ui/animated-tooltip";
 import useMousePosition from "@/hooks/use-mouse-position";
 import useMobileDetection from "@/hooks/use-mobile-detection";
 import {partners} from "@/lib/constants";
+import GridBackground from "@/lib/grid-background";
 
 const backgroundPaddingX = {
   _: 4,
@@ -46,9 +47,7 @@ export default function GridSmallBackgroundDemo() {
   const mousePosition = useMousePosition(isMobile, containerRef);
 
   return (
-    <div
-      className="duration-700 transition-colors overflow-hidden flex items-center text-center h-screen md:text-start w-full  dark:bg-black bg-white relative dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2]"
-    >
+    <GridBackground>
       <motion.div
         ref={containerRef}
         className={cn(
@@ -176,6 +175,6 @@ export default function GridSmallBackgroundDemo() {
         </div>
 
       </motion.div>
-    </div>
-  );
-}
+  </GridBackground>
+  )
+};
