@@ -214,19 +214,19 @@ export default function GridSmallBackgroundDemo() {
               initial={{opacity: 0, y: 20}}
               animate={{opacity: 1, y: 0}}
               transition={{duration: transitionDuration, delay: 1}}
-              className='relative flex flex-col items-center justify-center mt-8 sm:mt-20 md:mt-32  w-full'>
+              className='relative flex flex-col items-center justify-center mt-16 sm:mt-20 md:mt-32  w-full'>
               <ShoppingEarnings/>
             </motion.div>
           </div>
           <div className={`
           h-full
-          flex 
+          sm:flex 
           flex-col 
           md:flex-col-reverse
           font-medium 
           text-sm
           justify-center 
-          
+          hidden
           md:justify-end
           md:items-start 
           md:mt-7 

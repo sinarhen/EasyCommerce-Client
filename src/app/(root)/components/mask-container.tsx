@@ -12,7 +12,7 @@ interface MaskContainerProps {
 
 
 const MaskContainer = memo(({isMobile, mousePosition, isHovered, children}: MaskContainerProps) => {
-  const maskSize = isHovered && !isMobile ? 300 : 0;
+  const maskSize = isHovered && !isMobile ? 200 : 0;
 
   const animations = !isMobile ? {
     animate: {

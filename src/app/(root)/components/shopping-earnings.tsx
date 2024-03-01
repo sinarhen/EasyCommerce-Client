@@ -63,6 +63,7 @@ const ShoppingEarnings = () => {
         className={"w-20 sm:w-24 md:w-28 lg:w-32 xl:w-36 h-auto mt-3"}
       >
         <ShoppingBag
+          fill={"black"}
           className={"w-full h-full"}
           strokeWidth={1}
         />
