@@ -129,7 +129,7 @@ export default function GridSmallBackgroundDemo() {
       <motion.div
         ref={containerRef}
         className={cn(
-          "h-3/4 text-6xl font-bold sm:text-6xl md:text-7xl w-full xl:text-8xl"
+          " text-6xl font-bold sm:text-6xl md:text-7xl w-full xl:text-8xl"
         )}
         animate={{
           backgroundColor: isHovered ? "var(--slate-900)" : "var(--white)",
@@ -138,7 +138,6 @@ export default function GridSmallBackgroundDemo() {
         <div>
           {!isMobile && (
             <MaskContainer isMobile={isMobile} mousePosition={mousePosition} isHovered={isHovered}>
-              <div className={cn(`absolute  bg-black h-full w-full z-10 opacity-50`, isMobile ? "hidden" : "")}/>
               <div
                 className={cn(
                   `inline z-20 px-${backgroundPaddingX._} w-full md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} `
@@ -163,7 +162,7 @@ export default function GridSmallBackgroundDemo() {
 
           <div
             className={cn(
-              `transition-all flex flex-col md:flex-row duration-300 h-full items-center overflow-hidden font-bold dark:text-white w-full md:py-16 py-4 px-${backgroundPaddingX._}`
+              `transition-all flex flex-col md:flex-row duration-300 h-full overflow-hidden font-bold dark:text-white w-full md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} px-${backgroundPaddingX._}`
             )}
           >
             <div className="h-full md:w-3/4">
@@ -212,11 +211,26 @@ export default function GridSmallBackgroundDemo() {
               initial={{opacity: 0, y: 20}}
               animate={{opacity: 1, y: 0}}
               transition={{duration: transitionDuration, delay: 1}}
-              className='relative flex flex-col items-center justify-center mt-24 md:mt-32 w-full'>
+              className='relative flex flex-col items-center justify-center mt-8 sm:mt-16 md:mt-32  w-full'>
               <ShoppingEarnings/>
             </motion.div>
           </div>
-          <div className={`w-full flex-col md:flex-col-reverse font-medium text-lg h-full justify-center md:justify-end md:items-end md:mt-5 -mt-1 items-center px-${backgroundPaddingX._}`}>
+          <div className={`
+          h-full
+          flex 
+          flex-col 
+          md:flex-col-reverse
+          font-medium 
+          text-sm
+          justify-center 
+          
+          md:justify-end
+          md:items-start 
+          md:mt-7 
+          lg:mt-5
+          items-center 
+          px-${backgroundPaddingX._}
+          `}>
             <div className="flex">
               <AnimatedTooltip items={people}/>
             </div>
@@ -224,8 +238,8 @@ export default function GridSmallBackgroundDemo() {
               initial={{opacity: 0, x: -20}}
               animate={{opacity: 1, x: 0}}
               transition={{duration: transitionDuration, delay: 1, type: "spring"}}
-              className="text-lg mt-2">
-              Our partners
+              className="ml-2 mb-1 text-gray-800 text-2xl font-semibold mt-2">
+              Our Partners
             </motion.div>
           </div>
         </div>
