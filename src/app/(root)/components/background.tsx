@@ -216,13 +216,17 @@ export default function GridSmallBackgroundDemo() {
               <ShoppingEarnings/>
             </motion.div>
           </div>
-          <div className={`w-full flex-col  font-medium text-lg h-full justify-center md:justify-end md:items-end mt-5 items-center px-${backgroundPaddingX._}`}>
+          <div className={`w-full flex-col md:flex-col-reverse font-medium text-lg h-full justify-center md:justify-end md:items-end md:mt-5 -mt-1 items-center px-${backgroundPaddingX._}`}>
             <div className="flex">
               <AnimatedTooltip items={people}/>
             </div>
-            <div className="text-xs mt-2">
+            <motion.div
+              initial={{opacity: 0, x: -20}}
+              animate={{opacity: 1, x: 0}}
+              transition={{duration: transitionDuration, delay: 1, type: "spring"}}
+              className="text-lg mt-2">
               Our partners
-            </div>
+            </motion.div>
           </div>
         </div>
 
