@@ -124,7 +124,7 @@ export default function GridSmallBackgroundDemo() {
 
   return (
     <div
-      className="md:h- duration-700 transition-colors overflow-hidden flex items-center text-center h-screen md:text-start w-full  dark:bg-black bg-white relative dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2]"
+      className="duration-700 transition-colors overflow-hidden flex items-center text-center h-screen md:text-start w-full  dark:bg-black bg-white relative dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2]"
     >
       <motion.div
         ref={containerRef}
@@ -140,10 +140,13 @@ export default function GridSmallBackgroundDemo() {
             <MaskContainer isMobile={isMobile} mousePosition={mousePosition} isHovered={isHovered}>
               <div
                 className={cn(
-                  `inline z-20 px-${backgroundPaddingX._} w-full md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} `
+                  `inline z-20 px-${backgroundPaddingX._} w-full sm:py-${backgroundPaddingY.sm} lg:py-${backgroundPaddingY.lg} md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} xl:py-${backgroundPaddingY.xl} `
                 )}
               >
+                <span className="dark:text-black">
                 Welcome to
+
+                </span>
                 <div
                   className="text-gradient md:w-fit  animate-gradient"
                   onMouseEnter={() => setIsHovered(true)}
@@ -152,7 +155,7 @@ export default function GridSmallBackgroundDemo() {
                   {" EasyCommerce."}
                 </div>
                 <div
-                  className={`text-sm w-full mt-2 px-[20%] md:px-0 md:w-[37.5%] font-medium text-gradient animate-gradient`}>
+                  className={`text-sm w-full mt-2 px-[20%] md:px-0 md:w-1/3 font-medium text-gradient animate-gradient`}>
                   Your one-stop solution for all your ecommerce needs. Explore our wide range of products and become a
                   seller today.
                 </div>
@@ -162,7 +165,7 @@ export default function GridSmallBackgroundDemo() {
 
           <div
             className={cn(
-              `transition-all flex flex-col md:flex-row duration-300 h-full overflow-hidden font-bold dark:text-white w-full md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} px-${backgroundPaddingX._}`
+              `transition-all flex flex-col md:flex-row duration-300 h-full overflow-hidden font-bold dark:text-white w-full sm:py-${backgroundPaddingY.sm} lg:py-${backgroundPaddingY.lg} md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} xl:py-${backgroundPaddingY.xl} px-${backgroundPaddingX._}`
             )}
           >
             <div className="h-full md:w-3/4">
@@ -211,7 +214,7 @@ export default function GridSmallBackgroundDemo() {
               initial={{opacity: 0, y: 20}}
               animate={{opacity: 1, y: 0}}
               transition={{duration: transitionDuration, delay: 1}}
-              className='relative flex flex-col items-center justify-center mt-8 sm:mt-16 md:mt-32  w-full'>
+              className='relative flex flex-col items-center justify-center mt-8 sm:mt-20 md:mt-32  w-full'>
               <ShoppingEarnings/>
             </motion.div>
           </div>
@@ -227,6 +230,7 @@ export default function GridSmallBackgroundDemo() {
           md:justify-end
           md:items-start 
           md:mt-7 
+          sm:mt-10
           lg:mt-5
           items-center 
           px-${backgroundPaddingX._}
@@ -238,7 +242,7 @@ export default function GridSmallBackgroundDemo() {
               initial={{opacity: 0, x: -20}}
               animate={{opacity: 1, x: 0}}
               transition={{duration: transitionDuration, delay: 1, type: "spring"}}
-              className="ml-2 mb-1 text-gray-800 text-2xl font-semibold mt-2">
+              className="ml-2 text-sm mb-1 text-gray-800 md:text-2xl font-semibold mt-2">
               Our Partners
             </motion.div>
           </div>
