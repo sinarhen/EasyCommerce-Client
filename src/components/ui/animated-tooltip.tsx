@@ -1,13 +1,7 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
-import {
-  motion,
-  useTransform,
-  AnimatePresence,
-  useMotionValue,
-  useSpring,
-} from "framer-motion";
+import React, {useState} from "react";
+import {AnimatePresence, motion, useMotionValue, useSpring, useTransform,} from "framer-motion";
 
 export const AnimatedTooltip = ({
                                   items,
@@ -20,7 +14,7 @@ export const AnimatedTooltip = ({
   }[];
 }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const springConfig = { stiffness: 100, damping: 5 };
+  const springConfig = {stiffness: 100, damping: 5};
   const x = useMotionValue(0); // going to set this value on mouse move
   // rotate the tooltip
   const rotate = useSpring(
@@ -44,7 +38,7 @@ export const AnimatedTooltip = ({
           initial={{x: -100, opacity: 0}}
           animate={{x: 0, opacity: [0, 0.5, 0.7, 0.77, 0.9, 1]}}
           transition={{
-            type:"spring",
+            type: "spring",
             delay: -idx * 0.1 + 1,
             duration: 0.5,
             stiffness: 100,
@@ -57,7 +51,7 @@ export const AnimatedTooltip = ({
           <AnimatePresence mode="wait">
             {hoveredIndex === item.id && (
               <motion.div
-                initial={{ opacity: 0, y: 20, scale: 0.6 }}
+                initial={{opacity: 0, y: 20, scale: 0.6}}
                 animate={{
                   opacity: 1,
                   y: 0,
@@ -68,7 +62,7 @@ export const AnimatedTooltip = ({
                     damping: 10,
                   },
                 }}
-                exit={{ opacity: 0, y: 20, scale: 0.6 }}
+                exit={{opacity: 0, y: 20, scale: 0.6}}
                 style={{
                   translateX: translateX,
                   rotate: rotate,
@@ -76,8 +70,10 @@ export const AnimatedTooltip = ({
                 }}
                 className="absolute -top-16 -left-1/2 translate-x-1/2 flex text-xs  flex-col items-center justify-center rounded-md bg-black z-50 shadow-xl px-4 py-2"
               >
-                <div className="absolute inset-x-10 z-30 w-[20%] -bottom-px bg-gradient-to-r from-transparent via-purple-800 to-transparent h-px " />
-                <div className="absolute left-10 w-[40%] z-30 -bottom-px bg-gradient-to-r  from-transparent via-pink-500 to-transparent h-px " />
+                <div
+                  className="absolute inset-x-10 z-30 w-[20%] -bottom-px bg-gradient-to-r from-transparent via-purple-800 to-transparent h-px "/>
+                <div
+                  className="absolute left-10 w-[40%] z-30 -bottom-px bg-gradient-to-r  from-transparent via-pink-500 to-transparent h-px "/>
                 <div className="font-bold text-white relative z-30 text-base">
                   {item.name}
                 </div>

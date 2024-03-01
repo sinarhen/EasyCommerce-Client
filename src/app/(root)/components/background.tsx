@@ -9,51 +9,16 @@ import MousePosition from "@/types/mouse-position";
 import MaskContainer from "@/app/(root)/components/mask-container";
 import ShoppingEarnings from "@/app/(root)/components/shopping-earnings";
 import {AnimatedTooltip} from "@/components/ui/animated-tooltip";
-
-const people = [
-  {
-    id: 1,
-    name: "Louis Vuitton",
-    designation: "Clothing Designer",
-    image:
-      "https://i.pinimg.com/280x280_RS/01/75/7b/01757bf368917fec3800a21f45fc6dda.jpg",
-  },
-  {
-    id: 2,
-    name: "Gucci",
-    designation: "Clothing Designer",
-    image:
-      "https://i.pinimg.com/564x/3d/75/47/3d7547509311922c64ec583b9fd11d59.jpg",
-  },
-  {
-    id: 3,
-    name: "Polo Ralph Lauren",
-    designation: "Clothing Designer",
-    image: "https://i.pinimg.com/564x/e6/94/ab/e694ab1c10e809175fd0ea372439a24a.jpg"
-  },
-  {
-    id: 4,
-    name: "Emily Davis",
-    designation: "UX Designer",
-    image: "https://i.pinimg.com/280x280_RS/01/75/7b/01757bf368917fec3800a21f45fc6dda.jpg"
-  },
-  {
-    id: 5,
-    name: "Tyler Durden",
-    designation: "Soap Developer",
-    image: "https://i.pinimg.com/280x280_RS/01/75/7b/01757bf368917fec3800a21f45fc6dda.jpg"
-  },
-  {
-    id: 6,
-    name: "Dora",
-    designation: "The Explorer",
-    image:
-      "https://i.pinimg.com/280x280_RS/01/75/7b/01757bf368917fec3800a21f45fc6dda.jpg",
-  },
-];
+import useMousePosition from "@/hooks/use-mouse-position";
+import useMobileDetection from "@/hooks/use-mobile-detection";
+import {partners} from "@/lib/constants";
 
 const backgroundPaddingX = {
   _: 4,
+  sm: 8,
+  md: 16,
+  lg: 28,
+  xl: 52,
 };
 const backgroundPaddingY = {
   _: 4,
@@ -63,9 +28,6 @@ const backgroundPaddingY = {
   xl: 72,
 };
 
-const shirtDropDuration = 2.5;
-const shirtDropDelay = 0.5;
-
 const headerVariants = {
   hidden: {opacity: 0, x: -40},
   visible: {opacity: 1, x: 0}
@@ -74,46 +36,7 @@ const headerVariants = {
 
 const transitionDuration = 0.7;
 
-function useMobileDetection() {
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.matchMedia("(max-width: 768px)").matches);
-    };
-
-    checkMobile();
-  }, []);
-
-  return isMobile;
-}
-
-function useMousePosition(isMobile: boolean, containerRef: React.RefObject<HTMLDivElement>) {
-  const [mousePosition, setMousePosition] = useState<MousePosition>({x: null, y: null});
-
-  useEffect(() => {
-    if (!isMobile && containerRef.current) {
-      const updateMousePosition = (e: MouseEvent) => {
-        const rect = containerRef?.current?.getBoundingClientRect();
-        if (rect) {
-          setMousePosition({x: e.clientX - rect.left, y: e.clientY - rect.top});
-        }
-      };
-
-      containerRef.current.addEventListener("mousemove", updateMousePosition);
-      return () => {
-        if (containerRef.current) {
-          containerRef.current.removeEventListener(
-            "mousemove",
-            updateMousePosition
-          );
-        }
-      };
-    }
-  }, [isMobile, containerRef]);
-
-  return mousePosition;
-}
 
 
 export default function GridSmallBackgroundDemo() {
@@ -140,7 +63,7 @@ export default function GridSmallBackgroundDemo() {
             <MaskContainer isMobile={isMobile} mousePosition={mousePosition} isHovered={isHovered}>
               <div
                 className={cn(
-                  `inline z-20 px-${backgroundPaddingX._} w-full sm:py-${backgroundPaddingY.sm} lg:py-${backgroundPaddingY.lg} md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} xl:py-${backgroundPaddingY.xl} `
+                  `inline z-20 px-${backgroundPaddingX._} sm:px-${backgroundPaddingX.sm} md:px-${backgroundPaddingX.md} lg:px-${backgroundPaddingX.lg} xl:px-${backgroundPaddingX.xl} w-full sm:py-${backgroundPaddingY.sm} lg:py-${backgroundPaddingY.lg} md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} xl:py-${backgroundPaddingY.xl} `
                 )}
               >
                 <span className="dark:text-black">
@@ -165,7 +88,7 @@ export default function GridSmallBackgroundDemo() {
 
           <div
             className={cn(
-              `transition-all flex flex-col md:flex-row duration-300 h-full overflow-hidden font-bold dark:text-white w-full sm:py-${backgroundPaddingY.sm} lg:py-${backgroundPaddingY.lg} md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} xl:py-${backgroundPaddingY.xl} px-${backgroundPaddingX._}`
+              `transition-all flex flex-col md:flex-row duration-300 h-full overflow-hidden font-bold dark:text-white w-full sm:py-${backgroundPaddingY.sm} lg:py-${backgroundPaddingY.lg} md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} xl:py-${backgroundPaddingY.xl} px-${backgroundPaddingX._} sm:px-${backgroundPaddingX.sm} md:px-${backgroundPaddingX.md} lg:px-${backgroundPaddingX.lg} xl:px-${backgroundPaddingX.xl}`
             )}
           >
             <div className="h-full md:w-3/4">
@@ -214,8 +137,8 @@ export default function GridSmallBackgroundDemo() {
               initial={{opacity: 0, y: 20}}
               animate={{opacity: 1, y: 0}}
               transition={{duration: transitionDuration, delay: 1}}
-              className='relative flex flex-col items-center justify-center mt-16 sm:mt-20 md:mt-32  w-full'>
-              <ShoppingEarnings/>
+              className=' mt-16 sm:mt-20 md:mt-32  w-full'>
+              <ShoppingEarnings className="flex w-full justify-center md:justify-end" />
             </motion.div>
           </div>
           <div className={`
@@ -233,10 +156,14 @@ export default function GridSmallBackgroundDemo() {
           sm:mt-10
           lg:mt-5
           items-center 
-          px-${backgroundPaddingX._}
+          px-4  
+          sm:px-${backgroundPaddingX.sm}  
+          md:px-${backgroundPaddingX.md} 
+          lg:px-${backgroundPaddingX.lg} 
+          xl:px-${backgroundPaddingX.xl}
           `}>
             <div className="flex">
-              <AnimatedTooltip items={people}/>
+              <AnimatedTooltip items={partners}/>
             </div>
             <motion.div
               initial={{opacity: 0, x: -20}}
