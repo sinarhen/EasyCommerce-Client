@@ -35,7 +35,7 @@ const people = [
     id: 4,
     name: "Emily Davis",
     designation: "UX Designer",
-    image:"https://i.pinimg.com/280x280_RS/01/75/7b/01757bf368917fec3800a21f45fc6dda.jpg"
+    image: "https://i.pinimg.com/280x280_RS/01/75/7b/01757bf368917fec3800a21f45fc6dda.jpg"
   },
   {
     id: 5,
