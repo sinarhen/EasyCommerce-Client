@@ -70,7 +70,7 @@ const ShoppingEarnings = ({
     return () => clearInterval(interval);
   }, [dollarAmount, update, iterIndex, prices, colors, randomPrices, randomColors]);
 return (
-    <div className={cn(" relative ", className)}>
+    <div className={cn("relative", className)}>
       <div className='relative'>
         <DroppingShirt color={colors[0]} shirtDropDuration={shirtDropDuration} price={prices[0]} initialX="-100px"
                        delay={shirtDropDelay}/>
@@ -83,7 +83,8 @@ return (
           className={"w-20 sm:w-24 md:w-28 lg:w-32 xl:w-36 h-auto mt-3"}
         >
           <ShoppingBag
-            className={"w-full h-full bg-clip-text text-transparent stroke-current text-purple-800"}
+            fill={"#7C3AED"}
+            className={"w-full h-full text-white dark:text-black"}
             strokeWidth={1}
           />
         </motion.div>
