@@ -1,8 +1,9 @@
 export default function Store() {
   return (
     <>
-
-      asdasd
+      <div className="w-full h-full flex items-center justify-around">
+dasda
+      </div>
     </>
   );
 }

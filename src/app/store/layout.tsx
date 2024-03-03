@@ -1,6 +1,6 @@
 import React from "react";
 import GridBackground from "@/lib/grid-background";
-import StoreNavbar from "@/components/ui/store-navbar";
+import StoreNavbar from "@/app/store/components/store-navbar";
 
 export const metadata = {
   title: 'Next.js',

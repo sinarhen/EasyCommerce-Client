@@ -8,8 +8,9 @@ import React from "react";
 import dynamic from "next/dynamic";
 import {Info, Phone, ShoppingCart} from "lucide-react";
 import {NavButtonProps} from "@/types/nav-button";
+import StoreNavbarCommand from "./store-navbar-command";
 
-const ThemeToggle = dynamic(() => import('./theme-toggle'), {ssr: false})
+const ThemeToggle = dynamic(() => import('../../../components/ui/theme-toggle'), {ssr: false})
 
 const navButtons = [
   {href: "/store", icon: ShoppingCart, text: "Store", variant: "secondary"},
@@ -29,6 +30,7 @@ export default function StoreNavbar() {
     <nav className="dark:bg-black fixed w-full z-50 flex items-center justify-between py-2  text-white bg-zinc-900">
       <div className="flex justify-between items-center w-full px-4 sm:px-16 md:px-32 lg:px-64 xl:px-72">
         <Logo/>
+        <StoreNavbarCommand />
         <div className="flex gap-x-1.5">
           {navButtons.map((button, idx) => (
             <motion.div
