@@ -1,14 +1,14 @@
 'use client'
 import React from "react";
 import {Info, Phone, ShoppingCart} from "lucide-react";
-import NavButton from "./nav-button";
-import Logo from "./logo";
+import NavButton from "../../../components/ui/nav-button";
+import Logo from "../../../components/ui/logo";
 import {NavButtonProps} from "@/types/nav-button";
 import {motion} from "framer-motion";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import dynamic from 'next/dynamic';
 
-const ThemeToggle = dynamic(() => import('./theme-toggle'), {ssr: false})
+const ThemeToggle = dynamic(() => import('../../../components/ui/theme-toggle'), {ssr: false})
 
 const navButtons = [
   {href: "/store", icon: ShoppingCart, text: "Store", variant: "secondary"},

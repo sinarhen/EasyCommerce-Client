@@ -1,15 +1,9 @@
-import React from "react";
-
 const GridBackground = (
-  {children} : {
-    children: React.ReactNode,
-    className?: string
-
-  }
+  {children} : {children: React.ReactNode}
 ) => {
   return (
     <div
-      className={"dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2] duration-700 overflow-hidden transition-colors flex items-center h-screen w-full  dark:bg-black bg-white relative "}
+      className="duration-700 transition-colors h-screen w-full flex items-center justify-center dark:bg-black bg-white relative dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2]"
     >
       {children}
     </div>

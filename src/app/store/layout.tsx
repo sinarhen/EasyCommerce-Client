@@ -1,5 +1,6 @@
 import React from "react";
 import GridBackground from "@/lib/grid-background";
+import StoreNavbar from "@/components/ui/store-navbar";
 
 export const metadata = {
   title: 'Next.js',
@@ -13,6 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <>
+      <StoreNavbar />
       <GridBackground>
         {children}
       </GridBackground>

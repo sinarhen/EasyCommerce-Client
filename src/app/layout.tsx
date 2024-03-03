@@ -1,9 +1,8 @@
 import type {Metadata} from "next";
 import "./globals.css";
 import {ThemeProvider} from "@/components/ThemeProvider";
-import Navbar from "@/app/(root)/components/navbar";
 import {TooltipProvider} from "@/components/ui/tooltip";
-import GridBackground from "@/lib/grid-background";
+import React from "react";
 
 
 export const metadata: Metadata = {
@@ -27,7 +26,6 @@ export default function RootLayout({
     >
       <TooltipProvider>
           {children}
-        {/* <Footer /> */}
       </TooltipProvider>
     </ThemeProvider>
     </body>
