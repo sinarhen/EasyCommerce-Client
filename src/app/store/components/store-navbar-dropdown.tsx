@@ -12,8 +12,13 @@ import {
 } from "@/components/ui/dropdown-menu"
 import {Menu} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
+import {NavButtonProps} from "@/types/nav-button";
 
-export default function StoreNavbarDropdown() {
+export default function StoreNavbarDropdown({
+  items,
+                                            }: {
+  items: NavButtonProps[]
+}) {
 
   return (
     <DropdownMenu>
@@ -21,12 +26,14 @@ export default function StoreNavbarDropdown() {
         <div className="text-sm font-bold flex items-center gap-x-0.5"><Menu size={iconSizes.md}/>Menu</div>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>Menu</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem>Billing</DropdownMenuItem>
-        <DropdownMenuItem>Team</DropdownMenuItem>
-        <DropdownMenuItem>Subscription</DropdownMenuItem>
+        {items.map((item, idx) => (
+          <DropdownMenuItem className="gap-x-2 items-center" key={idx}>
+            <item.Icon size={iconSizes.sm}/>
+            {item.text}</DropdownMenuItem>
+        ))}
+
       </DropdownMenuContent>
     </DropdownMenu>
 

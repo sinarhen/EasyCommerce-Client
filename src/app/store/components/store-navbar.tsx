@@ -6,7 +6,7 @@ import NavButton from "@/components/ui/nav-button";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import React from "react";
 import dynamic from "next/dynamic";
-import {DollarSign, Info, Phone, ShoppingCart} from "lucide-react";
+import {DollarSign, Info, Phone, ShoppingCart, User} from "lucide-react";
 import {NavButtonProps} from "@/types/nav-button";
 import StoreNavbarCommand from "./store-navbar-command";
 import StoreNavbarDropdown from "@/app/store/components/store-navbar-dropdown";
@@ -14,9 +14,10 @@ import StoreNavbarDropdown from "@/app/store/components/store-navbar-dropdown";
 const ThemeToggle = dynamic(() => import('../../../components/ui/theme-toggle'), {ssr: false})
 
 const navButtons = [
-  {href: "/store", icon: ShoppingCart, text: "Products", variant: "secondary"},
-  {href: "/about", icon: Info, text: "About", variant: "ghost"},
-  {href: "/seller", icon: DollarSign, text: "Seller", variant: "ghost"},
+  {href: "/store", Icon: ShoppingCart, text: "Products", variant: "secondary"},
+  {href: "/about", Icon: Info, text: "About", variant: "ghost"},
+  {href: "/seller", Icon: DollarSign, text: "Seller", variant: "ghost"},
+  {href: "/me", Icon: User, text: "Profile", variant: "ghost"},
 ] as NavButtonProps[];
 
 const transitionDuration = 1;
@@ -28,14 +29,14 @@ const buttonVariants = {
 
 export default function StoreNavbar() {
   return (
-    <nav className="dark:bg-black fixed w-full z-50 flex items-center justify-between py-2  text-white bg-zinc-900">
-      <div className="flex justify-between items-center w-full px-4 sm:px-16 md:px-16 lg:px-32 xl:px-72">
+    <nav className="dark:bg-black fixed w-full z-50 flex py-2  text-white bg-zinc-900">
+      <div className="flex justify-between items-center w-full px-4 sm:px-16 md:px-4 lg:px-32 xl:px-72">
 
         <Logo/>
         <StoreNavbarCommand />
         <div></div>
         <div className="flex md:hidden relative justify-end items-center gap-x-6">
-          <StoreNavbarDropdown />
+          <StoreNavbarDropdown items={navButtons} />
 
         </div>
         <div className=" md:flex hidden  gap-x-1.5">
