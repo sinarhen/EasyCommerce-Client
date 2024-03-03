@@ -2,7 +2,7 @@
 
 ## Pages
 
-- [ ] Home Page
+- [X] Home Page
 - [ ] About Page
 - [ ] Contact Page
 - [ ] Login Page
