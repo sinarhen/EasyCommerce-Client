@@ -29,7 +29,7 @@ const buttonVariants = {
 export default function StoreNavbar() {
   return (
     <nav className="dark:bg-black fixed w-full z-50 flex items-center justify-between py-2  text-white bg-zinc-900">
-      <div className="flex justify-between items-center w-full px-4 sm:px-16 md:px-32 lg:px-64 xl:px-72">
+      <div className="flex justify-between items-center w-full px-4 sm:px-16 md:px-16 lg:px-32 xl:px-72">
 
         <Logo/>
         <StoreNavbarCommand />
