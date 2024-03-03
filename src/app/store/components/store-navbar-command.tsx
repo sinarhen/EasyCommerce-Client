@@ -14,10 +14,10 @@ const commandGroups = [
   {
     heading: "Products",
     commands: [
-      {icon: ShoppingCart, text: "Products"},
-      {icon: Archive, text: "Collections"},
-      {icon: List, text: "Categories"},
-      {icon: ShoppingCart, text: "Stores"},
+      {icon: ShoppingCart, text: "Products", href: "/store/products"},
+      {icon: Archive, text: "Collections", href: "/store/collections"},
+      {icon: List, text: "Categories", href: "/store/categories"},
+      {icon: ShoppingCart, text: "Stores", href: "/store/stores"},
     ]
   },
   {
@@ -41,7 +41,7 @@ const StoreNavbarCommand = () => {
   const [isFocused, setIsFocused] = useState(false)
   return (
     <Command className="rounded-lg border w-[200px] shadow-md">
-      <CommandInput className="w-[200px]" onBlurCapture={() => setIsFocused(false)} onFocus={() => {setIsFocused(true)}}  placeholder="Type a command or search..." />
+      <CommandInput className="w-[200px] h-8" onBlurCapture={() => setIsFocused(false)} onFocus={() => {setIsFocused(true)}}  placeholder="Type a command or search..." />
       <div className="w-full">
         <CommandList hidden={!isFocused} className='absolute scroll-m-0 rounded-lg dark:bg-black bg-white w-[200px]'>
           <CommandEmpty>No results found.</CommandEmpty>
