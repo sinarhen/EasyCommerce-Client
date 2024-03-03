@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Navbar/>
-      <GridBackground className='flex items-center '>
+      <GridBackground>
         <HomePageContent/>
       </GridBackground>
 

@@ -63,6 +63,7 @@ export default function HomePageContent() {
               <div
                 className={cn(
                   `inline z-20 px-4  
+                  text-center md:text-start
           md:px-12
           lg:px-28 
           xl:px-52 w-full sm:py-${backgroundPaddingY.sm} lg:py-${backgroundPaddingY.lg} md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} xl:py-${backgroundPaddingY.xl} `
@@ -163,8 +164,7 @@ export default function HomePageContent() {
           md:justify-end
           md:items-start 
           md:mt-7 
-          sm:mt-10
-          lg:mt-5
+          lg:mt-10
           items-center 
           px-4  
           sm:px-8  
