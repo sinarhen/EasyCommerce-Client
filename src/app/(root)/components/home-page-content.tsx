@@ -62,7 +62,10 @@ export default function HomePageContent() {
             <MaskContainer isMobile={isMobile} mousePosition={mousePosition} isHovered={isHovered}>
               <div
                 className={cn(
-                  `inline z-20 px-${backgroundPaddingX._} sm:px-${backgroundPaddingX.sm} md:px-${backgroundPaddingX.md} lg:px-${backgroundPaddingX.lg} xl:px-${backgroundPaddingX.xl} w-full sm:py-${backgroundPaddingY.sm} lg:py-${backgroundPaddingY.lg} md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} xl:py-${backgroundPaddingY.xl} `
+                  `inline z-20 px-4  
+          md:px-12
+          lg:px-28 
+          xl:px-52 w-full sm:py-${backgroundPaddingY.sm} lg:py-${backgroundPaddingY.lg} md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} xl:py-${backgroundPaddingY.xl} `
                 )}
               >
                 <span className="dark:text-black">
@@ -87,10 +90,14 @@ export default function HomePageContent() {
 
           <div
             className={cn(
-              `transition-all flex flex-col md:flex-row duration-300 h-full overflow-hidden font-bold dark:text-white w-full sm:py-${backgroundPaddingY.sm} lg:py-${backgroundPaddingY.lg} md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} xl:py-${backgroundPaddingY.xl} px-${backgroundPaddingX._} sm:px-${backgroundPaddingX.sm} md:px-${backgroundPaddingX.md} lg:px-${backgroundPaddingX.lg} xl:px-${backgroundPaddingX.xl}`
+              `transition-all flex flex-col md:flex-row duration-300 h-full overflow-hidden font-bold dark:text-white w-full sm:py-${backgroundPaddingY.sm} lg:py-${backgroundPaddingY.lg} md:py-${backgroundPaddingY.md} py-${backgroundPaddingY._} xl:py-${backgroundPaddingY.xl} px-4  
+          
+          md:px-12
+          lg:px-28 
+          xl:px-52`
             )}
           >
-            <div className="h-full md:w-3/4">
+            <div className="h-full text-center md:text-start sm:mt-12 md:mt-0  md:w-3/4">
               <motion.div
                 variants={headerVariants}
                 initial="hidden"
@@ -140,7 +147,7 @@ export default function HomePageContent() {
               initial={{opacity: 0, y: 20}}
               animate={{opacity: 1, y: 0}}
               transition={{duration: transitionDuration, delay: 1}}
-              className=' mt-16 sm:mt-20 md:mt-32  w-full'>
+              className=' mt-28 sm:mt-28 md:mt-32  w-full'>
               <ShoppingEarnings className="flex w-full justify-center md:justify-end" />
             </motion.div>
           </div>
@@ -160,10 +167,10 @@ export default function HomePageContent() {
           lg:mt-5
           items-center 
           px-4  
-          sm:px-${backgroundPaddingX.sm}  
-          md:px-${backgroundPaddingX.md} 
-          lg:px-${backgroundPaddingX.lg} 
-          xl:px-${backgroundPaddingX.xl}
+          sm:px-8  
+          md:px-16
+          lg:px-28 
+          xl:px-52
           `}>
             <div className="flex">
               <AnimatedTooltip items={partners}/>
@@ -172,7 +179,7 @@ export default function HomePageContent() {
               initial={{opacity: 0, x: -20}}
               animate={{opacity: 1, x: 0}}
               transition={{duration: transitionDuration, delay: 1, type: "spring"}}
-              className="ml-2 text-sm mb-1 text-gray-800 md:text-2xl font-semibold mt-2">
+              className="ml-2 sm:text-xs mb-1 text-gray-800 lg:text-lg font-semibold mt-2">
               Our Partners
             </motion.div>
           </div>

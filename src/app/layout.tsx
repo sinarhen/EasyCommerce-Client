@@ -26,9 +26,7 @@ export default function RootLayout({
       storageKey="theme"
     >
       <TooltipProvider>
-        <GridBackground>
           {children}
-        </GridBackground>
         {/* <Footer /> */}
       </TooltipProvider>
     </ThemeProvider>
