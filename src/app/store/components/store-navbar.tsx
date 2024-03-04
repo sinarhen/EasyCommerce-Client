@@ -11,7 +11,7 @@ import {NavButtonProps} from "@/types/nav-button";
 import StoreNavbarCommand from "./store-navbar-command";
 import StoreNavbarDropdown from "@/app/store/components/store-navbar-dropdown";
 
-const ThemeToggle = dynamic(() => import('../../../components/ui/theme-toggle'), {ssr: false})
+const ThemeToggle = dynamic(() => import('@/components/ui/theme-toggle'), {ssr: false})
 
 const navButtons = [
   {href: "/store", Icon: ShoppingCart, text: "Products", variant: "secondary"},
@@ -30,11 +30,12 @@ const buttonVariants = {
 export default function StoreNavbar() {
   return (
     <nav className="dark:bg-black fixed w-full z-50 flex py-2  text-white bg-zinc-900">
-      <div className="flex justify-between items-center w-full px-4 sm:px-16 md:px-4 lg:px-32 xl:px-72">
-
+      <div className="flex justify-between items-center w-full px-4 sm:px-16 md:px-8 lg:px-32 xl:px-72">
         <Logo/>
-        <StoreNavbarCommand />
-        <div></div>
+        <div className="flex">
+          <StoreNavbarCommand />
+
+        </div>
         <div className="flex md:hidden relative justify-end items-center gap-x-6">
           <StoreNavbarDropdown items={navButtons} />
 
@@ -54,14 +55,17 @@ export default function StoreNavbar() {
           ))}
         </div>
       </div>
-      <Tooltip>
-        <TooltipTrigger>
-          <ThemeToggle/>
-        </TooltipTrigger>
-        <TooltipContent>
-          Toggle Theme
-        </TooltipContent>
-      </Tooltip>
+      <div className="md:flex hidden">
+        <Tooltip>
+          <TooltipTrigger>
+            <ThemeToggle/>
+          </TooltipTrigger>
+          <TooltipContent>
+            Toggle Theme
+          </TooltipContent>
+        </Tooltip>
+
+      </div>
     </nav>
   );
 }

@@ -13,28 +13,38 @@ import {
 import {Menu} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
 import {NavButtonProps} from "@/types/nav-button";
+import { useTheme } from "next-themes";
 
 export default function StoreNavbarDropdown({
   items,
                                             }: {
   items: NavButtonProps[]
 }) {
-
+  const {theme, setTheme} = useTheme();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <div className="text-sm font-bold flex items-center gap-x-0.5"><Menu size={iconSizes.md}/>Menu</div>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuLabel>Menu</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        {items.map((item, idx) => (
-          <DropdownMenuItem className="gap-x-2 items-center" key={idx}>
-            <item.Icon size={iconSizes.sm}/>
-            {item.text}</DropdownMenuItem>
-        ))}
+        <Button className="text-sm font-bold flex items-center gap-x-0.5"><Menu size={iconSizes.md}/>Menu</Button>
 
-      </DropdownMenuContent>
+      </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuLabel>Menu</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          {items.map((item, idx) => (
+            <DropdownMenuItem className="gap-x-2 items-center" key={idx}>
+              <item.Icon size={iconSizes.sm}/>
+              {item.text}</DropdownMenuItem>
+          ))}
+          <DropdownMenuSeparator />
+          <DropdownMenuCheckboxItem
+            checked={theme == "dark"}
+            onClick={() => {
+              setTheme(theme === "dark" ? "light" : "dark");
+            }}
+          >Dark Mode</DropdownMenuCheckboxItem>
+
+        </DropdownMenuContent>
+
     </DropdownMenu>
 
   )
