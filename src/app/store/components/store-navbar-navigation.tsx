@@ -13,7 +13,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-import {List, LucideIcon, ShoppingBag, ShoppingCart} from "lucide-react";
+import {Info, List, LucideIcon, ShoppingBag, ShoppingCart} from "lucide-react";
 
 const about: { title: string; href: string; description: string }[] = [
   {
@@ -128,25 +128,28 @@ export function StoreNavbarNavigation() {
               <ListItem href="/store/sellers" Icon={ShoppingCart} title="Sellers">
                 See all the selling stores registered on our platform.
               </ListItem>
+              <ListItem href="/store/about"  Icon={Info} title="About us">
+                Learn about us.
+              </ListItem>
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-black dark:text-white">About</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[550px] md:grid-cols-3 lg:grid-cols-4  lg:w-[700px] ">
-              {about.map((component) => (
-                <ListItem
-                  key={component.title}
-                  title={component.title}
-                  href={component.href}
-                >
-                  {component.description}
-                </ListItem>
-              ))}
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
+        {/*<NavigationMenuItem>*/}
+        {/*  <NavigationMenuTrigger className="text-black dark:text-white">About</NavigationMenuTrigger>*/}
+        {/*  <NavigationMenuContent>*/}
+        {/*    <ul className="grid w-[400px] gap-3 p-4 md:w-[550px] md:grid-cols-3 lg:grid-cols-4  lg:w-[700px] ">*/}
+        {/*      {about.map((component) => (*/}
+        {/*        <ListItem*/}
+        {/*          key={component.title}*/}
+        {/*          title={component.title}*/}
+        {/*          href={component.href}*/}
+        {/*        >*/}
+        {/*          {component.description}*/}
+        {/*        </ListItem>*/}
+        {/*      ))}*/}
+        {/*    </ul>*/}
+        {/*  </NavigationMenuContent>*/}
+        {/*</NavigationMenuItem>*/}
       </NavigationMenuList>
     </NavigationMenu>
   )

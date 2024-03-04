@@ -38,7 +38,7 @@ export default function StoreNavbar() {
         <Logo/>
 
         <div className=" md:flex ml-9 hidden  gap-x-1.5">
-          <StoreNavbarNavigation/>
+          <StoreNavbarNavigation />
         </div>
 
         <motion.div
@@ -68,7 +68,7 @@ export default function StoreNavbar() {
           )}
         </div>
       </div>
-      <div className="md:flex hidden">
+      <div className="md:absolute hidden">
         <Tooltip>
           <TooltipTrigger>
             <ThemeToggle/>
