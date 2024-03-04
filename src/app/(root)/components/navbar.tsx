@@ -11,9 +11,9 @@ import dynamic from 'next/dynamic';
 const ThemeToggle = dynamic(() => import('../../../components/ui/theme-toggle'), {ssr: false})
 
 const navButtons = [
-  {href: "/store", icon: ShoppingCart, text: "Store", variant: "secondary"},
-  {href: "/about", icon: Info, text: "About", variant: "ghost"},
-  {href: "/contact", icon: Phone, text: "Contact", variant: "ghost"},
+  {href: "/store", Icon: ShoppingCart, text: "Store", variant: "secondary"},
+  {href: "/about", Icon: Info, text: "About", variant: "ghost"},
+  {href: "/contact", Icon: Phone, text: "Contact", variant: "ghost"},
 ] as NavButtonProps[];
 
 const transitionDuration = 1;
