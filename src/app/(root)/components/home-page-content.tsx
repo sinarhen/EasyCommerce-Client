@@ -11,7 +11,6 @@ import {AnimatedTooltip} from "@/components/ui/animated-tooltip";
 import useMousePosition from "@/hooks/use-mouse-position";
 import useMobileDetection from "@/hooks/use-mobile-detection";
 import {partners} from "@/lib/constants";
-import GridBackground from "@/lib/grid-background";
 import Link from "next/link";
 
 const backgroundPaddingX = {

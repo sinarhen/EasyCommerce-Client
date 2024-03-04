@@ -17,11 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-    <body>
+    <body className="min-h-screen">
     <ThemeProvider
+      defaultTheme="light"
       attribute="class"
-      defaultTheme="system"
-      enableSystem={true}
+
       storageKey="theme"
     >
       <TooltipProvider>

@@ -3,7 +3,7 @@ const GridBackground = (
 ) => {
   return (
     <div
-      className="h-screen w-full items-center justify-center dark:bg-black bg-white relative dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2]"
+      className="w-full h-screen flex items-center dark:bg-black bg-white  justify-center relative dark:bg-grid-small-white/[0.2] bg-grid-small-black/[0.2]"
     >
       {children}
     </div>

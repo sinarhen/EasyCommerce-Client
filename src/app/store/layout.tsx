@@ -1,5 +1,5 @@
 import React from "react";
-import GridBackground from "@/lib/grid-background";
+import GridBackground from "@/components/ui/grid-background";
 import StoreNavbar from "@/app/store/components/store-navbar";
 
 export const metadata = {
