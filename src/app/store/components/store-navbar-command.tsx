@@ -40,10 +40,9 @@ const commandGroups = [
 const StoreNavbarCommand = () => {
   const [isFocused, setIsFocused] = useState(false)
   return (
-    <Command className="rounded-lg border w-[200px] shadow-md">
+    <Command className="rounded-lg border h-8 w-[200px] shadow-md">
       <CommandInput className="w-[200px] h-8" onBlurCapture={() => setIsFocused(false)} onFocus={() => {setIsFocused(true)}}  placeholder="Type a command or search..." />
-      <div className="w-full">
-        <CommandList hidden={!isFocused} className='absolute scroll-m-0 rounded-lg dark:bg-black bg-white w-[200px]'>
+        <CommandList hidden={!isFocused} className='absolute scroll-m-0 top-12 rounded-lg dark:bg-black bg-white w-[200px]'>
           <CommandEmpty>No results found.</CommandEmpty>
           {commandGroups.map((group, groupIdx) => (
             <React.Fragment key={groupIdx}>
@@ -59,7 +58,6 @@ const StoreNavbarCommand = () => {
             </React.Fragment>
           ))}
         </CommandList>
-      </div>
     </Command>
   )
 }
