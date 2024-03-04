@@ -9,6 +9,8 @@ import dynamic from "next/dynamic";
 import {DollarSign, Info, Phone, ShoppingCart, User} from "lucide-react";
 import {NavButtonProps} from "@/types/nav-button";
 import StoreNavbarCommand from "./store-navbar-command";
+import {StoreNavbarNavigation} from "@/app/store/components/store-navbar-navigation";
+import {Button} from "@/components/ui/button";
 
 const ThemeToggle = dynamic(() => import('@/components/ui/theme-toggle'), {ssr: false})
 const StoreNavbarDropdown = dynamic(() => import('@/app/store/components/store-navbar-dropdown'), {ssr: false})
@@ -28,35 +30,42 @@ const buttonVariants = {
 };
 
 export default function StoreNavbar() {
+
+  const authorized = false; // TODO: replace with actual auth check
   return (
     <nav className="dark:bg-black fixed w-full z-50 flex py-2  text-white bg-zinc-900">
       <div className="flex justify-between items-center w-full px-4 sm:px-16 md:px-8 lg:px-32 xl:px-72">
         <Logo/>
+
+        <div className=" md:flex ml-9 hidden  gap-x-1.5">
+          <StoreNavbarNavigation/>
+        </div>
+
         <motion.div
           initial={{opacity: 0, y: -10}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: transitionDuration}}
-          className="flex">
-          <StoreNavbarCommand />
+          className="flex w-full px-9 justify-start">
+          <StoreNavbarCommand/>
 
         </motion.div>
-        <div className="flex md:hidden relative justify-end items-center gap-x-6">
-          <StoreNavbarDropdown items={navButtons} />
+        <div className="flex md:hidden relative justify-end md:justify-start w-full items-center gap-x-6">
+          <StoreNavbarDropdown items={navButtons}/>
 
         </div>
-        <div className=" md:flex hidden  gap-x-1.5">
-          {navButtons.map((button, idx) => (
-            <motion.div
-              key={idx}
-              initial="hidden"
-              animate="visible"
-              variants={buttonVariants}
-              transition={{delay: idx * 0.2, duration: transitionDuration}}
-            >
-              <NavButton {...button} />
-
-            </motion.div>
-          ))}
+        <div className="md:flex hidden">
+          {!authorized && (
+            <div className="flex gap-x-4">
+              <Button variant="ghost">
+               <span className="text-gradient animate-gradient">
+                Register
+               </span>
+              </Button>
+              <Button variant="ghost">
+                Login
+              </Button>
+            </div>
+          )}
         </div>
       </div>
       <div className="md:flex hidden">
@@ -68,7 +77,6 @@ export default function StoreNavbar() {
             Toggle Theme
           </TooltipContent>
         </Tooltip>
-
       </div>
     </nav>
   );
