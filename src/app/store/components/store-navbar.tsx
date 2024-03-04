@@ -9,9 +9,9 @@ import dynamic from "next/dynamic";
 import {DollarSign, Info, Phone, ShoppingCart, User} from "lucide-react";
 import {NavButtonProps} from "@/types/nav-button";
 import StoreNavbarCommand from "./store-navbar-command";
-import StoreNavbarDropdown from "@/app/store/components/store-navbar-dropdown";
 
 const ThemeToggle = dynamic(() => import('@/components/ui/theme-toggle'), {ssr: false})
+const StoreNavbarDropdown = dynamic(() => import('@/app/store/components/store-navbar-dropdown'), {ssr: false})
 
 const navButtons = [
   {href: "/store", Icon: ShoppingCart, text: "Products", variant: "secondary"},
