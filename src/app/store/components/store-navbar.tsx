@@ -32,10 +32,14 @@ export default function StoreNavbar() {
     <nav className="dark:bg-black fixed w-full z-50 flex py-2  text-white bg-zinc-900">
       <div className="flex justify-between items-center w-full px-4 sm:px-16 md:px-8 lg:px-32 xl:px-72">
         <Logo/>
-        <div className="flex">
+        <motion.div
+          initial={{opacity: 0, y: -10}}
+          animate={{opacity: 1, y: 0}}
+          transition={{duration: transitionDuration}}
+          className="flex">
           <StoreNavbarCommand />
 
-        </div>
+        </motion.div>
         <div className="flex md:hidden relative justify-end items-center gap-x-6">
           <StoreNavbarDropdown items={navButtons} />
 
