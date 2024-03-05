@@ -2,7 +2,6 @@
 
 import Logo from "@/components/ui/logo";
 import {motion} from "framer-motion";
-import NavButton from "@/components/ui/nav-button";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import React from "react";
 import dynamic from "next/dynamic";
@@ -34,10 +33,10 @@ export default function StoreNavbar() {
   const authorized = false; // TODO: replace with actual auth check
   return (
     <nav className="dark:bg-black fixed w-full z-50 flex py-2  text-white bg-zinc-900">
-      <div className="flex justify-between items-center w-full px-4 sm:px-16 md:px-8 lg:px-32 xl:px-72">
+      <div className="flex justify-between md:flex-row items-center w-full px-4 sm:px-16 md:px-8 lg:px-32 xl:px-72">
         <Logo/>
 
-        <div className=" md:flex ml-9 hidden  gap-x-1.5">
+        <div className=" flex ml-9 gap-x-1.5">
           <StoreNavbarNavigation />
         </div>
 
@@ -45,18 +44,14 @@ export default function StoreNavbar() {
           initial={{opacity: 0, y: -10}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: transitionDuration}}
-          className="flex w-full px-9 justify-start">
+          className="hidden md:flex w-full px-9 justify-start">
           <StoreNavbarCommand/>
 
         </motion.div>
-        <div className="flex md:hidden relative justify-end md:justify-start w-full items-center gap-x-6">
-          <StoreNavbarDropdown items={navButtons}/>
-
-        </div>
-        <div className="md:flex hidden">
+        <div className="flex">
           {!authorized && (
             <div className="flex gap-x-4">
-              <Button variant="ghost">
+              <Button className="hidden sm:flex" variant="ghost">
                <span className="text-gradient animate-gradient">
                 Register
                </span>

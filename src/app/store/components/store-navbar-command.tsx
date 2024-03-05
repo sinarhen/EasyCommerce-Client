@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/command";
 import {ShoppingCart, Archive, List, User, Sheet, Bookmark, Store, Settings} from "lucide-react";
 import React, {useState} from "react";
+import {cn} from "@/lib/utils";
 
 const commandGroups = [
   {
@@ -37,12 +38,16 @@ const commandGroups = [
   },
 ];
 
-const StoreNavbarCommand = () => {
+const StoreNavbarCommand = ({
+  className
+                            }: {
+  className?: string;
+}) => {
   const [isFocused, setIsFocused] = useState(false)
   return (
-    <Command className="rounded-lg border h-9 w-[200px] shadow-md">
-      <CommandInput className="w-[200px] h-9" onBlurCapture={() => setIsFocused(false)} onFocus={() => {setIsFocused(true)}}  placeholder="Type a command or search..." />
-        <CommandList hidden={!isFocused} className='absolute scroll-m-0 top-12 rounded-lg dark:bg-black bg-white w-[200px]'>
+    <Command className={cn("rounded-md border h-9 w-full shadow-md", className)}>
+      <CommandInput className="w-full h-9" onBlurCapture={() => setIsFocused(false)} onFocus={() => {setIsFocused(true)}}  placeholder="Type a command or search..." />
+        <CommandList hidden={!isFocused} className='absolute scroll-m-0 top-12 rounded-md dark:bg-black bg-white w-[200px]'>
           <CommandEmpty>No results found.</CommandEmpty>
           {commandGroups.map((group, groupIdx) => (
             <React.Fragment key={groupIdx}>

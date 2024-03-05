@@ -11,90 +11,14 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-import {Info, List, LucideIcon, ShoppingBag, ShoppingCart} from "lucide-react";
-
-const about: { title: string; href: string; description: string }[] = [
-  {
-    title: "Rules",
-    href: "/rules",
-    description:
-      "Read about the rules and regulations that govern our platform.",
-  },
-  {
-    title: "Contact",
-    href: "/contact",
-    description: "Get in touch with us.",
-  },
-  {
-    title: "FAQs",
-    href: "/faq",
-    description: "Find answers to frequently asked questions.",
-  },
-  {
-    title: "Terms",
-    href: "/terms",
-    description: "Read our terms and conditions.",
-  },
-  {
-    title: "Privacy",
-    href: "/privacy",
-    description: "Read our privacy policy.",
-  },
-  {
-    title: "Security",
-    href: "/security",
-    description: "Read about our security measures.",
-  },
-  {
-    title: "Careers",
-    href: "/careers",
-    description: "Join our team.",
-  },
-  {
-    title: "Blog",
-    href: "/blog",
-    description: "Read our blog.",
-  },
-  {
-    title: "Press",
-    href: "/press",
-    description: "Read about us in the press.",
-  },
-  {
-    title: "Partners",
-    href: "/partners",
-    description: "Learn about our partners.",
-  },
-  {
-    title: "Affiliates",
-    href: "/affiliates",
-    description: "Learn about our affiliate program.",
-  },
-  {
-    title: "Feedback",
-    href: "/feedback",
-    description: "Give us feedback.",
-  },
-  {
-    title: "Support",
-    href: "/support",
-    description: "Get support.",
-  },
-  {
-    title: "Accessibility",
-    href: "/accessibility",
-    description: "Learn about our accessibility features.",
-  },
-  {
-    title: "Pricing",
-    href: "/pricing",
-    description: "Learn about our pricing.",
-  },
-]
+import {Info, List, LucideIcon, ShoppingBag, ShoppingCart, SunMoon} from "lucide-react";
+import {motion} from "framer-motion";
+import StoreNavbarCommand from "@/app/store/components/store-navbar-command";
+import {useTheme} from "next-themes";
 
 export function StoreNavbarNavigation() {
+  const {theme, setTheme} = useTheme()
   return (
     <NavigationMenu>
       <NavigationMenuList >
@@ -102,13 +26,24 @@ export function StoreNavbarNavigation() {
           <NavigationMenuTrigger className="text-black dark:text-white">Getting started</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-              <li className="row-span-3">
+              <motion.div
+                initial={{opacity: 0, y: -10}}
+                animate={{opacity: 1, y: 0}}
+                transition={{duration: 1}}
+                className="flex col-span-full w-full md:hidden justify-start">
+                <StoreNavbarCommand/>
+
+              </motion.div>
+              <li className="row-span-4">
+
                 <NavigationMenuLink asChild>
+
+
                   <Link
                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                     href="/store"
                   >
-                    <ShoppingBag className="h-6 w-6" />
+                    <ShoppingBag className="h-6 w-6"/>
                     <div className="mb-2 mt-4 text-lg text-gradient animate-gradient font-medium">
 
                       EasyCommerce
@@ -128,9 +63,13 @@ export function StoreNavbarNavigation() {
               <ListItem href="/store/sellers" Icon={ShoppingCart} title="Sellers">
                 See all the selling stores registered on our platform.
               </ListItem>
-              <ListItem href="/store/about"  Icon={Info} title="About us">
+              <ListItem href="/store/about" Icon={Info} title="About us">
                 Learn about us.
               </ListItem>
+              <ListItem className="col-span-4" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} Icon={SunMoon} title="Toggle theme">
+                Click to toggle the theme.
+              </ListItem>
+
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
