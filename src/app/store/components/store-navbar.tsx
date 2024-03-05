@@ -36,14 +36,18 @@ export default function StoreNavbar() {
       <div className="flex justify-between md:flex-row items-center w-full px-4 sm:px-16 md:px-8 lg:px-32 xl:px-72">
         <Logo/>
 
-        <div className=" flex ml-9 gap-x-1.5">
+        <motion.div
+          initial={{opacity: 0, y: -10}}
+          animate={{opacity: 1, y: 0}}
+          transition={{duration: transitionDuration - 0.2}}
+          className=" flex ml-9 gap-x-1.5">
           <StoreNavbarNavigation />
-        </div>
+        </motion.div>
 
         <motion.div
           initial={{opacity: 0, y: -10}}
           animate={{opacity: 1, y: 0}}
-          transition={{duration: transitionDuration}}
+          transition={{duration: transitionDuration, delay: 0.2}}
           className="hidden md:flex w-full px-9 justify-start">
           <StoreNavbarCommand/>
 
@@ -51,14 +55,31 @@ export default function StoreNavbar() {
         <div className="flex">
           {!authorized && (
             <div className="flex gap-x-4">
-              <Button className="hidden sm:flex" variant="ghost">
-               <span className="text-gradient animate-gradient">
-                Register
-               </span>
-              </Button>
-              <Button variant="ghost">
-                Login
-              </Button>
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={buttonVariants}
+                transition={{duration: transitionDuration, delay: 0.4}}
+                >
+
+                <Button className="hidden sm:flex" variant="ghost">
+                 <span className="text-gradient animate-gradient">
+                  Register
+                 </span>
+                </Button>
+
+              </motion.div>
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={buttonVariants}
+                transition={{duration: transitionDuration, delay: 0.6}}
+                >
+
+                <Button variant="ghost">
+                  Login
+                </Button>
+              </motion.div>
             </div>
           )}
         </div>
