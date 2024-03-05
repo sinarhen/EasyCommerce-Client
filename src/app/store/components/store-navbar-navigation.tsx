@@ -23,17 +23,14 @@ export function StoreNavbarNavigation() {
     <NavigationMenu>
       <NavigationMenuList >
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-black dark:text-white">Getting started</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="text-black dark:text-white">Navigation</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-              <motion.div
-                initial={{opacity: 0, y: -10}}
-                animate={{opacity: 1, y: 0}}
-                transition={{duration: 1}}
-                className="flex col-span-full w-full md:hidden justify-start">
+            <ul className="grid grid-cols-1 w-full gap-3 p-4 sm:w-[270px] md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+              <div
+                className="flex col-span-full   w-full md:hidden justify-start">
                 <StoreNavbarCommand/>
 
-              </motion.div>
+              </div>
               <li className="row-span-4">
 
                 <NavigationMenuLink asChild>

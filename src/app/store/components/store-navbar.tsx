@@ -30,7 +30,7 @@ const buttonVariants = {
 
 export default function StoreNavbar() {
 
-  const authorized = false; // TODO: replace with actual auth check
+  const authorized = false;
   return (
     <nav className="dark:bg-black fixed w-full z-50 flex py-2  text-white bg-zinc-900">
       <div className="flex justify-between md:flex-row items-center w-full px-4 sm:px-16 md:px-8 lg:px-32 xl:px-72">
@@ -40,7 +40,7 @@ export default function StoreNavbar() {
           initial={{opacity: 0, y: -10}}
           animate={{opacity: 1, y: 0}}
           transition={{duration: transitionDuration - 0.2}}
-          className=" flex ml-9 gap-x-1.5">
+          className=" flex md:ml-9 gap-x-1.5">
           <StoreNavbarNavigation />
         </motion.div>
 
