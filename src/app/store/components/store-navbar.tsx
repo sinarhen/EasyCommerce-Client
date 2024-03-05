@@ -8,6 +8,7 @@ import {StoreNavbarNavigation} from "@/app/store/components/store-navbar-navigat
 import {Button} from "@/components/ui/button";
 import {useDialog} from "@/hooks/use-dialog";
 import {AuthDialog} from "@/components/ui/auth-dialog";
+import {useAuthDialog} from "@/hooks/use-auth-dialog";
 
 const transitionDuration = 1;
 
@@ -18,11 +19,10 @@ const buttonVariants = {
 
 export default function StoreNavbar() {
 
-  const {isOpen, open, close} = useDialog();
+  const {setOpen} = useAuthDialog();
   const authorized = false;
   return (
     <>
-      <AuthDialog isOpen={isOpen} variant="login" onClose={close} />
       <nav className="dark:bg-black fixed w-full z-50 flex py-2  text-white bg-zinc-900">
         <div className="flex justify-between md:flex-row items-center w-full px-4 sm:px-16 md:px-8 lg:px-32 xl:px-72">
           <Logo/>
@@ -67,7 +67,7 @@ export default function StoreNavbar() {
                   transition={{duration: transitionDuration, delay: 0.6}}
                 >
 
-                  <Button onClick={() => open()} variant="ghost">
+                  <Button onClick={() => setOpen(true)} variant="ghost">
                     Login
                   </Button>
                 </motion.div>

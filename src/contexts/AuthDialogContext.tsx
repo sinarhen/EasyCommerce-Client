@@ -1,7 +1,8 @@
 'use client'
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useDialog, DialogProps } from '@/hooks/use-dialog';
+import {AuthDialog} from "@/components/ui/auth-dialog";
 
 
 export type AuthDialogProps = {
@@ -17,8 +18,11 @@ export const AuthDialogProvider = ({ children }: {
 }) => {
   const dialog = useDialog();
   const [variant, setVariant] = React.useState<"login" | "register">("login");
+
   return (
     <AuthDialogContext.Provider value={{...dialog, variant, setVariant}}>
+      <AuthDialog  isOpen={dialog.isOpen} setVariant={setVariant} variant={variant} setOpen={dialog.setOpen}  />
+
       {children}
     </AuthDialogContext.Provider>
   );

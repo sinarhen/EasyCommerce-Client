@@ -13,18 +13,18 @@ import { Label } from "@/components/ui/label"
 
 export function AuthDialog({
   isOpen,
-  onClose,
+  setOpen,
   variant = "login",
   setVariant
 }: {
   isOpen: boolean;
-  onClose: () => void;
+  setOpen: (open: boolean) => void;
   variant?: "login" | "register" ;
   setVariant?: (variant: "login" | "register") => void;
                            }) {
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Login</DialogTitle>
