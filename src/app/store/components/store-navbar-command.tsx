@@ -47,7 +47,7 @@ const StoreNavbarCommand = ({
   return (
     <Command className={cn("rounded-md border h-9 w-full shadow-md", className)}>
       <CommandInput className="w-full h-9" onBlurCapture={() => setIsFocused(false)} onFocus={() => {setIsFocused(true)}}  placeholder="Type a command or search..." />
-        <CommandList hidden={!isFocused} className='absolute scroll-m-0 top-12 rounded-md dark:bg-black bg-white w-[200px]'>
+        <CommandList hidden={!isFocused} className='absolute scroll-m-0 top-12 rounded-md dark:bg-black bg-white w-full border  sm:w-[200px]'>
           <CommandEmpty>No results found.</CommandEmpty>
           {commandGroups.map((group, groupIdx) => (
             <React.Fragment key={groupIdx}>
