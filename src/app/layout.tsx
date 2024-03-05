@@ -3,6 +3,7 @@ import "./globals.css";
 import {ThemeProvider} from "@/components/ThemeProvider";
 import {TooltipProvider} from "@/components/ui/tooltip";
 import React from "react";
+import Providers from "@/app/providers";
 
 
 export const metadata: Metadata = {
@@ -18,16 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
     <body className="min-h-screen">
-    <ThemeProvider
-      defaultTheme="light"
-      attribute="class"
 
-      storageKey="theme"
-    >
-      <TooltipProvider>
-          {children}
-      </TooltipProvider>
-    </ThemeProvider>
+      <Providers>
+        {children}
+      </Providers>
     </body>
     </html>
   );
