@@ -84,16 +84,6 @@ export default function StoreNavbar() {
           )}
         </div>
       </div>
-      <div className="md:absolute hidden">
-        <Tooltip>
-          <TooltipTrigger>
-            <ThemeToggle/>
-          </TooltipTrigger>
-          <TooltipContent>
-            Toggle Theme
-          </TooltipContent>
-        </Tooltip>
-      </div>
     </nav>
   );
 }
