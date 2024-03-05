@@ -2,24 +2,10 @@
 
 import Logo from "@/components/ui/logo";
 import {motion} from "framer-motion";
-import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import React from "react";
-import dynamic from "next/dynamic";
-import {DollarSign, Info, Phone, ShoppingCart, User} from "lucide-react";
-import {NavButtonProps} from "@/types/nav-button";
 import StoreNavbarCommand from "./store-navbar-command";
 import {StoreNavbarNavigation} from "@/app/store/components/store-navbar-navigation";
 import {Button} from "@/components/ui/button";
-
-const ThemeToggle = dynamic(() => import('@/components/ui/theme-toggle'), {ssr: false})
-const StoreNavbarDropdown = dynamic(() => import('@/app/store/components/store-navbar-dropdown'), {ssr: false})
-
-const navButtons = [
-  {href: "/store", Icon: ShoppingCart, text: "Products", variant: "secondary"},
-  {href: "/about", Icon: Info, text: "About", variant: "ghost"},
-  {href: "/seller", Icon: DollarSign, text: "Seller", variant: "ghost"},
-  {href: "/me", Icon: User, text: "Profile", variant: "ghost"},
-] as NavButtonProps[];
 
 const transitionDuration = 1;
 
