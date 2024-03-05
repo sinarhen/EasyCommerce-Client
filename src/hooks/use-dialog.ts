@@ -1,6 +1,6 @@
 import {create} from "zustand";
 
-interface DialogProps {
+export interface DialogProps {
   isOpen: boolean;
   open: () => void;
   close: () => void;
