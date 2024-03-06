@@ -1,6 +1,6 @@
 import type {Metadata} from "next";
 import "./globals.css";
-import {ThemeProvider} from "@/components/ThemeProvider";
+import {ThemeProvider} from "@/contexts/ThemeProvider";
 import {TooltipProvider} from "@/components/ui/tooltip";
 import React from "react";
 import Providers from "@/app/providers";
