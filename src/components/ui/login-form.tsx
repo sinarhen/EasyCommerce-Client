@@ -8,7 +8,7 @@ import {DialogFooter} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {toast} from "react-hot-toast";
 import {schema, TFormSchema} from "@/types/login-form";
-
+import {login} from "@/actions/login";
 
 export default function LoginForm() {
   const {register, handleSubmit, formState: {errors}} = useForm<TFormSchema>({
@@ -16,11 +16,23 @@ export default function LoginForm() {
     reValidateMode: "onBlur",
   });
 
-  const onSubmit = (data: TFormSchema) => {
-    toast.success("Not implemented")
+  const onSubmit = async (data: TFormSchema) => {
+    console.log('onSubmit called');
+    try {
+      const resp = await login(data);
+      const token = resp?.token;
+
+      // TODO: Save token to cookie
+
+
+    } catch (error) {
+      console.error(error);
+      toast.error("An error occurred");
+    }
   };
 
   function renderError(field: keyof TFormSchema) {
+    console.log("Error render")
     if (errors[field]) {
       return (
         <p className="text-red-500 text-xs mt-1">
@@ -40,7 +52,7 @@ export default function LoginForm() {
           {...register("email")}
           className="mt-1"
         />
-        {renderError("email")}
+        {/*{renderError("email")}*/}
       </div>
       <div>
         <Label htmlFor="password" className="">Password</Label>
@@ -50,7 +62,7 @@ export default function LoginForm() {
           {...register("password")}
           className="mt-1"
         />
-        {renderError("password")}
+        {/*{renderError("password")}*/}
       </div>
       <DialogFooter>
         <Button type="submit">Save changes</Button>
