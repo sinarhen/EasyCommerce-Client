@@ -7,18 +7,9 @@ import {Label} from "@/components/ui/label";
 import {DialogFooter} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {toast} from "react-hot-toast";
+import {schema, TFormSchema} from "@/types/register-form";
 
 
-const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-  confirmPassword: z.string().min(8),
-}).refine(data => data.password === data.confirmPassword, {
-  message: "Passwords do not match",
-  path: ["confirmPassword"],
-});
-
-type TFormSchema = z.infer<typeof schema>;
 
 export default function RegisterForm() {
   const {register, handleSubmit, formState: {errors}} = useForm<TFormSchema>({

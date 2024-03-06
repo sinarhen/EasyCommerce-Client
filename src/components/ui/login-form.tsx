@@ -7,14 +7,8 @@ import {Label} from "@/components/ui/label";
 import {DialogFooter} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {toast} from "react-hot-toast";
+import {schema, TFormSchema} from "@/types/login-form";
 
-
-const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-});
-
-type TFormSchema = z.infer<typeof schema>;
 
 export default function LoginForm() {
   const {register, handleSubmit, formState: {errors}} = useForm<TFormSchema>({
