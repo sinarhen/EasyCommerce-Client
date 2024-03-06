@@ -6,8 +6,8 @@ import {AuthDialog} from "@/components/ui/auth-dialog";
 
 
 export type AuthDialogProps = {
-  variant?: "login" | "register";
-  setVariant?: (variant: "login" | "register") => void;
+  variant: "login" | "register";
+  setVariant: (variant: "login" | "register") => void;
 } & DialogProps;
 
 export const AuthDialogContext = React.createContext<AuthDialogProps | null>(null);
