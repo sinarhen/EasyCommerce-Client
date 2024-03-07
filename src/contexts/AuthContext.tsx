@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const token = Cookie.get("token");
 
   React.useEffect(() => {
+    console.log("Refreshing user")
     if (token) {
       getCurrentUser(token).then((resp) => {
         if (resp.success) {
@@ -31,7 +32,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
       });
     }
-  }, [token]);
+    else {
+      setUser(null)
+    }
+  }, [token, setUser]);
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>

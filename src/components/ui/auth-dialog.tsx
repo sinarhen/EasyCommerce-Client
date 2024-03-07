@@ -39,7 +39,7 @@ export function AuthDialog({
             {variant === "login" ? "Not registered yet?" : "Already have an account?"}
           </DialogDescription>
         </DialogHeader>
-        {variant === "login" ? <LoginForm/> : <RegisterForm />}
+        {variant === "login" ? <LoginForm onAfterLogin={() => {setOpen(false)}}/> : <RegisterForm />}
       </DialogContent>
     </Dialog>
   )
