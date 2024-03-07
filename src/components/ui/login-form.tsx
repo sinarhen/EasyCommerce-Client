@@ -9,6 +9,8 @@ import {Button} from "@/components/ui/button";
 import {toast} from "react-hot-toast";
 import {schema, TFormSchema} from "@/types/login-form";
 import {login} from "@/actions/login";
+import Cookie from "js-cookie";
+
 
 export default function LoginForm() {
   const {register, handleSubmit, formState: {errors}} = useForm<TFormSchema>({
@@ -20,14 +22,26 @@ export default function LoginForm() {
     console.log('onSubmit called');
     try {
       const resp = await login(data);
-      const token = resp?.token;
+      console.log(resp)
+      if (resp.status !== 200) {
+        console.error(resp.statusText);
+        toast.error(resp.statusText);
+        return;
+      }
+      const token = resp?.data?.token;
+
 
       // TODO: Save token to cookie
-
-
-    } catch (error) {
+      if (token) {
+        Cookie.set("token", token);
+        toast.success("Login successful");
+      } else {
+        console.error("Token not found in response");
+        toast.error("Not found");
+      }
+    } catch (error: any) {
       console.error(error);
-      toast.error("An error occurred");
+      toast.error(error?.message);
     }
   };
 
