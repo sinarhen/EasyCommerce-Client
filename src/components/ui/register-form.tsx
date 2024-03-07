@@ -8,6 +8,9 @@ import {DialogFooter} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {toast} from "react-hot-toast";
 import {schema, TFormSchema} from "@/types/register-form";
+import {login} from "@/actions/login";
+import Cookie from "js-cookie";
+import registerUser from "@/actions/register";
 
 
 
@@ -17,10 +20,36 @@ export default function RegisterForm() {
     reValidateMode: "onBlur",
   });
 
-  const onSubmit = (data: TFormSchema) => {
-    toast.success("Not implemented")
-  };
+  const onSubmit = async (data: TFormSchema) => {
+    if (Cookie.get("token")) {
+      console.error("Token already exists");
+      toast.error("Token already exists");
+      return;
+    }
+    try {
+      const resp = await registerUser(data);
+      console.log(resp)
+      if (resp.status !== 200) {
+        console.error(resp.statusText);
+        toast.error(resp.statusText);
+        return;
+      }
+      const token = resp?.data?.token;
 
+
+      // TODO: Save token to cookie
+      if (token) {
+        Cookie.set("token", token);
+        toast.success("Login successful");
+      } else {
+        console.error("Token not found in response");
+        toast.error("Not found");
+      }
+    } catch (error: any) {
+      console.error(error);
+      toast.error(error?.message);
+    }
+  }
   function renderError(field: keyof TFormSchema) {
     if (errors[field]) {
       return (

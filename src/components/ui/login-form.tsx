@@ -19,19 +19,16 @@ export default function LoginForm() {
   });
 
   const onSubmit = async (data: TFormSchema) => {
-    console.log('onSubmit called');
     try {
       const resp = await login(data);
       console.log(resp)
-      if (resp.status !== 200) {
+      if (!resp.success) {
         console.error(resp.statusText);
         toast.error(resp.statusText);
         return;
       }
-      const token = resp?.data?.token;
+      const token = resp?.response?.token;
 
-
-      // TODO: Save token to cookie
       if (token) {
         Cookie.set("token", token);
         toast.success("Login successful");
