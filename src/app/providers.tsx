@@ -4,6 +4,7 @@ import React, { ReactNode } from "react";
 import {ThemeProvider} from "next-themes";
 import {TooltipProvider} from "@/components/ui/tooltip";
 import {Toaster} from "react-hot-toast";
+import {AuthProvider} from "@/contexts/AuthContext";
 
 const Providers = ({ children }: { children: ReactNode }) => (
       <ThemeProvider
@@ -14,8 +15,9 @@ const Providers = ({ children }: { children: ReactNode }) => (
       >
         <TooltipProvider>
           <Toaster/>
-
-          {children}
+          <AuthProvider>
+            {children}
+          </AuthProvider>
         </TooltipProvider>
       </ThemeProvider>
 

@@ -9,6 +9,7 @@ import {Button} from "@/components/ui/button";
 import {useDialog} from "@/hooks/use-dialog";
 import {AuthDialog} from "@/components/ui/auth-dialog";
 import {useAuthDialog} from "@/hooks/use-auth-dialog";
+import useAuth from "@/hooks/use-auth";
 
 const transitionDuration = 1;
 
@@ -20,7 +21,8 @@ const buttonVariants = {
 export default function StoreNavbar() {
 
   const {setOpen} = useAuthDialog();
-  const authorized = false;
+
+  const {user} = useAuth();
   return (
     <>
       <nav className="dark:bg-black fixed w-full z-50 flex py-2  text-white bg-zinc-900">
@@ -44,7 +46,7 @@ export default function StoreNavbar() {
 
           </motion.div>
           <div className="flex">
-            {!authorized && (
+            {!user ? (
               <div className="flex gap-x-4">
                 <motion.div
                   initial="hidden"
@@ -71,6 +73,13 @@ export default function StoreNavbar() {
                     Login
                   </Button>
                 </motion.div>
+              </div>
+            ): (
+              <div>
+                {user.username}
+                <Button variant="ghost">
+                  Logout
+                </Button>
               </div>
             )}
           </div>
