@@ -6,12 +6,12 @@ import React from "react";
 import StoreNavbarCommand from "./store-navbar-command";
 import {StoreNavbarNavigation} from "@/app/store/components/store-navbar-navigation";
 import {Button} from "@/components/ui/button";
-import {useDialog} from "@/hooks/use-dialog";
-import {AuthDialog} from "@/components/ui/auth-dialog";
 import {useAuthDialog} from "@/hooks/use-auth-dialog";
 import useAuth from "@/hooks/use-auth";
-
+import Image from "next/image";
+import {User} from "lucide-react";
 const transitionDuration = 1;
+
 
 const buttonVariants = {
   hidden: {opacity: 0, x: 10},
@@ -75,11 +75,15 @@ export default function StoreNavbar() {
                 </motion.div>
               </div>
             ): (
-              <div>
+              <div className="flex text-sm gap-x-2 items-center">
+                <div className="h-8 w-8 flex items-center justify-center overflow-hidden bg-white rounded-full">
+                  {user.imageUrl
+                    ? <Image width={100} height={100} src={user.imageUrl} alt={"asd"}/>
+                    : <User strokeWidth={1.5} className="dark:text-black w-3/4 h-3/4"/>
+                  }
+                </div>
                 {user.username}
-                <Button variant="ghost">
-                  Logout
-                </Button>
+
               </div>
             )}
           </div>
