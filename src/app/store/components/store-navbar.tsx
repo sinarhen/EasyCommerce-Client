@@ -19,7 +19,7 @@ const buttonVariants = {
 };
 
 export default function StoreNavbar() {
-  const {setOpen} = useAuthDialog();
+  const {setOpen, setVariant} = useAuthDialog();
 
   const {user} = useAuth();
   return (
@@ -54,7 +54,12 @@ export default function StoreNavbar() {
                   transition={{duration: transitionDuration, delay: 0.4}}
                 >
 
-                  <Button className="hidden sm:flex" variant="ghost">
+                  <Button onClick={() => {
+                    setVariant("register")
+                    setOpen(true)
+
+                  }}
+                  className="hidden sm:flex" variant="ghost">
                  <span className="text-gradient animate-gradient">
                   Register
                  </span>
