@@ -1,8 +1,6 @@
 import {apiBase} from "@/lib/constants";
-import {Dispatcher} from "undici-types";
-import HttpMethod = Dispatcher.HttpMethod;
 
-const apiFetcher = async (method: HttpMethod, endpoint: string, body: object, token?: string) => {
+const apiFetcher = async (method: string, endpoint: string, body: object, token?: string) => {
   const headers: { [key: string]: string } = {
     "Content-Type": "application/json",
   }
@@ -10,9 +8,9 @@ const apiFetcher = async (method: HttpMethod, endpoint: string, body: object, to
     headers["Authorization"] = `Bearer ${token}`;
 
   const response = await fetch(
-    `${apiBase}/api/auth/register`,
+    `${apiBase}/${endpoint}`,
     {
-      method: "POST",
+      method: method,
       headers: headers,
       body: JSON.stringify(body),
     }
