@@ -31,7 +31,7 @@ export function StoreUserNavigation() {
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid grid-cols-1 w-full gap-3 p-4 sm:w-[270px] md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-              <li className="row-span-4">
+              <li className="row-span-3">
 
                 <NavigationMenuLink asChild>
 
@@ -70,7 +70,7 @@ export function StoreUserNavigation() {
                   Admin panel.
                 </ListItem>
               )}
-              <ListItem className="col-span-4" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} Icon={SunMoon} title="Toggle theme">
+              <ListItem  onClick={() => setTheme(theme === "dark" ? "light" : "dark")} Icon={SunMoon} title="Toggle theme">
                 Click to toggle the theme.
               </ListItem>
 

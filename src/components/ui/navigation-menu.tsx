@@ -101,6 +101,8 @@ const NavigationMenuViewport = React.forwardRef<
 ))
 NavigationMenuViewport.displayName =
   NavigationMenuPrimitive.Viewport.displayName
+
+
 const NavigationMenuViewportEnd = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Viewport>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Viewport>
@@ -116,6 +118,7 @@ const NavigationMenuViewportEnd = React.forwardRef<
     />
   </div>
 ))
+NavigationMenuViewportEnd.displayName = NavigationMenuPrimitive.Viewport.displayName
 
 const NavigationMenuIndicator = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Indicator>,
