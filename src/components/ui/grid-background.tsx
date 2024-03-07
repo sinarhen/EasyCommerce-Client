@@ -1,5 +1,5 @@
 const GridBackground = (
-  {children} : {children: React.ReactNode}
+  {children}: { children: React.ReactNode }
 ) => {
   return (
     <div

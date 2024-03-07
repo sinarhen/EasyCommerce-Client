@@ -12,7 +12,7 @@ import Cookie from "js-cookie";
 import {useRouter} from "next/navigation";
 
 export default function LoginForm({
-  onAfterLogin
+                                    onAfterLogin
                                   }:
                                     {
                                       onAfterLogin?: () => void;
@@ -20,7 +20,7 @@ export default function LoginForm({
   const {register, handleSubmit, formState: {errors}} = useForm<TFormSchema>({
     resolver: zodResolver(schema),
     reValidateMode: "onBlur",
-    });
+  });
 
   const router = useRouter();
   const onSubmit = async (data: TFormSchema) => {

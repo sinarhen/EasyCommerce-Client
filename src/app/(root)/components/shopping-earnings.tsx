@@ -23,14 +23,14 @@ const iterableColors = [
   ["black", "white", "green"],
   ["#B45396", "#fff", "#000"],
   ["red", "purple", "blue"],
-  ]
+]
 
 
 const shirtDropDuration = 2.5;
 const shirtDropDelay = 1;
 const ShoppingEarnings = ({
-    className
-                          }:{
+                            className
+                          }: {
   className?: string
 }) => {
   const [dollarAmount, setDollarAmount] = useState(0);
@@ -51,10 +51,10 @@ const ShoppingEarnings = ({
   const getColorsAndPrices = useCallback((index: number) => {
     const prices = iterablePrices[index % iterablePrices.length];
     const colors = iterableColors[index % iterableColors.length];
-    return { randomPrices: prices, randomColors:colors};
+    return {randomPrices: prices, randomColors: colors};
   }, []);
 
-  const { randomPrices, randomColors } = useMemo(() => getColorsAndPrices(iterIndex), [getColorsAndPrices, iterIndex]);
+  const {randomPrices, randomColors} = useMemo(() => getColorsAndPrices(iterIndex), [getColorsAndPrices, iterIndex]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -69,7 +69,7 @@ const ShoppingEarnings = ({
 
     return () => clearInterval(interval);
   }, [dollarAmount, update, iterIndex, prices, colors, randomPrices, randomColors]);
-return (
+  return (
     <div className={cn("relative", className)}>
       <div className='relative'>
         <DroppingShirt color={colors[0]} shirtDropDuration={shirtDropDuration} price={prices[0]} initialX="-100px"

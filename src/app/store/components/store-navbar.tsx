@@ -8,9 +8,8 @@ import {StoreNavbarNavigation} from "@/app/store/components/store-navbar-navigat
 import {Button} from "@/components/ui/button";
 import {useAuthDialog} from "@/hooks/use-auth-dialog";
 import useAuth from "@/hooks/use-auth";
-import Image from "next/image";
-import {User} from "lucide-react";
 import {StoreUserNavigation} from "@/components/ui/store-user-navigation";
+
 const transitionDuration = 1;
 
 
@@ -74,7 +73,7 @@ export default function StoreNavbar() {
                   </Button>
                 </motion.div>
               </div>
-            ): (
+            ) : (
               <StoreUserNavigation/>
             )}
           </div>

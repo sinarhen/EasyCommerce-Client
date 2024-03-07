@@ -2,8 +2,6 @@
 
 import * as React from "react"
 import Link from "next/link"
-
-import { cn } from "@/lib/utils"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,21 +10,21 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
-import {Info, List, LucideIcon, ShoppingBag, ShoppingCart, SunMoon} from "lucide-react";
-import {motion} from "framer-motion";
+import {Info, List, ShoppingBag, ShoppingCart, SunMoon} from "lucide-react";
 import StoreNavbarCommand from "@/app/store/components/store-navbar-command";
 import {useTheme} from "next-themes";
-import { ListItem } from "@/components/ui/list-item"
+import {ListItem} from "@/components/ui/list-item"
 
 export function StoreNavbarNavigation() {
   const {theme, setTheme} = useTheme()
   return (
     <NavigationMenu>
-      <NavigationMenuList >
+      <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger className="text-black dark:text-white">Navigation</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid grid-cols-1 w-full gap-3 p-4 sm:w-[270px] md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+            <ul
+              className="grid grid-cols-1 w-full gap-3 p-4 sm:w-[270px] md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <div
                 className="flex col-span-full   w-full md:hidden justify-start">
                 <StoreNavbarCommand/>
@@ -64,7 +62,8 @@ export function StoreNavbarNavigation() {
               <ListItem href="/store/about" Icon={Info} title="About us">
                 Learn about us.
               </ListItem>
-              <ListItem className="col-span-4" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} Icon={SunMoon} title="Toggle theme">
+              <ListItem className="col-span-4" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                        Icon={SunMoon} title="Toggle theme">
                 Click to toggle the theme.
               </ListItem>
 

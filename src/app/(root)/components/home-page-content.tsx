@@ -37,8 +37,6 @@ const headerVariants = {
 const transitionDuration = 0.7;
 
 
-
-
 export default function HomePageContent() {
   const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -136,7 +134,7 @@ export default function HomePageContent() {
                   </Button>
                 </Link>
                 <span className="text-sm my-3 sm:hidden font-medium text-center ">or</span>
-                <Link href={"/seller"} className="w-full flex" >
+                <Link href={"/seller"} className="w-full flex">
                   <Button size="lg" variant="outline" className="gap-x-2 w-full ">
                     <DollarSign/> Become a Seller
                   </Button>
@@ -148,7 +146,7 @@ export default function HomePageContent() {
               animate={{opacity: 1, y: 0}}
               transition={{duration: transitionDuration, delay: 1}}
               className=' mt-28 sm:mt-28 md:mt-32  w-full'>
-              <ShoppingEarnings className="flex w-full justify-center md:justify-end" />
+              <ShoppingEarnings className="flex w-full justify-center md:justify-end"/>
             </motion.div>
           </div>
           <div className={`
@@ -185,6 +183,6 @@ export default function HomePageContent() {
         </div>
 
       </motion.div>
-  </>
+    </>
   )
 };

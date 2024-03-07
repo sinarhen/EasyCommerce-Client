@@ -3,9 +3,9 @@ import {User} from "lucide-react";
 import React from "react";
 import useAuth from "@/hooks/use-auth";
 
-export default function StoreNavbarUser(){
+export default function StoreNavbarUser() {
   const {user} = useAuth();
-  if (!user){
+  if (!user) {
     return null
   }
   return (

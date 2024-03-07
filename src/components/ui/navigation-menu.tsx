@@ -1,9 +1,9 @@
 import * as React from "react"
-import { ChevronDownIcon } from "@radix-ui/react-icons"
+import {ChevronDownIcon} from "@radix-ui/react-icons"
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
-import { cva } from "class-variance-authority"
+import {cva} from "class-variance-authority"
 
-import { cn } from "@/lib/utils"
+import {cn} from "@/lib/utils"
 
 
 interface NavigationMenuProps extends React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Root> {
@@ -13,7 +13,7 @@ interface NavigationMenuProps extends React.ComponentPropsWithoutRef<typeof Navi
 const NavigationMenu = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Root>,
   NavigationMenuProps
->(({ className, children, alignTo, ...props }, ref) => (
+>(({className, children, alignTo, ...props}, ref) => (
   <NavigationMenuPrimitive.Root
     ref={ref}
     className={cn(
@@ -23,7 +23,7 @@ const NavigationMenu = React.forwardRef<
     {...props}
   >
     {children}
-    {alignTo === "end" ? <NavigationMenuViewportEnd /> : <NavigationMenuViewport />}
+    {alignTo === "end" ? <NavigationMenuViewportEnd/> : <NavigationMenuViewport/>}
   </NavigationMenuPrimitive.Root>
 ))
 NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName
@@ -31,7 +31,7 @@ NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName
 const NavigationMenuList = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.List>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.List>
->(({ className, ...props }, ref) => (
+>(({className, ...props}, ref) => (
   <NavigationMenuPrimitive.List
     ref={ref}
     className={cn(
@@ -52,7 +52,7 @@ const navigationMenuTriggerStyle = cva(
 const NavigationMenuTrigger = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
+>(({className, children, ...props}, ref) => (
   <NavigationMenuPrimitive.Trigger
     ref={ref}
     className={cn(navigationMenuTriggerStyle(), "group", className)}
@@ -70,7 +70,7 @@ NavigationMenuTrigger.displayName = NavigationMenuPrimitive.Trigger.displayName
 const NavigationMenuContent = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Content>
->(({ className, ...props }, ref) => (
+>(({className, ...props}, ref) => (
   <NavigationMenuPrimitive.Content
     ref={ref}
     className={cn(
@@ -87,7 +87,7 @@ const NavigationMenuLink = NavigationMenuPrimitive.Link
 const NavigationMenuViewport = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Viewport>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Viewport>
->(({ className, ...props }, ref) => (
+>(({className, ...props}, ref) => (
   <div className={cn("absolute left-0 top-full flex justify-center")}>
     <NavigationMenuPrimitive.Viewport
       className={cn(
@@ -106,7 +106,7 @@ NavigationMenuViewport.displayName =
 const NavigationMenuViewportEnd = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Viewport>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Viewport>
->(({ className, ...props }, ref) => (
+>(({className, ...props}, ref) => (
   <div className={cn("absolute right-0 top-full flex justify-center")}>
     <NavigationMenuPrimitive.Viewport
       className={cn(
@@ -123,7 +123,7 @@ NavigationMenuViewportEnd.displayName = NavigationMenuPrimitive.Viewport.display
 const NavigationMenuIndicator = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Indicator>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Indicator>
->(({ className, ...props }, ref) => (
+>(({className, ...props}, ref) => (
   <NavigationMenuPrimitive.Indicator
     ref={ref}
     className={cn(
@@ -132,7 +132,7 @@ const NavigationMenuIndicator = React.forwardRef<
     )}
     {...props}
   >
-    <div className="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-slate-200 shadow-md dark:bg-slate-800" />
+    <div className="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-slate-200 shadow-md dark:bg-slate-800"/>
   </NavigationMenuPrimitive.Indicator>
 ))
 NavigationMenuIndicator.displayName =

@@ -1,7 +1,7 @@
 'use client'
 
-import React, {useEffect} from 'react';
-import { useDialog, DialogProps } from '@/hooks/use-dialog';
+import React from 'react';
+import {DialogProps, useDialog} from '@/hooks/use-dialog';
 import {AuthDialog} from "@/components/ui/auth-dialog";
 
 
@@ -12,7 +12,7 @@ export type AuthDialogProps = {
 
 export const AuthDialogContext = React.createContext<AuthDialogProps | null>(null);
 
-export const AuthDialogProvider = ({ children }: {
+export const AuthDialogProvider = ({children}: {
   children: React.ReactNode;
 
 }) => {
@@ -21,7 +21,7 @@ export const AuthDialogProvider = ({ children }: {
 
   return (
     <AuthDialogContext.Provider value={{...dialog, variant, setVariant}}>
-      <AuthDialog  isOpen={dialog.isOpen} setVariant={setVariant} variant={variant} setOpen={dialog.setOpen}  />
+      <AuthDialog isOpen={dialog.isOpen} setVariant={setVariant} variant={variant} setOpen={dialog.setOpen}/>
 
       {children}
     </AuthDialogContext.Provider>

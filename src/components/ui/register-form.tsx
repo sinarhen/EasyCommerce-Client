@@ -1,4 +1,3 @@
-import * as z from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
 import {Input} from "@/components/ui/input";
@@ -8,10 +7,8 @@ import {DialogFooter} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {toast} from "react-hot-toast";
 import {schema, TFormSchema} from "@/types/register-form";
-import {login} from "@/actions/login";
 import Cookie from "js-cookie";
 import registerUser from "@/actions/register";
-
 
 
 export default function RegisterForm() {
@@ -50,6 +47,7 @@ export default function RegisterForm() {
       toast.error(error?.message);
     }
   }
+
   function renderError(field: keyof TFormSchema) {
     if (errors[field]) {
       return (
@@ -59,6 +57,7 @@ export default function RegisterForm() {
       );
     }
   }
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-4">
       {/* eslint-disable-next-line react/jsx-no-undef */}

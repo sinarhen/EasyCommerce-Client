@@ -10,7 +10,7 @@ export type ListItemProps = React.ComponentPropsWithoutRef<"a"> & {
 export const ListItem = React.forwardRef<
   React.ElementRef<"a">,
   ListItemProps
->(({ className, title, Icon, children, ...props }, ref) => {
+>(({className, title, Icon, children, ...props}, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -23,7 +23,7 @@ export const ListItem = React.forwardRef<
           {...props}
         >
           <div className="text-sm flex gap-x-1 items-center font-medium leading-none">
-            {Icon && <Icon />} {title}
+            {Icon && <Icon/>} {title}
           </div>
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
             {children}
