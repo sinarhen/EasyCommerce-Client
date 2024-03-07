@@ -1,7 +1,7 @@
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
 import {Input} from "@/components/ui/input";
-import React from "react";
+import React, {useCallback} from "react";
 import {Label} from "@/components/ui/label";
 import {DialogFooter} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
@@ -9,14 +9,20 @@ import {toast} from "react-hot-toast";
 import {schema, TFormSchema} from "@/types/login-form";
 import {login} from "@/actions/login";
 import Cookie from "js-cookie";
+import {useRouter} from "next/navigation";
 
-
-export default function LoginForm() {
+export default function LoginForm({
+  onAfterLogin
+                                  }:
+                                    {
+                                      onAfterLogin?: () => void;
+                                    }) {
   const {register, handleSubmit, formState: {errors}} = useForm<TFormSchema>({
     resolver: zodResolver(schema),
     reValidateMode: "onBlur",
-  });
+    });
 
+  const router = useRouter();
   const onSubmit = async (data: TFormSchema) => {
     try {
       const resp = await login(data);
@@ -31,6 +37,10 @@ export default function LoginForm() {
       if (token) {
         Cookie.set("token", token);
         toast.success("Login successful");
+        router.refresh();
+        if (onAfterLogin) {
+          onAfterLogin();
+        }
       } else {
         console.error("Token not found in response");
         toast.error("Not found");
@@ -41,8 +51,7 @@ export default function LoginForm() {
     }
   };
 
-  function renderError(field: keyof TFormSchema) {
-    console.log("Error render")
+  const renderError = useCallback((field: keyof TFormSchema) => {
     if (errors[field]) {
       return (
         <p className="text-red-500 text-xs mt-1">
@@ -50,7 +59,7 @@ export default function LoginForm() {
         </p>
       );
     }
-  }
+  }, [errors])
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-4">
       {/* eslint-disable-next-line react/jsx-no-undef */}
@@ -62,7 +71,7 @@ export default function LoginForm() {
           {...register("email")}
           className="mt-1"
         />
-        {/*{renderError("email")}*/}
+        {renderError("email")}
       </div>
       <div>
         <Label htmlFor="password" className="">Password</Label>
@@ -72,10 +81,10 @@ export default function LoginForm() {
           {...register("password")}
           className="mt-1"
         />
-        {/*{renderError("password")}*/}
+        {renderError("password")}
       </div>
       <DialogFooter>
-        <Button type="submit">Save changes</Button>
+        <Button type="submit">Log in</Button>
       </DialogFooter>
     </form>
   );
