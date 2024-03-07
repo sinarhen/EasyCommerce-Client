@@ -6,6 +6,6 @@ import apiFetcher from "@/actions/api";
 
 
 export default async function registerUser(data: TFormSchema) {
-  return apiFetcher("POST", "/auth/register", data)
+  return await apiFetcher("POST", "/auth/register", data)
 
 }

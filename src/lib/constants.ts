@@ -5,7 +5,7 @@ export const iconSizes = {
   banner: 180,
 }
 
-export const apiBase = 'http://localhost:5000/api/'
+export const apiBase = 'http://localhost:5000/api'
 
 
 export const partners = [

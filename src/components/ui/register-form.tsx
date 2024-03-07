@@ -9,14 +9,19 @@ import {toast} from "react-hot-toast";
 import {schema, TFormSchema} from "@/types/register-form";
 import Cookie from "js-cookie";
 import registerUser from "@/actions/register";
+import {useRouter} from "next/navigation";
 
 
-export default function RegisterForm() {
+export default function RegisterForm({
+  onSuccess
+                                     }: {
+  onSuccess?: () => void;
+}) {
   const {register, handleSubmit, formState: {errors}} = useForm<TFormSchema>({
     resolver: zodResolver(schema),
     reValidateMode: "onBlur",
   });
-
+  const router = useRouter();
   const onSubmit = async (data: TFormSchema) => {
     if (Cookie.get("token")) {
       console.error("Token already exists");
@@ -26,18 +31,23 @@ export default function RegisterForm() {
     try {
       const resp = await registerUser(data);
       console.log(resp)
-      if (resp.status !== 200) {
-        console.error(resp.statusText);
-        toast.error(resp.statusText);
+      if (!resp?.success) {
+        console.error(resp?.statusText);
+        if (resp?.statusText)
+        {
+          toast.error(resp.statusText);
+        }
         return;
       }
       const token = resp?.data?.token;
-
-
-      // TODO: Save token to cookie
       if (token) {
         Cookie.set("token", token);
         toast.success("Login successful");
+        router.refresh();
+        if (onSuccess)
+        {
+          onSuccess();
+        }
       } else {
         console.error("Token not found in response");
         toast.error("Not found");
@@ -72,6 +82,16 @@ export default function RegisterForm() {
         {renderError("email")}
       </div>
       <div>
+        <Label htmlFor="username">Username</Label>
+        <Input
+          type="text"
+          placeholder="Username"
+          {...register("username")}
+          className="mt-1"
+        />
+        {renderError("username")}
+      </div>
+      <div>
         <Label htmlFor="password" className="">Password</Label>
         <Input
           type="password"
@@ -92,7 +112,7 @@ export default function RegisterForm() {
         {renderError("confirmPassword")}
       </div>
       <DialogFooter>
-        <Button type="submit">Save changes</Button>
+        <Button type="submit">Register</Button>
       </DialogFooter>
     </form>
   );

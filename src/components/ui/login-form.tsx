@@ -12,10 +12,10 @@ import Cookie from "js-cookie";
 import {useRouter} from "next/navigation";
 
 export default function LoginForm({
-                                    onAfterLogin
+                                    onSuccess
                                   }:
                                     {
-                                      onAfterLogin?: () => void;
+                                      onSuccess?: () => void;
                                     }) {
   const {register, handleSubmit, formState: {errors}} = useForm<TFormSchema>({
     resolver: zodResolver(schema),
@@ -38,8 +38,8 @@ export default function LoginForm({
         Cookie.set("token", token);
         toast.success("Login successful");
         router.refresh();
-        if (onAfterLogin) {
-          onAfterLogin();
+        if (onSuccess) {
+          onSuccess();
         }
       } else {
         console.error("Token not found in response");

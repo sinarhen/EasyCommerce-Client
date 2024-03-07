@@ -32,7 +32,9 @@ export function AuthDialog({
         </DialogHeader>
         {variant === "login" ? <LoginForm onAfterLogin={() => {
           setOpen(false)
-        }}/> : <RegisterForm/>}
+        }}/> : <RegisterForm onSuccess={() => {
+
+        }}/>}
       </DialogContent>
     </Dialog>
   )

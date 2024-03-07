@@ -73,7 +73,10 @@ export default function StoreNavbar() {
                   transition={{duration: transitionDuration, delay: 0.6}}
                 >
 
-                  <Button onClick={() => setOpen(true)} variant="ghost">
+                  <Button onClick={() => {
+                    setOpen(true)
+                    setVariant("login")
+                  }} variant="ghost">
                     Login
                   </Button>
                 </motion.div>
