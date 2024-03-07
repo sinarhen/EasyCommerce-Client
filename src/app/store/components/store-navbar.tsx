@@ -19,7 +19,6 @@ const buttonVariants = {
 };
 
 export default function StoreNavbar() {
-
   const {setOpen} = useAuthDialog();
 
   const {user} = useAuth();
@@ -82,7 +81,11 @@ export default function StoreNavbar() {
                     : <User strokeWidth={1.5} className="dark:text-black w-3/4 h-3/4"/>
                   }
                 </div>
-                {user.username}
+                <span className='w-20 truncate'>
+                  {user.username}
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, adipisci alias aliquid amet animi aperiam aspernatur atque autem beatae commodi consequatur corporis cumque cupiditate delectus deleniti dicta distinctio dolor doloremque doloribus ducimus ea eius eligendi error est eum eveniet ex excepturi exercitationem expedita explicabo facere facilis fugiat harum id illum impedit in incidunt ipsa ipsam ipsum iure iusto labore laboriosam laborum laudantium libero magnam magni maiores maxime minima minus molestiae mollitia natus nemo neque nihil nisi nobis non nulla numquam obcaecati odio officiis omnis optio pariatur perferendis perspiciatis placeat praesentium provident quae quam qui quia quibusdam quisquam quo ratione recusandae reiciendis rem repellat repudiandae rerum saepe sapiente sequi similique sit soluta sunt suscipit tempora tenetur totam ullam unde vel veniam veritatis voluptas voluptates voluptatum.
+                </span>
+
 
               </div>
             )}
