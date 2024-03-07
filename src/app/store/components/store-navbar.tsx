@@ -10,6 +10,7 @@ import {useAuthDialog} from "@/hooks/use-auth-dialog";
 import useAuth from "@/hooks/use-auth";
 import Image from "next/image";
 import {User} from "lucide-react";
+import {StoreUserNavigation} from "@/components/ui/store-user-navigation";
 const transitionDuration = 1;
 
 
@@ -74,20 +75,7 @@ export default function StoreNavbar() {
                 </motion.div>
               </div>
             ): (
-              <div className="flex text-sm gap-x-2 items-center">
-                <div className="h-8 w-8 flex items-center justify-center overflow-hidden bg-white rounded-full">
-                  {user.imageUrl
-                    ? <Image width={100} height={100} src={user.imageUrl} alt={"asd"}/>
-                    : <User strokeWidth={1.5} className="dark:text-black w-3/4 h-3/4"/>
-                  }
-                </div>
-                <span className='w-20 truncate'>
-                  {user.username}
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, adipisci alias aliquid amet animi aperiam aspernatur atque autem beatae commodi consequatur corporis cumque cupiditate delectus deleniti dicta distinctio dolor doloremque doloribus ducimus ea eius eligendi error est eum eveniet ex excepturi exercitationem expedita explicabo facere facilis fugiat harum id illum impedit in incidunt ipsa ipsam ipsum iure iusto labore laboriosam laborum laudantium libero magnam magni maiores maxime minima minus molestiae mollitia natus nemo neque nihil nisi nobis non nulla numquam obcaecati odio officiis omnis optio pariatur perferendis perspiciatis placeat praesentium provident quae quam qui quia quibusdam quisquam quo ratione recusandae reiciendis rem repellat repudiandae rerum saepe sapiente sequi similique sit soluta sunt suscipit tempora tenetur totam ullam unde vel veniam veritatis voluptas voluptates voluptatum.
-                </span>
-
-
-              </div>
+              <StoreUserNavigation/>
             )}
           </div>
         </div>

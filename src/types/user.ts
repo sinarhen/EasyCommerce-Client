@@ -4,8 +4,8 @@ export type TUser = {
   username: string;
   imageUrl: string;
   phoneNumber: string;
-  role: TRole;
-  roles: TRole[];
+  role: "Customer" | "Seller" | "Admin" | "SuperAdmin";
+  roles: ("Customer" | "Seller" | "Admin" | "SuperAdmin")[];
   isBanned: boolean;
   createdAt: string;
   updatedAt: string;
