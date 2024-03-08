@@ -17,7 +17,13 @@ export default function RootLayout({
     <AuthDialogProvider>
       <StoreNavbar/>
       <GridBackground>
-        {children}
+        <div className="h-full
+          px-4
+          md:px-12
+          lg:px-28
+          xl:px-52 flex w-full py-24 md:py-30 ">
+          {children}
+        </div>
       </GridBackground>
     </AuthDialogProvider>
   )

@@ -1,9 +1,10 @@
 export default function Store() {
   return (
-    <>
-      <div className="w-full h-full flex items-center justify-around">
-        dasda
-      </div>
-    </>
+    <div>
+      <h1 className="text-6xl border-gradient  border-b font-bold">
+        Products
+
+      </h1>
+    </div>
   );
 }

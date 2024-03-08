@@ -1,6 +1,5 @@
 'use server'
 
-import api from "@/actions/api";
 import {TFormSchema} from "@/types/register-form";
 import apiFetcher from "@/actions/api";
 
