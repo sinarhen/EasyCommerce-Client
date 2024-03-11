@@ -17,7 +17,7 @@ export default function LoginForm({
                                     {
                                       onSuccess?: () => void;
                                     }) {
-  const {register, handleSubmit, formState: {errors}} = useForm<TFormSchema>({
+  const {register, setError, handleSubmit, formState: {errors}} = useForm<TFormSchema>({
     resolver: zodResolver(schema),
     reValidateMode: "onBlur",
   });
@@ -26,13 +26,20 @@ export default function LoginForm({
   const onSubmit = async (data: TFormSchema) => {
     try {
       const resp = await login(data);
-      console.log(resp)
+      console.log(resp);
       if (!resp.success) {
         console.error(resp.statusText);
-        toast.error(resp.statusText);
+        toast.error(resp?.data?.message || resp.statusText);
+        if (resp.data.field)
+        {
+          setError(resp.data.field, {
+            message: resp.data.message
+          });
+
+        }
         return;
       }
-      const token = resp?.response?.token;
+      const token = resp?.data?.token;
 
       if (token) {
         Cookie.set("token", token);
@@ -47,7 +54,7 @@ export default function LoginForm({
       }
     } catch (error: any) {
       console.error(error);
-      toast.error(error?.message);
+      toast.error("Something went wrong");
     }
   };
 

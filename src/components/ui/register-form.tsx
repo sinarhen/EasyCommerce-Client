@@ -17,7 +17,7 @@ export default function RegisterForm({
                                      }: {
   onSuccess?: () => void;
 }) {
-  const {register, handleSubmit, formState: {errors}} = useForm<TFormSchema>({
+  const {register, setError, handleSubmit, formState: {errors}} = useForm<TFormSchema>({
     resolver: zodResolver(schema),
     reValidateMode: "onBlur",
   });
@@ -30,22 +30,25 @@ export default function RegisterForm({
     }
     try {
       const resp = await registerUser(data);
-      console.log(resp)
-      if (!resp?.success) {
-        console.error(resp?.statusText);
-        if (resp?.statusText)
+      if (!resp.success) {
+        console.error(resp.statusText);
+        toast.error(resp?.data?.message || resp.statusText);
+        if (resp.data.field)
         {
-          toast.error(resp.statusText);
+          setError(resp.data.field, {
+            message: resp.data.message
+          });
+
         }
         return;
       }
       const token = resp?.data?.token;
+
       if (token) {
         Cookie.set("token", token);
         toast.success("Login successful");
         router.refresh();
-        if (onSuccess)
-        {
+        if (onSuccess) {
           onSuccess();
         }
       } else {
