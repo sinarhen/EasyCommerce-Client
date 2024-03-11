@@ -2,8 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
     :root {
+        --background-animation: linear-gradient(270deg, #7C3AED, #B45396, #7C3AED, #B45396, #7C3AED, #B45396, #7C3AED);
         --background: 0 0% 100%;
         --foreground: 222.2 84% 4.9%;
 
@@ -77,18 +79,14 @@
 }
 
 .text-gradient {
-    background: linear-gradient(to right,
-    #7C3AED,
-    #B45396,
-    #7C3AED,
-    #B45396,
-    #7C3AED,
-    #B45396,
-    #7C3AED
-    );
+    background: linear-gradient(270deg, #7C3AED, #B45396, #7C3AED, #B45396, #7C3AED, #B45396, #7C3AED);
     background-size: 300% 300%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    color: transparent; /* This is equivalent to Tailwind's text-transparent */
+    color: transparent;
 }
 
+.bg-gradient {
+    background: linear-gradient(270deg, #7C3AED, #B45396, #7C3AED, #B45396, #7C3AED, #B45396, #7C3AED);
+    background-size: 300% 300%;
+}

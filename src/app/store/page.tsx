@@ -1,10 +1,12 @@
+import Header from "@/components/ui/header";
+
 export default function Store() {
   return (
-    <div>
-      <h1 className="text-6xl border-gradient  border-b font-bold">
+    <div className='w-full'>
+      <Header>
         Products
-
-      </h1>
+      </Header>
+      <hr className="h-px my-3 bg-gray-200 rounded-full bg-gradient animate-gradient border-0 " />
     </div>
   );
 }
