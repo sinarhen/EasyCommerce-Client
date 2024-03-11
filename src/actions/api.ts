@@ -20,6 +20,7 @@ async function apiFetcher(method: Method, endpoint: string, body: any = {}, toke
         body: method === 'GET' ? undefined : JSON.stringify(body),
       }
     );
+    console.log(response)
     return {
       status: response.status,
       data: response ? await response.json() : null,
@@ -29,6 +30,6 @@ async function apiFetcher(method: Method, endpoint: string, body: any = {}, toke
   } catch (error: any) {
     console.error(error);
   }
-};
+}
 
 export default apiFetcher;
