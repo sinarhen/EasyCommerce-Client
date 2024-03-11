@@ -6,7 +6,7 @@ import {iconSizes} from "@/lib/constants";
 
 export default function Store() {
   return (
-    <div className='w-full'>
+    <div className='w-full overflow-x-hidden'>
         <Header>
           Products
         </Header>

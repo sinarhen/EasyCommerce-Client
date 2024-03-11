@@ -19,6 +19,7 @@ export default function RootLayout({
       <GridBackground>
         <div className="h-full
           px-4
+          overflow-x-hidden
           md:px-12
           lg:px-28
           xl:px-52 flex w-full py-24 md:py-30 ">
