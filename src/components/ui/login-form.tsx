@@ -7,7 +7,7 @@ import {DialogFooter} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {toast} from "react-hot-toast";
 import {schema, TFormSchema} from "@/types/login-form";
-import {login} from "@/actions/login";
+import {loginUser} from "@/actions/auth";
 import Cookie from "js-cookie";
 import {useRouter} from "next/navigation";
 
@@ -25,7 +25,7 @@ export default function LoginForm({
   const router = useRouter();
   const onSubmit = async (data: TFormSchema) => {
     try {
-      const resp = await login(data);
+      const resp = await loginUser(data);
       console.log(resp);
       if (!resp.success) {
         console.error(resp.statusText);

@@ -8,7 +8,7 @@ import {Button} from "@/components/ui/button";
 import {toast} from "react-hot-toast";
 import {schema, TFormSchema} from "@/types/register-form";
 import Cookie from "js-cookie";
-import registerUser from "@/actions/register";
+import registerUser from "@/actions/auth";
 import {useRouter} from "next/navigation";
 
 

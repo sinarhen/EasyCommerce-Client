@@ -1,7 +1,7 @@
 import React from 'react'
 import {TUser} from "@/types/user";
 import Cookie from 'js-cookie'
-import {getCurrentUser} from "@/actions/currentUser";
+import {getCurrentUser} from "@/actions/auth";
 
 interface AuthContextProps {
   user: TUser | null;
