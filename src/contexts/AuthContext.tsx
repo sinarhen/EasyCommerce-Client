@@ -22,10 +22,10 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
     console.log("Refreshing user")
     if (token) {
       getCurrentUser(token).then((resp) => {
-        if (resp.success) {
-          setUser(resp.response);
+        if (resp?.success) {
+          setUser(resp.data);
         } else {
-          console.error(resp.statusText);
+          console.error(resp?.statusText);
           setUser(null);
 
         }

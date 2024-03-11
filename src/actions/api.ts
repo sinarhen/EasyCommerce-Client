@@ -37,6 +37,6 @@ async function apiFetcher(method: Method, endpoint: string, body: any = {}, toke
   } catch (error: any) {
     console.error(error);
   }
-};
+}
 
 export default apiFetcher;
