@@ -20,8 +20,20 @@ export interface ProductDto {
   isAvailable: boolean;
   isBestseller: boolean;
   // colors: ColorDto[]; add later
-  // images: ProductImageDto[]; add later
+  images: ProductImageDto[];
 }
+
+export interface ProductImageDto {
+  colorId: string;
+  imageUrls: string[];
+}
+
+export interface ColorDto {
+  id: string;
+  name: string;
+  hexCode: string;
+}
+
 
 export interface ProductCategoryDto {
   id: string;
