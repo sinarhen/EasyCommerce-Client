@@ -3,8 +3,11 @@ import {Backpack, Filter, PersonStanding, ShoppingCart, Sun} from "lucide-react"
 import {Button} from "@/components/ui/button";
 import {iconSizes} from "@/lib/constants";
 import ProductCard from "@/components/ui/product-card";
+import apiFetcher from "@/actions/api";
+import {ProductDto} from "@/types/product";
 
-export default function Store() {
+export default async function Store() {
+  const products = (await apiFetcher("GET", "/products")).data.products
   return (
     <div className='w-full '>
         <Header>
@@ -18,12 +21,13 @@ export default function Store() {
       </Button>
 
       <div className="grid mt-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
+        {products.length > 0 && products.map((product: ProductDto) => (
+          <ProductCard
+            key={product.id}
+           product={product}
 
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
-
+          />
+        ))}
       </div>
     </div>
   );
