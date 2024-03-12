@@ -19,7 +19,7 @@ export interface ProductDto {
   isOnSale: boolean;
   isAvailable: boolean;
   isBestseller: boolean;
-  // colors: ColorDto[]; add later
+  colors: ColorDto[];
   images: ProductImageDto[];
 }
 
