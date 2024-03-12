@@ -9,11 +9,13 @@ export default function ProductCard({
   product: ProductDto
 }) {
   return (
-    <div className="bg-white relative flex-col flex h-[600px] sm:h-[450px] rounded-md shadow-md p-4">
+    <div className="bg-white darbg-gray-100 group relative flex-col flex h-full rounded-md drop-shadow-lg p-4">
       {product.isNew && (
         <div className="absolute -top-3 -left-4 px-2 py-1 z-20 bg-purple-800 rounded bg-opacity-90 text-sm">New</div>
       )}
-      <div className="relative h-[70%] w-full bg-gray-300 rounded">
+
+
+      <div className="relative min-h-[300px] w-full bg-gray-300 rounded">
         <div
           className="absolute flex sm:text-xs text-lg   rounded-2xl text-gray-400 font-semibold items-center gap-x-1 top-2 left-2 sm:left-1">
           <Star size={iconSizes.md} className="h-full w-full"/>
@@ -30,35 +32,22 @@ export default function ProductCard({
           <span className="bg-gray-400 w-2 h-2 rounded-full"></span>
         </div>
       </div>
-      <div className="w-full mt-0.5 justify-between flex items-center font-semibold text-xs">
-        <span
-          className="text-orange-300 opacity-40 hover:opacity-100 transition-opacity cursor-pointer items-center flex gap-x-1.5"><Sun
-          size={iconSizes.sm}/> {product.season}</span>
-        <span
-          className="text-black flex opacity-40 hover:opacity-100 transition-opacity cursor-pointer items-center gap-x-1"><Backpack
-          size={iconSizes.sm}/> {product.occasion.name}</span>
-        <span
-          className="text-blue-800 flex items-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer gap-x-1"><PersonStanding
-          size={iconSizes.sm}/> {product.gender}</span>
-      </div>
-      <div className="flex items-center w-full justify-between">
-        <h3 className="font-light text-2xl sm:text-xl text-black w-40 truncate mt-1">{product.name}</h3>
+      <div className="flex mt-3 items-center w-full justify-between">
+        <h3 className="font-light text-2xl sm:text-lg line-clamp-1 text-black mt-1">{product.name}</h3>
         <div className="flex gap-x-1 text-xs items-center h-full text-gray-400 ">
           {product.categories.reverse().map((category, index) => (
-            <span key={category.id} className="text-gray-400">{category.name}{index !== product.categories.length - 1 && ","}</span>
+            <span key={category.id}
+                  className="text-gray-400">{category.name}{index !== product.categories.length - 1 && ","}</span>
           ))}
         </div>
       </div>
-
-      <p className="text-gray-400 truncate">
-        {product.description}
-      </p>
-      <div className="mt-4 justify-self-end flex justify-between items-center">
+      <hr className="h-px my-1"/>
+      <div className="justify-self-end flex justify-between items-center">
         <span className=" text-gradient animate-gradient  text-lg ">${product.minPrice}</span>
         <div>
           <Button size={"sm"} variant="outline" className='group'>
 
-            <div className="group-hover:translate-x-0.5  transition-transform flex gap-x-2 ease-out ">
+            <div className="hover:translate-x-0.5  transition-transform flex gap-x-2 ease-out ">
               <ShoppingCart size={iconSizes.md}></ShoppingCart>
               To cart
             </div>
@@ -67,6 +56,18 @@ export default function ProductCard({
 
         </div>
       </div>
+
+        {/*<div className="w-full absolute mt-3 bg-white justify-between flex items-center font-semibold text-xs">*/}
+        {/*<span*/}
+        {/*  className="text-orange-300 opacity-40 hover:opacity-100 transition-opacity cursor-pointer items-center flex gap-x-1.5"><Sun*/}
+        {/*  size={iconSizes.sm}/> {product.season}</span>*/}
+        {/*  <span*/}
+        {/*    className="text-black flex opacity-40 hover:opacity-100 transition-opacity cursor-pointer items-center gap-x-1"><Backpack*/}
+        {/*    size={iconSizes.sm}/> {product.occasion.name}</span>*/}
+        {/*  <span*/}
+        {/*    className="text-blue-800 flex items-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer gap-x-1"><PersonStanding*/}
+        {/*    size={iconSizes.sm}/> {product.gender}</span>*/}
+        {/*</div>*/}
     </div>
 
   )
