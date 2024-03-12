@@ -5,7 +5,12 @@ const nextConfig = {
             {
                 protocol: 'https',
                 hostname: 'i.pinimg.com',// Delete this line after testing
-            }
+            },
+            {
+                protocol: 'https',
+                hostname: '**.**',
+                port: '',
+            },
         ]
     }
 };
