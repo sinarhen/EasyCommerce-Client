@@ -6,8 +6,17 @@ import ProductCard from "@/components/ui/product-card";
 import apiFetcher from "@/actions/api";
 import {ProductDto} from "@/types/product";
 
+
+
+export async function getData() {
+  const products = await apiFetcher('GET', '/products');
+  return {
+    products: products.data.products
+  }
+}
+
 export default async function Store() {
-  const products = (await apiFetcher("GET", "/products")).data.products
+  const {products} = await getData();
   return (
     <div className='w-full '>
         <Header>
