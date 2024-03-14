@@ -10,14 +10,15 @@ import {schema, TFormSchema} from "@/types/login-form";
 import {loginUser} from "@/actions/auth";
 import Cookie from "js-cookie";
 import {useRouter} from "next/navigation";
+import Loading from "@/components/ui/loading";
 
 export default function LoginForm({
                                     onSuccess
                                   }:
-                                    {
-                                      onSuccess?: () => void;
-                                    }) {
-  const {register, setError, handleSubmit, formState: {errors}} = useForm<TFormSchema>({
+                                  {
+                                    onSuccess?: () => void;
+                                  }) {
+  const {register, setError, handleSubmit, formState: {errors, isSubmitting, isValid, isDirty, isValidating, isLoading}} = useForm<TFormSchema>({
     resolver: zodResolver(schema),
     reValidateMode: "onBlur",
   });
@@ -26,7 +27,6 @@ export default function LoginForm({
   const onSubmit = async (data: TFormSchema) => {
     try {
       const resp = await loginUser(data);
-      console.log(resp);
       if (!resp.success) {
         console.error(resp.statusText);
         toast.error(resp?.data?.message || resp.statusText);
@@ -91,7 +91,12 @@ export default function LoginForm({
         {renderError("password")}
       </div>
       <DialogFooter>
-        <Button type="submit">Log in</Button>
+        <Button
+          disabled={isSubmitting || !isDirty || !isValid || isLoading}
+          type="submit">
+          {(isSubmitting || isLoading) ? <Loading/> : "Login"}
+
+        </Button>
       </DialogFooter>
     </form>
   );
