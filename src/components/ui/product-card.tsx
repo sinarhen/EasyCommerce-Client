@@ -9,6 +9,7 @@ import Image from "next/image";
 import {useEffect, useState} from "react";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import apiFetcher from "@/actions/api";
+import {useRouter} from "next/navigation";
 
 
 export default function ProductCard({
@@ -20,6 +21,7 @@ export default function ProductCard({
   const [imageIsLoading, setImageIsLoading] = useState(true);
   const [selectedColor, setSelectedColor] = useState<ColorDto | undefined>(product.colors[0]);
 
+  const router = useRouter();
   useEffect(() => {
     if (selectedColor){
       setSelectedImage(product.images.find(image => image.colorId == selectedColor?.id)?.imageUrls[0])
@@ -34,10 +36,10 @@ export default function ProductCard({
       )}
 
 
-      <div className="relative group min-h-[300px] overflow-hidden w-full bg-gray-300 ">
+      <div onClick={() => router.push(`/store/products/${product.id}`)} className="relative cursor-pointer group min-h-[300px] overflow-hidden w-full bg-gray-300 ">
         <div className="absolute transition-all duration-300 delay-500 opacity-0 group-hover:opacity-100  flex  top-0 left-0 w-full h-full bg-black/40 z-10  items-center justify-center">
-          <Button size={"sm"} variant="outline" className='group-hover:translate-y-0 transition-all opacity-0 delay-500 group-hover:opacity-100 translate-y-3'>
-            <div className="hover:translate-x-0.5  transition-transform flex gap-x-2 ease-out ">
+          <Button  size={"sm"} variant="outline" className='group-hover:translate-y-0 group/wish  transition-all opacity-0 delay-500 group-hover:opacity-100 translate-y-3'>
+            <div className="group-hover/wish:translate-x-0.5 transition-transform flex gap-x-2 ease-out ">
               <Star size={iconSizes.md}></Star>
               Wishlist
             </div>
