@@ -8,19 +8,23 @@ import {iconSizes} from "@/lib/constants";
 import Image from "next/image";
 import {useEffect, useState} from "react";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
+import apiFetcher from "@/actions/api";
+
 
 export default function ProductCard({
   product,
                                     }: {
   product: ProductDto
 }) {
-  const [selectedImage, setSelectedImage] = useState(product.images[0].imageUrls[0])
+  const [selectedImage, setSelectedImage] = useState<string | undefined>(product.images[0].imageUrls[0])
   const [imageIsLoading, setImageIsLoading] = useState(true);
   const [selectedColor, setSelectedColor] = useState<ColorDto | undefined>(product.colors[0]);
+
   useEffect(() => {
-    console.log("Selected color for product", product.name, selectedColor?.name)
-    
-  }, [product.name, selectedColor?.name])
+    if (selectedColor){
+      setSelectedImage(product.images.find(image => image.colorId == selectedColor?.id)?.imageUrls[0])
+    }
+  }, [product.images, selectedColor])
 
   return (
     <div className="group relative">
@@ -31,24 +35,29 @@ export default function ProductCard({
 
 
       <div className="relative min-h-[300px] overflow-hidden w-full bg-gray-300 ">
-
-        <Image
+        {selectedImage ? <Image
           className={`${imageIsLoading ? "animate-pulse bg-gray-200 blur-md" : ""} transition-all object-cover hover:scale-110 `}
           quality={80}
           loading="lazy"
+          onError={() => setImageIsLoading(false)}
           onLoad={() => setImageIsLoading(false)}
           src={selectedImage}
           fill
           alt={"None"}/>
+        : (
+          <span className="w-full h-full flex items-center justify-center text-black/40">
+            No image
+          </span>
+          )}
         {/*image*/}
         {/*<div className='absolute text-center text-lg p-2 text-nowrap bg-gray-500 top-0 right-0  w-16 h-16 flex justify-center items-center opacity-40 hover:opacity-100 transition-all rounded'>*/}
         {/*    5 <br/>sizes*/}
         {/*</div>*/}
         <div className=" flex justify-center gap-x-1 w-full text-black absolute bottom-2">
-          {product.images.map((image, index) => (
+          {product.images.filter(image => image.colorId == selectedColor?.id).map((image, index) => (
             <div key={index}
                  onClick={() => setSelectedImage(image.imageUrls[0])}
-                 className={`w-2 h-2 ${image.imageUrls.includes(selectedImage) ? "bg-gray-500" : "bg-gray-300"} rounded-full cursor-pointer`}/>
+                 className={`w-2 h-2 ${selectedImage ? (image.imageUrls.includes(selectedImage) ? "bg-gray-500" : "bg-gray-300"): ""} rounded-full cursor-pointer`}/>
 
 
           ))}
@@ -57,9 +66,9 @@ export default function ProductCard({
       <div className="flex mt-3 px-4 items-center w-full justify-between">
         <h3 className="font-light text-2xl sm:text-lg line-clamp-1 text-black mt-1">{product.name}</h3>
         <div className="flex gap-x-1 text-xs items-center h-full text-gray-400 ">
-          {product.categories.reverse().map((category, index) => (
+          {product.categories.map((category, index) => (
             <span key={category.id}
-                  className="text-gray-400">{category.name}{index !== product.categories.length - 1 && ","}</span>
+                  className="text-gray-400 text-nowrap">{category.name}{index !== product.categories.length - 1 && ","}</span>
           ))}
         </div>
       </div>
