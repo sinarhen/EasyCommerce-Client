@@ -1,10 +1,11 @@
 import Header from "@/components/ui/header";
-import {Backpack, Filter, PersonStanding, ShoppingCart, Sun} from "lucide-react";
+import {Filter} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {iconSizes} from "@/lib/constants";
 import ProductCard from "@/components/ui/product-card";
 import apiFetcher from "@/actions/api";
 import {ProductDto} from "@/types/product";
+import AnimatedProducts from "@/app/store/components/animated-products";
 
 
 
@@ -30,13 +31,7 @@ export default async function Store() {
       </Button>
 
       <div className="grid mt-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
-        {products.length > 0 && products.map((product: ProductDto) => (
-          <ProductCard
-            key={product.id}
-           product={product}
-
-          />
-        ))}
+        <AnimatedProducts products={products} />
       </div>
     </div>
   );

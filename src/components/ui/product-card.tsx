@@ -28,15 +28,24 @@ export default function ProductCard({
 
   return (
     <div className="group relative">
-    <div className="bg-white group-hover:absolute w-full flex-col flex h-full rounded-sm drop-shadow-lg ">
+    <div className="bg-white  w-full flex-col flex h-full rounded-sm drop-shadow-lg ">
       {product.isNew && (
         <div className="absolute -top-3 -left-4 px-2 py-1 z-20 bg-purple-800 rounded bg-opacity-90 text-sm">New</div>
       )}
 
 
-      <div className="relative min-h-[300px] overflow-hidden w-full bg-gray-300 ">
+      <div className="relative group min-h-[300px] overflow-hidden w-full bg-gray-300 ">
+        <div className="absolute transition-all duration-300 delay-500 opacity-0 group-hover:opacity-100  flex  top-0 left-0 w-full h-full bg-black/40 z-10  items-center justify-center">
+          <Button size={"sm"} variant="outline" className='group-hover:translate-y-0 transition-all opacity-0 delay-500 group-hover:opacity-100 translate-y-3'>
+            <div className="hover:translate-x-0.5  transition-transform flex gap-x-2 ease-out ">
+              <Star size={iconSizes.md}></Star>
+              Wishlist
+            </div>
+          </Button>
+        </div>
+
         {selectedImage ? <Image
-          className={`${imageIsLoading ? "animate-pulse bg-gray-200 blur-md" : ""} transition-all object-cover hover:scale-110 `}
+          className={`${imageIsLoading ? "animate-pulse bg-gray-200 blur-md" : ""} transition-all object-cover group-hover:scale-110 `}
           quality={80}
           loading="lazy"
           onError={() => setImageIsLoading(false)}
