@@ -34,6 +34,34 @@ export interface ColorDto {
   hexCode: string;
 }
 
+export enum ProductsOrderBy
+{
+  price,
+  priceDesc,
+  name,
+  nameDesc,
+  newest,
+  oldest,
+  bestseller,
+  default
+}
+export interface ProductSearchParams {
+  productId?: string;
+  orderBy?: ProductsOrderBy;
+  filterBy?: string;
+  pageSize?: number;
+  pageNumber?: number;
+  searchTerm?: string;
+  categoryId?: string;
+  colorId?: string;
+  sizeId?: string;
+  collectionId?: string;
+  materialId?: string;
+  occasionId?: string;
+  minPrice?: number;
+  maxPrice?: number;
+}
+
 
 export interface ProductCategoryDto {
   id: string;
