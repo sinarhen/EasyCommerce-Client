@@ -17,6 +17,7 @@ import React from "react";
 import {FilterSectionGroupCheckbox} from "@/app/store/components/filterSectionGroupCheckbox";
 import {FilterSectionGroup} from "@/app/store/components/filterSectionGroup";
 import {FilterSection} from "@/app/store/components/filterSection";
+import {getProducts} from "@/actions/products";
 
 
 export function Filters() {
@@ -35,7 +36,7 @@ export function Filters() {
             Filters for products
           </SheetDescription>
         </SheetHeader>
-        <div className="flex flex-col gap-y-2">
+        <form method="get" action="/" className="flex flex-col gap-y-5">
           <div>
             <Label htmlFor="searchTerm">
               Search
@@ -73,11 +74,12 @@ export function Filters() {
               <Input type="number" id="maxPrice" placeholder="Max"/>
             </div>
           </FilterSection>
-        </div>
+        </form>
 
         <SheetFooter>
           <SheetClose asChild>
-            <Button className="mt-2 w-full" type="submit">Apply</Button>
+            <Button
+              className="mt-2 w-full" type="submit">Apply</Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>
