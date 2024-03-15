@@ -48,13 +48,12 @@ export default function ProductCard({
 
         {selectedImage ? <Image
           className={`${imageIsLoading ? "animate-pulse bg-gray-200 blur-md" : ""} transition-all object-cover group-hover:scale-110 `}
-          quality={80}
           loading="lazy"
           onError={() => setImageIsLoading(false)}
           onLoad={() => setImageIsLoading(false)}
           src={selectedImage}
           fill
-          alt={"None"}/>
+          alt={"No image"}/>
         : (
           <span className="w-full h-full flex items-center justify-center text-black/40">
             No image
