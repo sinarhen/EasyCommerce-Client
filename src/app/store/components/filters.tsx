@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import {Button} from "@/components/ui/button"
+import {Input} from "@/components/ui/input"
+import {Label} from "@/components/ui/label"
 import {
   Sheet,
   SheetClose,
@@ -11,72 +11,13 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import {ArrowDown, ChevronDown, Filter} from "lucide-react";
+import {Filter} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import {Checkbox} from "@/components/ui/checkbox";
 import React from "react";
+import {FilterSectionGroupCheckbox} from "@/app/store/components/filterSectionGroupCheckbox";
+import {FilterSectionGroup} from "@/app/store/components/filterSectionGroup";
+import {FilterSection} from "@/app/store/components/filterSection";
 
-
-export function FilterSectionGroupCheckbox({
-  title,
-  id,
-                                           }: {
-  title: string,
-  id: string
-}){
-  return (
-    <div className="flex items-center gap-x-1">
-      <Checkbox id={id}/>
-      <Label htmlFor={id}>
-        {title}
-      </Label>
-    </div>
-  )
-}
-
-export function FilterSectionGroup({
-                                     children
-                                   }: {
-  children: React.ReactNode
-}) {
-  return (
-    <div className="mt-2 gap-y-2 flex flex-col">
-      {children}
-    </div>
-  )
-}
-
-export function FilterSection({
-  title,
-  description,
-  children
-                                      }: {
-  title: string,
-  description: string
-  children: React.ReactNode
-}) {
-  return (
-    <Collapsible>
-      <CollapsibleTrigger>
-        <h4 className=" flex items-center font-semibold">
-          {title}
-          <ChevronDown size={iconSizes.md} />
-        </h4>
-
-      </CollapsibleTrigger>
-      <CollapsibleContent>
-        <p className="text-sm text-gray-500">
-          {description}
-        </p>
-
-        {children}
-
-      </CollapsibleContent>
-    </Collapsible>
-
-  )
-}
 
 export function Filters() {
   return (
