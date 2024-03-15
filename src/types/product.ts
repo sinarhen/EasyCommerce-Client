@@ -45,7 +45,7 @@ export enum ProductsOrderBy
   bestseller,
   default
 }
-export interface ProductSearchParams {
+export interface ProductsSearchParams {
   productId?: string;
   orderBy?: ProductsOrderBy;
   filterBy?: string;
