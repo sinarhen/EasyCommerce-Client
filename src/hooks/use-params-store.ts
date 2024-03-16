@@ -13,12 +13,12 @@ const initialState: ProductsSearchParams = {
   searchTerm: '',
   orderBy: ProductsOrderBy.name,
   filterBy: 'live',
-  categoryId: '',
-  colorId: '',
-  sizeId: '',
-  collectionId: '',
-  materialId: '',
-  occasionId: '',
+  categoryId: [],
+  colorId: [],
+  sizeId: [],
+  collectionId: [],
+  materialId: [],
+  occasionId: [],
   minPrice: 0,
   maxPrice: 0
 }
