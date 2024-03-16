@@ -147,7 +147,7 @@ export function Filters() {
             Filters for products
           </SheetDescription>
         </SheetHeader>
-        <form method="get" action="/" className="flex flex-col gap-y-5">
+        <div className="flex flex-col gap-y-5">
           <div>
             <Label htmlFor="searchTerm">
               Search
@@ -189,7 +189,7 @@ export function Filters() {
               ))}
             </FilterSectionGroup>
           </FilterSection>
-        </form>
+        </div>
 
         <SheetFooter>
           <SheetClose asChild>
