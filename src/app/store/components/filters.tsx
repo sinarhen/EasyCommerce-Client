@@ -1,3 +1,5 @@
+'use client'
+
 import {Button} from "@/components/ui/button"
 import {Input} from "@/components/ui/input"
 import {Label} from "@/components/ui/label"
@@ -13,14 +15,43 @@ import {
 } from "@/components/ui/sheet"
 import {Filter} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
-import React from "react";
+import React, {useCallback} from "react";
 import {FilterSectionGroupCheckbox} from "@/app/store/components/filterSectionGroupCheckbox";
 import {FilterSectionGroup} from "@/app/store/components/filterSectionGroup";
 import {FilterSection} from "@/app/store/components/filterSection";
 import {getProducts} from "@/actions/products";
+import {useParamsStore} from "@/hooks/use-params-store";
+import {shallow} from "zustand/shallow";
 
 
 export function Filters() {
+  const params = useParamsStore(state => ({
+    pageNumber: state.pageNumber,
+    pageSize: state.pageSize,
+    searchTerm: state.searchTerm,
+    orderBy: state.orderBy,
+    filterBy: state.filterBy,
+    categoryId: state.categoryId,
+    colorId: state.colorId,
+    sizeId: state.sizeId,
+    collectionId: state.collectionId,
+    occasionId: state.occasionId,
+
+  }), shallow);
+  const setParams = useParamsStore(state => state.setParams);
+  const onApply = async () => {
+    console.log("Params:", params)
+    await getProducts(params);
+  }
+
+  const toggleFilter = useCallback((filter: "categoryId" | "sizeId" | "colorId" | "occasionId", value: string) => {
+    console.log("togglefilter for ", filter, value)
+    if (params[filter]?.includes(value)) {
+      setParams({[filter]: params[filter]?.filter(v => v !== value)})
+    } else {
+      setParams({[filter]: [...(params[filter] || []), value]})
+    }
+  }, [params, setParams])
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -29,7 +60,7 @@ export function Filters() {
           Filter
         </Button>
       </SheetTrigger>
-      <SheetContent side={"left"} >
+      <SheetContent side={"left"} className="overflow-y-scroll">
         <SheetHeader>
           <SheetTitle>Filters</SheetTitle>
           <SheetDescription>
@@ -54,18 +85,18 @@ export function Filters() {
           </FilterSection>
           <FilterSection title={"Color"} description={"Filter by color"}>
             <FilterSectionGroup>
-              <FilterSectionGroupCheckbox title={"Red"} id={"red"}/>
-              <FilterSectionGroupCheckbox title={"Blue"} id={"blue"}/>
-              <FilterSectionGroupCheckbox title={"Green"} id={"green"}/>
-              <FilterSectionGroupCheckbox title={"Yellow"} id={"yellow"}/>
+              <FilterSectionGroupCheckbox onCheck={() => toggleFilter("colorId", "red")} title={"Red"} id={"red"}/>
+              <FilterSectionGroupCheckbox onCheck={() => toggleFilter("colorId", "blue")} title={"Blue"} id={"blue"}/>
+              <FilterSectionGroupCheckbox title={"Green"} id={"green"} onCheck={() => toggleFilter("colorId", "green")}/>
+              <FilterSectionGroupCheckbox title={"Yellow"} id={"yellow"} onCheck={() => toggleFilter("colorId", "yellow")}/>
             </FilterSectionGroup>
           </FilterSection>
           <FilterSection title={"Size"} description={"Filter by size"}>
             <FilterSectionGroup>
-              <FilterSectionGroupCheckbox title={"Small"} id={"small"}/>
-              <FilterSectionGroupCheckbox title={"Medium"} id={"medium"}/>
-              <FilterSectionGroupCheckbox title={"Large"} id={"large"}/>
-              <FilterSectionGroupCheckbox title={"Extra Large"} id={"xl"}/>
+              <FilterSectionGroupCheckbox checked onCheck={() => toggleFilter("sizeId", "small")} title={"Small"} id={"small"}/>
+              <FilterSectionGroupCheckbox onCheck={() => toggleFilter("sizeId", "medium")} title={"Medium"} id={"medium"}/>
+              <FilterSectionGroupCheckbox onCheck={() => toggleFilter("sizeId", "large")} title={"Large"} id={"large"}/>
+              <FilterSectionGroupCheckbox onCheck={() => toggleFilter("sizeId", "extralarge")} title={"Extra Large"} id={"xl"}/>
             </FilterSectionGroup>
           </FilterSection>
           <FilterSection title={"Price"} description={"Filter by price"}>
@@ -79,7 +110,9 @@ export function Filters() {
         <SheetFooter>
           <SheetClose asChild>
             <Button
-              className="mt-2 w-full" type="submit">Apply</Button>
+              className="mt-2 w-full"
+              onClick={onApply}
+              type="submit">Apply</Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

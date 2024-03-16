@@ -3,15 +3,19 @@ import {Label} from "@/components/ui/label";
 import React from "react";
 
 export function FilterSectionGroupCheckbox({
-                                             title,
-                                             id,
+  title,
+  id,
+  onCheck,
+  checked
                                            }: {
   title: string,
-  id: string
+  id: string,
+  onCheck?: () => void;
+  checked?: boolean;
 }) {
   return (
     <div className="flex items-center gap-x-1">
-      <Checkbox id={id}/>
+      <Checkbox checked={checked} value={"dsa"} id={id} onClick={onCheck}/>
       <Label htmlFor={id}>
         {title}
       </Label>
