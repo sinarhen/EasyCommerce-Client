@@ -15,7 +15,7 @@ export default function CategoryCard({
 
 }) {
   return (
-    <div className="group  overflow-hidden cursor-pointer relative bg-gray-300 rounded w-[200px] h-[200px]">
+    <div className="group  overflow-hidden cursor-pointer relative bg-gray-300 rounded min-w-[200px] h-[200px]">
       <div
         className=" flex-col justify-between flex group-hover:bg-black/90 transition-all px-4 py-5 bg-black/70 absolute z-20 w-full h-full">
         <div>
@@ -35,9 +35,16 @@ export default function CategoryCard({
 
       </div>
       <AspectRatio ratio={1}>
-        <Image src={image} fill alt="Image"
-               className="rounded-md transition-transform ease-out group-hover:scale-125 object-cover"/>
-      </AspectRatio>
+        {image ? (
+          <Image src={image} fill alt="Image"
+                 className="rounded-md transition-transform ease-out group-hover:scale-125 object-cover"/>
+
+        ): (
+          <Image
+            className="rounded-md transition-transform ease-out group-hover:scale-125 object-cover"
+            fill src={"https://i.pinimg.com/564x/0a/d5/16/0ad516d7ee2277fab0a7c37aecab1cb8.jpg"} alt="Image" />
+        )}
+        </AspectRatio>
     </div>
   )
 }

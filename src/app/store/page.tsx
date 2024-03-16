@@ -4,7 +4,9 @@ import AnimatedProducts from "@/app/store/components/animated-products";
 import { Filters } from "./components/filters";
 import React from "react";
 import CategoryCard from "@/components/ui/category-card";
-
+import AnimatedCategories from "@/app/store/components/animated-categories";
+import {ErrorBoundary} from "next/dist/client/components/error-boundary";
+import ErrorComponent from "@/components/ui/error-component";
 
 export async function getData() {
   const products = await apiFetcher('GET', '/products');
@@ -12,25 +14,25 @@ export async function getData() {
     products: products.data.products
   }
 }
+const ErrorComponentWrapper = ({ message }: { message: string }) => <ErrorComponent message={message} />;
 
 
+export async function getCategories() {
+  const categories = await apiFetcher('GET', '/categories');
+  return {
+    categories: categories.data.categories
+  }
+}
 
 export default async function Store() {
   const {products} = await getData();
+  const {categories} = await getCategories();
+  console.log(categories)
   return (
     <div className='w-full '>
-      <div className="flex overflow-y-hidden mb-5 overflow-x-auto flex-wrap gap-x-2">
-        <CategoryCard
-          title="Shirts"
-          description="A collection of shirts"
-          image={products[0].images[0].imageUrls[0]}
-        />
-        <CategoryCard
-          title="Blouses"
-          description="A collection of Blouses"
-          image={products[2].images[0].imageUrls[0]}
-        />
-      </div>
+      {/*<ErrorBoundary errorComponent={ErrorComponentWrapper}>*/}
+        <AnimatedCategories categories={categories}/>
+      {/*</ErrorBoundary>*/}
       <Header>
         Products
       </Header>

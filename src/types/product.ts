@@ -68,3 +68,10 @@ export interface ProductCategoryDto {
   name: string;
   order: number;
 }
+
+export interface CategoryDto {
+  id: string;
+  name: string;
+  imageUrl: string;
+  subCategories?: CategoryDto[];
+}

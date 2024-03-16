@@ -9,3 +9,7 @@ export async function getProducts(params: ProductsSearchParams) {
   const data = await apiFetcher("GET", endpointWithParams);
   console.log(data)
 }
+
+export async function getCategories() {
+  return await apiFetcher("GET", "/categories");
+}
