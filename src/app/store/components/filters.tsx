@@ -158,21 +158,28 @@ export function Filters() {
           <FilterSection title={"Category"} description={"Filter by category"}>
             <FilterSectionGroup>
               {categories.map(category => (
-                <FilterSectionGroupCheckbox checked={params?.categoryId?.includes(category.id)} onCheck={() => toggleFilter("categoryId", category.id)} title={category.title} id={category.id}/>
+                <FilterSectionGroupCheckbox
+                  key={category.id}
+                  checked={params?.categoryId?.includes(category.id)} onCheck={() => toggleFilter("categoryId", category.id)} title={category.title} id={category.id}/>
               ))}
             </FilterSectionGroup>
           </FilterSection>
           <FilterSection title={"Color"} description={"Filter by color"}>
             <FilterSectionGroup>
               {colors.map(color => (
-                <FilterSectionGroupCheckbox checked={params?.colorId?.includes(color.id)} onCheck={() => toggleFilter("colorId", color.id)} title={color.title} id={color.id}/>
+                <FilterSectionGroupCheckbox
+                  key={color.id}
+                  checked={params?.colorId?.includes(color.id)} onCheck={() => toggleFilter("colorId", color.id)} title={color.title} id={color.id}/>
               ))}
             </FilterSectionGroup>
           </FilterSection>
           <FilterSection title={"Size"} description={"Filter by size"}>
             <FilterSectionGroup>
               {sizes.map(size => (
-                <FilterSectionGroupCheckbox checked={params?.sizeId?.includes(size.id)} onCheck={() => toggleFilter("sizeId", size.id)} title={size.title} id={size.id}/>
+                <FilterSectionGroupCheckbox
+                  key={size.id}
+                  checked={params?.sizeId?.includes(size.id)}
+                  onCheck={() => toggleFilter("sizeId", size.id)} title={size.title} id={size.id}/>
               ))}
             </FilterSectionGroup>
           </FilterSection>
@@ -185,7 +192,9 @@ export function Filters() {
           <FilterSection title={"Occasion"} description={"Filter by occasion"}>
             <FilterSectionGroup>
               {occasions.map(occasion => (
-                <FilterSectionGroupCheckbox checked={params?.occasionId?.includes(occasion.id)} onCheck={() => toggleFilter("occasionId", occasion.id)} title={occasion.title} id={occasion.id}/>
+                <FilterSectionGroupCheckbox
+                  key={occasion.id}
+                  checked={params?.occasionId?.includes(occasion.id)} onCheck={() => toggleFilter("occasionId", occasion.id)} title={occasion.title} id={occasion.id}/>
               ))}
             </FilterSectionGroup>
           </FilterSection>
