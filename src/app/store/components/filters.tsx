@@ -23,6 +23,84 @@ import {getProducts} from "@/actions/products";
 import {useParamsStore} from "@/hooks/use-params-store";
 import {shallow} from "zustand/shallow";
 
+const sizes = [
+  {
+    id: "small",
+    title: "Small",
+  },
+  {
+    id: "medium",
+    title: "Medium",
+  },
+  {
+    id: "large",
+    title: "Large",
+  },
+  {
+    id: "extralarge",
+    title: "Extra Large",
+  },
+]
+
+const colors = [
+  {
+    id: "red",
+    title: "Red",
+  },
+  {
+    id: "blue",
+    title: "Blue",
+  },
+  {
+    id: "green",
+    title: "Green",
+  },
+  {
+    id: "yellow",
+    title: "Yellow",
+  },
+]
+
+const categories = [
+  {
+    id: "shirts",
+    title: "Shirts",
+  },
+  {
+    id: "pants",
+    title: "Pants",
+  },
+  {
+    id: "shoes",
+    title: "Shoes",
+  },
+  {
+    id: "accessories",
+    title: "Accessories",
+  },
+]
+
+const occasions = [ // Test values. Data should be fetched from the server
+  {
+    id: "casual",
+    title: "Casual",
+  },
+  {
+    id: "formal",
+    title: "Formal",
+  },
+  {
+    id: "party",
+    title: "Party",
+  },
+  {
+    id: "wedding",
+    title: "Wedding",
+  },
+]
+
+
+
 
 export function Filters() {
   const params = useParamsStore(state => ({
@@ -30,6 +108,8 @@ export function Filters() {
     pageSize: state.pageSize,
     searchTerm: state.searchTerm,
     orderBy: state.orderBy,
+    minPrice: state.minPrice,
+    maxPrice: state.maxPrice,
     filterBy: state.filterBy,
     categoryId: state.categoryId,
     colorId: state.colorId,
@@ -77,33 +157,37 @@ export function Filters() {
           </div>
           <FilterSection title={"Category"} description={"Filter by category"}>
             <FilterSectionGroup>
-              <FilterSectionGroupCheckbox title={"Shirts"} id={"shirts"}/>
-              <FilterSectionGroupCheckbox title={"Pants"} id={"pants"}/>
-              <FilterSectionGroupCheckbox title={"Shoes"} id={"shoes"}/>
-              <FilterSectionGroupCheckbox title={"Accessories"} id={"accessories"}/>
+              {categories.map(category => (
+                <FilterSectionGroupCheckbox checked={params?.categoryId?.includes(category.id)} onCheck={() => toggleFilter("categoryId", category.id)} title={category.title} id={category.id}/>
+              ))}
             </FilterSectionGroup>
           </FilterSection>
           <FilterSection title={"Color"} description={"Filter by color"}>
             <FilterSectionGroup>
-              <FilterSectionGroupCheckbox onCheck={() => toggleFilter("colorId", "red")} title={"Red"} id={"red"}/>
-              <FilterSectionGroupCheckbox onCheck={() => toggleFilter("colorId", "blue")} title={"Blue"} id={"blue"}/>
-              <FilterSectionGroupCheckbox title={"Green"} id={"green"} onCheck={() => toggleFilter("colorId", "green")}/>
-              <FilterSectionGroupCheckbox title={"Yellow"} id={"yellow"} onCheck={() => toggleFilter("colorId", "yellow")}/>
+              {colors.map(color => (
+                <FilterSectionGroupCheckbox checked={params?.colorId?.includes(color.id)} onCheck={() => toggleFilter("colorId", color.id)} title={color.title} id={color.id}/>
+              ))}
             </FilterSectionGroup>
           </FilterSection>
           <FilterSection title={"Size"} description={"Filter by size"}>
             <FilterSectionGroup>
-              <FilterSectionGroupCheckbox checked onCheck={() => toggleFilter("sizeId", "small")} title={"Small"} id={"small"}/>
-              <FilterSectionGroupCheckbox onCheck={() => toggleFilter("sizeId", "medium")} title={"Medium"} id={"medium"}/>
-              <FilterSectionGroupCheckbox onCheck={() => toggleFilter("sizeId", "large")} title={"Large"} id={"large"}/>
-              <FilterSectionGroupCheckbox onCheck={() => toggleFilter("sizeId", "extralarge")} title={"Extra Large"} id={"xl"}/>
+              {sizes.map(size => (
+                <FilterSectionGroupCheckbox checked={params?.sizeId?.includes(size.id)} onCheck={() => toggleFilter("sizeId", size.id)} title={size.title} id={size.id}/>
+              ))}
             </FilterSectionGroup>
           </FilterSection>
           <FilterSection title={"Price"} description={"Filter by price"}>
             <div className="flex items-center gap-x-1">
-              <Input type="number" id="minPrice" placeholder="Min"/>
-              <Input type="number" id="maxPrice" placeholder="Max"/>
+              <Input onChange={(e) => setParams({...params, minPrice: e.target.valueAsNumber})} value={params.minPrice?.toString()} type="number" id="minPrice" placeholder="Min"/>
+              <Input onChange={(e) => setParams({...params, maxPrice: e.target.valueAsNumber})} value={params.maxPrice?.toString()} type="number" id="maxPrice" placeholder="Max"/>
             </div>
+          </FilterSection>
+          <FilterSection title={"Occasion"} description={"Filter by occasion"}>
+            <FilterSectionGroup>
+              {occasions.map(occasion => (
+                <FilterSectionGroupCheckbox checked={params?.occasionId?.includes(occasion.id)} onCheck={() => toggleFilter("occasionId", occasion.id)} title={occasion.title} id={occasion.id}/>
+              ))}
+            </FilterSectionGroup>
           </FilterSection>
         </form>
 

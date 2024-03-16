@@ -15,7 +15,7 @@ export function FilterSectionGroupCheckbox({
 }) {
   return (
     <div className="flex items-center gap-x-1">
-      <Checkbox checked={checked} value={"dsa"} id={id} onClick={onCheck}/>
+      <Checkbox checked={checked} value={"dsa"} id={id} onCheckedChange={onCheck}/>
       <Label htmlFor={id}>
         {title}
       </Label>

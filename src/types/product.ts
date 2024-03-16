@@ -52,12 +52,12 @@ export interface ProductsSearchParams {
   pageSize?: number;
   pageNumber?: number;
   searchTerm?: string;
-  categoryId?: string;
-  colorId?: string;
-  sizeId?: string;
-  collectionId?: string;
-  materialId?: string;
-  occasionId?: string;
+  categoryId?: string[];
+  colorId?: string[];
+  sizeId?: string[];
+  collectionId?: string[];
+  materialId?: string[];
+  occasionId?: string[];
   minPrice?: number;
   maxPrice?: number;
 }
