@@ -1,35 +1,42 @@
 'use client'
 
 import CategoryCard from "@/components/ui/category-card";
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import {CategoryDto} from "@/types/product";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
 import {Button} from "@/components/ui/button";
 import CategoriesWrapper from "@/components/ui/categories-wrapper";
 import {useParamsStore} from "@/hooks/use-params-store";
-import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import apiFetcher from "@/actions/api";
+import {useMutation, useQuery, UseQueryResult} from "@tanstack/react-query";
 import CategoryCardSkeleton from "@/components/ui/skeletons/category-card-skeleton";
 import {getCategories} from "@/actions/products";
-import {Cross, X} from "lucide-react";
+import {X} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
+import {AnimatePresence, motion} from "framer-motion";
+import {shallow} from "zustand/shallow";
 
-function useCategories(): UseQueryResult<CategoryDto[]> {
-  return useQuery({
+function useCategories(): UseQueryResult<CategoryDto[]>  {
+
+  const query = useQuery({
     queryKey: ['categories'],
     queryFn: async () => {
       const categories = await getCategories();
       return categories.categories;
     }
   });
+
+  return { ...query};
 }
 export default function AnimatedCategories() {
-  const { data: categories, isLoading, error } = useCategories();
+  const [selectedCategory, setSelectedCategory] = useState<CategoryDto | null>(null);
+
+  const { data: categories, isLoading, error, } = useCategories();
   const [open, setOpen] = React.useState(false);
   const params = useParamsStore(state => ({
-    addFilter: state.toggleFilter,
+    toggleFilter: state.toggleFilter,
     categoryId: state.categoryId,
-  }));
+  }), shallow);
+
 
   if (isLoading) return (
     <CategoriesWrapper>
@@ -63,7 +70,7 @@ export default function AnimatedCategories() {
           <Button
             variant="outline"
             key={id}
-            onClick={() => params.addFilter('categoryId', id)}
+            onClick={() => params.toggleFilter('categoryId', id)}
             className="group flex items-center gap-x-1"
           >
             {categories?.find((category) => category.id === id)?.name}
@@ -75,12 +82,27 @@ export default function AnimatedCategories() {
       <Collapsible open={open} onOpenChange={setOpen}>
 
         <CategoriesWrapper>
-          { categories?.map((category: CategoryDto) => (
-            <CategoryCard
-              key={category.id} title={category.name}
-              onClick={() => params.addFilter('categoryId', category.id)}
-              description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>
-          ))}
+          <AnimatePresence mode="wait">
+            {(!selectedCategory ? categories : selectedCategory?.subCategories)?.map((category: CategoryDto, index) => (
+              <motion.div
+                key={category.id}
+                initial={{opacity: 0, x: -10}}
+                animate={{opacity: 1, x: 0}}
+                exit={{opacity: 0, x: -10}}
+                transition={{duration: 0.2, delay: 0.1 * index}}
+              >
+                <CategoryCard
+                  title={category.name}
+                  onClick={() => {
+                    params.toggleFilter('categoryId', category.id)
+                    setSelectedCategory(category);
+                  }}
+                  description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>
+
+              </motion.div>
+              ))}
+
+          </AnimatePresence>
         </CategoriesWrapper>
 
         <CollapsibleContent>
