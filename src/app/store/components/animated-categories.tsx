@@ -4,46 +4,62 @@ import CategoryCard from "@/components/ui/category-card";
 import React, { useEffect } from "react";
 import {CategoryDto} from "@/types/product";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
+import {Button} from "@/components/ui/button";
+import CategoriesWrapper from "@/components/ui/categories-wrapper";
+import {useParamsStore} from "@/hooks/use-params-store";
 
 export default function AnimatedCategories({
   categories
                                            }: {
   categories: CategoryDto[]
 }) {
-  console.log(categories)
+  const [open, setOpen] = React.useState(false);
+  const params = useParamsStore(state => ({
+    categoryId: state.categoryId,
+    setParams: state.setParams
+  }));
+
   if (!categories || categories.length === 0) return (
     <div className="w-full h-full flex justify-center items-center">
       No categories
     </div>
   )
+
   return (
-    <Collapsible>
-        <div className="grid overflow-y-hidden mb-6 gap-y-4 lg:grid-cols-4 grid-cols-2  overflow-x-auto gap-x-2">
+    <>
+      {params.categoryId?.map(id => (
+        <Button
+          key={id}
+        >
+          {categories.find((category) => category.id === id)?.name}
+        </Button>
+      ))}
+      <Collapsible open={open} onOpenChange={setOpen}>
 
+        <CategoriesWrapper>
           {categories?.map((category: CategoryDto) => (
-            <CategoryCard key={category.id} title={category.name}
-                          description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>
+            <CategoryCard
+              key={category.id} title={category.name}
+              description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>
           ))}
+        </CategoriesWrapper>
+
+        <CollapsibleContent>
+          <CategoriesWrapper>
+              {categories?.map((category: CategoryDto) => (
+                <CategoryCard
+                  key={category.id} title={category.name}
+                  description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>
+              ))}
+          </CategoriesWrapper>
+        </CollapsibleContent>
+        <div className="w-full flex justify-center">
+          <Button variant={"ghost"} onClick={() => setOpen(!open)}>{open ? 'Show less' : 'Show more'}</Button>
         </div>
 
-      <CollapsibleContent>
-        <div className="grid overflow-y-hidden mb-6 gap-y-4 lg:grid-cols-4 grid-cols-2  overflow-x-auto gap-x-2">
+      </Collapsible>
 
-          {categories?.map((category: CategoryDto) => (
-            <CategoryCard key={category.id} title={category.name}
-                          description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>
-          ))}
-        </div>
-      </CollapsibleContent>
-      <CollapsibleTrigger>
-        <div className="w-full">
-          <button className="w-full text-center text-gray-500 font-semibold">
-            Show more
-          </button>
-        </div>
-      </CollapsibleTrigger>
-
-    </Collapsible>
+    </>
 
 )
 }
