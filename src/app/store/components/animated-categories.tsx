@@ -10,14 +10,14 @@ import {useParamsStore} from "@/hooks/use-params-store";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import apiFetcher from "@/actions/api";
 import CategoryCardSkeleton from "@/components/ui/skeletons/category-card-skeleton";
+import {getCategories} from "@/actions/products";
 
 function useCategories(): UseQueryResult<CategoryDto[]> {
   return useQuery({
     queryKey: ['categories'],
-    queryFn: async() => {
-      const resp = (await apiFetcher("GET", "/categories"))
-      console.log(resp)
-      return resp;
+    queryFn: async () => {
+      const categories = await getCategories();
+      return categories.categories;
     }
   });
 }
@@ -61,7 +61,7 @@ export default function AnimatedCategories() {
       <Collapsible open={open} onOpenChange={setOpen}>
 
         <CategoriesWrapper>
-          {categories?.map((category: CategoryDto) => (
+          { categories?.map((category: CategoryDto) => (
             <CategoryCard
               key={category.id} title={category.name}
               description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>
