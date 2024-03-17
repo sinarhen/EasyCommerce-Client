@@ -13,8 +13,8 @@ export default function AnimatedCategories() {
   const [categories, setCategories] = React.useState<CategoryDto[]>([]);
   const [open, setOpen] = React.useState(false);
   const params = useParamsStore(state => ({
+    addFilter: state.addFilter,
     categoryId: state.categoryId,
-    setParams: state.setParams
   }));
 
   useEffect(() => {
@@ -25,7 +25,6 @@ export default function AnimatedCategories() {
     );
 
   }, []);
-  
 
   return (
     <>
