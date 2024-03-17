@@ -121,7 +121,7 @@ export default function ProductCard({
         </div>
       </div>
 
-      <div className="w-full pb-4 px-4 mt-3 bg-white justify-between flex flex-col font-semibold text-xs">
+      <div className="w-full text-black dark:text-black pb-4 px-4 mt-3 bg-white justify-between flex flex-col font-semibold text-xs">
 
         <span
           className=" opacity-40 hover:opacity-100 w-full transition-opacity cursor-pointer items-center flex justify-between ">
