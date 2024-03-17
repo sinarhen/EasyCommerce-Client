@@ -7,24 +7,47 @@ import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/
 import {Button} from "@/components/ui/button";
 import CategoriesWrapper from "@/components/ui/categories-wrapper";
 import {useParamsStore} from "@/hooks/use-params-store";
-import {getCategories} from "@/actions/products";
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
+import apiFetcher from "@/actions/api";
+import CategoryCardSkeleton from "@/components/ui/skeletons/category-card-skeleton";
 
+function useCategories(): UseQueryResult<CategoryDto[]> {
+  return useQuery({
+    queryKey: ['categories'],
+    queryFn: async() => {
+      const resp = (await apiFetcher("GET", "/categories"))
+      console.log(resp)
+      return resp;
+    }
+  });
+}
 export default function AnimatedCategories() {
-  const [categories, setCategories] = React.useState<CategoryDto[]>([]);
+  const { data: categories, isLoading, error } = useCategories();
   const [open, setOpen] = React.useState(false);
   const params = useParamsStore(state => ({
     addFilter: state.addFilter,
     categoryId: state.categoryId,
   }));
 
-  useEffect(() => {
-    getCategories().then(
-      (data) => {
-        setCategories(data.categories)
-      }
-    );
+  if (isLoading) return (
+    <CategoriesWrapper>
+      <CategoryCardSkeleton />
+      <CategoryCardSkeleton />
+      <CategoryCardSkeleton />
+      <CategoryCardSkeleton />
+    </CategoriesWrapper>
+  )
 
-  }, []);
+  if (error){
+    console.log(error)
+    return (
+
+      <div>
+        Error occured while fetching categories
+      </div>
+    )
+  }
+
 
   return (
     <>
@@ -32,7 +55,7 @@ export default function AnimatedCategories() {
         <Button
           key={id}
         >
-          {categories.find((category) => category.id === id)?.name}
+          {categories?.find((category) => category.id === id)?.name}
         </Button>
       ))}
       <Collapsible open={open} onOpenChange={setOpen}>
