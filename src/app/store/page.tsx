@@ -25,20 +25,13 @@ export default async function Store() {
 
       <Suspense fallback={
         <CategoriesWrapper>
-          <div className="group  overflow-hidden cursor-pointer relative bg-gray-300 rounded min-w-[200px] h-[200px]">
-
-          </div>
+          <CategoryCardSkeleton />
+          <CategoryCardSkeleton />
+          <CategoryCardSkeleton />
+          <CategoryCardSkeleton />
         </CategoriesWrapper>
-
       }>
-
-        <CategoriesWrapper>
-          <CategoryCardSkeleton />
-          <CategoryCardSkeleton />
-          <CategoryCardSkeleton />
-          <CategoryCardSkeleton />
-        </CategoriesWrapper>
-
+        <AnimatedCategories />
       </Suspense>
 
       <Header>
