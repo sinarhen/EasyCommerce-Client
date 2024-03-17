@@ -8,14 +8,18 @@ export default function CategoryCard({
                                title,
                                description,
                                image,
+  onClick
                              }: {
   title: string,
   description: string,
-  image: string
+  image: string,
+  onClick?: () => void
 
 }) {
   return (
-    <div className="group  overflow-hidden cursor-pointer relative bg-gray-300 rounded min-w-[200px] h-[200px]">
+    <div
+      onClick={onClick}
+      className="group  overflow-hidden cursor-pointer relative bg-gray-300 rounded min-w-[200px] h-[200px]">
       <div
         className=" flex-col justify-between flex group-hover:bg-black/90 transition-all px-4 py-5 bg-black/70 absolute z-20 w-full h-full">
         <div>

@@ -11,6 +11,8 @@ import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import apiFetcher from "@/actions/api";
 import CategoryCardSkeleton from "@/components/ui/skeletons/category-card-skeleton";
 import {getCategories} from "@/actions/products";
+import {Cross, X} from "lucide-react";
+import {iconSizes} from "@/lib/constants";
 
 function useCategories(): UseQueryResult<CategoryDto[]> {
   return useQuery({
@@ -25,7 +27,7 @@ export default function AnimatedCategories() {
   const { data: categories, isLoading, error } = useCategories();
   const [open, setOpen] = React.useState(false);
   const params = useParamsStore(state => ({
-    addFilter: state.addFilter,
+    addFilter: state.toggleFilter,
     categoryId: state.categoryId,
   }));
 
@@ -51,19 +53,32 @@ export default function AnimatedCategories() {
 
   return (
     <>
-      {params.categoryId?.map(id => (
-        <Button
-          key={id}
-        >
-          {categories?.find((category) => category.id === id)?.name}
-        </Button>
-      ))}
+      {params.categoryId?.length !== 0 && (
+        <p className="font-semibold">
+          Selected categories
+        </p>
+      )}
+      <div className="flex gap-x-1 mb-1">
+        {params.categoryId?.map(id => (
+          <Button
+            variant="outline"
+            key={id}
+            onClick={() => params.addFilter('categoryId', id)}
+            className="group flex items-center gap-x-1"
+          >
+            {categories?.find((category) => category.id === id)?.name}
+            <X className="group-hover:rotate-90 transition-transform" size={iconSizes.sm}/>
+          </Button>
+        ))}
+
+      </div>
       <Collapsible open={open} onOpenChange={setOpen}>
 
         <CategoriesWrapper>
           { categories?.map((category: CategoryDto) => (
             <CategoryCard
               key={category.id} title={category.name}
+              onClick={() => params.addFilter('categoryId', category.id)}
               description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>
           ))}
         </CategoriesWrapper>

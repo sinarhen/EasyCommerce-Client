@@ -5,7 +5,7 @@ import {ProductsOrderBy, ProductsSearchParams} from "@/types/product";
 type Products = {
   setParams: (params: Partial<ProductsSearchParams>) => void;
   reset: () => void;
-  addFilter: (filter: "categoryId" | "sizeId" | "colorId" | "occasionId", value: string) => void;
+  toggleFilter: (filter: "categoryId" | "sizeId" | "colorId" | "occasionId", value: string) => void;
 }
 
 const initialState: ProductsSearchParams = {
@@ -36,7 +36,7 @@ export const useParamsStore = createWithEqualityFn<ProductsSearchParams & Produc
       }
     })
   },
-  addFilter: (filter: "categoryId" | "sizeId" | "colorId" | "occasionId", value: string) => {
+  toggleFilter: (filter: "categoryId" | "sizeId" | "colorId" | "occasionId", value: string) => {
     return set(
       state => {
         if (state[filter]?.includes(value)) {
