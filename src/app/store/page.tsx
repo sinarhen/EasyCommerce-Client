@@ -2,11 +2,13 @@ import Header from "@/components/ui/header";
 import apiFetcher from "@/actions/api";
 import AnimatedProducts from "@/app/store/components/animated-products";
 import { Filters } from "./components/filters";
-import React from "react";
-import CategoryCard from "@/components/ui/category-card";
+import React, {Suspense} from "react";
 import AnimatedCategories from "@/app/store/components/animated-categories";
-import {ErrorBoundary} from "next/dist/client/components/error-boundary";
-import ErrorComponent from "@/components/ui/error-component";
+import CategoriesWrapper from "@/components/ui/categories-wrapper";
+import {Button} from "@/components/ui/button";
+import {Eye} from "lucide-react";
+import {iconSizes} from "@/lib/constants";
+import CategoryCardSkeleton from "@/components/ui/skeletons/category-card-skeleton";
 
 export async function getData() {
   const products = await apiFetcher('GET', '/products');
@@ -14,25 +16,31 @@ export async function getData() {
     products: products.data.products
   }
 }
-const ErrorComponentWrapper = ({ message }: { message: string }) => <ErrorComponent message={message} />;
-
-
-export async function getCategories() {
-  const categories = await apiFetcher('GET', '/categories');
-  return {
-    categories: categories.data.categories
-  }
-}
 
 export default async function Store() {
   const {products} = await getData();
-  const {categories} = await getCategories();
-  console.log(categories)
   return (
     <div className='w-full '>
       {/*<ErrorBoundary errorComponent={ErrorComponentWrapper}>*/}
-        <AnimatedCategories categories={categories}/>
-      {/*</ErrorBoundary>*/}
+
+      <Suspense fallback={
+        <CategoriesWrapper>
+          <div className="group  overflow-hidden cursor-pointer relative bg-gray-300 rounded min-w-[200px] h-[200px]">
+
+          </div>
+        </CategoriesWrapper>
+
+      }>
+
+        <CategoriesWrapper>
+          <CategoryCardSkeleton />
+          <CategoryCardSkeleton />
+          <CategoryCardSkeleton />
+          <CategoryCardSkeleton />
+        </CategoriesWrapper>
+
+      </Suspense>
+
       <Header>
         Products
       </Header>

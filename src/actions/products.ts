@@ -11,5 +11,8 @@ export async function getProducts(params: ProductsSearchParams) {
 }
 
 export async function getCategories() {
-  return await apiFetcher("GET", "/categories");
+  const categories = await apiFetcher('GET', '/categories');
+  return {
+    categories: categories.data.categories
+  }
 }

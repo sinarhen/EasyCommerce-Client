@@ -7,23 +7,25 @@ import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/
 import {Button} from "@/components/ui/button";
 import CategoriesWrapper from "@/components/ui/categories-wrapper";
 import {useParamsStore} from "@/hooks/use-params-store";
+import {getCategories} from "@/actions/products";
 
-export default function AnimatedCategories({
-  categories
-                                           }: {
-  categories: CategoryDto[]
-}) {
+export default function AnimatedCategories() {
+  const [categories, setCategories] = React.useState<CategoryDto[]>([]);
   const [open, setOpen] = React.useState(false);
   const params = useParamsStore(state => ({
     categoryId: state.categoryId,
     setParams: state.setParams
   }));
 
-  if (!categories || categories.length === 0) return (
-    <div className="w-full h-full flex justify-center items-center">
-      No categories
-    </div>
-  )
+  useEffect(() => {
+    getCategories().then(
+      (data) => {
+        setCategories(data.categories)
+      }
+    );
+
+  }, []);
+  
 
   return (
     <>
