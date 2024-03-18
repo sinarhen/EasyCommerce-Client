@@ -1,11 +1,12 @@
 import {createWithEqualityFn} from "zustand/traditional";
-import {ProductsOrderBy, ProductsSearchParams} from "@/types/product";
+import {CategoryDto, ProductsOrderBy, ProductsSearchParams} from "@/types/product";
 
 
 type Products = {
   setParams: (params: Partial<ProductsSearchParams>) => void;
   reset: () => void;
-  toggleFilter: (filter: "categoryId" | "sizeId" | "colorId" | "occasionId", value: string) => void;
+  toggleFilter: (filter: "sizeId" | "colorId" | "occasionId", value: string) => void;
+  toggleCategory: (category: CategoryDto) => void;
 }
 
 const initialState: ProductsSearchParams = {
@@ -14,7 +15,7 @@ const initialState: ProductsSearchParams = {
   searchTerm: '',
   orderBy: ProductsOrderBy.name,
   filterBy: 'live',
-  categoryId: [],
+  categories: [],
   colorId: [],
   sizeId: [],
   collectionId: [],
@@ -36,13 +37,25 @@ export const useParamsStore = createWithEqualityFn<ProductsSearchParams & Produc
       }
     })
   },
-  toggleFilter: (filter: "categoryId" | "sizeId" | "colorId" | "occasionId", value: string) => {
+  toggleFilter: (filter: "sizeId" | "colorId" | "occasionId", value: string) => {
     return set(
       state => {
         if (state[filter]?.includes(value)) {
           return {...state, [filter]: state[filter]?.filter(v => v !== value)}
         } else {
           return {...state, [filter]: [...(state[filter] || []), value]}
+        }
+      }
+    )
+  },
+  toggleCategory: (category: CategoryDto) => {
+    return set(
+      state => {
+        if (state?.categories?.find(s => s.id === category.id))
+        {
+          return {...state, categories: state.categories?.filter(s => s.id !== category.id)}
+        } else {
+          return {...state, categories: [...(state.categories ?? []), category]}
         }
       }
     )

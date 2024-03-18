@@ -52,7 +52,7 @@ export interface ProductsSearchParams {
   pageSize?: number;
   pageNumber?: number;
   searchTerm?: string;
-  categoryId?: string[];
+  categories?: CategoryDto[];
   colorId?: string[];
   sizeId?: string[];
   collectionId?: string[];

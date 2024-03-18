@@ -21,7 +21,7 @@ export default function CategoryCard({
       onClick={onClick}
       className="group  overflow-hidden cursor-pointer relative bg-gray-300 rounded-md min-w-[200px] h-[200px]">
       <div
-        className=" flex-col justify-between flex group-hover:bg-black/90 transition-all px-4 py-5 bg-black/70 absolute z-20 w-full h-full">
+        className=" flex-col justify-between flex group-hover:bg-black/90 transition-all px-4 py-5 bg-black/70 absolute rounded-md z-20 w-full h-full">
         <div>
           <h1 className="text-2xl font-bold text-gradient animate-gradient">{title}</h1>
           <p className="text-white">{description}</p>
@@ -38,7 +38,7 @@ export default function CategoryCard({
         </div>
 
       </div>
-      <AspectRatio ratio={1}>
+      <AspectRatio className="rounded-md" ratio={1}>
         {image ? (
           <Image src={image} fill alt="Image"
                  className="rounded-md transition-transform ease-out group-hover:scale-125 object-cover"/>
