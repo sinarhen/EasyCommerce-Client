@@ -28,15 +28,17 @@ function useCategories(): UseQueryResult<CategoryDto[]>  {
   return { ...query};
 }
 export default function AnimatedCategories() {
-  const [selectedCategory, setSelectedCategory] = useState<CategoryDto | null>(null);
 
   const { data: categories, isLoading, error, } = useCategories();
   const [open, setOpen] = React.useState(false);
   const params = useParamsStore(state => ({
-    toggleFilter: state.toggleFilter,
-    categoryId: state.categoryId,
+    categories: state.categories,
+    toggleCategory: state.toggleCategory,
   }), shallow);
 
+  useEffect(() => {
+    console.log(params.categories)
+  }, [params.categories]);
 
   if (isLoading) return (
     <CategoriesWrapper>
@@ -60,20 +62,20 @@ export default function AnimatedCategories() {
 
   return (
     <>
-      {params.categoryId?.length !== 0 && (
+      {params.categories?.length !== 0 && (
         <p className="font-semibold">
           Selected categories
         </p>
       )}
       <div className="flex gap-x-1 mb-1">
-        {params.categoryId?.map(id => (
+        {params.categories?.map(category => (
           <Button
             variant="outline"
-            key={id}
-            onClick={() => params.toggleFilter('categoryId', id)}
+            key={category.id}
+            onClick={() => params.toggleCategory(category)}
             className="group flex items-center gap-x-1"
           >
-            {categories?.find((category) => category.id === id)?.name}
+            {category.name}
             <X className="group-hover:rotate-90 transition-transform" size={iconSizes.sm}/>
           </Button>
         ))}
@@ -83,7 +85,7 @@ export default function AnimatedCategories() {
 
         <CategoriesWrapper>
           <AnimatePresence mode="wait">
-            {(!selectedCategory ? categories : selectedCategory?.subCategories)?.map((category: CategoryDto, index) => (
+            {(params?.categories?.length === 0 ? categories : params?.categories?.pop()?.subCategories)?.map((category: CategoryDto, index) => (
               <motion.div
                 key={category.id}
                 initial={{opacity: 0, x: -10}}
@@ -94,8 +96,7 @@ export default function AnimatedCategories() {
                 <CategoryCard
                   title={category.name}
                   onClick={() => {
-                    params.toggleFilter('categoryId', category.id)
-                    setSelectedCategory(category);
+                    params.toggleCategory(category)
                   }}
                   description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>
 
