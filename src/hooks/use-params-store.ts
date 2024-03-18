@@ -2,11 +2,12 @@ import {createWithEqualityFn} from "zustand/traditional";
 import {CategoryDto, ProductsOrderBy, ProductsSearchParams} from "@/types/product";
 
 
-type Products = {
+export type Products = {
   setParams: (params: Partial<ProductsSearchParams>) => void;
   reset: () => void;
   toggleFilter: (filter: "sizeId" | "colorId" | "occasionId", value: string) => void;
   toggleCategory: (category: CategoryDto) => void;
+  resetCategories: () => void;
 }
 
 const initialState: ProductsSearchParams = {
@@ -48,6 +49,7 @@ export const useParamsStore = createWithEqualityFn<ProductsSearchParams & Produc
       }
     )
   },
+  resetCategories: () => set(state => ({...state, categories: []})),
   toggleCategory: (category: CategoryDto) => {
     return set(
       state => {

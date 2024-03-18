@@ -1,21 +1,26 @@
 import {Button} from "@/components/ui/button";
-import {Eye} from "lucide-react";
+import {Eye, LucideIcon} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
 import {AspectRatio} from "@/components/ui/aspect-ratio";
 import Image from "next/image";
+import React from "react";
 
 export default function CategoryCard({
-                                       title,
-                                       description,
-                                       image,
-                                       onClick
+  title,
+  description,
+  image,
+  onClick,
+  buttonText,
+  buttonIcon
                                      }: {
   title: string,
   description: string,
-  image: string,
+  image?: string,
   onClick?: () => void
-
+  buttonText?: string
+  buttonIcon?: LucideIcon
 }) {
+  const Icon = buttonIcon ?? Eye;
   return (
     <div
       onClick={onClick}
@@ -31,8 +36,8 @@ export default function CategoryCard({
           <Button size={"sm"} variant="outline"
                   className='group-hover:translate-y-0 group/wish  transition-all opacity-0 group-hover:opacity-100 translate-y-3'>
             <div className="group-hover/wish:translate-x-0.5 transition-transform flex gap-x-2 ease-out ">
-              <Eye size={iconSizes.md}></Eye>
-              View
+              <Icon size={iconSizes.md}></Icon>
+              {buttonText ?? "View"}
             </div>
           </Button>
         </div>
