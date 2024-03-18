@@ -86,7 +86,7 @@ export default function AnimatedCategories() {
       </div>
       <Collapsible open={open} onOpenChange={setOpen}>
 
-        <CategoriesWrapper>
+        <CategoriesWrapper className={categoriesToDisplay?.length === 0 ? "grid-cols-1 sm:grid-cols-1 lg:grid-cols-1" : ""}>
           <AnimatePresence mode="wait">
             {categoriesToDisplay?.length !== 0 ? categoriesToDisplay?.map((category: CategoryDto, index) => (
               <motion.div
