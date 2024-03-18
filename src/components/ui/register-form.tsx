@@ -13,7 +13,7 @@ import {useRouter} from "next/navigation";
 
 
 export default function RegisterForm({
-  onSuccess
+                                       onSuccess
                                      }: {
   onSuccess?: () => void;
 }) {
@@ -33,8 +33,7 @@ export default function RegisterForm({
       if (!resp.success) {
         console.error(resp.statusText);
         toast.error(resp?.data?.message || resp.statusText);
-        if (resp.data.field)
-        {
+        if (resp.data.field) {
           setError(resp.data.field, {
             message: resp.data.message
           });

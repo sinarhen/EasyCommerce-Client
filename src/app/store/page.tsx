@@ -1,13 +1,10 @@
 import Header from "@/components/ui/header";
 import apiFetcher from "@/actions/api";
 import AnimatedProducts from "@/app/store/components/animated-products";
-import { Filters } from "./components/filters";
+import {Filters} from "./components/filters";
 import React, {Suspense} from "react";
 import AnimatedCategories from "@/app/store/components/animated-categories";
 import CategoriesWrapper from "@/components/ui/categories-wrapper";
-import {Button} from "@/components/ui/button";
-import {Eye} from "lucide-react";
-import {iconSizes} from "@/lib/constants";
 import CategoryCardSkeleton from "@/components/ui/skeletons/category-card-skeleton";
 
 export async function getData() {
@@ -25,13 +22,13 @@ export default async function Store() {
 
       <Suspense fallback={
         <CategoriesWrapper>
-          <CategoryCardSkeleton />
-          <CategoryCardSkeleton />
-          <CategoryCardSkeleton />
-          <CategoryCardSkeleton />
+          <CategoryCardSkeleton/>
+          <CategoryCardSkeleton/>
+          <CategoryCardSkeleton/>
+          <CategoryCardSkeleton/>
         </CategoriesWrapper>
       }>
-        <AnimatedCategories />
+        <AnimatedCategories/>
       </Suspense>
 
       <Header>

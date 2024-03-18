@@ -3,10 +3,10 @@ import {Label} from "@/components/ui/label";
 import React from "react";
 
 export function FilterSectionGroupCheckbox({
-  title,
-  id,
-  onCheck,
-  checked
+                                             title,
+                                             id,
+                                             onCheck,
+                                             checked
                                            }: {
   title: string,
   id: string,

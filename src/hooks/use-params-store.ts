@@ -51,10 +51,12 @@ export const useParamsStore = createWithEqualityFn<ProductsSearchParams & Produc
   toggleCategory: (category: CategoryDto) => {
     return set(
       state => {
-        if (state?.categories?.find(s => s.id === category.id))
-        {
-          return {...state, categories: state.categories?.filter(s => s.id !== category.id)}
+        const existingCategory = state.categories?.find(c => c.id === category.id);
+        if (existingCategory) {
+          return {...state, categories: state.categories?.filter(c => c.id !== category.id)}
         } else {
+          console.log('Adding category', category)
+          console.log("New categories", [...(state.categories ?? []), category])
           return {...state, categories: [...(state.categories ?? []), category]}
         }
       }

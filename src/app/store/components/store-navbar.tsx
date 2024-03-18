@@ -59,7 +59,7 @@ export default function StoreNavbar() {
                     setOpen(true)
 
                   }}
-                  className="hidden sm:flex" variant="ghost">
+                          className="hidden sm:flex" variant="ghost">
                  <span className="text-gradient animate-gradient">
                   Register
                  </span>

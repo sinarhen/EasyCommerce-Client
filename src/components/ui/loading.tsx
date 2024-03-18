@@ -1,5 +1,3 @@
-import {cn} from "@/lib/utils";
-
 const sizes = {
   "xs": "w-4 h-4",
   "sm": "w-6 h-6",

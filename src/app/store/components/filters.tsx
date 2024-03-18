@@ -100,8 +100,6 @@ const occasions = [ // Test values. Data should be fetched from the server
 ]
 
 
-
-
 export function Filters() {
   const params = useParamsStore(state => ({
     pageNumber: state.pageNumber,
@@ -160,7 +158,8 @@ export function Filters() {
               {categories.map(category => (
                 <FilterSectionGroupCheckbox
                   key={category.id}
-                  checked={params?.categoryId?.includes(category.id)} onCheck={() => toggleFilter("categoryId", category.id)} title={category.title} id={category.id}/>
+                  checked={params?.categoryId?.includes(category.id)}
+                  onCheck={() => toggleFilter("categoryId", category.id)} title={category.title} id={category.id}/>
               ))}
             </FilterSectionGroup>
           </FilterSection>
@@ -169,7 +168,8 @@ export function Filters() {
               {colors.map(color => (
                 <FilterSectionGroupCheckbox
                   key={color.id}
-                  checked={params?.colorId?.includes(color.id)} onCheck={() => toggleFilter("colorId", color.id)} title={color.title} id={color.id}/>
+                  checked={params?.colorId?.includes(color.id)} onCheck={() => toggleFilter("colorId", color.id)}
+                  title={color.title} id={color.id}/>
               ))}
             </FilterSectionGroup>
           </FilterSection>
@@ -185,8 +185,10 @@ export function Filters() {
           </FilterSection>
           <FilterSection title={"Price"} description={"Filter by price"}>
             <div className="flex items-center gap-x-1">
-              <Input onChange={(e) => setParams({...params, minPrice: e.target.valueAsNumber})} value={params.minPrice?.toString()} type="number" id="minPrice" placeholder="Min"/>
-              <Input onChange={(e) => setParams({...params, maxPrice: e.target.valueAsNumber})} value={params.maxPrice?.toString()} type="number" id="maxPrice" placeholder="Max"/>
+              <Input onChange={(e) => setParams({...params, minPrice: e.target.valueAsNumber})}
+                     value={params.minPrice?.toString()} type="number" id="minPrice" placeholder="Min"/>
+              <Input onChange={(e) => setParams({...params, maxPrice: e.target.valueAsNumber})}
+                     value={params.maxPrice?.toString()} type="number" id="maxPrice" placeholder="Max"/>
             </div>
           </FilterSection>
           <FilterSection title={"Occasion"} description={"Filter by occasion"}>
@@ -194,7 +196,8 @@ export function Filters() {
               {occasions.map(occasion => (
                 <FilterSectionGroupCheckbox
                   key={occasion.id}
-                  checked={params?.occasionId?.includes(occasion.id)} onCheck={() => toggleFilter("occasionId", occasion.id)} title={occasion.title} id={occasion.id}/>
+                  checked={params?.occasionId?.includes(occasion.id)}
+                  onCheck={() => toggleFilter("occasionId", occasion.id)} title={occasion.title} id={occasion.id}/>
               ))}
             </FilterSectionGroup>
           </FilterSection>

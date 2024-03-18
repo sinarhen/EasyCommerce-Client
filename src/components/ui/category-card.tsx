@@ -5,11 +5,11 @@ import {AspectRatio} from "@/components/ui/aspect-ratio";
 import Image from "next/image";
 
 export default function CategoryCard({
-                               title,
-                               description,
-                               image,
-  onClick
-                             }: {
+                                       title,
+                                       description,
+                                       image,
+                                       onClick
+                                     }: {
   title: string,
   description: string,
   image: string,
@@ -43,12 +43,12 @@ export default function CategoryCard({
           <Image src={image} fill alt="Image"
                  className="rounded-md transition-transform ease-out group-hover:scale-125 object-cover"/>
 
-        ): (
+        ) : (
           <Image
             className="rounded-md scale-[101%] transition-transform ease-out group-hover:scale-125 object-cover"
-            fill src={"https://i.pinimg.com/564x/0a/d5/16/0ad516d7ee2277fab0a7c37aecab1cb8.jpg"} alt="Image" />
+            fill src={"https://i.pinimg.com/564x/0a/d5/16/0ad516d7ee2277fab0a7c37aecab1cb8.jpg"} alt="Image"/>
         )}
-        </AspectRatio>
+      </AspectRatio>
     </div>
   )
 }

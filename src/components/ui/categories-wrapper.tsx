@@ -1,12 +1,10 @@
-import {CategoryDto} from "@/types/product";
-import CategoryCard from "@/components/ui/category-card";
 import React from "react";
 import {cn} from "@/lib/utils";
 
 const CategoriesWrapper = ({
-  children,
-  className
-}: {
+                             children,
+                             className
+                           }: {
   children: React.ReactNode;
   className?: string
 }) => (

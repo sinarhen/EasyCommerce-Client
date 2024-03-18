@@ -1,21 +1,20 @@
 'use client'
 
 import CategoryCard from "@/components/ui/category-card";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {CategoryDto} from "@/types/product";
-import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
+import {Collapsible, CollapsibleContent} from "@/components/ui/collapsible";
 import {Button} from "@/components/ui/button";
 import CategoriesWrapper from "@/components/ui/categories-wrapper";
 import {useParamsStore} from "@/hooks/use-params-store";
-import {useMutation, useQuery, UseQueryResult} from "@tanstack/react-query";
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import CategoryCardSkeleton from "@/components/ui/skeletons/category-card-skeleton";
 import {getCategories} from "@/actions/products";
 import {X} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
 import {AnimatePresence, motion} from "framer-motion";
-import {shallow} from "zustand/shallow";
 
-function useCategories(): UseQueryResult<CategoryDto[]>  {
+function useCategories(): UseQueryResult<CategoryDto[]> {
 
   const query = useQuery({
     queryKey: ['categories'],
@@ -25,31 +24,28 @@ function useCategories(): UseQueryResult<CategoryDto[]>  {
     }
   });
 
-  return { ...query};
+  return {...query};
 }
+
 export default function AnimatedCategories() {
 
-  const { data: categories, isLoading, error, } = useCategories();
+  const {data, isLoading, error,} = useCategories();
   const [open, setOpen] = React.useState(false);
   const params = useParamsStore(state => ({
     categories: state.categories,
-    toggleCategory: state.toggleCategory,
-  }), shallow);
-
-  useEffect(() => {
-    console.log(params.categories)
-  }, [params.categories]);
+    setParams: state.setParams
+  }));
 
   if (isLoading) return (
     <CategoriesWrapper>
-      <CategoryCardSkeleton />
-      <CategoryCardSkeleton />
-      <CategoryCardSkeleton />
-      <CategoryCardSkeleton />
+      <CategoryCardSkeleton/>
+      <CategoryCardSkeleton/>
+      <CategoryCardSkeleton/>
+      <CategoryCardSkeleton/>
     </CategoriesWrapper>
   )
 
-  if (error){
+  if (error) {
     console.log(error)
     return (
 
@@ -59,7 +55,13 @@ export default function AnimatedCategories() {
     )
   }
 
-
+  const toggleCategory = (category: CategoryDto) => {
+    const newCategories = params.categories?.includes(category) ? params.categories?.filter(c => c.id !== category.id) : [...(params.categories ?? []), category];
+    console.log("New categories:", newCategories)
+    console.log("Old categories:", params.categories)
+    params.setParams({...params, categories: [category]});
+  }
+  console.log(params)
   return (
     <>
       {params.categories?.length !== 0 && (
@@ -72,7 +74,7 @@ export default function AnimatedCategories() {
           <Button
             variant="outline"
             key={category.id}
-            onClick={() => params.toggleCategory(category)}
+            onClick={() => toggleCategory(category)}
             className="group flex items-center gap-x-1"
           >
             {category.name}
@@ -84,8 +86,8 @@ export default function AnimatedCategories() {
       <Collapsible open={open} onOpenChange={setOpen}>
 
         <CategoriesWrapper>
-          <AnimatePresence mode="wait">
-            {(params?.categories?.length === 0 ? categories : params?.categories?.pop()?.subCategories)?.map((category: CategoryDto, index) => (
+          <AnimatePresence>
+            {(params?.categories?.length === 0 ? data : params?.categories?.pop()?.subCategories)?.map((category: CategoryDto, index) => (
               <motion.div
                 key={category.id}
                 initial={{opacity: 0, x: -10}}
@@ -95,24 +97,22 @@ export default function AnimatedCategories() {
               >
                 <CategoryCard
                   title={category.name}
-                  onClick={() => {
-                    params.toggleCategory(category)
-                  }}
+                  onClick={() => toggleCategory(category)}
                   description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>
 
               </motion.div>
-              ))}
+            ))}
 
           </AnimatePresence>
         </CategoriesWrapper>
 
         <CollapsibleContent>
           <CategoriesWrapper>
-              {categories?.map((category: CategoryDto) => (
-                <CategoryCard
-                  key={category.id} title={category.name}
-                  description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>
-              ))}
+            {data?.map((category: CategoryDto) => (
+              <CategoryCard
+                key={category.id} title={category.name}
+                description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>
+            ))}
           </CategoriesWrapper>
         </CollapsibleContent>
         <div className="w-full flex justify-center">
@@ -123,5 +123,5 @@ export default function AnimatedCategories() {
 
     </>
 
-)
+  )
 }

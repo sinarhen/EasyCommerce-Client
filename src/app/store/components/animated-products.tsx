@@ -13,7 +13,7 @@ export default function AnimatedProducts({products}: {
     </div>
   )
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
       {products.length > 0 && products.map((product: ProductDto, index) => (
         <motion.div
           key={product.id}
@@ -30,8 +30,8 @@ export default function AnimatedProducts({products}: {
           />
 
         </motion.div>
-        ))}
+      ))}
 
     </AnimatePresence>
-    )
+  )
 }

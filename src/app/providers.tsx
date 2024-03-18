@@ -13,7 +13,7 @@ const Providers = ({children}: { children: ReactNode }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <ReactQueryDevtools initialIsOpen={false}/>
       <ThemeProvider
         defaultTheme="light"
         attribute="class"
@@ -31,7 +31,6 @@ const Providers = ({children}: { children: ReactNode }) => {
 
   )
 };
-
 
 
 export default Providers;

@@ -15,10 +15,15 @@ import Loading from "@/components/ui/loading";
 export default function LoginForm({
                                     onSuccess
                                   }:
-                                  {
-                                    onSuccess?: () => void;
-                                  }) {
-  const {register, setError, handleSubmit, formState: {errors, isSubmitting, isValid, isDirty, isValidating, isLoading}} = useForm<TFormSchema>({
+                                    {
+                                      onSuccess?: () => void;
+                                    }) {
+  const {
+    register,
+    setError,
+    handleSubmit,
+    formState: {errors, isSubmitting, isValid, isDirty, isValidating, isLoading}
+  } = useForm<TFormSchema>({
     resolver: zodResolver(schema),
     reValidateMode: "onBlur",
   });
@@ -30,8 +35,7 @@ export default function LoginForm({
       if (!resp.success) {
         console.error(resp.statusText);
         toast.error(resp?.data?.message || resp.statusText);
-        if (resp.data.field)
-        {
+        if (resp.data.field) {
           setError(resp.data.field, {
             message: resp.data.message
           });

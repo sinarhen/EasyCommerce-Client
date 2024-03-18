@@ -34,8 +34,7 @@ export interface ColorDto {
   hexCode: string;
 }
 
-export enum ProductsOrderBy
-{
+export enum ProductsOrderBy {
   price,
   priceDesc,
   name,
@@ -45,6 +44,7 @@ export enum ProductsOrderBy
   bestseller,
   default
 }
+
 export interface ProductsSearchParams {
   productId?: string;
   orderBy?: ProductsOrderBy;
