@@ -34,6 +34,27 @@ export interface ColorDto {
   hexCode: string;
 }
 
+export interface ProductsResponse {
+  products: ProductDto[];
+  filters: ProductFiltersDto;
+  pageNumber: number;
+  pageSize: number;
+}
+
+export interface ProductFiltersDto {
+  colors: ColorDto[];
+  sizes: SizeDto[];
+  collections: IdNameDto[];
+  materials: IdNameDto[];
+  occasions: OccasionDto[];
+}
+
+export interface OccasionDto {
+  id: string;
+  name: string;
+  description: string;
+}
+
 export enum ProductsOrderBy {
   price,
   priceDesc,
@@ -60,6 +81,11 @@ export interface ProductsSearchParams {
   occasionId?: string[];
   minPrice?: number;
   maxPrice?: number;
+}
+export interface SizeDto{
+  id: string;
+  name: string;
+  value: number;
 }
 
 
