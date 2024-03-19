@@ -9,18 +9,25 @@ import ProductsWrapper from "@/components/ui/products-wrapper";
 import React from "react";
 import {ProductCardSkeleton} from "@/components/ui/skeletons/product-card-skeleton";
 
-function useProducts(): UseQueryResult<ProductDto[]>{
+function useProducts(products: ProductDto[]): UseQueryResult<ProductDto[]>{
   return useQuery({
     queryKey: ["products"],
     queryFn: async () => {
       const data = await getProducts();
       return data.products
+    },
+    initialData: () => {
+      return products;
     }
   })
 }
 
-export default function AnimatedProducts() {
-  const {data: products, error, isLoading} = useProducts();
+export default function AnimatedProducts({
+  initialProducts
+                                         }: {
+  initialProducts: ProductDto[]
+}) {
+  const {data: products, error, isLoading} = useProducts(initialProducts);
 
   if (isLoading){
     return (

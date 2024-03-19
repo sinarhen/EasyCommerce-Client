@@ -9,43 +9,28 @@ import CategoriesWrapper from "@/components/ui/categories-wrapper";
 import {useParamsStore} from "@/hooks/use-params-store";
 import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import CategoryCardSkeleton from "@/components/ui/skeletons/category-card-skeleton";
-import {getCategories} from "@/actions/products";
-import {Brush, X} from "lucide-react";
+import {X} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
 import {AnimatePresence, motion} from "framer-motion";
 import {shallow} from "zustand/shallow";
 
-function useCategories(): UseQueryResult<CategoryDto[]> {
-  return useQuery({
-    queryKey: ['categories'],
-    queryFn: async () => {
-      const categories = await getCategories();
-      return categories.categories;
-    }
-  });
 
-}
-
-
-function useAnimatedCategories() {
-  const { data, isLoading, error, } = useCategories();
+export default function AnimatedCategories({
+  initialCategories
+                                           }: {
+  initialCategories?: CategoryDto[]
+}) {
   const [open, setOpen] = React.useState(false);
+
   const params = useParamsStore(state => ({
     categories: state.categories,
     toggleCategory: state.toggleCategory,
     resetCategories: state.resetCategories
   }), shallow);
 
-  const categoriesToDisplay = params?.categories?.length === 0 ? data : params.categories![params.categories!.length - 1].subCategories;
+  const categoriesToDisplay = params?.categories?.length === 0 ? initialCategories : params.categories![params.categories!.length - 1].subCategories;
 
-  return { categoriesToDisplay, isLoading, error, open, setOpen, params };
-}
-export default function AnimatedCategories() {
-
-  const { categoriesToDisplay, isLoading, error, open, setOpen, params } = useAnimatedCategories();
-
-
-  if (isLoading) return (
+  if (false) return (
     <CategoriesWrapper>
       <CategoryCardSkeleton/>
       <CategoryCardSkeleton/>
@@ -54,8 +39,8 @@ export default function AnimatedCategories() {
     </CategoriesWrapper>
   )
 
-  if (error) {
-    console.log(error)
+  if (false) { // TODO: handle in some way errors on server side
+    console.log("Error")
     return (
 
       <div>
@@ -63,7 +48,7 @@ export default function AnimatedCategories() {
       </div>
     )
   }
-
+  console.log(initialCategories)
   return (
     <>
       {params.categories?.length !== 0 && (
