@@ -16,8 +16,7 @@ import {AnimatePresence, motion} from "framer-motion";
 import {shallow} from "zustand/shallow";
 
 function useCategories(): UseQueryResult<CategoryDto[]> {
-
-  const query = useQuery({
+  return useQuery({
     queryKey: ['categories'],
     queryFn: async () => {
       const categories = await getCategories();
@@ -25,18 +24,26 @@ function useCategories(): UseQueryResult<CategoryDto[]> {
     }
   });
 
-  return {...query};
 }
 
-export default function AnimatedCategories() {
 
-  const {data, isLoading, error,} = useCategories();
+function useAnimatedCategories() {
+  const { data, isLoading, error, } = useCategories();
   const [open, setOpen] = React.useState(false);
   const params = useParamsStore(state => ({
     categories: state.categories,
     toggleCategory: state.toggleCategory,
     resetCategories: state.resetCategories
   }), shallow);
+
+  const categoriesToDisplay = params?.categories?.length === 0 ? data : params.categories![params.categories!.length - 1].subCategories;
+
+  return { categoriesToDisplay, isLoading, error, open, setOpen, params };
+}
+export default function AnimatedCategories() {
+
+  const { categoriesToDisplay, isLoading, error, open, setOpen, params } = useAnimatedCategories();
+
 
   if (isLoading) return (
     <CategoriesWrapper>
@@ -56,8 +63,6 @@ export default function AnimatedCategories() {
       </div>
     )
   }
-
-  const categoriesToDisplay = (params?.categories?.length === 0 ? data : params!.categories![params?.categories?.length! - 1].subCategories)
 
   return (
     <>
@@ -114,7 +119,7 @@ export default function AnimatedCategories() {
 
         <CollapsibleContent>
           <CategoriesWrapper>
-            {data?.map((category: CategoryDto) => (
+            {categoriesToDisplay?.map((category: CategoryDto) => (
               <CategoryCard
                 key={category.id} title={category.name}
                 description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>
