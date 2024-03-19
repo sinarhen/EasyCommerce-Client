@@ -3,10 +3,22 @@
 import {ProductDto} from "@/types/product";
 import ProductCard from "@/components/ui/product-card";
 import {AnimatePresence, motion} from "framer-motion";
+import {useQuery, UseQueryResult} from "@tanstack/react-query";
+import {getProducts} from "@/actions/products";
 
-export default function AnimatedProducts({products}: {
-  products: ProductDto[]
-}) {
+function useProducts(): UseQueryResult<ProductDto[]>{
+  return useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const data = await getProducts();
+      return data.products
+    }
+  })
+}
+
+export default function AnimatedProducts() {
+  const {data: products, error, isLoading} = useProducts();
+
   if (!products || products.length === 0) return (
     <div className="w-full h-full flex justify-center items-center">
       No products

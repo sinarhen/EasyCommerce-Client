@@ -7,15 +7,7 @@ import AnimatedCategories from "@/app/store/components/animated-categories";
 import CategoriesWrapper from "@/components/ui/categories-wrapper";
 import CategoryCardSkeleton from "@/components/ui/skeletons/category-card-skeleton";
 
-export async function getData() {
-  const products = await apiFetcher('GET', '/products');
-  return {
-    products: products.data.products
-  }
-}
-
 export default async function Store() {
-  const {products} = await getData();
   return (
     <div className='w-full '>
       {/*<ErrorBoundary errorComponent={ErrorComponentWrapper}>*/}
@@ -39,7 +31,7 @@ export default async function Store() {
       <Filters/>
 
       <div className="grid mt-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
-        <AnimatedProducts products={products}/>
+        <AnimatedProducts />
       </div>
     </div>
   );
