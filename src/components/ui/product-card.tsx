@@ -103,7 +103,7 @@ export default function ProductCard({
         <div className="px-4 w-full flex justify-start">
 
           <div
-            className="flex w-1/2  gap-x-1 ">
+            className="flex w-full gap-x-1 ">
             {product.colors.length > 0 ? product.colors.map((color, index) => (
               <Tooltip key={color.id}>
                 <TooltipTrigger>
