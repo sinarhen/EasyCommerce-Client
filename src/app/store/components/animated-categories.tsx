@@ -38,10 +38,6 @@ export default function AnimatedCategories() {
     resetCategories: state.resetCategories
   }), shallow);
 
-  useEffect(() => {
-    console.log('Params --> ', params)
-  }, [params])
-
   if (isLoading) return (
     <CategoriesWrapper>
       <CategoryCardSkeleton/>
