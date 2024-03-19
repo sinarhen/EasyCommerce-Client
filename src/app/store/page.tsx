@@ -20,10 +20,7 @@ export default async function Store() {
 
       <hr className="h-px my-3 bg-gray-200 rounded-full bg-gradient animate-gradient border-0 "/>
       <Filters/>
-
-      <div className="grid mt-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
-        <AnimatedProducts />
-      </div>
+      <AnimatedProducts />
     </div>
   );
 }

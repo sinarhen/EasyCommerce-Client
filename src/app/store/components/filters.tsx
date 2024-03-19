@@ -109,27 +109,15 @@ export function Filters() {
     minPrice: state.minPrice,
     maxPrice: state.maxPrice,
     filterBy: state.filterBy,
-    categoryId: state.categoryId,
     colorId: state.colorId,
     sizeId: state.sizeId,
     collectionId: state.collectionId,
     occasionId: state.occasionId,
+    toggleFilter: state.toggleFilter,
 
   }), shallow);
   const setParams = useParamsStore(state => state.setParams);
-  const onApply = async () => {
-    console.log("Params:", params)
-    await getProducts(params);
-  }
 
-  const toggleFilter = useCallback((filter: "categoryId" | "sizeId" | "colorId" | "occasionId", value: string) => {
-    console.log("togglefilter for ", filter, value)
-    if (params[filter]?.includes(value)) {
-      setParams({[filter]: params[filter]?.filter(v => v !== value)})
-    } else {
-      setParams({[filter]: [...(params[filter] || []), value]})
-    }
-  }, [params, setParams])
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -153,22 +141,12 @@ export function Filters() {
             <Input type="text" id="searchTerm" placeholder="Search for products"/>
 
           </div>
-          <FilterSection title={"Category"} description={"Filter by category"}>
-            <FilterSectionGroup>
-              {categories.map(category => (
-                <FilterSectionGroupCheckbox
-                  key={category.id}
-                  checked={params?.categoryId?.includes(category.id)}
-                  onCheck={() => toggleFilter("categoryId", category.id)} title={category.title} id={category.id}/>
-              ))}
-            </FilterSectionGroup>
-          </FilterSection>
           <FilterSection title={"Color"} description={"Filter by color"}>
             <FilterSectionGroup>
               {colors.map(color => (
                 <FilterSectionGroupCheckbox
                   key={color.id}
-                  checked={params?.colorId?.includes(color.id)} onCheck={() => toggleFilter("colorId", color.id)}
+                  checked={params?.colorId?.includes(color.id)} onCheck={() => params.toggleFilter("colorId", color.id)}
                   title={color.title} id={color.id}/>
               ))}
             </FilterSectionGroup>
@@ -179,7 +157,7 @@ export function Filters() {
                 <FilterSectionGroupCheckbox
                   key={size.id}
                   checked={params?.sizeId?.includes(size.id)}
-                  onCheck={() => toggleFilter("sizeId", size.id)} title={size.title} id={size.id}/>
+                  onCheck={() => params.toggleFilter("sizeId", size.id)} title={size.title} id={size.id}/>
               ))}
             </FilterSectionGroup>
           </FilterSection>
@@ -197,7 +175,7 @@ export function Filters() {
                 <FilterSectionGroupCheckbox
                   key={occasion.id}
                   checked={params?.occasionId?.includes(occasion.id)}
-                  onCheck={() => toggleFilter("occasionId", occasion.id)} title={occasion.title} id={occasion.id}/>
+                  onCheck={() => params.toggleFilter("occasionId", occasion.id)} title={occasion.title} id={occasion.id}/>
               ))}
             </FilterSectionGroup>
           </FilterSection>
@@ -207,7 +185,7 @@ export function Filters() {
           <SheetClose asChild>
             <Button
               className="mt-2 w-full"
-              onClick={onApply}
+              onClick={() => {}}
               type="submit">Apply</Button>
           </SheetClose>
         </SheetFooter>
