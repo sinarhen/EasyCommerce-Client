@@ -12,16 +12,7 @@ export default async function Store() {
     <div className='w-full '>
       {/*<ErrorBoundary errorComponent={ErrorComponentWrapper}>*/}
 
-      <Suspense fallback={
-        <CategoriesWrapper>
-          <CategoryCardSkeleton/>
-          <CategoryCardSkeleton/>
-          <CategoryCardSkeleton/>
-          <CategoryCardSkeleton/>
-        </CategoriesWrapper>
-      }>
-        <AnimatedCategories/>
-      </Suspense>
+      <AnimatedCategories/>
 
       <Header>
         Products
