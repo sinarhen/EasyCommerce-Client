@@ -7,7 +7,6 @@ import {Collapsible, CollapsibleContent} from "@/components/ui/collapsible";
 import {Button} from "@/components/ui/button";
 import CategoriesWrapper from "@/components/ui/categories-wrapper";
 import {useParamsStore} from "@/hooks/use-params-store";
-import {useQuery, UseQueryResult} from "@tanstack/react-query";
 import CategoryCardSkeleton from "@/components/ui/skeletons/category-card-skeleton";
 import {X} from "lucide-react";
 import {iconSizes} from "@/lib/constants";

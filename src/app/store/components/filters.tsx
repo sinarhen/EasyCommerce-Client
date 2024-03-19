@@ -22,85 +22,16 @@ import {FilterSection} from "@/app/store/components/filterSection";
 import {getProducts} from "@/actions/products";
 import {useParamsStore} from "@/hooks/use-params-store";
 import {shallow} from "zustand/shallow";
+import {ProductFiltersDto} from "@/types/product";
 
-const sizes = [
-  {
-    id: "small",
-    title: "Small",
-  },
-  {
-    id: "medium",
-    title: "Medium",
-  },
-  {
-    id: "large",
-    title: "Large",
-  },
-  {
-    id: "extralarge",
-    title: "Extra Large",
-  },
-]
+type FiltersProps = Omit<ProductFiltersDto, 'categories'>
 
-const colors = [
-  {
-    id: "red",
-    title: "Red",
-  },
-  {
-    id: "blue",
-    title: "Blue",
-  },
-  {
-    id: "green",
-    title: "Green",
-  },
-  {
-    id: "yellow",
-    title: "Yellow",
-  },
-]
-
-const categories = [
-  {
-    id: "shirts",
-    title: "Shirts",
-  },
-  {
-    id: "pants",
-    title: "Pants",
-  },
-  {
-    id: "shoes",
-    title: "Shoes",
-  },
-  {
-    id: "accessories",
-    title: "Accessories",
-  },
-]
-
-const occasions = [ // Test values. Data should be fetched from the server
-  {
-    id: "casual",
-    title: "Casual",
-  },
-  {
-    id: "formal",
-    title: "Formal",
-  },
-  {
-    id: "party",
-    title: "Party",
-  },
-  {
-    id: "wedding",
-    title: "Wedding",
-  },
-]
-
-
-export function Filters() {
+export function Filters({
+  filters
+                        }: {
+  filters: FiltersProps
+}) {
+  const {sizes, colors, occasions, materials} = filters;
   const params = useParamsStore(state => ({
     pageNumber: state.pageNumber,
     pageSize: state.pageSize,
@@ -147,17 +78,17 @@ export function Filters() {
                 <FilterSectionGroupCheckbox
                   key={color.id}
                   checked={params?.colorId?.includes(color.id)} onCheck={() => params.toggleFilter("colorId", color.id)}
-                  title={color.title} id={color.id}/>
+                  title={color.name} id={color.id}/>
               ))}
             </FilterSectionGroup>
           </FilterSection>
           <FilterSection title={"Size"} description={"Filter by size"}>
             <FilterSectionGroup>
-              {sizes.map(size => (
+              {sizes.sort(s => s.value).map(size => (
                 <FilterSectionGroupCheckbox
                   key={size.id}
                   checked={params?.sizeId?.includes(size.id)}
-                  onCheck={() => params.toggleFilter("sizeId", size.id)} title={size.title} id={size.id}/>
+                  onCheck={() => params.toggleFilter("sizeId", size.id)} title={size.name} id={size.id}/>
               ))}
             </FilterSectionGroup>
           </FilterSection>
@@ -175,7 +106,7 @@ export function Filters() {
                 <FilterSectionGroupCheckbox
                   key={occasion.id}
                   checked={params?.occasionId?.includes(occasion.id)}
-                  onCheck={() => params.toggleFilter("occasionId", occasion.id)} title={occasion.title} id={occasion.id}/>
+                  onCheck={() => params.toggleFilter("occasionId", occasion.id)} title={occasion.name} id={occasion.id}/>
               ))}
             </FilterSectionGroup>
           </FilterSection>
