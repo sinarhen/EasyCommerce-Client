@@ -1,14 +1,12 @@
 'use server'
 
 import apiFetcher from "@/actions/api";
-import {ProductsSearchParams} from "@/types/product";
+import {ProductsResponse, ProductsSearchParams} from "@/types/product";
 
 
 export async function getProducts() {
   const products = await apiFetcher('GET', '/products');
-  return {
-    products: products.data.products
-  }
+  return products.data as ProductsResponse
 }
 export async function getCategories() {
   const categories = await apiFetcher('GET', '/categories');

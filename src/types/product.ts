@@ -46,6 +46,7 @@ export interface ProductFiltersDto {
   sizes: SizeDto[];
   collections: IdNameDto[];
   materials: IdNameDto[];
+  categories: CategoryDto[]
   occasions: OccasionDto[];
 }
 
