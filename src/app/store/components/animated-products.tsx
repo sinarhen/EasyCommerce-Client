@@ -15,6 +15,7 @@ export default function AnimatedProducts({
                                          }: {
   initialProducts: ProductDto[]
 }) {
+
   const {data: products, error, isLoading} = useProducts(initialProducts);
 
   if (isLoading){

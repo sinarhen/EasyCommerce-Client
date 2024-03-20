@@ -1,7 +1,7 @@
 'use client'
 
 import CategoryCard from "@/components/ui/category-card";
-import React, {useEffect} from "react";
+import React, {useCallback, useEffect} from "react";
 import {CategoryDto} from "@/types/product";
 import {Collapsible, CollapsibleContent} from "@/components/ui/collapsible";
 import {Button} from "@/components/ui/button";
@@ -12,6 +12,7 @@ import {X} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
 import {AnimatePresence, motion} from "framer-motion";
 import {shallow} from "zustand/shallow";
+import useProducts from "@/hooks/use-products";
 
 
 export default function AnimatedCategories({
@@ -28,6 +29,12 @@ export default function AnimatedCategories({
   }), shallow);
 
   const categoriesToDisplay = params?.categories?.length === 0 ? initialCategories : params.categories![params.categories!.length - 1].subCategories;
+
+  const {refetch, data} = useProducts();
+
+  const onApply = useCallback(async () => {
+    refetch()
+  }, [refetch])
 
   if (false) return (
     <CategoriesWrapper>
@@ -55,18 +62,24 @@ export default function AnimatedCategories({
           Selected categories
         </p>
       )}
-      <div className="flex gap-x-1 mb-1">
-        {params.categories?.map(category => (
-          <Button
-            variant="outline"
-            key={category.id}
-            onClick={() => params.toggleCategory(category)}
-            className="group flex items-center gap-x-1"
-          >
-            {category.name}
-            <X className="group-hover:rotate-90 transition-transform" size={iconSizes.sm}/>
-          </Button>
-        ))}
+      <div className="flex justify-between  mb-1">
+        <div className="gap-x-1 flex">
+          {params.categories?.map(category => (
+            <Button
+              variant="outline"
+              key={category.id}
+              onClick={() => params.toggleCategory(category)}
+              className="group flex items-center gap-x-1"
+            >
+              {category.name}
+              <X className="group-hover:rotate-90 transition-transform" size={iconSizes.sm}/>
+            </Button>
+          ))}
+        </div>
+        <div className={"gap-x-1 " + (params.categories?.length === 0 ? "hidden" : "flex ")} hidden={params.categories!.length === 0}>
+          <Button variant={"ghost"} onClick={() => params.resetCategories()}>Clear</Button>
+          <Button variant={"outline"} onClick={() => {}}>Apply</Button>
+        </div>
 
       </div>
       <Collapsible open={open} onOpenChange={setOpen}>
