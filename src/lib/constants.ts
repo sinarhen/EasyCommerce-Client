@@ -7,6 +7,7 @@ export const iconSizes = {
 
 export const apiBase = 'http://localhost:5000/api'
 
+export const productsPageSizes = ["4", "12", "24", "36", "48", "60"]
 
 export const partners = [
   {
