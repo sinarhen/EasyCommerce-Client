@@ -24,7 +24,7 @@ export function ProductsPagination() {
   }), shallow)
   const changePage = useCallback((page: number) => {
     params.setParams({...params, pageNumber: page})
-  }, [])
+  }, [params])
 
 
 
