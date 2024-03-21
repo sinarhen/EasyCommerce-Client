@@ -1,4 +1,4 @@
-import {CategoryDto, ProductDto} from "@/types/product";
+import {ProductDto} from "@/types/product";
 import {useQuery, UseQueryResult, useQueryClient} from "@tanstack/react-query";
 import {getProducts} from "@/actions/products";
 import {useParamsStore} from "@/hooks/use-params-store";
@@ -34,6 +34,9 @@ export default function useProducts(products?: ProductDto[]): UseQueryResult<Pro
   return useQuery({
     queryKey: ["products", paramString],
     queryFn: async () => {
+      if (!paramString){
+        return [];
+      }
       const data = await getProducts(paramString);
       return data.products;
     },
