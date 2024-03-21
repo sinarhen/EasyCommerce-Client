@@ -4,6 +4,7 @@ import {Filters} from "./components/filters";
 import React from "react";
 import AnimatedCategories from "@/app/store/components/animated-categories";
 import {getProducts} from "@/actions/products";
+import {ProductsPagination} from "@/app/store/components/products-pagination";
 
 export default async function Store() {
 
@@ -21,6 +22,9 @@ export default async function Store() {
 
       <Filters filters={otherFilters}/>
       <AnimatedProducts initialProducts={products}/>
+      <div className="flex justify-between">
+        <ProductsPagination />
+      </div>
     </div>
   );
 }
