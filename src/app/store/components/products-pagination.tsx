@@ -26,8 +26,6 @@ export function ProductsPagination() {
     params.setParams({...params, pageNumber: page})
   }, [params])
 
-
-
   return (
     <Pagination>
       <PaginationContent className="mt-4">
