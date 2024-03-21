@@ -57,8 +57,6 @@ export const useParamsStore = createWithEqualityFn<ProductsSearchParams & Produc
         if (existingCategory) {
           return {...state, categories: state.categories?.filter(c => c.id !== category.id)}
         } else {
-          console.log('Adding category', category)
-          console.log("New categories", [...(state.categories ?? []), category])
           return {...state, categories: [...(state.categories ?? []), category]}
         }
       }

@@ -13,6 +13,7 @@ import {iconSizes} from "@/lib/constants";
 import {AnimatePresence, motion} from "framer-motion";
 import {shallow} from "zustand/shallow";
 import useProducts from "@/hooks/use-products";
+import toast from "react-hot-toast";
 
 
 export default function AnimatedCategories({
@@ -21,7 +22,6 @@ export default function AnimatedCategories({
   initialCategories?: CategoryDto[]
 }) {
   const [open, setOpen] = React.useState(false);
-
   const params = useParamsStore(state => ({
     categories: state.categories,
     toggleCategory: state.toggleCategory,
@@ -30,13 +30,14 @@ export default function AnimatedCategories({
 
   const categoriesToDisplay = params?.categories?.length === 0 ? initialCategories : params.categories![params.categories!.length - 1].subCategories;
 
-  const {refetch, data} = useProducts();
+  const {refetch, data, error, isLoading} = useProducts();
 
   const onApply = useCallback(async () => {
-    refetch()
+    toast.success("Categories applied")
+    await refetch()
   }, [refetch])
 
-  if (false) return (
+  if (isLoading) return (
     <CategoriesWrapper>
       <CategoryCardSkeleton/>
       <CategoryCardSkeleton/>
@@ -45,16 +46,13 @@ export default function AnimatedCategories({
     </CategoriesWrapper>
   )
 
-  if (false) { // TODO: handle in some way errors on server side
-    console.log("Error")
+  if (error) { // TODO: handle in some way errors on server side
     return (
-
       <div>
         Error occured while fetching categories
       </div>
     )
   }
-  console.log(initialCategories)
   return (
     <>
       {params.categories?.length !== 0 && (
@@ -78,7 +76,7 @@ export default function AnimatedCategories({
         </div>
         <div className={"gap-x-1 " + (params.categories?.length === 0 ? "hidden" : "flex ")} hidden={params.categories!.length === 0}>
           <Button variant={"ghost"} onClick={() => params.resetCategories()}>Clear</Button>
-          <Button variant={"outline"} onClick={() => {}}>Apply</Button>
+          <Button variant={"outline"} onClick={onApply}>Apply</Button>
         </div>
 
       </div>
