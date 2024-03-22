@@ -1,7 +1,7 @@
 import {IdNameDto} from "@/types/shared";
 
 export interface ProductDto {
-  id: string;
+id: string;
   categories: ProductCategoryDto[];
   name: string;
   description: string;

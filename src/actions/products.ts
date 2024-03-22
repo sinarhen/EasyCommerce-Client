@@ -3,7 +3,12 @@
 import apiFetcher from "@/actions/api";
 import {ProductsResponse, ProductsSearchParams} from "@/types/product";
 
-export async function getProducts(params?: string) {
+export async function getProducts(params?: string): ProductsResponse {
   const products = await apiFetcher.get("/products" + (params ? ("?" + params) : ""))
-  return products.data as ProductsResponse
+  return products.data
+}
+
+export async function getProduct(id: string) {
+  const product = await apiFetcher.get("/products/" + id)
+  return product.data
 }
