@@ -43,7 +43,7 @@ export default function AnimatedProducts({
   }
   return (
     <ProductsWrapper >
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {products.length > 0 && products.map((product: ProductDto, index) => (
           <motion.div
             key={product.id}
