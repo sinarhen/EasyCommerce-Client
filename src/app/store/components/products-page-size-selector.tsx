@@ -9,18 +9,13 @@ import {productsPageSizes} from "@/lib/constants";
 export default function ProductsPageSizeSelector(){
   const params = useParamsStore((state) => {
     return {
-      ...state,
       setParams: state.setParams,
       pageSize: state.pageSize,
     }
   }, shallow)
 
-
   const changePageSize = useCallback((size: number) => {
-    console.log("ChangePageSize")
-    console.log(size)
     params.setParams({
-      ...params,
       pageSize: size
     })
   }, [params])

@@ -33,7 +33,7 @@ export function ProductsPagination() {
             <PaginationPrevious onClick={() => changePage(params.pageNumber! - 1)} />
           </PaginationItem>
         )}
-        {Array.from({length: total/params.pageSize! + 1}, (_, i) => i + 1).map((page) => {
+        {Array.from({length: total / params.pageSize! + 1}, (_, i) => i + 1).map((page) => {
           if (page < params.pageNumber! - 2 || page > params.pageNumber! + 2) {
             return null
           }
@@ -43,7 +43,7 @@ export function ProductsPagination() {
             </PaginationItem>
           )
         })}
-        {(total > 1 && params.pageSize! * params.pageNumber! < total && params.pageNumber !== total) && (
+        {(total > 1 && params.pageNumber !== Math.floor(total / params.pageSize + 1) ) && (
           <PaginationItem>
             <PaginationNext onClick={() => changePage(params.pageNumber! + 1)} />
           </PaginationItem>
