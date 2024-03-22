@@ -66,7 +66,7 @@ export default function ProductCard({
           {/*    5 <br/>sizes*/}
           {/*</div>*/}
           <div className=" flex justify-center gap-x-1 w-full text-black absolute bottom-2">
-            {product.images.filter(image => image.colorId == selectedColor?.id).map((image, index) => (
+            {(product.colors.length !== 0 ? product.images.filter(image => image.colorId == selectedColor?.id) : product.images).map((image, index) => (
               <div key={index}
                    onClick={() => setSelectedImage(image.imageUrls[0])}
                    className={`w-2 h-2 ${selectedImage ? (image.imageUrls.includes(selectedImage) ? "bg-gray-500" : "bg-gray-300") : ""} rounded-full cursor-pointer`}/>
