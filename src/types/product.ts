@@ -1,9 +1,23 @@
 import {IdNameDto} from "@/types/shared";
 
-export interface ProductDto {
-id: string;
+export interface ProductDetailsDto extends ProductDto {
+  sizes: SizeDto[];
+  reviews: ReviewDto[];
+  materials: MaterialDto[];
+  sizeChartImageUrl: string;
+  stocks: StockDto[];
+}
+
+export interface StockDto {
+  sizeId: string;
+  colorId: string;
+  stock: number;
+  price: number;
+  discount: number;
+}
+
+export interface ProductDto extends IdNameDto {
   categories: ProductCategoryDto[];
-  name: string;
   description: string;
   discount: number | null;
   occasion: IdNameDto;
@@ -28,7 +42,7 @@ export interface ProductImageDto {
   imageUrls: string[];
 }
 
-export interface ColorDto {
+export interface ColorDto extends IdNameDto {
   id: string;
   name: string;
   hexCode: string;
@@ -50,9 +64,7 @@ export interface ProductFiltersDto {
   occasions: OccasionDto[];
 }
 
-export interface OccasionDto {
-  id: string;
-  name: string;
+export interface OccasionDto extends IdNameDto {
   description: string;
 }
 
@@ -83,22 +95,20 @@ export interface ProductsSearchParams {
   minPrice?: number;
   maxPrice?: number;
 }
-export interface SizeDto{
-  id: string;
-  name: string;
+export interface SizeDto extends IdNameDto {
   value: number;
 }
 
 
-export interface ProductCategoryDto {
-  id: string;
-  name: string;
+export interface ProductCategoryDto extends IdNameDto {
   order: number;
 }
 
-export interface CategoryDto {
-  id: string;
-  name: string;
+export interface MaterialDto extends IdNameDto{
+  percentage: number;
+}
+
+export interface CategoryDto extends IdNameDto {
   imageUrl: string;
   subCategories?: CategoryDto[];
 }

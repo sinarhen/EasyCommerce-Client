@@ -14,7 +14,7 @@ export default async function ProductDetailsPage({
   console.log(product)
   return (
     <div className="w-full">
-
+      {product.name}
 
     </div>
   )
