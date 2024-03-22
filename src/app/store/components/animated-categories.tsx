@@ -21,7 +21,7 @@ export default function AnimatedCategories({
                                            }: {
   initialCategories?: CategoryDto[]
 }) {
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
   const params = useParamsStore(state => ({
     categories: state.categories,
     toggleCategory: state.toggleCategory,
@@ -81,7 +81,7 @@ export default function AnimatedCategories({
         </div>
 
       </div>
-      <Collapsible open={open} onOpenChange={setOpen}>
+      {/*<Collapsible open={open} onOpenChange={setOpen}>*/}
 
         <CategoriesWrapper
           className={categoriesToDisplay?.length === 0 ? "grid-cols-1 sm:grid-cols-1 lg:grid-cols-1" : ""}>
@@ -114,20 +114,18 @@ export default function AnimatedCategories({
           </AnimatePresence>
         </CategoriesWrapper>
 
-        <CollapsibleContent>
-          <CategoriesWrapper>
-            {categoriesToDisplay?.map((category: CategoryDto) => (
-              <CategoryCard
-                key={category.id} title={category.name}
-                description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>
-            ))}
-          </CategoriesWrapper>
-        </CollapsibleContent>
-        <div className="w-full flex justify-center">
-          <Button variant={"ghost"} onClick={() => setOpen(!open)}>{open ? 'Show less' : 'Show more'}</Button>
-        </div>
+        {/*<CollapsibleContent>*/}
+        {/*  <CategoriesWrapper>*/}
+        {/*    {categoriesToDisplay?.map((category: CategoryDto) => (*/}
+        {/*      <CategoryCard*/}
+        {/*        key={category.id} title={category.name}*/}
+        {/*        description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>*/}
+        {/*    ))}*/}
+        {/*  </CategoriesWrapper>*/}
+        {/*</CollapsibleContent>*/}
 
-      </Collapsible>
+
+      {/*</Collapsible>*/}
 
     </>
 
