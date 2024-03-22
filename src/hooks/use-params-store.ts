@@ -31,11 +31,7 @@ export const useParamsStore = createWithEqualityFn<ProductsSearchParams & Produc
 
   setParams: (newParams: Partial<ProductsSearchParams>) => {
     return set(state => {
-      if (newParams.pageNumber) {
-        return {...state, pageNumber: newParams.pageNumber}
-      } else {
-        return {...state, ...newParams, pageNumber: 1}
-      }
+      return {...state, ...newParams}
     })
   },
   toggleFilter: (filter: "sizeId" | "colorId" | "occasionId", value: string) => {

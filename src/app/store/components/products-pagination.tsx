@@ -17,17 +17,16 @@ import useProducts from "@/hooks/use-products";
 export function ProductsPagination() {
   const total = useProducts().data?.length ?? 0;
   const params = useParamsStore((state) => ({
-    ...state,
     setParams: state.setParams,
     pageNumber: state.pageNumber,
     pageSize: state.pageSize,
   }), shallow)
   const changePage = useCallback((page: number) => {
-    params.setParams({...params, pageNumber: page})
+    params.setParams({pageNumber: page})
   }, [params])
 
   return (
-    <Pagination>
+    <Pagination className="justify-end">
       <PaginationContent className="mt-4">
         {(total > 1 && params.pageNumber !== 1) && (
           <PaginationItem>
