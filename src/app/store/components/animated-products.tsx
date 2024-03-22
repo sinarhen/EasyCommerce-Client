@@ -3,22 +3,20 @@
 import {ProductDto} from "@/types/product";
 import ProductCard from "@/components/ui/product-card";
 import {AnimatePresence, motion} from "framer-motion";
-import {useQuery, UseQueryResult} from "@tanstack/react-query";
-import {getProducts} from "@/actions/products";
 import ProductsWrapper from "@/components/ui/products-wrapper";
 import React from "react";
 import {ProductCardSkeleton} from "@/components/ui/skeletons/product-card-skeleton";
 import useProducts from "@/hooks/use-products";
 
 export default function AnimatedProducts({
-  initialProducts
+                                           initialProducts
                                          }: {
   initialProducts: ProductDto[]
 }) {
 
   const {data: products, error, isLoading} = useProducts(initialProducts);
 
-  if (isLoading){
+  if (isLoading) {
     return (
       <ProductsWrapper>
         <ProductCardSkeleton></ProductCardSkeleton>
@@ -33,7 +31,7 @@ export default function AnimatedProducts({
       No products
     </div>
   )
-  if (error){
+  if (error) {
 
     return (
       <div className="w-full h-full flex justify-center items-center">
@@ -42,7 +40,7 @@ export default function AnimatedProducts({
     )
   }
   return (
-    <ProductsWrapper >
+    <ProductsWrapper>
       <AnimatePresence mode="wait">
         {products.length > 0 && products.map((product: ProductDto, index) => (
           <motion.div
@@ -63,5 +61,5 @@ export default function AnimatedProducts({
         ))}
       </AnimatePresence>
     </ProductsWrapper>
-    )
+  )
 }

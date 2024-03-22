@@ -15,11 +15,10 @@ import {
 } from "@/components/ui/sheet"
 import {Filter} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
-import React, {useCallback} from "react";
+import React from "react";
 import {FilterSectionGroupCheckbox} from "@/app/store/components/filterSectionGroupCheckbox";
 import {FilterSectionGroup} from "@/app/store/components/filterSectionGroup";
 import {FilterSection} from "@/app/store/components/filterSection";
-import {getProducts} from "@/actions/products";
 import {useParamsStore} from "@/hooks/use-params-store";
 import {shallow} from "zustand/shallow";
 import {ProductFiltersDto} from "@/types/product";
@@ -27,7 +26,7 @@ import {ProductFiltersDto} from "@/types/product";
 type FiltersProps = Omit<ProductFiltersDto, 'categories'>
 
 export function Filters({
-  filters
+                          filters
                         }: {
   filters: FiltersProps
 }) {
@@ -106,7 +105,8 @@ export function Filters({
                 <FilterSectionGroupCheckbox
                   key={occasion.id}
                   checked={params?.occasionId?.includes(occasion.id)}
-                  onCheck={() => params.toggleFilter("occasionId", occasion.id)} title={occasion.name} id={occasion.id}/>
+                  onCheck={() => params.toggleFilter("occasionId", occasion.id)} title={occasion.name}
+                  id={occasion.id}/>
               ))}
             </FilterSectionGroup>
           </FilterSection>
@@ -116,7 +116,8 @@ export function Filters({
           <SheetClose asChild>
             <Button
               className="mt-2 w-full"
-              onClick={() => {}}
+              onClick={() => {
+              }}
               type="submit">Apply</Button>
           </SheetClose>
         </SheetFooter>

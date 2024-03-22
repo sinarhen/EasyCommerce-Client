@@ -1,7 +1,7 @@
 'use client'
 
 import CategoryCard from "@/components/ui/category-card";
-import React, {useCallback, useEffect} from "react";
+import React, {useCallback} from "react";
 import {CategoryDto} from "@/types/product";
 import {Collapsible, CollapsibleContent} from "@/components/ui/collapsible";
 import {Button} from "@/components/ui/button";
@@ -17,7 +17,7 @@ import toast from "react-hot-toast";
 
 
 export default function AnimatedCategories({
-  initialCategories
+                                             initialCategories
                                            }: {
   initialCategories?: CategoryDto[]
 }) {
@@ -74,7 +74,8 @@ export default function AnimatedCategories({
             </Button>
           ))}
         </div>
-        <div className={"gap-x-1 " + (params.categories?.length === 0 ? "hidden" : "flex ")} hidden={params.categories!.length === 0}>
+        <div className={"gap-x-1 " + (params.categories?.length === 0 ? "hidden" : "flex ")}
+             hidden={params.categories!.length === 0}>
           <Button variant={"ghost"} onClick={() => params.resetCategories()}>Clear</Button>
           <Button variant={"outline"} onClick={onApply}>Apply</Button>
         </div>
@@ -82,7 +83,8 @@ export default function AnimatedCategories({
       </div>
       <Collapsible open={open} onOpenChange={setOpen}>
 
-        <CategoriesWrapper className={categoriesToDisplay?.length === 0 ? "grid-cols-1 sm:grid-cols-1 lg:grid-cols-1" : ""}>
+        <CategoriesWrapper
+          className={categoriesToDisplay?.length === 0 ? "grid-cols-1 sm:grid-cols-1 lg:grid-cols-1" : ""}>
           <AnimatePresence mode="wait">
             {categoriesToDisplay?.length !== 0 ? categoriesToDisplay?.map((category: CategoryDto, index) => (
               <motion.div
@@ -91,7 +93,7 @@ export default function AnimatedCategories({
                 animate={{opacity: 1, x: 0}}
                 exit={{opacity: 0, x: -10}}
                 transition={{duration: 0.2, delay: 0.1 * index}}
-            >
+              >
                 <CategoryCard
                   title={category.name}
                   onClick={() => params.toggleCategory(category)}

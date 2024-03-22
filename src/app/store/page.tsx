@@ -24,8 +24,8 @@ export default async function Store() {
       <Filters filters={otherFilters}/>
       <AnimatedProducts initialProducts={products}/>
       <div className="flex justify-between">
-        <ProductsPageSizeSelector />
-        <ProductsPagination />
+        <ProductsPageSizeSelector/>
+        <ProductsPagination/>
       </div>
     </div>
   );

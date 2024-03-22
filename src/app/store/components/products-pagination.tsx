@@ -3,7 +3,6 @@
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -30,7 +29,7 @@ export function ProductsPagination() {
       <PaginationContent className="mt-4">
         {(total > 1 && params.pageNumber !== 1) && (
           <PaginationItem>
-            <PaginationPrevious onClick={() => changePage(params.pageNumber! - 1)} />
+            <PaginationPrevious onClick={() => changePage(params.pageNumber! - 1)}/>
           </PaginationItem>
         )}
         {Array.from({length: total / params.pageSize! + 1}, (_, i) => i + 1).map((page) => {
@@ -39,13 +38,14 @@ export function ProductsPagination() {
           }
           return (
             <PaginationItem key={page}>
-              <PaginationLink isActive={page === params.pageNumber} onClick={() => changePage(page)}>{page}</PaginationLink>
+              <PaginationLink isActive={page === params.pageNumber}
+                              onClick={() => changePage(page)}>{page}</PaginationLink>
             </PaginationItem>
           )
         })}
-        {(total > 1 && params.pageNumber !== Math.floor(total / params.pageSize + 1) ) && (
+        {(total > 1 && params.pageNumber !== Math.floor(total / params.pageSize + 1)) && (
           <PaginationItem>
-            <PaginationNext onClick={() => changePage(params.pageNumber! + 1)} />
+            <PaginationNext onClick={() => changePage(params.pageNumber! + 1)}/>
           </PaginationItem>
         )}
       </PaginationContent>
