@@ -30,7 +30,7 @@ export default function AnimatedCategories({
 
   const categoriesToDisplay = params?.categories?.length === 0 ? initialCategories : params.categories![params.categories!.length - 1].subCategories;
 
-  const {refetch, data, error, isLoading} = useProducts();
+  const {refetch, error, isLoading} = useProducts();
 
   const onApply = useCallback(async () => {
     toast.success("Categories applied")
@@ -46,7 +46,7 @@ export default function AnimatedCategories({
     </CategoriesWrapper>
   )
 
-  if (error) { // TODO: handle in some way errors on server side
+  if (error) {
     return (
       <div>
         Error occured while fetching categories

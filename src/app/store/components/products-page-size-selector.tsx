@@ -24,7 +24,8 @@ export default function ProductsPageSizeSelector() {
 
   const changePageSize = useCallback((size: number) => {
     params.setParams({
-      pageSize: size
+      pageSize: size,
+      pageNumber: 1,
     })
   }, [params])
   return (
