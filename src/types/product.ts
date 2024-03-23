@@ -1,4 +1,5 @@
 import {IdNameDto} from "@/types/shared";
+import {TUser} from "@/types/user";
 
 export interface ProductDetailsDto extends ProductDto {
   sizes: SizeDto[];
@@ -6,6 +7,25 @@ export interface ProductDetailsDto extends ProductDto {
   materials: MaterialDto[];
   sizeChartImageUrl: string;
   stocks: StockDto[];
+}
+
+enum Rating {
+  noRating = 0,
+  terrible = 1,
+  bad = 2,
+  average = 3,
+  good = 4,
+  excellent = 5
+}
+
+export interface ReviewDto {
+  id: string;
+  user: TUser;
+  title: string;
+  content: string;
+  rating: Rating;
+  createdAt: string;
+
 }
 
 export interface StockDto {
