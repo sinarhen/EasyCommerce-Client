@@ -59,7 +59,7 @@ export default async function ProductDetailsPage({
           asd
         </div>
       </div>
-      <div className="flex row-start-2 h-fit gap-x-1">
+      <div className="md:flex  hidden row-start-2 h-fit gap-x-1">
         {product.images.map((image, index) => (
           <div key={index} className="w-1/4 rounded p-[0.05rem] animate-gradient bg-gradient">
             <AspectRatio ratio={1}>
