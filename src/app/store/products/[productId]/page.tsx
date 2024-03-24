@@ -7,6 +7,9 @@ import { Button } from "@/components/ui/button";
 import CategoriesBreadcrumbs from "@/components/ui/skeletons/categories-breadcrumbs";
 import {ProductDetailsDto} from "@/types/product";
 import ProductDetailsCard from "@/app/store/products/[productId]/components/products-details-card";
+import Link from "next/link";
+import {ArrowBigLeft} from "lucide-react";
+import {iconSizes} from "@/lib/constants";
 
 
 
@@ -21,6 +24,20 @@ export default async function ProductDetailsPage({
   const [product] = await Promise.all([getProduct(params.productId)]);
   return (
     <div className="w-full h-full">
+      <Link href="/store">
+        <Button
+          variant={"outline"}
+          className="mb-4 group"
+        >
+          <span className="flex transition-transform items-center group-hover:-translate-x-2">
+          <ArrowBigLeft size={iconSizes.md} />
+          Back
+
+          </span>
+
+        </Button>
+
+      </Link>
       <CategoriesBreadcrumbs categories={product.categories}/>
       <ProductDetailsCard product={product}/>
       <div className="mt-4">
