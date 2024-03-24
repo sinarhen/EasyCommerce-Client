@@ -42,7 +42,7 @@ export interface ProductDto extends IdNameDto {
   discount: number | null;
   occasion: IdNameDto;
   collection: IdNameDto;
-  mainMaterial: IdNameDto;
+  // mainMaterial: IdNameDto;
   gender: string;
   season: string;
   ordersCount: number;
