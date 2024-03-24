@@ -61,24 +61,24 @@ export default async function ProductDetailsPage({
           </div>
           <div>
             <div className={"flex w-full pb-1 overflow-auto gap-x-1"}>
-              {product.sizes.map((size, index) => (
+              {product.sizes.sort((a,b) => {
+                return a.value > b.value ? 1 : -1
+              }).map((size, index) => (
                 <Button key={index} variant="outline" className="w-10 h-10">
                   {size.name}
                 </Button>
               ))}
             </div>
-            <div className="flex items-end gap-x-2 justify-end">
+            <div className="flex items-end justify-between gap-x-2">
+                <Button>
+                  Buy
+                </Button>
               <div>
-              <span className="text-xs">
-                  Starting from{" "}
-                </span>
-                <span className="text-gradient text-sm animate-gradient">
+                <span className="text-gradient text-sm sm:text-lg md:text-2xl animate-gradient">
                   {product.minPrice}$
+                  {/*if selected color and size find price in stocks(should be implemented on client side )*/}
                 </span>
               </div>
-              <Button>
-                Buy
-              </Button>
 
             </div>
           </div>
