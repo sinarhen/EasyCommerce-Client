@@ -13,6 +13,7 @@ export default function ProductDetailsCard({
   product: ProductDetailsDto
 }) {
   const [selectedColor, setSelectedColor] = useState<ColorDto | undefined>(product.colors[0]);
+  const [selectedSizeId, setSelectedSizeId] = useState<string | null>(null);
   return (
     <div
       className="w-full grid gap-x-3 gap-y-2 grid-cols-1 md:grid-cols-2  ">
@@ -49,7 +50,7 @@ export default function ProductDetailsCard({
           <div className="flex gap-x-1 mt-1">
 
             {product.colors.map((color, index) => (
-              <button onClick={() => setSelectedColor(color)} key={index} className={`w-8 h-8 border transition-all rounded-full ${selectedColor?.id === color.id ? "border-black": "border-gray-400"}`} style={{backgroundColor: color.hexCode}}></button>
+              <button onClick={() => setSelectedColor(color)} key={index} className={`w-8 h-8 border transition-all rounded-full ${selectedColor?.id === color.id ? "border-black dark:border-white": "border-gray-400"}`} style={{backgroundColor: color.hexCode}}></button>
             ))}
           </div>
           <hr className="h-px my-3 bg-gray-200 opacity-90 rounded-full bg-gradient animate-gradient border-0 "/>
@@ -57,24 +58,38 @@ export default function ProductDetailsCard({
 
         </div>
         <div>
-          <div className={"flex w-full pb-1 overflow-auto gap-x-1"}>
+          <span className="text-sm text-gray-400">
+            Note: Select color and size to see the price
+          </span>
+          <div className={"flex w-full pb-2 overflow-auto gap-x-1"}>
+
             {product.sizes.sort((a, b) => {
               return a.value > b.value ? 1 : -1
             }).map((size, index) => (
-              <Button key={index} variant="outline" className="w-10 h-10">
-                {size.name}
+              <Button key={index} onClick={() => {
+                setSelectedSizeId(size.id)
+              }} variant="outline" className={`w-12 h-12 transition-all flex-col ${size.id === selectedSizeId ? "dark:border-white border-black" : ""}`}>
+                <div>
+                  {size.name}
+                </div>
+                <div className="text-xs text-gray-400">
+                  stock: {product.stocks.filter(stock => stock.sizeId === size.id).length}
+                </div>
               </Button>
             ))}
+
           </div>
           <div className="flex items-end justify-between gap-x-2">
             <Button>
               Buy
             </Button>
-            <div>
-  <span className="text-gradient text-sm sm:text-lg md:text-2xl animate-gradient">
-    {product.minPrice}$
-    {/*if selected color and size find price in stocks(should be implemented on client side )*/}
-  </span>
+            <div className="flex items-end gap-x-1 text-gray-400">
+              Starting from{" "}
+              <span className="text-gradient flex  text-sm sm:text-lg md:text-2xl animate-gradient">
+                ${selectedColor && selectedSizeId ? product.stocks.find(stock => stock.colorId === selectedColor.id && stock.sizeId === selectedSizeId)?.price : product.minPrice}
+                {/*if selected color and size find price in stocks(should be implemented on client side )*/}
+              </span>
+
             </div>
 
           </div>
