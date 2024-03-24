@@ -1,17 +1,18 @@
 'use client'
 
-import {ProductDetailsDto} from "@/types/product";
+import {ColorDto, ProductDetailsDto} from "@/types/product";
 import {AspectRatio} from "@/components/ui/aspect-ratio";
 import Image from "next/image";
 import {Header1} from "@/components/ui/header";
 import {Button} from "@/components/ui/button";
-import React from "react";
+import React, {useState} from "react";
 
 export default function ProductDetailsCard({
                                              product
                                            }: {
   product: ProductDetailsDto
 }) {
+  const [selectedColor, setSelectedColor] = useState<ColorDto | undefined>(product.colors[0]);
   return (
     <div
       className="w-full grid gap-x-3 gap-y-2 grid-cols-1 md:grid-cols-2  ">
@@ -35,20 +36,20 @@ export default function ProductDetailsCard({
             {product.name.split(" ").slice(0, -1).join(" ") + " "}
 
             <span className="animate-gradient text-gradient">
-    {product.name.split(" ").slice(-1)}
-    </span>
+              {product.name.split(" ").slice(-1)}
+            </span>
           </Header1>
           <span className='mt-3'>
-    Color:
-  <span className='font-bold'>
-    {" " + product.colors[0]?.name}
+            Color:
+            <span className='font-bold'>
+            {" " + selectedColor?.name}
 
-    </span>
-    </span>
+          </span>
+          </span>
           <div className="flex gap-x-1 mt-1">
 
             {product.colors.map((color, index) => (
-              <button key={index} className="w-8 h-8 rounded-full" style={{backgroundColor: color.hexCode}}></button>
+              <button onClick={() => setSelectedColor(color)} key={index} className={`w-8 h-8 border transition-all rounded-full ${selectedColor?.id === color.id ? "border-black": "border-gray-400"}`} style={{backgroundColor: color.hexCode}}></button>
             ))}
           </div>
           <hr className="h-px my-3 bg-gray-200 opacity-90 rounded-full bg-gradient animate-gradient border-0 "/>
