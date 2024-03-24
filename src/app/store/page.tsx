@@ -1,4 +1,4 @@
-import Header from "@/components/ui/header";
+import {Header1} from "@/components/ui/header";
 import AnimatedProducts from "@/app/store/components/animated-products";
 import {Filters} from "./components/filters";
 import React from "react";
@@ -15,9 +15,9 @@ export default async function Store() {
     <div className='w-full '>
       <AnimatedCategories initialCategories={categories}/>
 
-      <Header>
+      <Header1>
         Products
-      </Header>
+      </Header1>
 
       <hr className="h-px my-3 bg-gray-200 rounded-full bg-gradient animate-gradient border-0 "/>
 
