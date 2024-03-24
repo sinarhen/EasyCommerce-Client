@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import {Header1, Header2} from "@/components/ui/header";
 import { Button } from "@/components/ui/button";
+import CategoriesBreadcrumbs from "@/components/ui/skeletons/categories-breadcrumbs";
 
 export default async function ProductDetailsPage({
   params
@@ -15,17 +16,7 @@ export default async function ProductDetailsPage({
   const [product] = await Promise.all([getProduct(params.productId)]);
   return (
     <div className="w-full h-full">
-      <div className="flex justify-center w-full md:justify-start">
-        {product.categories.map((category, index) => (
-          <span key={index} className="text-2xl md:text-sm text-gray-500">
-            <button className="hover:underline" >
-              {category.name}
-
-            </button>
-            {(index !== product.categories.length - 1 ? " > " : "")}
-          </span>
-        ))}
-      </div>
+      <CategoriesBreadcrumbs categories={product.categories}/>
       <div
       className="w-full grid gap-x-3 gap-y-2 grid-cols-1 md:grid-cols-2  ">
         <div className="gap-y-1.5 row-span-1 flex items-center md:items-start flex-col">

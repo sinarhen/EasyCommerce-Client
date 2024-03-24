@@ -9,6 +9,7 @@ import Image from "next/image";
 import {useEffect, useState} from "react";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import {useRouter} from "next/navigation";
+import CategoriesBreadcrumbs from "@/components/ui/skeletons/categories-breadcrumbs";
 
 
 export default function ProductCard({
@@ -77,12 +78,10 @@ export default function ProductCard({
         </div>
         <div className="flex mt-3 px-4 items-center w-full justify-between">
           <h3 className="font-light text-2xl sm:text-lg line-clamp-1 text-black mt-1">{product.name}</h3>
-          <div className="flex gap-x-1 text-xs items-center h-full text-gray-400 ">
-            {product.categories.map((category, index) => (
-              <span key={category.id}
-                    className="text-gray-400 text-nowrap">{category.name}{index !== product.categories.length - 1 && ","}</span>
-            ))}
-          </div>
+          <CategoriesBreadcrumbs
+            className={'text-xs'}
+            categories={product.categories}/>
+
         </div>
         <hr className="h-px my-1"/>
         <div className="justify-self-end px-4 flex justify-between items-center">
