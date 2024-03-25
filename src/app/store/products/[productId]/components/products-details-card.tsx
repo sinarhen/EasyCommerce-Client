@@ -5,7 +5,7 @@ import {AspectRatio} from "@/components/ui/aspect-ratio";
 import Image from "next/image";
 import {Header1} from "@/components/ui/header";
 import {Button} from "@/components/ui/button";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 export default function ProductDetailsCard({
                                              product
@@ -14,6 +14,13 @@ export default function ProductDetailsCard({
 }) {
   const [selectedColor, setSelectedColor] = useState<ColorDto | undefined>(product.colors[0]);
   const [selectedSizeId, setSelectedSizeId] = useState<string | null>(null);
+
+  const [totalStock, setTotalStock] = useState<number>(0);
+
+  useEffect(() => {
+    setTotalStock(product.stocks.reduce((acc, stock) => acc + stock.stock, 0));
+  }, [product.stocks]);
+
   return (
     <div
       className="w-full grid gap-x-3 gap-y-2 grid-cols-1 md:grid-cols-2  ">
@@ -33,6 +40,11 @@ export default function ProductDetailsCard({
       </div>
       <div className="flex row-span-1 flex-col  md:h-full md:justify-between w-full">
         <div>
+          <p>
+            {product.categories.map((category, index) => (
+              <span key={index} className="text-gray-400">{category.name} </span>
+            ))}
+          </p>
           <Header1>
             {product.name.split(" ").slice(0, -1).join(" ") + " "}
 
