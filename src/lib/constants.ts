@@ -12,10 +12,11 @@ export const apiBase = 'http://localhost:5000/api'
 export const productsPageSizes = ["4", "12", "24", "36", "48", "60"]
 
 export const seasonsDescriptions: Record<Season, string> = {
-  "winter": 'Winter description',
-  "spring": 'Spring description',
-  "summer": 'Summer description',
-  "autumn": 'Autumn description',
+  "winter": "Freezing cold, snow, ice, frost, sleet, hail, and high winds.",
+  "spring": "Rain, wind, and flowers.",
+  "summer": "Hot, sunny, and humid.",
+  "autumn": "Cool, crisp, and colorful leaves."
+
 };
 export const partners = [
   {
