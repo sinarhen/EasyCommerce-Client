@@ -91,7 +91,7 @@ export default function ProductDetailsCard({
 
           </div>
           <div className="flex md:flex-row flex-col-reverse md:items-end justify-between gap-x-2">
-            <Button className="w-full">
+            <Button className="w-full md:w-auto">
               Buy
             </Button>
             <div className="flex text-lg mb-3 items-end gap-x-1 text-gray-400">
