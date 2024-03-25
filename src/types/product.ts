@@ -44,7 +44,7 @@ export interface ProductDto extends IdNameDto {
   collection: IdNameDto;
   // mainMaterial: IdNameDto;
   gender: string;
-  season: string;
+  season: Season;
   ordersCount: number;
   reviewsCount: number;
   avgRating: number;
@@ -61,6 +61,9 @@ export interface ProductImageDto {
   colorId: string;
   imageUrls: string[];
 }
+
+export type Season = 'winter' | 'spring' | 'summer' | 'autumn';
+
 
 export interface ColorDto extends IdNameDto {
   id: string;

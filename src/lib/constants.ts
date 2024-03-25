@@ -1,3 +1,5 @@
+import {Season} from "@/types/product";
+
 export const iconSizes = {
   sm: 12,
   md: 16,
@@ -9,6 +11,12 @@ export const apiBase = 'http://localhost:5000/api'
 
 export const productsPageSizes = ["4", "12", "24", "36", "48", "60"]
 
+export const seasonsDescriptions: Record<Season, string> = {
+  "winter": 'Winter description',
+  "spring": 'Spring description',
+  "summer": 'Summer description',
+  "autumn": 'Autumn description',
+};
 export const partners = [
   {
     id: 1,

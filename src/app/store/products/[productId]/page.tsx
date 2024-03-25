@@ -1,15 +1,11 @@
 import {getProduct} from "@/actions/products";
-import {AspectRatio} from "@/components/ui/aspect-ratio";
 import React from "react";
-import Image from "next/image";
-import {Header1, Header2} from "@/components/ui/header";
+import {Header2} from "@/components/ui/header";
 import { Button } from "@/components/ui/button";
-import CategoriesBreadcrumbs from "@/components/ui/skeletons/categories-breadcrumbs";
-import {ProductDetailsDto} from "@/types/product";
 import ProductDetailsCard from "@/app/store/products/[productId]/components/products-details-card";
 import Link from "next/link";
 import {ArrowBigLeft, ArrowDown, ChevronDown, InspectionPanel, Shirt, Sun} from "lucide-react";
-import {iconSizes} from "@/lib/constants";
+import {iconSizes, seasonsDescriptions} from "@/lib/constants";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
 
 
@@ -47,9 +43,16 @@ export default async function ProductDetailsPage({
           <p>
             {product.description}
           </p>
-          <span className="flex items-center gap-x-1">
-            <Sun size={iconSizes.md}/>
-            {product.season}
+          <span className="flex flex-col transition-all group gap-x-1">
+            <div className="flex gap-x-1 items-center">
+              <Sun className="transition-all group-hover:rotate-[120deg]" size={iconSizes.md}/>
+              <span className='group-hover:translate-x-2 transition-transform'>
+                {product.season}
+              </span>
+            </div>
+            <div className="group-hover:h-full group-hover:text-white transition-all h-full">
+              {seasonsDescriptions[product.season] }
+            </div>
           </span>
           <span className="flex items-center gap-x-1">
             <Shirt size={iconSizes.md}/>
