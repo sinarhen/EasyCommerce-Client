@@ -1,5 +1,5 @@
 import {Header2} from "@/components/ui/header";
-import {ChevronDown, InspectionPanel, Shirt, Sun} from "lucide-react";
+import {ChevronDown, InspectionPanel, List, Shirt, Sun} from "lucide-react";
 import {iconSizes, seasonsDescriptions} from "@/lib/constants";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
 import React from "react";
@@ -20,7 +20,7 @@ export default function ProductInformation({
   materials: MaterialDto[]
 }){
   return (
-    <div className="mt-4">
+    <div className="mt-6">
       <Header2>
         Information
       </Header2>
@@ -44,9 +44,9 @@ export default function ProductInformation({
           {occasion.name}
           </span>
         <span className="flex items-center gap-x-1">
-            <Sun size={iconSizes.md}/>
-          {collection.name}
-          </span>
+            <List size={iconSizes.md}/>
+            {collection.name}
+        </span>
         <div>
           <Collapsible>
             <CollapsibleTrigger>

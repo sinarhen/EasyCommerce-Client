@@ -66,7 +66,6 @@ export default function ProductDetailsCard({
             ))}
           </div>
           <hr className="h-px my-3 bg-gray-200 opacity-90 rounded-full bg-gradient animate-gradient border-0 "/>
-          <p className="italic">{product.description}</p>
 
         </div>
         <div>

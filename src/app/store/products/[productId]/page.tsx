@@ -7,6 +7,7 @@ import Link from "next/link";
 import {ArrowBigLeft, ArrowDown, ChevronDown, InspectionPanel, Shirt, Sun} from "lucide-react";
 import {iconSizes, seasonsDescriptions} from "@/lib/constants";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
+import ProductInformation from "@/app/store/products/[productId]/components/product-information";
 
 
 
@@ -35,7 +36,9 @@ export default async function ProductDetailsPage({
 
       </Link>
       <ProductDetailsCard product={product}/>
-
+      <ProductInformation
+        {...product}
+      />
     </div>
   )
 
