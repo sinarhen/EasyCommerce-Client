@@ -90,13 +90,13 @@ export default function ProductDetailsCard({
             ))}
 
           </div>
-          <div className="flex items-end justify-between gap-x-2">
-            <Button>
+          <div className="flex md:flex-row flex-col-reverse md:items-end justify-between gap-x-2">
+            <Button className="w-full">
               Buy
             </Button>
-            <div className="flex items-end gap-x-1 text-gray-400">
+            <div className="flex text-lg mb-3 items-end gap-x-1 text-gray-400">
               Starting from{" "}
-              <span className="text-gradient flex  text-sm sm:text-lg md:text-2xl animate-gradient">
+              <span className="text-gradient flex  text-2xl sm:text-lg md:text-2xl animate-gradient">
                 ${selectedColor && selectedSizeId ? product.stocks.find(stock => stock.colorId === selectedColor.id && stock.sizeId === selectedSizeId)?.price : product.minPrice}
                 {/*if selected color and size find price in stocks(should be implemented on client side )*/}
               </span>
