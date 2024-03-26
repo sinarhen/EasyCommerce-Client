@@ -7,8 +7,8 @@ export default function ImageFrame({
                            }:
                              {src: string}){
   return (
-    <div className="bg-gradient flex items-center justify-center overflow-hidden rounded animate-gradient p-px">
-      <AspectRatio ratio={1}>
+    <div className="bg-gradient w-full h-full flex items-center justify-center overflow-hidden rounded animate-gradient p-[0.05rem]">
+      <AspectRatio ratio={1} className="bg-gray-300 rounded">
         <Image
           className='object-cover rounded w-full h-full'
           fill
