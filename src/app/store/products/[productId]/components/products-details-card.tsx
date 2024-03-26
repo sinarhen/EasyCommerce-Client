@@ -1,11 +1,16 @@
 'use client'
 
+
 import {ColorDto, ProductDetailsDto} from "@/types/product";
 import {AspectRatio} from "@/components/ui/aspect-ratio";
 import Image from "next/image";
 import {Header1} from "@/components/ui/header";
 import {Button} from "@/components/ui/button";
 import React, {useEffect, useState} from "react";
+import ImageFrame from "@/components/ui/image-frame";
+
+
+
 
 export default function ProductDetailsCard({
                                              product
@@ -16,34 +21,18 @@ export default function ProductDetailsCard({
   const [selectedSizeId, setSelectedSizeId] = useState<string | null>(null);
 
 
+
   return (
     <div
       className="w-full grid gap-x-3 gap-y-2 grid-cols-1 md:grid-cols-2  ">
       <div className="gap-y-1.5 row-span-2 flex items-center md:items-start flex-col">
-        <div className="w-3/4 md:w-full rounded p-[0.05rem] animate-gradient bg-gradient ">
-          <AspectRatio ratio={1}>
-            <Image
-              className='rounded object-cover w-full h-full'
-              fill
-              src={product.images[0].imageUrls[0]}
-              alt={"No image"}
-
-            />
-          </AspectRatio>
-
+        <div className="w-3/4 md:w-full">
+          <ImageFrame src={product.images[0].imageUrls[0]}/>
         </div>
         <div className="md:flex hidden w-full h-full gap-x-1">
           {product.images.map((image, index) => (
-            <div key={index} className="w-1/4 rounded p-[0.05rem] animate-gradient bg-gradient">
-              <AspectRatio ratio={1}>
-                <Image
-                  className='rounded object-cover w-full h-full'
-                  fill
-                  src={image.imageUrls[0]}
-                  alt={"No image"}
-
-                />
-              </AspectRatio>
+            <div key={index} className="w-1/4">
+              <ImageFrame src={image.imageUrls[0]}/>
             </div>
           ))}
         </div>
