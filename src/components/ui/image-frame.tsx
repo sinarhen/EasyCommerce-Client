@@ -8,7 +8,7 @@ export default function ImageFrame({
                            }:
                              {
   src: string;
-  alt:string
+  alt?: string
 }){
   return (
     <div className="bg-gradient w-full h-full flex items-center justify-center overflow-hidden rounded animate-gradient p-[0.05rem]">
