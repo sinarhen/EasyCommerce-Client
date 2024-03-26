@@ -15,11 +15,11 @@ export default function ProductDetailsCard({
   const [selectedColor, setSelectedColor] = useState<ColorDto | undefined>(product.colors[0]);
   const [selectedSizeId, setSelectedSizeId] = useState<string | null>(null);
 
-  const [totalStock, setTotalStock] = useState<number>(0);
-
-  useEffect(() => {
-    setTotalStock(product.stocks.reduce((acc, stock) => acc + stock.stock, 0));
-  }, [product.stocks]);
+  // const [totalStock, setTotalStock] = useState<number>(0);
+  //
+  // useEffect(() => {
+  //   setTotalStock(product.stocks.reduce((acc, stock) => acc + stock.stock, 0));
+  // }, [product.stocks]);
 
   return (
     <div

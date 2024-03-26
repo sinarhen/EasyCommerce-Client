@@ -1,43 +1,12 @@
+'use client'
+
 import {Header2} from "@/components/ui/header";
-import {ChevronDown, InspectionPanel, List, LucideIcon, Shirt, Sun} from "lucide-react";
-import {iconSizes, seasonsDescriptions} from "@/lib/constants";
-import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
+import {InspectionPanel, List, LucideIcon, Shirt, Sun} from "lucide-react";
+import {seasonsDescriptions} from "@/lib/constants";
 import React from "react";
 import {MaterialDto, Season} from "@/types/product";
 import {IdNameDto} from "@/types/shared";
-import Link from "next/link";
-import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
-
-interface InformationListItemProps {
-  icon: LucideIcon,
-  text: string,
-  description: string
-}
-
-const InformationListItem: React.FC<InformationListItemProps> = ({icon: IconComponent, text, description}) => (
-  <span className="flex flex-col transition-all group gap-x-1">
-    <div className="flex gap-x-1 items-center">
-      <IconComponent className="transition-all group-hover:rotate-[120deg]" size={iconSizes.md}/>
-      <span className='group-hover:translate-x-1 transition-transform'>
-        {text}
-      </span>
-    </div>
-    <div className="group-hover:max-h-full group-hover:text-white text-transparent transition-all  max-h-0">
-      {description}
-    </div>
-  </span>
-);
-const InformationList: React.FC<InformationListProps> = ({items}) => (
-  <div className="flex font-thin text-lg flex-col gap-y-1">
-    {items.map((item, index) => (
-      <InformationListItem key={index} {...item} />
-    ))}
-  </div>
-);
-
-interface InformationListProps {
-  items: InformationListItemProps[]
-}
+import {InformationList} from "@/app/store/products/[productId]/components/information-list";
 
 
 export default function ProductInformation({
@@ -53,7 +22,11 @@ export default function ProductInformation({
   collection: IdNameDto,
   materials: MaterialDto[]
 }){
-  const items = [
+  const items: {
+    icon: LucideIcon,
+    text: string,
+    description?: string | React.ReactNode
+  }[] = [
     {
       icon: Sun,
       text: season,
@@ -62,17 +35,22 @@ export default function ProductInformation({
     {
       icon: Shirt,
       text: occasion.name,
-      description: '' // Add description if available
     },
     {
       icon: List,
       text: collection.name,
-      description: `Browse ${collection.name} collection.`
     },
     {
       icon: InspectionPanel,
       text: 'Materials',
-      description: '' // Add description if available
+      description: <>
+        {materials.map((material, index) => (
+          <span key={index} className="flex gap-x-1 items-center">
+            <span>{material.name}</span>
+            <span>{material.percentage}%</span>
+          </span>
+        ))}
+      </>
     }
   ];
 
