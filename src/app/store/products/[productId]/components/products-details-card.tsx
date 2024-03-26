@@ -15,16 +15,11 @@ export default function ProductDetailsCard({
   const [selectedColor, setSelectedColor] = useState<ColorDto | undefined>(product.colors[0]);
   const [selectedSizeId, setSelectedSizeId] = useState<string | null>(null);
 
-  // const [totalStock, setTotalStock] = useState<number>(0);
-  //
-  // useEffect(() => {
-  //   setTotalStock(product.stocks.reduce((acc, stock) => acc + stock.stock, 0));
-  // }, [product.stocks]);
 
   return (
     <div
       className="w-full grid gap-x-3 gap-y-2 grid-cols-1 md:grid-cols-2  ">
-      <div className="gap-y-1.5 row-span-1 flex items-center md:items-start flex-col">
+      <div className="gap-y-1.5 row-span-2 flex items-center md:items-start flex-col">
         <div className="w-3/4 md:w-full rounded p-[0.05rem] animate-gradient bg-gradient ">
           <AspectRatio ratio={1}>
             <Image
@@ -37,10 +32,26 @@ export default function ProductDetailsCard({
           </AspectRatio>
 
         </div>
+        <div className="md:flex hidden w-full h-full gap-x-1">
+          {product.images.map((image, index) => (
+            <div key={index} className="w-1/4 rounded p-[0.05rem] animate-gradient bg-gradient">
+              <AspectRatio ratio={1}>
+                <Image
+                  className='rounded object-cover w-full h-full'
+                  fill
+                  src={image.imageUrls[0]}
+                  alt={"No image"}
+
+                />
+              </AspectRatio>
+            </div>
+          ))}
+        </div>
+
       </div>
       <div className="flex row-span-1 flex-col  md:h-full md:justify-between w-full">
         <div>
-          <p>
+          <p className="justify-center md:justify-start flex gap-x-1">
             {product.categories.map((category, index) => (
               <span key={index} className="text-gray-400">{category.name} </span>
             ))}
@@ -106,21 +117,6 @@ export default function ProductDetailsCard({
           </div>
         </div>
 
-      </div>
-      <div className="md:flex  hidden row-start-2 h-fit gap-x-1">
-        {product.images.map((image, index) => (
-          <div key={index} className="w-1/4 rounded p-[0.05rem] animate-gradient bg-gradient">
-            <AspectRatio ratio={1}>
-              <Image
-                className='rounded object-cover w-full h-full'
-                fill
-                src={image.imageUrls[0]}
-                alt={"No image"}
-
-              />
-            </AspectRatio>
-          </div>
-        ))}
       </div>
 
     </div>
