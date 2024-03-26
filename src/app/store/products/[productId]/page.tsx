@@ -4,7 +4,17 @@ import {Header2} from "@/components/ui/header";
 import { Button } from "@/components/ui/button";
 import ProductDetailsCard from "@/app/store/products/[productId]/components/products-details-card";
 import Link from "next/link";
-import {ArrowBigLeft, ArrowDown, ChevronDown, InspectionPanel, Shirt, Sun, User} from "lucide-react";
+import {
+  ArrowBigLeft,
+  ArrowDown,
+  Check,
+  ChevronDown,
+  InspectionPanel,
+  MessageSquareWarning,
+  Shirt,
+  Sun,
+  User
+} from "lucide-react";
 import {iconSizes, seasonsDescriptions} from "@/lib/constants";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
 import ProductInformation from "@/app/store/products/[productId]/components/product-information";
@@ -42,7 +52,7 @@ export default async function ProductDetailsPage({
       <ProductInformation
         {...product}
       />
-      <div className="mt-6">
+      <div className="mt-6 ">
         <Header2>
           Reviews
         </Header2>
@@ -51,7 +61,7 @@ export default async function ProductDetailsPage({
             5 days ago
           </div>
           <div className="col-span-1">
-            <div className=" w-full flex items-center justify-center overflow-hidden bg-white rounded-full">
+            <div className="  flex items-center justify-center overflow-hidden bg-white rounded-full">
               {0
                 ? <Image width={100} height={100} src={""} alt={"nONE"}/>
                 : <User strokeWidth={1.5} className="text-black w-3/4 h-3/4"/>
@@ -101,7 +111,27 @@ export default async function ProductDetailsPage({
               </div>
             </div>
           </div>
-          <div>
+          <div className="col-span-3 mt-2">
+            <div className="flex gap-x-1">
+
+              <Button
+                variant={"outline"}
+                className="flex items-center gap-x-0.5"
+                size={"sm"}
+              >
+                <Check size={iconSizes.sm}/>
+                Helpful
+              </Button>
+              <Button
+                variant="destructive"
+                className="flex items-center gap-x-0.5"
+                size="sm"
+              >
+                <MessageSquareWarning size={iconSizes.sm} />
+                Report
+              </Button>
+
+            </div>
 
           </div>
 
