@@ -1,6 +1,6 @@
 export function Header1({children}: { children: React.ReactNode }) {
   return (
-    <div className="text-4xl sm:text-5xl text-center md:text-start md:text-6xl lg:text-7xl">
+    <div className="text-4xl font-thin sm:text-5xl text-center md:text-start md:text-6xl lg:text-7xl">
       {children}
     </div>
   );
@@ -9,7 +9,7 @@ export function Header1({children}: { children: React.ReactNode }) {
 
 export function Header2({children}: { children: React.ReactNode }) {
   return (
-    <div className="text-3xl sm:text-4xl text-center md:text-start md:text-5xl lg:text-6xl">
+    <div className="text-3xl font-thin sm:text-4xl text-center md:text-start md:text-5xl lg:text-6xl">
       {children}
     </div>
   );
@@ -17,7 +17,7 @@ export function Header2({children}: { children: React.ReactNode }) {
 
 export function Header3({children}: { children: React.ReactNode }) {
   return (
-    <div className="text-2xl sm:text-3xl text-center md:text-start md:text-4xl lg:text-5xl">
+    <div className="text-2xl sm:text-3xl text-center font-thin md:text-start md:text-4xl lg:text-5xl">
       {children}
     </div>
   );
@@ -33,7 +33,7 @@ export function Header4({children}: { children: React.ReactNode }) {
 
 export function Header5({children}: { children: React.ReactNode }) {
   return (
-    <div className="text-lg sm:text-xl text-center md:text-start md:text-2xl lg:text-3xl">
+    <div className="text-lg sm:text-xl text-center md:text-start font-thin md:text-2xl lg:text-3xl">
       {children}
     </div>
   );
@@ -41,7 +41,7 @@ export function Header5({children}: { children: React.ReactNode }) {
 
 export function Header6({children}: { children: React.ReactNode }) {
   return (
-    <div className="text-base sm:text-lg text-center md:text-start md:text-xl lg:text-2xl">
+    <div className="text-base sm:text-lg text-center md:text-start font-thin md:text-xl lg:text-2xl">
       {children}
     </div>
   );
