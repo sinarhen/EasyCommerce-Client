@@ -10,6 +10,7 @@ import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/
 import ProductInformation from "@/app/store/products/[productId]/components/product-information";
 import Image from "next/image";
 import {AspectRatio} from "@/components/ui/aspect-ratio";
+import ImageFrame from "@/components/ui/image-frame";
 
 
 
@@ -72,14 +73,21 @@ export default async function ProductDetailsPage({
                 </span>
                 <ChevronDown size={iconSizes.xs}/>
               </div>
-              <div className="flex items-center gap-x-2 ">
-                <div className="h-20 w-20 border rounded-lg overflow-hidden bg-gradient p-[0.05rem]">
-                  <AspectRatio
-                    ratio={1}
-                    className="w-full h-full bg-gray-200"
-                  >
-
-                  </AspectRatio>
+              <div className="flex mt-1 items-center gap-x-1 ">
+                <div className="h-20 w-20">
+                  <ImageFrame alt='' src={""}/>
+                </div>
+                <div className="h-20 w-20">
+                  <ImageFrame alt='' src={""}/>
+                </div>
+                <div className="h-20 w-20">
+                  <ImageFrame alt="" src={""}/>
+                </div>
+                <div className="h-20 w-20">
+                  <ImageFrame alt="" src={""}/>
+                </div>
+                <div className="h-20 w-20">
+                  <ImageFrame alt="" src={""}/>
                 </div>
 
               </div>
@@ -92,6 +100,9 @@ export default async function ProductDetailsPage({
                 {'⭐'.repeat(1)}
               </div>
             </div>
+          </div>
+          <div>
+
           </div>
 
         </div>
