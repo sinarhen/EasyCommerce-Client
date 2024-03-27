@@ -1,7 +1,7 @@
 'use client'
 
 
-import {ColorDto, ProductDetailsDto} from "@/types/product";
+import {ColorDto, ProductDetailsDto, SizeDto} from "@/types/product";
 import {AspectRatio} from "@/components/ui/aspect-ratio";
 import Image from "next/image";
 import {Header1} from "@/components/ui/header";
@@ -18,10 +18,10 @@ export default function ProductDetailsCard({
   product: ProductDetailsDto
 }) {
   const [selectedColor, setSelectedColor] = useState<ColorDto | undefined>(product.colors[0]);
-  const [selectedSizeId, setSelectedSizeId] = useState<string | null>(null);
+  const [selectedSize, setSelectedSize] = useState<SizeDto | null>(null);
   const selectedStock = useMemo(() => {
-    return product.stocks.find(stock => stock.colorId === selectedColor?.id && stock.sizeId === selectedSizeId)
-  }, [selectedColor, selectedSizeId]);
+    return product.stocks.find(stock => stock.colorId === selectedColor?.id && stock.sizeId === selectedSize?.id)
+  }, [selectedColor, selectedSize]);
 
   const stockForSize = useCallback((sizeId: string) => {
     return product.stocks.find(stock => stock.colorId === selectedColor?.id && stock.sizeId === sizeId)
@@ -89,9 +89,9 @@ export default function ProductDetailsCard({
                   <Button
                     disabled={stock?.price === 0}
                     onClick={() => {
-                    setSelectedSizeId(size.id)
+                    setSelectedSize(size)
                   }} variant="outline"
-                          className={`w-14 h-14 relative flex justify-between overflow-hidden transition-all flex-col ${size.id === selectedSizeId ? "dark:border-white border-black" : ""}`}>
+                          className={`w-14 h-14 relative flex justify-between overflow-hidden transition-all flex-col ${size.id === selectedSize?.id ? "dark:border-white border-black" : ""}`}>
                     {(stock?.discount && stock?.discount > 0) ? (
                       <div className="absolute bg-red-500 rounded text-[9px] right-0 text-center -top-1 h-4 w-4">
                         %
@@ -111,9 +111,24 @@ export default function ProductDetailsCard({
 
           </div>
           <div className="flex md:flex-row flex-col-reverse md:items-end justify-between gap-x-2">
-          <Button className="w-full md:w-auto">
-              Buy
-            </Button>
+            <div className="flex items-end">
+              <Button className="w-full md:w-auto">
+                Buy
+              </Button>
+              {selectedSize && selectedColor ? (
+                <div className="text-xs flex items-center gap-x-1 ml-2">
+                  <span>
+                    Size {selectedSize?.name}
+                  </span>
+                  <span className="h-1 w-1 rounded-full dark:bg-white bg-black "></span>
+                  <span>
+                    Color {selectedColor?.name}
+                  </span>
+
+                </div>
+              ): null}
+
+            </div>
             <div className="flex text-lg mb-3 items-end gap-x-1 text-gray-400">
               {!selectedStock && "Starting from "}
               <div>
