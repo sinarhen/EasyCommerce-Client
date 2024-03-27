@@ -12,7 +12,7 @@ export default async function Store() {
   const {products, filters} = await getProducts();
   const {categories, ...otherFilters} = filters
   return (
-    <div className='w-full '>
+    <div className='w-full min-h-screen '>
       <AnimatedCategories initialCategories={categories}/>
 
       <Header1>
