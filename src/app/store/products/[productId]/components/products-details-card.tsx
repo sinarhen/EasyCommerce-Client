@@ -2,8 +2,6 @@
 
 
 import {ColorDto, ProductDetailsDto, SizeDto} from "@/types/product";
-import {AspectRatio} from "@/components/ui/aspect-ratio";
-import Image from "next/image";
 import {Header1} from "@/components/ui/header";
 import {Button} from "@/components/ui/button";
 import React, {useCallback, useEffect, useMemo, useState} from "react";
