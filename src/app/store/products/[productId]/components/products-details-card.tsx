@@ -91,7 +91,7 @@ export default function ProductDetailsCard({
                     onClick={() => {
                     setSelectedSizeId(size.id)
                   }} variant="outline"
-                          className={`w-14 h-14 relative overflow-hidden transition-all flex-col ${size.id === selectedSizeId ? "dark:border-white border-black" : ""}`}>
+                          className={`w-14 h-14 relative flex justify-between overflow-hidden transition-all flex-col ${size.id === selectedSizeId ? "dark:border-white border-black" : ""}`}>
                     {(stock?.discount && stock?.discount > 0) ? (
                       <div className="absolute bg-red-500 rounded text-[9px] right-0 text-center -top-1 h-4 w-4">
                         %
@@ -104,11 +104,6 @@ export default function ProductDetailsCard({
                       {stock?.price ? "$ " + stock?.price : "N/A"}
                     </div>
                   </Button>
-                  {stock && stock?.stock < 30 ? (
-                    <div className="text-xs w-min text-wrap font-thin text-red-500">
-                      Running out
-                    </div>
-                  ): null}
 
                 </div>
               )
@@ -122,11 +117,24 @@ export default function ProductDetailsCard({
             <div className="flex text-lg mb-3 items-end gap-x-1 text-gray-400">
               {!selectedStock && "Starting from "}
               <div>
+                <span className="flex md:flex-row-reverse gap-x-2 text-2xl sm:text-lg md:text-2xl animate-gradient"
+                >
+                  <div className="relative">
+                    <span className={`text-gradient animate-gradient`}>
+                      ${selectedStock?.price ? (selectedStock.discount ? selectedStock.price * selectedStock.discount : selectedStock.price) : product.minPrice}
+                    </span>
+                    {selectedStock?.discount ? (
+                      <span className="text-red-500  -right-6 -top-2 absolute rounded text-sm">
+                        -{selectedStock.discount * 100}%
+                      </span>
+                    ): null}
 
-                <span className="text-gradient flex gap-x-2 text-2xl sm:text-lg md:text-2xl animate-gradient">
+                  </div>
+                  {selectedStock?.discount && selectedStock?.discount > 0 ? (
+                    <span className="text-lg sm:text-sm md:text-lg line-through text-gray-400">
+                      ${selectedStock?.price}</span>
+                  ) : null}
 
-                  ${selectedStock?.price || product.minPrice}
-                  {/*if selected color and size find price in stocks(should be implemented on client side )*/}
                 </span>
 
               </div>
