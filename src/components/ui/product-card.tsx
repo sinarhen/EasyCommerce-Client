@@ -29,8 +29,8 @@ export default function ProductCard({
   }, [product.images, selectedColor])
 
   return (
-    <div className="group relative">
-      <div className="bg-white  w-full flex-col flex h-full rounded-sm drop-shadow-lg ">
+    <div className="group relative ">
+      <div className="bg-white  w-full flex-col flex h-full drop-shadow-lg ">
         {product.isNew && (
           <div className="absolute -top-3 -left-4 px-2 py-1 z-20 bg-purple-800 rounded bg-opacity-90 text-sm">New</div>
         )}

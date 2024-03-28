@@ -33,8 +33,8 @@ export function ProductReviewCard() {
       <div className="col-span-12 flex text-sm ml-2 text-gray-300">
         5 days ago
       </div>
-      <div className="col-span-1">
-        <div className="  flex items-center justify-center overflow-hidden bg-white rounded-full">
+      <div className="col-span-1 flex justify-center overflow-hidden ">
+        <div className="bg-white rounded-full w-8 h-8 sm:h-10 sm:w-10 md:w-12 md:h-12 lg:h-12 lg:w-12 xl:h-16 xl:w-16 flex items-center justify-center">
           {0
             ? <Image width={100} height={100} src={""} alt={"nONE"}/>
             : <User strokeWidth={1.5} className="text-black w-3/4 h-3/4"/>
