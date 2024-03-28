@@ -27,10 +27,12 @@ export default function ProductDetailsCard({
 
   return (
     <div
-      className="w-full grid gap-x-3 gap-y-2 grid-cols-1 md:grid-cols-2  ">
+    className="w-full grid gap-x-16 gap-y-2 grid-cols-1 md:grid-cols-2  ">
       <div className="gap-y-1.5 row-span-2 flex items-center md:items-start flex-col">
         <div className="w-3/4 md:w-full">
-          <ImageFrame src={product.images[0].imageUrls[0]}/>
+          <ImageFrame
+            className="group-hover:scale-125 transition-transform"
+            src={product.images[0].imageUrls[0]}/>
         </div>
         <div className="md:flex hidden w-full h-full gap-x-1">
           {product.images.map((image, index) => (

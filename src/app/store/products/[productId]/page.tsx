@@ -9,9 +9,35 @@ import {
 import {iconSizes} from "@/lib/constants";
 import ProductInformation from "@/app/store/products/[productId]/components/product-information";
 import {ProductReviewCard, ProductReviews } from "./components/product-reviews";
+import {TUser} from "@/types/user";
 
 
-
+const testReviews = [
+  {
+    createdAt: "2021-09-01",
+    user: {
+      username: "John Doe",
+    } as TUser,
+    content: "This is the best product ever",
+    rating: 5,
+  },
+  {
+    createdAt: "2021-09-01",
+    user:{
+      username: "Jane Doe",
+    } as TUser,
+    content: "This is good",
+    rating: 4
+  },
+  {
+    createdAt: "2021-09-01",
+    user: {
+      username: "Jack Doe",
+    } as TUser,
+    content: "This is okay",
+    rating: 3
+  },
+]
 export default async function ProductDetailsPage({
                                                    params
                                                  }: {
@@ -40,11 +66,12 @@ export default async function ProductDetailsPage({
         {...product}
       />
       <ProductReviews>
-        <ProductReviewCard/>
-        <ProductReviewCard/>
-        <ProductReviewCard/>
-        <ProductReviewCard/>
-        <ProductReviewCard/>
+        {testReviews.map((review, index) => (
+          <ProductReviewCard
+            key={index}
+            {...review}
+          />
+        ))}
       </ProductReviews>
 
     </div>
