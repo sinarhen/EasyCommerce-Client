@@ -47,7 +47,7 @@ export default async function ProductDetailsPage({
 }) {
   const [product] = await Promise.all([getProduct(params.productId)]);
   return (
-    <div className="w-full h-full">
+    <div className="w-full flex flex-col gap-y-10 h-full">
       <Link href="/store">
         <Button
           variant={"outline"}

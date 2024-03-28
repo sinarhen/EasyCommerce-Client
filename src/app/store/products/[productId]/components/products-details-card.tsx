@@ -27,7 +27,7 @@ export default function ProductDetailsCard({
 
   return (
     <div
-    className="w-full grid gap-x-16 gap-y-2 grid-cols-1 md:grid-cols-2  ">
+    className="w-full grid lg:gap-x-16 md:gap-x-12  gap-y-2 grid-cols-1 md:grid-cols-2  ">
       <div className="gap-y-1.5 row-span-2 flex items-center md:items-start flex-col">
         <div className="w-3/4 md:w-full">
           <ImageFrame
@@ -60,7 +60,7 @@ export default function ProductDetailsCard({
           <span className='mt-3'>
             Color:
             <span className='font-bold'>
-            {" " + selectedColor?.name}
+            {" " + (selectedColor?.name ?? "N/A")}
 
           </span>
           </span>
