@@ -18,7 +18,7 @@ export default function RootLayout({
       <StoreNavbar/>
       <GridBackground>
         <div className="h-full
-          px-4
+          px-6
           overflow-x-hidden
           md:px-8
           lg:px-16
