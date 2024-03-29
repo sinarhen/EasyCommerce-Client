@@ -30,6 +30,10 @@ export default function RegisterForm({
     }
     try {
       const resp = await registerUser(data);
+      if (!resp) {
+        toast.error("Something went wrong");
+        return;
+      }
       if (!resp.success) {
         console.error(resp.statusText);
         toast.error(resp?.data?.message || resp.statusText);

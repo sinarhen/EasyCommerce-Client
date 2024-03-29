@@ -32,7 +32,11 @@ export default function LoginForm({
   const onSubmit = async (data: TFormSchema) => {
     try {
       const resp = await loginUser(data);
-      if (!resp.success) {
+      if (!resp){
+        toast.error("Something went wrong");
+        return;
+      }
+      if (!resp.success ) {
         console.error(resp.statusText);
         toast.error(resp?.data?.message || resp.statusText);
         if (resp.data.field) {
