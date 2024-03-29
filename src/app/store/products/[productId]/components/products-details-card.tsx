@@ -59,22 +59,19 @@ export default function ProductDetailsCard({
               {product.name.split(" ").slice(-1)}
             </span>
           </Header1>
-          <div className='mt-4  items-center md:items-start flex flex-col sm:my-4'>
-            <div className="flex gap-x-1.5 md:gap-x-1 mb-6">
+          <div className='mt-4 mb-3  items-center md:items-start flex flex-col sm:my-4'>
+            <div className="flex gap-x-1.5 md:gap-x-1 ">
 
               {product.colors.map((color, index) => (
-                  <button onClick={() => setSelectedColor(color)} key={index}
-                          className={`w-12 h-12 sm:h-10 sm:w-10  border transition-all rounded-full ${selectedColor?.id === color.id ? "border-black dark:border-white" : "border-gray-400"}`}
-                          style={{backgroundColor: color.hexCode}}></button>
-                ))}
-              </div>
+                <button onClick={() => setSelectedColor(color)} key={index}
+                        className={`w-12 h-12 sm:h-10 sm:w-10  border transition-all rounded-full ${selectedColor?.id === color.id ? "border-black dark:border-white" : "border-gray-400"}`}
+                        style={{backgroundColor: color.hexCode}}></button>
+              ))}
+            </div>
           </div>
           <InformationList {...product}/>
 
           <hr className="h-px mb-3 mt-2 bg-gray-200 opacity-90 rounded-full bg-gradient animate-gradient border-0 "/>
-
-        </div>
-        <div className="mt-1">
           <div className="mb-2 flex w-full justify-center md:justify-start text-sm text-gray-400">
 
             <Button
@@ -98,9 +95,9 @@ export default function ProductDetailsCard({
                   <Button
                     disabled={stock?.price === 0}
                     onClick={() => {
-                    setSelectedSize(size)
-                  }} variant="ghost"
-                          className={`w-14 h-14 border relative flex justify-between overflow-hidden transition-all flex-col ${size.id === selectedSize?.id ? "dark:border-white border-black" : ""}`}>
+                      setSelectedSize(size)
+                    }} variant="ghost"
+                    className={`w-14 h-14 border relative flex justify-between overflow-hidden transition-all flex-col ${size.id === selectedSize?.id ? "dark:border-white border-black" : ""}`}>
                     {(stock?.discount && stock?.discount > 0) ? (
                       <div className="absolute bg-red-500 rounded text-[9px] right-0 text-center -top-1 h-4 w-4">
                         %
@@ -138,13 +135,14 @@ export default function ProductDetailsCard({
                   </span>
 
                 </div>
-              ): null}
+              ) : null}
 
             </div>
             <div className="flex text-lg items-end justify-center sm:my-6 my-7 h-full md:my-0 gap-x-1 text-gray-400">
               {!selectedStock && "Starting from "}
               <div>
-                <span className="flex md:flex-row-reverse justify-center items-center gap-x-2 text-2xl sm:text-3xl md:text-xl animate-gradient"
+                <span
+                  className="flex md:flex-row-reverse justify-center items-center gap-x-2 text-2xl sm:text-3xl md:text-xl animate-gradient"
                 >
                   <div className="relative">
                     <span className={`text-gradient animate-gradient`}>
@@ -154,7 +152,7 @@ export default function ProductDetailsCard({
                       <span className="text-red-500  -right-6 -top-2 absolute rounded text-sm">
                         -{selectedStock.discount * 100}%
                       </span>
-                    ): null}
+                    ) : null}
 
                   </div>
                   {selectedStock?.discount && selectedStock?.discount > 0 ? (
@@ -170,7 +168,9 @@ export default function ProductDetailsCard({
 
           </div>
         </div>
+        <div>
 
+        </div>
       </div>
 
     </div>

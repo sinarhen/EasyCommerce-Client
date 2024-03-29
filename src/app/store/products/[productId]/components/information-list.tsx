@@ -1,8 +1,9 @@
-import React from "react";
+import React, {memo, useCallback} from "react";
 import {iconSizes} from "@/lib/constants";
 import {InspectionPanel, List, LucideIcon, Shirt, Sun} from "lucide-react";
 import {IdNameDto} from "@/types/shared";
 import {MaterialDto} from "@/types/product";
+import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
 
 export const InformationList: React.FC<InformationListProps> = ({
   collection,
@@ -10,6 +11,22 @@ export const InformationList: React.FC<InformationListProps> = ({
   occasion,
   materials
                                                                 }) => {
+
+  const renderMaterials = useCallback(() => (
+    <Collapsible className='text-sm'>
+      <CollapsibleTrigger>
+        View materials
+      </CollapsibleTrigger>
+      <CollapsibleContent>
+        {materials.map((material, index) => (
+          <span key={index} className="flex gap-x-1 items-center text-sm ">
+            <span>{material.name}</span>
+            <span>{material.percentage}%</span>
+          </span>
+        ))}
+      </CollapsibleContent>
+    </Collapsible>
+  ), [materials]);
   const items: InformationListItemProps[] = [
     {
       icon: Sun,
@@ -26,14 +43,8 @@ export const InformationList: React.FC<InformationListProps> = ({
     {
       icon: InspectionPanel,
       text: 'Materials',
-      description: <>
-        {materials.map((material, index) => (
-          <span key={index} className="flex gap-x-1 items-center">
-            <span>{material.name}</span>
-            <span>{material.percentage}%</span>
-          </span>
-        ))}
-      </>
+      description: renderMaterials()
+
     }
   ];
 
@@ -62,7 +73,7 @@ interface InformationListItemProps {
   description?: string | React.ReactNode
 }
 
-export const InformationListItem: React.FC<InformationListItemProps> = ({icon: IconComponent, text, description}) => (
+export const InformationListItem: React.FC<InformationListItemProps> = React.memo(({icon: IconComponent, text, description}) => (
   <span className="flex flex-col transition-all group gap-x-1">
     <div className="flex gap-x-1 items-center">
       <IconComponent className="transition-all group-hover:rotate-[10deg]" size={iconSizes.md}/>
@@ -78,4 +89,4 @@ export const InformationListItem: React.FC<InformationListItemProps> = ({icon: I
       {description}
     </div>
   </span>
-);
+));
