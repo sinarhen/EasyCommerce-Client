@@ -18,7 +18,6 @@ export default function ImageFrame({
         <Image
           className='object-cover rounded w-full h-full'
           fill
-
           src={src}
           alt={alt??"none"}
 

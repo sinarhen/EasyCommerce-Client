@@ -1,7 +1,7 @@
 'use client'
 
 
-import {ColorDto, ProductDetailsDto, SizeDto} from "@/types/product";
+import {ColorDto, ProductDetailsDto, ProductImageDto, SizeDto} from "@/types/product";
 import {Header1} from "@/components/ui/header";
 import {Button} from "@/components/ui/button";
 import React, {useCallback, useEffect, useMemo, useState} from "react";
@@ -24,6 +24,12 @@ export default function ProductDetailsCard({
     return product.stocks.find(stock => stock.colorId === selectedColor?.id && stock.sizeId === selectedSize?.id)
   }, [selectedColor, selectedSize]);
 
+  const [selectedImages, setSelectedImages] = useState<ProductImageDto | undefined>();
+  useEffect(() => {
+
+    setSelectedImages(product.images.find(pi => pi.colorId == selectedColor?.id));
+  }, [product.images, selectedColor]);
+
   const stockForSize = useCallback((sizeId: string) => {
     return product.stocks.find(stock => stock.colorId === selectedColor?.id && stock.sizeId === sizeId)
   }, [selectedColor?.id])
@@ -34,12 +40,12 @@ export default function ProductDetailsCard({
         <div className="w-3/4 md:w-full">
           <ImageFrame
             className="group-hover:scale-125 transition-transform"
-            src={product.images[0].imageUrls[0]}/>
+            src={selectedImages?.imageUrls[0] ?? ""}/>
         </div>
         <div className="md:flex hidden w-full h-full gap-x-1">
-          {product.images.map((image, index) => (
+          {selectedImages?.imageUrls.map((image, index) => (
             <div key={index} className="w-1/4">
-              <ImageFrame src={image.imageUrls[0]}/>
+              <ImageFrame src={image}/>
             </div>
           ))}
         </div>
