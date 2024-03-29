@@ -29,11 +29,12 @@ export default function ProductCard({
   }, [product.images, selectedColor])
 
   return (
-    <div className="group relative ">
-      <div className="bg-white  w-full flex-col flex h-full drop-shadow-lg ">
-        {product.isNew && (
-          <div className="absolute -top-3 -left-4 px-2 py-1 z-20 bg-purple-800 rounded bg-opacity-90 text-sm">New</div>
-        )}
+    <div className="group  relative">
+      {product.isNew && (
+        <div className="absolute -top-3 -left-4 px-2 py-1 z-20 bg-purple-800 rounded bg-opacity-90 text-sm">New</div>
+      )}
+      <div className="bg-white overflow-hidden rounded w-full flex-col flex h-full drop-shadow-lg ">
+
 
 
         <div onClick={() => router.push(`/store/products/${product.id}`)}
@@ -62,10 +63,6 @@ export default function ProductCard({
             No image
           </span>
             )}
-          {/*image*/}
-          {/*<div className='absolute text-center text-lg p-2 text-nowrap bg-gray-500 top-0 right-0  w-16 h-16 flex justify-center items-center opacity-40 hover:opacity-100 transition-all rounded'>*/}
-          {/*    5 <br/>sizes*/}
-          {/*</div>*/}
           <div className=" flex justify-center gap-x-1 w-full text-black absolute bottom-2">
             {(product.colors.length !== 0 ? product.images.filter(image => image.colorId == selectedColor?.id) : product.images).map((image, index) => (
               <div key={index}
