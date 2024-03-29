@@ -6,6 +6,9 @@ import {Header1} from "@/components/ui/header";
 import {Button} from "@/components/ui/button";
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import ImageFrame from "@/components/ui/image-frame";
+import {InspectionPanel, List, LucideIcon, Ruler, Shirt, ShoppingCart, Sun} from "lucide-react";
+import {iconSizes, seasonsDescriptions} from "@/lib/constants";
+import {InformationList, InformationListItem} from "@/app/store/products/[productId]/components/information-list";
 
 
 
@@ -24,7 +27,6 @@ export default function ProductDetailsCard({
   const stockForSize = useCallback((sizeId: string) => {
     return product.stocks.find(stock => stock.colorId === selectedColor?.id && stock.sizeId === sizeId)
   }, [selectedColor?.id])
-
   return (
     <div
     className="w-full grid lg:gap-x-16 md:gap-x-12  gap-y-2 grid-cols-1 md:grid-cols-2  ">
@@ -43,7 +45,7 @@ export default function ProductDetailsCard({
         </div>
 
       </div>
-      <div className="flex row-span-1 flex-col  md:h-full md:justify-between w-full">
+      <div className="flex row-span-3 flex-col  md:h-full md:justify-between w-full">
         <div>
           <p className="justify-center md:justify-start flex gap-x-1">
             {product.categories.map((category, index) => (
@@ -57,27 +59,34 @@ export default function ProductDetailsCard({
               {product.name.split(" ").slice(-1)}
             </span>
           </Header1>
-          <span className='mt-3'>
-            Color:
-            <span className='font-bold'>
-            {" " + (selectedColor?.name ?? "N/A")}
+          <div className='mt-4  items-center md:items-start flex flex-col sm:my-4'>
+            <div className="flex gap-x-1.5 md:gap-x-1 mb-6">
 
-          </span>
-          </span>
-          <div className="flex gap-x-1 mt-1">
-
-            {product.colors.map((color, index) => (
-              <button onClick={() => setSelectedColor(color)} key={index} className={`w-10 h-10 border transition-all rounded-full ${selectedColor?.id === color.id ? "border-black dark:border-white": "border-gray-400"}`} style={{backgroundColor: color.hexCode}}></button>
-            ))}
+              {product.colors.map((color, index) => (
+                  <button onClick={() => setSelectedColor(color)} key={index}
+                          className={`w-12 h-12 sm:h-10 sm:w-10  border transition-all rounded-full ${selectedColor?.id === color.id ? "border-black dark:border-white" : "border-gray-400"}`}
+                          style={{backgroundColor: color.hexCode}}></button>
+                ))}
+              </div>
           </div>
-          <hr className="h-px my-3 bg-gray-200 opacity-90 rounded-full bg-gradient animate-gradient border-0 "/>
+          <InformationList {...product}/>
+
+          <hr className="h-px mb-3 mt-2 bg-gray-200 opacity-90 rounded-full bg-gradient animate-gradient border-0 "/>
 
         </div>
-        <div>
-          <span className="text-sm text-gray-400">
-            Note: Select color and size to see the price
-          </span>
-          <div className={"flex w-full pb-2 overflow-auto gap-x-1"}>
+        <div className="mt-1">
+          <div className="mb-2 flex w-full justify-center md:justify-start text-sm text-gray-400">
+
+            <Button
+              size={"xs"}
+              variant="ghost"
+              className="flex gap-x-1 items-center"
+            >
+              <Ruler size={iconSizes.sm}/>
+              Size guide
+            </Button>
+          </div>
+          <div className={"flex w-full justify-center md:justify-start overflow-auto gap-x-1"}>
 
             {product.sizes.sort((a, b) => {
               return a.value > b.value ? 1 : -1
@@ -90,8 +99,8 @@ export default function ProductDetailsCard({
                     disabled={stock?.price === 0}
                     onClick={() => {
                     setSelectedSize(size)
-                  }} variant="outline"
-                          className={`w-14 h-14 relative flex justify-between overflow-hidden transition-all flex-col ${size.id === selectedSize?.id ? "dark:border-white border-black" : ""}`}>
+                  }} variant="ghost"
+                          className={`w-14 h-14 border relative flex justify-between overflow-hidden transition-all flex-col ${size.id === selectedSize?.id ? "dark:border-white border-black" : ""}`}>
                     {(stock?.discount && stock?.discount > 0) ? (
                       <div className="absolute bg-red-500 rounded text-[9px] right-0 text-center -top-1 h-4 w-4">
                         %
@@ -110,9 +119,12 @@ export default function ProductDetailsCard({
             })}
 
           </div>
-          <div className="flex md:flex-row flex-col-reverse md:items-end justify-between gap-x-2">
-            <div className="flex items-end">
-              <Button className="w-full md:w-auto">
+          <div className="flex md:flex-row md:mt-6 flex-col-reverse md:items-end justify-between gap-x-2">
+            <div className="flex items-center flex-col gap-y-1 md:flex-row">
+              <Button
+                size={"sm"}
+                className="w-full flex items-center gap-x-1 md:w-auto">
+                <ShoppingCart size={iconSizes.sm}/>
                 Buy
               </Button>
               {selectedSize && selectedColor ? (
@@ -129,10 +141,10 @@ export default function ProductDetailsCard({
               ): null}
 
             </div>
-            <div className="flex text-lg mb-3 items-end gap-x-1 text-gray-400">
+            <div className="flex text-lg items-end justify-center sm:my-6 my-7 h-full md:my-0 gap-x-1 text-gray-400">
               {!selectedStock && "Starting from "}
               <div>
-                <span className="flex md:flex-row-reverse gap-x-2 text-2xl sm:text-lg md:text-2xl animate-gradient"
+                <span className="flex md:flex-row-reverse justify-center items-center gap-x-2 text-2xl sm:text-3xl md:text-xl animate-gradient"
                 >
                   <div className="relative">
                     <span className={`text-gradient animate-gradient`}>

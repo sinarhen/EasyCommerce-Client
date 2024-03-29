@@ -7,7 +7,6 @@ import {
   ArrowBigLeft,
 } from "lucide-react";
 import {iconSizes} from "@/lib/constants";
-import ProductInformation from "@/app/store/products/[productId]/components/product-information";
 import {ProductReviewCard, ProductReviews } from "./components/product-reviews";
 import {TUser} from "@/types/user";
 
@@ -62,9 +61,9 @@ export default async function ProductDetailsPage({
 
       </Link>
       <ProductDetailsCard product={product}/>
-      <ProductInformation
-        {...product}
-      />
+      {/*<ProductInformation*/}
+      {/*  {...product}*/}
+      {/*/>*/}
       <ProductReviews>
         {testReviews.map((review, index) => (
           <ProductReviewCard

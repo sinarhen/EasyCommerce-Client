@@ -1,17 +1,59 @@
 import React from "react";
 import {iconSizes} from "@/lib/constants";
-import {LucideIcon} from "lucide-react";
+import {InspectionPanel, List, LucideIcon, Shirt, Sun} from "lucide-react";
+import {IdNameDto} from "@/types/shared";
+import {MaterialDto} from "@/types/product";
 
-export const InformationList: React.FC<InformationListProps> = ({items}) => (
-  <div className="flex font-thin text-lg flex-col gap-y-1">
-    {items.map((item, index) => (
-      <InformationListItem key={index} {...item} />
-    ))}
-  </div>
-);
+export const InformationList: React.FC<InformationListProps> = ({
+  collection,
+  season,
+  occasion,
+  materials
+                                                                }) => {
+  const items: InformationListItemProps[] = [
+    {
+      icon: Sun,
+      text: season,
+    },
+    {
+      icon: Shirt,
+      text: occasion.name,
+    },
+    {
+      icon: List,
+      text: collection.name,
+    },
+    {
+      icon: InspectionPanel,
+      text: 'Materials',
+      description: <>
+        {materials.map((material, index) => (
+          <span key={index} className="flex gap-x-1 items-center">
+            <span>{material.name}</span>
+            <span>{material.percentage}%</span>
+          </span>
+        ))}
+      </>
+    }
+  ];
+
+  return (
+    <div className="flex items-center md:items-start font-thin sm:text-lg text-sm flex-col gap-y-1">
+      <div>
+        {items.map((item, index) => (
+          <InformationListItem key={index} {...item} />
+        ))}
+
+      </div>
+    </div>
+  );
+}
 
 interface InformationListProps {
-  items: InformationListItemProps[]
+  collection: IdNameDto,
+  season: string,
+  occasion: IdNameDto,
+  materials: MaterialDto[]
 }
 
 interface InformationListItemProps {
