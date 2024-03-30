@@ -17,8 +17,10 @@ export function WishListProvider({children}: {children: React.ReactNode}) {
     const isWished = useMemo(() => (productId: string) => wishList.includes(productId), [wishList]);
     const toggleWish = useCallback((productId: string) => {
         if (wishList.includes(productId)) {
+            localStorage.setItem("wishlist", JSON.stringify(wishList.filter(w => w !== productId)));
             setWishList(wishList.filter(w => w !== productId));
         } else {
+            localStorage.setItem("wishlist", JSON.stringify([...wishList, productId]));
             setWishList([...wishList, productId]);
         }
     }, [wishList]);

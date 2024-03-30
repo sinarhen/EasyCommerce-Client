@@ -11,6 +11,7 @@ import {iconSizes} from "@/lib/constants";
 import {InformationList} from "@/app/store/products/[productId]/components/information-list";
 import {SizeSelection} from "@/app/store/products/[productId]/components/size-selection";
 import {ColorSelection} from "@/app/store/products/[productId]/components/color-selection";
+import useWishlist from "@/hooks/use-wishlist";
 
 
 export default function ProductDetailsCard({
@@ -22,6 +23,10 @@ export default function ProductDetailsCard({
   const [selectedSize, setSelectedSize] = useState<SizeDto | null>(null);
   const [selectedImages, setSelectedImages] = useState<ProductImageDto | undefined>();
 
+  const {toggleWish, wishList} = useWishlist();
+
+  const inWishlist = useMemo(() => wishList.includes(product.id)
+    , [wishList]);
   const selectedStock = useMemo(() => product.stocks.find(stock => stock.colorId === selectedColor?.id && stock.sizeId === selectedSize?.id), [selectedColor, selectedSize]);
 
   useEffect(() =>
@@ -55,8 +60,11 @@ export default function ProductDetailsCard({
                 <span key={index} className="text-gray-400">{category.name} </span>
               ))}
             </p>
-            <Button variant='ghost' size="sm">
-              <Bookmark size={iconSizes.md}/>
+            <Button
+              onClick={() => toggleWish(product.id)}
+              variant='ghost'
+              size="sm">
+              <Bookmark fill={inWishlist ? "black" : undefined} size={iconSizes.md}/>
             </Button>
           </div>
           <Header1>
