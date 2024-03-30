@@ -49,7 +49,7 @@ export default function ProductDetailsCard({
       </div>
       <div className="flex row-span-3 flex-col  md:h-full md:justify-between w-full">
         <div>
-          <div className="flex justify-between">
+          <div className="flex  justify-center items-center md:justify-between gap-x-2">
             <p className="justify-center md:justify-start flex gap-x-1">
               {product.categories.map((category, index) => (
                 <span key={index} className="text-gray-400">{category.name} </span>
