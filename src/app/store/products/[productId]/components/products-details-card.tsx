@@ -6,7 +6,7 @@ import {Header1} from "@/components/ui/header";
 import {Button} from "@/components/ui/button";
 import React, {useCallback, useEffect, useMemo, useState} from "react";
 import ImageFrame from "@/components/ui/image-frame";
-import {Ruler, ShoppingCart} from "lucide-react";
+import {Bookmark, Ruler, ShoppingCart} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
 import {InformationList} from "@/app/store/products/[productId]/components/information-list";
 import {SizeSelection} from "@/app/store/products/[productId]/components/size-selection";
@@ -49,11 +49,16 @@ export default function ProductDetailsCard({
       </div>
       <div className="flex row-span-3 flex-col  md:h-full md:justify-between w-full">
         <div>
-          <p className="justify-center md:justify-start flex gap-x-1">
-            {product.categories.map((category, index) => (
-              <span key={index} className="text-gray-400">{category.name} </span>
-            ))}
-          </p>
+          <div className="flex justify-between">
+            <p className="justify-center md:justify-start flex gap-x-1">
+              {product.categories.map((category, index) => (
+                <span key={index} className="text-gray-400">{category.name} </span>
+              ))}
+            </p>
+            <Button variant='ghost' size="sm">
+              <Bookmark size={iconSizes.md}/>
+            </Button>
+          </div>
           <Header1>
             {product.name.split(" ").slice(0, -1).join(" ") + " "}
 
