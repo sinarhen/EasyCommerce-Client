@@ -15,13 +15,31 @@ import {
 } from "@/components/ui/sheet"
 import {Filter, X} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
-import React from "react";
+import React, {useMemo} from "react";
 import {FilterSectionGroupCheckbox} from "@/app/store/components/filterSectionGroupCheckbox";
 import {FilterSectionGroup} from "@/app/store/components/filterSectionGroup";
 import {FilterSection} from "@/app/store/components/filterSection";
 import {useParamsStore} from "@/hooks/use-params-store";
 import {shallow} from "zustand/shallow";
 import {ProductFiltersDto} from "@/types/product";
+import {IdNameDto} from "@/types/shared";
+
+function FilterButton({ item, toggleFilter }: {
+  item: IdNameDto,
+  toggleFilter: (item: IdNameDto) => void
+}) {
+  return (
+    <Button
+      variant="outline"
+      key={item.id}
+      onClick={() => toggleFilter(item)}
+      className="group flex items-center gap-x-1"
+    >
+      {item.name}
+      <X className="group-hover:rotate-90 transition-transform" size={iconSizes.sm}/>
+    </Button>
+  );
+}
 
 type FiltersProps = Omit<ProductFiltersDto, 'categories'>
 
@@ -49,7 +67,6 @@ export function Filters({
   }), shallow);
   const setParams = useParamsStore(state => state.setParams);
 
-  console.log(params)
   return (
     <Sheet>
       <div className="flex items-center gap-x-3">
@@ -60,49 +77,33 @@ export function Filters({
           </Button>
         </SheetTrigger>
         <div className="flex gap-x-1 items-center">
-          {params?.colors?.map(c => (
-            <Button
-              variant="outline"
-              key={c.id}
-              onClick={() => params.toggleFilter("colors", c)}
-              className="group flex items-center gap-x-1"
-            >
-              {c.name}
-              <X className="group-hover:rotate-90 transition-transform" size={iconSizes.sm}/>
-            </Button>
+          {params.colors?.map(item => (
+            <FilterButton
+              key={item.id}
+              item={item}
+              toggleFilter={(data: IdNameDto) => params.toggleFilter("colors", data)}
+            />
           ))}
-          {params?.sizes?.map(s => (
-            <Button
-              variant="outline"
-              key={s.id}
-              onClick={() => params.toggleFilter("sizes", s)}
-              className="group flex items-center gap-x-1"
-            >
-              {s.name}
-              <X className="group-hover:rotate-90 transition-transform" size={iconSizes.sm}/>
-            </Button>
+          {params.sizes?.map(item => (
+            <FilterButton
+              key={item.id}
+              item={item}
+              toggleFilter={(data: IdNameDto) => params.toggleFilter("sizes", data)}
+            />
           ))}
-          {params?.occasions?.map(o => (
-            <Button
-              variant="outline"
-              key={o.id}
-              onClick={() => params.toggleFilter("occasions", o)}
-              className="group flex items-center gap-x-1"
-            >
-              {o.name}
-              <X className="group-hover:rotate-90 transition-transform" size={iconSizes.sm}/>
-            </Button>
+          {params.materials?.map(item => (
+            <FilterButton
+              key={item.id}
+              item={item}
+              toggleFilter={(data: IdNameDto) => params.toggleFilter("materials", data)}
+            />
           ))}
-          {params?.materials?.map(m => (
-            <Button
-              variant="outline"
-              key={m.id}
-              onClick={() => params.toggleFilter("materials", m)}
-              className="group flex items-center gap-x-1"
-            >
-              {m.name}
-              <X className="group-hover:rotate-90 transition-transform" size={iconSizes.sm}/>
-            </Button>
+          {params.occasions?.map(item => (
+            <FilterButton
+              key={item.id}
+              item={item}
+              toggleFilter={(data: IdNameDto) => params.toggleFilter("occasions", data)}
+            />
           ))}
 
         </div>

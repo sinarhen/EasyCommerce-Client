@@ -1,5 +1,3 @@
-'use client';
-
 import React, {useCallback} from "react";
 import {toast} from "react-hot-toast";
 
@@ -13,7 +11,9 @@ export const WishListContext = React.createContext<null | WishListContextType>(n
 
 export function WishListProvider({children}: {children: React.ReactNode}) {
     const [wishList, setWishList] = React.useState<string[]>(() => {
-        return JSON.parse(localStorage.getItem("wishlist") || "[]");
+        if (typeof window !== undefined){
+            return JSON.parse(localStorage.getItem("wishlist") || "[]");
+        }
     });
 
     const toggleWish = useCallback((productId: string) => {
