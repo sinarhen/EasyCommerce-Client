@@ -110,14 +110,17 @@ export interface ProductsSearchParams {
   pageNumber?: number;
   searchTerm?: string;
   categories?: CategoryDto[];
-  colorId?: string[];
-  sizeId?: string[];
-  collectionId?: string[];
-  materialId?: string[];
-  occasionId?: string[];
+  colors?: IdNameDto[]; // We need to store color names as well to user-friendly display selected colors
+  sizes?: IdNameDto[]; // We need to store size names as well to user-friendly display selected sizes
+  collections?: IdNameDto[]; // We need to store names as well to user-friendly display selected collections
+  materials?: IdNameDto[]; // We need to store material names as well to user-friendly display selected materials
+  occasions?: IdNameDto[]; // We need to store names as well to user-friendly display selected occasions
   minPrice?: number;
   maxPrice?: number;
 }
+
+
+
 export interface SizeDto extends IdNameDto {
   value: number;
 }

@@ -20,11 +20,11 @@ export default function useProducts(products?: ProductDto[]): UseQueryResult<Pro
         minPrice: params.minPrice,
         maxPrice: params.maxPrice,
         filterBy: params.filterBy,
-        colorId: params.colorId?.join(','),
-        sizeId: params.sizeId?.join(','),
-        collectionId: params.collectionId?.join(','),
-        materialId: params.materialId?.join(','),
-        occasionId: params.occasionId?.join(','),
+        colorId: params.colors?.map(c => c.id).join(','),
+        sizeId: params.sizes?.map(s => s.id).join(','),
+        collectionId: params.collections?.map(c => c.id).join(','),
+        materialId: params.materials?.map(m => m.id).join(','),
+        occasionId: params.occasions?.map(o => o.id).join(','),
       }).filter(([_, value]) => value != null && value !== '')
     );
 

@@ -13,7 +13,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import {Filter} from "lucide-react";
+import {Filter, X} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
 import React from "react";
 import {FilterSectionGroupCheckbox} from "@/app/store/components/filterSectionGroupCheckbox";
@@ -36,26 +36,41 @@ export function Filters({
     pageSize: state.pageSize,
     searchTerm: state.searchTerm,
     orderBy: state.orderBy,
+    isFilterActive: state.isFilterActive,
     minPrice: state.minPrice,
     maxPrice: state.maxPrice,
     filterBy: state.filterBy,
-    colorId: state.colorId,
-    sizeId: state.sizeId,
-    collectionId: state.collectionId,
-    occasionId: state.occasionId,
+    colors: state.colors,
+    sizes: state.sizes,
+    occasions: state.occasions,
     toggleFilter: state.toggleFilter,
 
   }), shallow);
   const setParams = useParamsStore(state => state.setParams);
 
+  console.log(params)
   return (
     <Sheet>
-      <SheetTrigger asChild>
-        <Button size={"xs"}>
-          <Filter size={iconSizes.sm}/>
-          Filter
-        </Button>
-      </SheetTrigger>
+      <div className="flex gap-x-3">
+        <SheetTrigger asChild>
+          <Button size={"xs"}>
+            <Filter size={iconSizes.sm}/>
+            Filter
+          </Button>
+        </SheetTrigger>
+        {/*{params?.colors.map(c => (*/}
+        {/*  <Button*/}
+        {/*    variant="outline"*/}
+        {/*    key={category.id}*/}
+        {/*    onClick={() => params.toggleCategory(category)}*/}
+        {/*    className="group flex items-center gap-x-1"*/}
+        {/*  >*/}
+        {/*    {category.name}*/}
+        {/*    <X className="group-hover:rotate-90 transition-transform" size={iconSizes.sm}/>*/}
+        {/*  </Button>*/}
+        {/*))}*/}
+      </div>
+
       <SheetContent side={"left"} className="overflow-y-scroll">
         <SheetHeader>
           <SheetTitle>Filters</SheetTitle>
@@ -76,7 +91,7 @@ export function Filters({
               {colors.map(color => (
                 <FilterSectionGroupCheckbox
                   key={color.id}
-                  checked={params?.colorId?.includes(color.id)} onCheck={() => params.toggleFilter("colorId", color.id)}
+                  checked={(params?.colors?.filter(c => color.id === c.id).length ?? 0) > 0} onCheck={() => params.toggleFilter("colors", color)}
                   title={color.name} id={color.id}/>
               ))}
             </FilterSectionGroup>
@@ -86,8 +101,8 @@ export function Filters({
               {sizes.sort(s => s.value).map(size => (
                 <FilterSectionGroupCheckbox
                   key={size.id}
-                  checked={params?.sizeId?.includes(size.id)}
-                  onCheck={() => params.toggleFilter("sizeId", size.id)} title={size.name} id={size.id}/>
+                  checked={(params?.sizes?.filter(s => size.id === s.id).length || 0) > 0}
+                  onCheck={() => params.toggleFilter("sizes", size)} title={size.name} id={size.id}/>
               ))}
             </FilterSectionGroup>
           </FilterSection>
@@ -104,8 +119,8 @@ export function Filters({
               {occasions.map(occasion => (
                 <FilterSectionGroupCheckbox
                   key={occasion.id}
-                  checked={params?.occasionId?.includes(occasion.id)}
-                  onCheck={() => params.toggleFilter("occasionId", occasion.id)} title={occasion.name}
+                  checked={params.isFilterActive("occasions", occasion.id)}
+                  onCheck={() => params.toggleFilter("occasions", occasion)} title={occasion.name}
                   id={occasion.id}/>
               ))}
             </FilterSectionGroup>

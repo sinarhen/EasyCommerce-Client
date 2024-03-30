@@ -25,8 +25,7 @@ export default function ProductDetailsCard({
 
   const {toggleWish, wishList} = useWishlist();
 
-  const inWishlist = useMemo(() => wishList.includes(product.id)
-    , [wishList]);
+  const inWishlist = useMemo(() => wishList.includes(product.id), [wishList]);
   const selectedStock = useMemo(() => product.stocks.find(stock => stock.colorId === selectedColor?.id && stock.sizeId === selectedSize?.id), [selectedColor, selectedSize]);
 
   useEffect(() =>
@@ -34,6 +33,7 @@ export default function ProductDetailsCard({
     [product.images, selectedColor]);
 
   const stockForSize = useCallback((sizeId: string) => product.stocks.find(stock => stock.colorId === selectedColor?.id && stock.sizeId === sizeId), [selectedColor?.id]);
+
   return (
     <div
     className="w-full grid lg:gap-x-16 md:gap-x-12  gap-y-2 grid-cols-1 md:grid-cols-2  ">
@@ -64,7 +64,7 @@ export default function ProductDetailsCard({
               onClick={() => toggleWish(product.id)}
               variant='ghost'
               size="sm">
-              <Bookmark fill={inWishlist ? "black" : undefined} size={iconSizes.md}/>
+              <Bookmark fill={inWishlist ? "black" : "white"} size={iconSizes.md}/>
             </Button>
           </div>
           <Header1>
