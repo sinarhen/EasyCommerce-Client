@@ -47,20 +47,22 @@ export default async function ProductDetailsPage({
   const [product] = await Promise.all([getProduct(params.productId)]);
   return (
     <div className="w-full flex flex-col gap-y-10 h-full">
-      <Link href="/store">
-        <Button
-          variant={"outline"}
-          className="mb-4 group"
-        >
+      <div className="gap-y-2 flex flex-col">
+        <Link className="w-fit" href="/store">
+          <Button
+            variant={"outline"}
+            className=" group"
+          >
           <span className="flex transition-transform items-center group-hover:-translate-x-2">
             <ArrowBigLeft size={iconSizes.md}/>
             Back
           </span>
 
-        </Button>
+          </Button>
 
-      </Link>
-      <ProductDetailsCard product={product}/>
+        </Link>
+        <ProductDetailsCard product={product}/>
+      </div>
       {/*<ProductInformation*/}
       {/*  {...product}*/}
       {/*/>*/}
