@@ -7,6 +7,7 @@ import {Toaster} from "react-hot-toast";
 import {AuthProvider} from "@/contexts/AuthContext";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
+import {WishListProvider} from "@/contexts/WishListContext";
 
 const Providers = ({children}: { children: ReactNode }) => {
   const [queryClient] = useState(() => new QueryClient());
@@ -23,7 +24,9 @@ const Providers = ({children}: { children: ReactNode }) => {
         <TooltipProvider>
           <Toaster/>
           <AuthProvider>
-            {children}
+            <WishListProvider>
+              {children}
+            </WishListProvider>
           </AuthProvider>
         </TooltipProvider>
       </ThemeProvider>
