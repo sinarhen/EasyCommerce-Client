@@ -1,8 +1,9 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useMemo} from "react";
 
 type WishListContextType = {
     wishList: string[],
-    toggleWish: (productId: string) => void
+    toggleWish: (productId: string) => void;
+    isWished: (productId: string) => boolean;
 };
 
 export const WishListContext = React.createContext<null | WishListContextType>(null);
@@ -13,6 +14,7 @@ export function WishListProvider({children}: {children: React.ReactNode}) {
         return JSON.parse(localStorage.getItem("wishlist") || "[]");
     });
 
+    const isWished = useMemo(() => (productId: string) => wishList.includes(productId), [wishList]);
     const toggleWish = useCallback((productId: string) => {
         if (wishList.includes(productId)) {
             setWishList(wishList.filter(w => w !== productId));
@@ -22,7 +24,7 @@ export function WishListProvider({children}: {children: React.ReactNode}) {
     }, [wishList]);
 
     return (
-        <WishListContext.Provider value={{wishList, toggleWish}}>
+        <WishListContext.Provider value={{wishList, toggleWish, isWished}}>
             {children}
         </WishListContext.Provider>
     );
