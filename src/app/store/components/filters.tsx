@@ -34,6 +34,7 @@ export function Filters({
   const params = useParamsStore(state => ({
     pageNumber: state.pageNumber,
     pageSize: state.pageSize,
+    materials: state.materials,
     searchTerm: state.searchTerm,
     orderBy: state.orderBy,
     isFilterActive: state.isFilterActive,
@@ -51,24 +52,60 @@ export function Filters({
   console.log(params)
   return (
     <Sheet>
-      <div className="flex gap-x-3">
+      <div className="flex items-center gap-x-3">
         <SheetTrigger asChild>
-          <Button size={"xs"}>
+          <Button size={"sm"}>
             <Filter size={iconSizes.sm}/>
             Filter
           </Button>
         </SheetTrigger>
-        {/*{params?.colors.map(c => (*/}
-        {/*  <Button*/}
-        {/*    variant="outline"*/}
-        {/*    key={category.id}*/}
-        {/*    onClick={() => params.toggleCategory(category)}*/}
-        {/*    className="group flex items-center gap-x-1"*/}
-        {/*  >*/}
-        {/*    {category.name}*/}
-        {/*    <X className="group-hover:rotate-90 transition-transform" size={iconSizes.sm}/>*/}
-        {/*  </Button>*/}
-        {/*))}*/}
+        <div className="flex gap-x-1 items-center">
+          {params?.colors?.map(c => (
+            <Button
+              variant="outline"
+              key={c.id}
+              onClick={() => params.toggleFilter("colors", c)}
+              className="group flex items-center gap-x-1"
+            >
+              {c.name}
+              <X className="group-hover:rotate-90 transition-transform" size={iconSizes.sm}/>
+            </Button>
+          ))}
+          {params?.sizes?.map(s => (
+            <Button
+              variant="outline"
+              key={s.id}
+              onClick={() => params.toggleFilter("sizes", s)}
+              className="group flex items-center gap-x-1"
+            >
+              {s.name}
+              <X className="group-hover:rotate-90 transition-transform" size={iconSizes.sm}/>
+            </Button>
+          ))}
+          {params?.occasions?.map(o => (
+            <Button
+              variant="outline"
+              key={o.id}
+              onClick={() => params.toggleFilter("occasions", o)}
+              className="group flex items-center gap-x-1"
+            >
+              {o.name}
+              <X className="group-hover:rotate-90 transition-transform" size={iconSizes.sm}/>
+            </Button>
+          ))}
+          {params?.materials?.map(m => (
+            <Button
+              variant="outline"
+              key={m.id}
+              onClick={() => params.toggleFilter("materials", m)}
+              className="group flex items-center gap-x-1"
+            >
+              {m.name}
+              <X className="group-hover:rotate-90 transition-transform" size={iconSizes.sm}/>
+            </Button>
+          ))}
+
+        </div>
       </div>
 
       <SheetContent side={"left"} className="overflow-y-scroll">
