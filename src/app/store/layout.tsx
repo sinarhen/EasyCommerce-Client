@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <AuthDialogProvider>
+    <>
       <StoreNavbar/>
       <GridBackground>
         <div className="h-full
@@ -26,6 +26,6 @@ export default function RootLayout({
           {children}
         </div>
       </GridBackground>
-    </AuthDialogProvider>
+    </>
   )
 }
