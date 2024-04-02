@@ -3,13 +3,14 @@
 
 import {ColorDto, ProductDto} from "@/types/product";
 import {Button} from "@/components/ui/button";
-import {PersonStanding, Shirt, ShoppingCart, Star, Sun} from "lucide-react";
+import {Bookmark, Info, PersonStanding, Shirt, ShoppingCart, Star, Sun} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
 import Image from "next/image";
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import {useRouter} from "next/navigation";
 import CategoriesBreadcrumbs from "@/components/ui/skeletons/categories-breadcrumbs";
+import useWishlist from "@/hooks/use-wishlist";
 
 
 export default function ProductCard({
@@ -21,12 +22,20 @@ export default function ProductCard({
   const [imageIsLoading, setImageIsLoading] = useState(true);
   const [selectedColor, setSelectedColor] = useState<ColorDto | undefined>(product.colors[0]);
 
+
+  const {toggleWish, wishList} = useWishlist();
+
+  const isWished = useMemo(() => wishList.includes(product.id), [wishList, product.id]);
+
+
+
   const router = useRouter();
   useEffect(() => {
     if (selectedColor) {
       setSelectedImage(product.images.find(image => image.colorId == selectedColor?.id)?.imageUrls[0])
     }
   }, [product.images, selectedColor])
+
 
   return (
     <div className="group  relative">
@@ -40,14 +49,27 @@ export default function ProductCard({
         <div onClick={() => router.push(`/store/products/${product.id}`)}
              className="relative cursor-pointer group min-h-[300px] overflow-hidden w-full bg-gray-300 ">
           <div
-            className="absolute transition-all duration-300 delay-500 opacity-0 group-hover:opacity-100  flex  top-0 left-0 w-full h-full bg-black/40 z-10  items-center justify-center">
-            <Button size={"sm"} variant="outline"
-                    className='group-hover:translate-y-0 group/wish  transition-all opacity-0 delay-500 group-hover:opacity-100 translate-y-3'>
-              <div className="group-hover/wish:translate-x-0.5 transition-transform flex gap-x-2 ease-out ">
-                <Star size={iconSizes.md}></Star>
-                Wishlist
+            className="absolute transition-all duration-300 bg-black/0  flex flex-col gap-y-2  w-full h-full group-hover:bg-black/40 z-10  items-center justify-center">
+            <Button
+              onClick={(e) => {
+                e.stopPropagation()
+                toggleWish(product.id)
+              }}
+              size={"sm"} variant="ghost"
+                    className='group-hover:translate-y-0 absolute right-2 top-2 group/wish transition-all translate-y-3'>
+              <div className="">
+                <Bookmark fill={isWished ? "black" : "transparent"} size={iconSizes.md}></Bookmark>
               </div>
             </Button>
+
+            <Button size={"sm"} variant="ghost"
+                    className='group-hover:translate-y-0 group/info transition-all opacity-0 group-hover:opacity-100 translate-y-3'>
+              <div className="group-hover/info:translate-x-0.5 transition-transform flex gap-x-2 ease-out ">
+                <Info size={iconSizes.md}></Info>
+                Details
+              </div>
+            </Button>
+
           </div>
 
           {selectedImage ? <Image
