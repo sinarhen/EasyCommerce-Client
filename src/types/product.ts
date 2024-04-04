@@ -41,6 +41,7 @@ export interface ProductDto extends IdNameDto {
   description: string;
   discount: number | null;
   occasion: IdNameDto;
+  isFavorite: boolean;
   collection: IdNameDto;
   // mainMaterial: IdNameDto;
   gender: string;
