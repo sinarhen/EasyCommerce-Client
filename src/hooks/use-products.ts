@@ -1,7 +1,7 @@
 import {ProductDto} from "@/types/product";
 import {useQuery, UseQueryResult, useQueryClient} from "@tanstack/react-query";
 import {getProducts} from "@/actions/products";
-import {useParamsStore} from "@/hooks/use-params-store";
+import {initialState, useParamsStore} from "@/hooks/use-params-store";
 import qs from "querystring";
 import { useEffect, useState } from "react";
 
@@ -16,15 +16,17 @@ export default function useProducts(initialProducts?: ProductDto[], token?: stri
     useQuery({
       queryKey: ["products", paramString],
       queryFn: async () => {
-        if (paramString === defaultParamString) return [...initialProducts!];
         const data = await getProducts(paramString, token);
         return data.products;
       },
       initialData: initialProducts,
-      initialDataUpdatedAt: initialProducts ? Date.now() : undefined,
     });
 
   useEffect(() => {
+    if (params === initialState){
+      setParamString(defaultParamString);
+      return;
+    }
     const filteredParams = Object.fromEntries(
       Object.entries({
         categoryId: params.categories?.length !== 0 ? params.categories![params.categories!.length - 1].id : undefined,
@@ -43,8 +45,12 @@ export default function useProducts(initialProducts?: ProductDto[], token?: stri
       }).filter(([_, value]) => value != null && value !== '')
     );
 
-    setParamString(qs.stringify(filteredParams));
-    query.refetch();
+
+    const newParamString = qs.stringify(filteredParams);
+    if (newParamString !== defaultParamString) {
+      setParamString(newParamString);
+      query.refetch();
+    }
   }, [params, query.refetch]);
 
   return query;

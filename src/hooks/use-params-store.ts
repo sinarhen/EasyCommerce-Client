@@ -12,7 +12,7 @@ export type Products = {
   isFilterActive: (filter: "sizes" | "colors" |  "materials" | "occasions", valueId: string) => boolean;
 }
 
-const initialState: ProductsSearchParams = {
+export const initialState: ProductsSearchParams = {
   pageNumber: 1,
   pageSize: 12,
   searchTerm: '',
