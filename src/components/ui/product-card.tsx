@@ -21,12 +21,10 @@ export default function ProductCard({
   const [selectedImage, setSelectedImage] = useState<string | undefined>(product.images[0].imageUrls[0])
   const [imageIsLoading, setImageIsLoading] = useState(true);
   const [selectedColor, setSelectedColor] = useState<ColorDto | undefined>(product.colors[0]);
-
-
   const {toggleWish, wishList} = useWishlist();
 
-  const isWished = wishList[product.id] ? wishList[product.id] : product.isFavorite;
 
+  const isWished = wishList.hasOwnProperty(product.id) ? wishList[product.id] : product.isFavorite;
 
   const router = useRouter();
   useEffect(() => {
@@ -52,7 +50,7 @@ export default function ProductCard({
             <Button
               onClick={(e) => {
                 e.stopPropagation()
-                toggleWish(product.id)
+                toggleWish(product.id, product.isFavorite)
               }}
               size={"sm"} variant="ghost"
                     className='group-hover:translate-y-0 absolute right-2 top-2 group/wish transition-all translate-y-3'>

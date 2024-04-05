@@ -7,7 +7,7 @@ import Cookie from "js-cookie";
 
 type WishListContextType = {
     wishList: Record<string, boolean>,
-    toggleWish: (productId: string) => void;
+    toggleWish: (productId: string, isInitialWished: boolean) => void;
 };
 
 export const WishListContext = React.createContext<null | WishListContextType>(null);
@@ -18,14 +18,14 @@ export function WishListProvider({children}: {children: React.ReactNode}) {
     const {setOpen, setVariant} = useAuthDialog();
     const [wishList, setWishList] = React.useState<Record<string, boolean>>({});
     const token = Cookie.get("token")
-    const toggleWish = useCallback((productId: string) => {
+    const toggleWish = useCallback((productId: string, isInitialWished: boolean = false) => {
         if (!user || !token){
             setOpen(true);
             setVariant("login");
             toast.error("You need to login to add to wishlist");
             return;
         }
-        if (wishList[productId]) {
+        if (wishList.hasOwnProperty(productId) ? wishList[productId] : isInitialWished) {
             removeWish(productId, token);
             setWishList(prevWishList => ({...prevWishList, [productId]: false}));
             toast.success("Removed from wishlist");
