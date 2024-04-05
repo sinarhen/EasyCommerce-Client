@@ -25,8 +25,7 @@ export default function ProductCard({
 
   const {toggleWish, wishList} = useWishlist();
 
-  const isWished = useMemo(() => wishList.includes(product.id), [wishList, product.id]);
-
+  const isWished = wishList[product.id] ? wishList[product.id] : product.isFavorite;
 
 
   const router = useRouter();

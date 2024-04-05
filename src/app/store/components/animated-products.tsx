@@ -4,18 +4,25 @@ import {ProductDto} from "@/types/product";
 import ProductCard from "@/components/ui/product-card";
 import {AnimatePresence, motion} from "framer-motion";
 import ProductsWrapper from "@/components/ui/products-wrapper";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {ProductCardSkeleton} from "@/components/ui/skeletons/product-card-skeleton";
 import useProducts from "@/hooks/use-products";
+import {useQuery, useQueryClient} from "@tanstack/react-query";
+import {getProducts} from "@/actions/products";
+import {useParamsStore} from "@/hooks/use-params-store";
+import qs from "querystring";
 
 export default function AnimatedProducts({
-                                           initialProducts
+  initialProducts,
+  token
                                          }: {
-  initialProducts: ProductDto[]
+  initialProducts: ProductDto[];
+  token?: string;
 }) {
+  const {data, isLoading, error} = useProducts(initialProducts, token);
 
-  const {data: products, error, isLoading} = useProducts(initialProducts);
-
+  console.log(initialProducts)
+  console.log(data)
   if (isLoading) {
     return (
       <ProductsWrapper>
@@ -26,7 +33,7 @@ export default function AnimatedProducts({
       </ProductsWrapper>
     )
   }
-  if (!products || products.length === 0) return (
+  if (!data || data.length === 0) return (
     <div className="w-full h-full flex justify-center items-center">
       No products
     </div>
@@ -42,7 +49,7 @@ export default function AnimatedProducts({
   return (
     <ProductsWrapper>
       <AnimatePresence mode="wait">
-        {products.length > 0 && products.map((product: ProductDto, index) => (
+        {data.length > 0 && data.map((product: ProductDto, index) => (
           <motion.div
             key={product.id}
             initial={{opacity: 0, y: 10}}

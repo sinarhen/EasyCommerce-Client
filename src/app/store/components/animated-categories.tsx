@@ -12,14 +12,17 @@ import {X} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
 import {AnimatePresence, motion} from "framer-motion";
 import {shallow} from "zustand/shallow";
-import useProducts from "@/hooks/use-products";
 import toast from "react-hot-toast";
 
 
 export default function AnimatedCategories({
-                                             initialCategories
+                                             initialCategories,
+  isLoading = false,
+  error = undefined
                                            }: {
-  initialCategories?: CategoryDto[]
+  initialCategories?: CategoryDto[];
+  isLoading?: false;
+  error?: string
 }) {
   // const [open, setOpen] = React.useState(false);
   const params = useParamsStore(state => ({
@@ -30,12 +33,10 @@ export default function AnimatedCategories({
 
   const categoriesToDisplay = params?.categories?.length === 0 ? initialCategories : params.categories![params.categories!.length - 1].subCategories;
 
-  const {refetch, error, isLoading} = useProducts();
 
   const onApply = useCallback(async () => {
     toast.success("Categories applied")
-    await refetch()
-  }, [refetch])
+  }, [])
 
   if (isLoading) return (
     <CategoriesWrapper>

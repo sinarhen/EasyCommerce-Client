@@ -19,7 +19,6 @@ export const AuthProvider = ({children}: { children: React.ReactNode }) => {
   const token = Cookie.get("token");
 
   React.useEffect(() => {
-    console.log("Refreshing user")
     if (token) {
       getCurrentUser(token).then((resp) => {
         if (resp?.success) {

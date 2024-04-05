@@ -5,9 +5,20 @@ import {useParamsStore} from "@/hooks/use-params-store";
 import qs from "querystring";
 import { useEffect, useState } from "react";
 
-export default function useProducts(products?: ProductDto[]): UseQueryResult<ProductDto[]>{
+export default function useProducts(initialProducts?: ProductDto[], token?: string): UseQueryResult<ProductDto[]>{
+
   const params = useParamsStore(state => state);
-  const [paramString, setParamString] = useState('');
+  const [paramString, setParamString] = useState('pageNumber=1&pageSize=12&orderBy=2&minPrice=0&maxPrice=0&filterBy=live')
+
+  const query =
+    useQuery({
+      queryKey: ["products", paramString],
+      queryFn: async () => {
+        const data = await getProducts(paramString, token);
+        return data.products;
+      },
+      initialData: initialProducts,
+    });
 
   useEffect(() => {
     const filteredParams = Object.fromEntries(
@@ -29,17 +40,9 @@ export default function useProducts(products?: ProductDto[]): UseQueryResult<Pro
     );
 
     setParamString(qs.stringify(filteredParams));
-  }, [params]);
+    query.refetch();
+  }, [params, query.refetch]);
 
-  return useQuery({
-    queryKey: ["products", paramString],
-    queryFn: async () => {
-      if (!paramString){
-        return [];
-      }
-      const data = await getProducts(paramString);
-      return data.products;
-    },
-    initialData: products ?? undefined,
-  });
+  return query;
+
 }

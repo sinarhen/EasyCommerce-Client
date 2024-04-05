@@ -6,10 +6,12 @@ import AnimatedCategories from "@/app/store/components/animated-categories";
 import {getProducts} from "@/actions/products";
 import {ProductsPagination} from "@/app/store/components/products-pagination";
 import ProductsPageSizeSelector from "@/app/store/components/products-page-size-selector";
+import { cookies } from "next/headers"
+
 
 export default async function Store() {
-
-  const {products, filters} = await getProducts();
+  const token = cookies().get("token")
+  const {products, filters} = await getProducts(undefined, token?.value);
   const {categories, ...otherFilters} = filters
   return (
     <div className='w-full min-h-screen '>
@@ -22,7 +24,7 @@ export default async function Store() {
       <hr className="h-px my-3 bg-gray-200 rounded-full bg-gradient animate-gradient border-0 "/>
 
       <Filters filters={otherFilters}/>
-      <AnimatedProducts initialProducts={products}/>
+      <AnimatedProducts token={token?.value} initialProducts={products}/>
       <div className="flex justify-between">
         <ProductsPageSizeSelector/>
         <ProductsPagination/>
