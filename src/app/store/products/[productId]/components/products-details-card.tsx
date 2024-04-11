@@ -25,7 +25,7 @@ export default function ProductDetailsCard({
 
   const {toggleWish, wishList} = useWishlist();
 
-  const inWishlist = useMemo(() => wishList.includes(product.id), [wishList]);
+  const inWishlist = wishList.hasOwnProperty(product.id) ? wishList[product.id] : product.isFavorite;
   const selectedStock = useMemo(() => product.stocks.find(stock => stock.colorId === selectedColor?.id && stock.sizeId === selectedSize?.id), [selectedColor, selectedSize]);
 
   useEffect(() =>
@@ -61,7 +61,7 @@ export default function ProductDetailsCard({
               ))}
             </p>
             <Button
-              onClick={() => toggleWish(product.id)}
+              onClick={() => toggleWish(product.id, product.isFavorite)}
               variant='ghost'
               size="sm">
               <Bookmark fill={inWishlist ? "black" : "white"} size={iconSizes.md}/>
