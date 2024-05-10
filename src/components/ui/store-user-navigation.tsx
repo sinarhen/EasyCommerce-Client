@@ -20,11 +20,12 @@ import useAuth from "@/hooks/use-auth";
 import {useTheme} from "next-themes";
 import {toast} from "react-hot-toast";
 import {useRouter} from "next/navigation";
+import {tokenKeyString} from "@/lib/constants";
 
 export function StoreUserNavigation() {
   const router = useRouter();
   const onLogout = useCallback(() => {
-    Cookie.remove("token")
+    Cookie.remove(tokenKeyString)
     toast
       .success("You have been logged out.")
     router.refresh()

@@ -6,9 +6,10 @@ import Link from "next/link";
 import {
   ArrowBigLeft,
 } from "lucide-react";
-import {iconSizes} from "@/lib/constants";
+import {iconSizes, tokenKeyString} from "@/lib/constants";
 import {ProductReviewCard, ProductReviews } from "./components/product-reviews";
 import {TUser} from "@/types/user";
+import {cookies} from "next/headers";
 
 
 const testReviews = [
@@ -44,7 +45,8 @@ export default async function ProductDetailsPage({
     productId: string
   }
 }) {
-  const [product] = await Promise.all([getProduct(params.productId)]);
+  const token = cookies().get(tokenKeyString)?.value
+  const [product] = await Promise.all([getProduct(params.productId, token)]);
   return (
     <div className="w-full flex flex-col gap-y-10 h-full">
       <div className="gap-y-2 flex flex-col">

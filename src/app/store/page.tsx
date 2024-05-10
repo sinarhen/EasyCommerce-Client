@@ -7,10 +7,11 @@ import {getProducts} from "@/actions/products";
 import {ProductsPagination} from "@/app/store/components/products-pagination";
 import ProductsPageSizeSelector from "@/app/store/components/products-page-size-selector";
 import { cookies } from "next/headers"
+import {tokenKeyString} from "@/lib/constants";
 
 
 export default async function Store() {
-  const token = cookies().get("token")
+  const token = cookies().get(tokenKeyString)
   const {products, filters} = await getProducts(undefined, token?.value);
   const {categories, ...otherFilters} = filters
   return (

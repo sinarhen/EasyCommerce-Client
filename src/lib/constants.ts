@@ -60,3 +60,5 @@ export const partners = [
       "https://i.pinimg.com/280x280_RS/01/75/7b/01757bf368917fec3800a21f45fc6dda.jpg",
   },
 ];
+
+export const tokenKeyString: string = "token";

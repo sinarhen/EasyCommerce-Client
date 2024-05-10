@@ -4,6 +4,7 @@ import useAuth from "@/hooks/use-auth";
 import {useAuthDialog} from "@/hooks/use-auth-dialog";
 import {addWish, removeWish} from "@/actions/products";
 import Cookie from "js-cookie";
+import {tokenKeyString} from "@/lib/constants";
 
 type WishListContextType = {
     wishList: Record<string, boolean>,
@@ -17,7 +18,7 @@ export function WishListProvider({children}: {children: React.ReactNode}) {
     const {user} = useAuth();
     const {setOpen, setVariant} = useAuthDialog();
     const [wishList, setWishList] = React.useState<Record<string, boolean>>({});
-    const token = Cookie.get("token")
+    const token = Cookie.get(tokenKeyString);
     const toggleWish = useCallback((productId: string, isInitialWished: boolean = false) => {
         if (!user || !token){
             setOpen(true);

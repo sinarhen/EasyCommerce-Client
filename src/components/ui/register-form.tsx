@@ -10,6 +10,7 @@ import {schema, TFormSchema} from "@/types/register-form";
 import Cookie from "js-cookie";
 import registerUser from "@/actions/auth";
 import {useRouter} from "next/navigation";
+import {tokenKeyString} from "@/lib/constants";
 
 
 export default function RegisterForm({
@@ -23,7 +24,7 @@ export default function RegisterForm({
   });
   const router = useRouter();
   const onSubmit = async (data: TFormSchema) => {
-    if (Cookie.get("token")) {
+    if (Cookie.get(tokenKeyString)) {
       console.error("Token already exists");
       toast.error("Token already exists");
       return;
@@ -48,7 +49,7 @@ export default function RegisterForm({
       const token = resp?.data?.token;
 
       if (token) {
-        Cookie.set("token", token);
+        Cookie.set(tokenKeyString, token);
         toast.success("Login successful");
         router.refresh();
         if (onSuccess) {

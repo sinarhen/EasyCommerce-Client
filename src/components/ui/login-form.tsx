@@ -11,6 +11,7 @@ import {loginUser} from "@/actions/auth";
 import Cookie from "js-cookie";
 import {useRouter} from "next/navigation";
 import Loading from "@/components/ui/loading";
+import {tokenKeyString} from "@/lib/constants";
 
 export default function LoginForm({
                                     onSuccess
@@ -50,7 +51,7 @@ export default function LoginForm({
       const token = resp?.data?.token;
 
       if (token) {
-        Cookie.set("token", token);
+        Cookie.set(tokenKeyString, token);
         toast.success("Login successful");
         router.refresh();
         if (onSuccess) {

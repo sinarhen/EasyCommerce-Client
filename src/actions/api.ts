@@ -33,6 +33,7 @@ async function apiCall(method: 'GET' | 'POST' | 'PUT' | 'DELETE', endpoint: stri
     const response = await fetch(
       `${apiBase}${endpoint}`,
       {
+        credentials: 'include',
         method: method,
         headers: headers,
         body: method === 'GET' ? undefined : JSON.stringify(body),

@@ -2,6 +2,7 @@ import React from 'react'
 import {TUser} from "@/types/user";
 import Cookie from 'js-cookie'
 import {getCurrentUser} from "@/actions/auth";
+import {tokenKeyString} from "@/lib/constants";
 
 interface AuthContextProps {
   user: TUser | null;
@@ -16,7 +17,7 @@ export const AuthContext = React.createContext<null | AuthContextProps>(null);
 export const AuthProvider = ({children}: { children: React.ReactNode }) => {
   const [user, setUser] = React.useState<TUser | null>(null);
 
-  const token = Cookie.get("token");
+  const token = Cookie.get(tokenKeyString);
 
   React.useEffect(() => {
     if (token) {

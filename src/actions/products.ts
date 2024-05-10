@@ -8,8 +8,8 @@ export async function getProducts(params?: string, token?: string): Promise<Prod
   return products?.data
 }
 
-export async function getProduct(id: string): Promise<ProductDetailsDto> {
-  const product = await apiFetcher.get("/products/" + id)
+export async function getProduct(id: string, token?: string): Promise<ProductDetailsDto> {
+  const product = await apiFetcher.get("/products/" + id, token)
   return product?.data
 }
 
