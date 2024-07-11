@@ -8,7 +8,7 @@ import React, {useCallback, useEffect, useMemo, useState} from "react";
 import ImageFrame from "@/components/ui/image-frame";
 import {Bookmark, Ruler, ShoppingCart} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
-import {InformationList} from "@/app/store/products/[productId]/components/information-list";
+import InformationList from "@/app/store/products/[productId]/components/information-list";
 import {SizeSelection} from "@/app/store/products/[productId]/components/size-selection";
 import {ColorSelection} from "@/app/store/products/[productId]/components/color-selection";
 import useWishlist from "@/hooks/use-wishlist";
@@ -26,7 +26,7 @@ export default function ProductDetailsCard({
   const {toggleWish, wishList} = useWishlist();
 
   const inWishlist = wishList.hasOwnProperty(product.id) ? wishList[product.id] : product.isFavorite;
-  const selectedStock = useMemo(() => product.stocks.find(stock => stock.colorId === selectedColor?.id && stock.sizeId === selectedSize?.id), [selectedColor, selectedSize]);
+  const selectedStock = useMemo(() => product.stocks.find(stock => stock.colorId === selectedColor?.id && stock.sizeId === selectedSize?.id), [product.stocks, selectedColor?.id, selectedSize?.id]);
 
   useEffect(() =>
     setSelectedImages(product.images.find(pi => pi.colorId == selectedColor?.id)),

@@ -5,12 +5,12 @@ import {IdNameDto} from "@/types/shared";
 import {MaterialDto} from "@/types/product";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
 
-export const InformationList: React.FC<InformationListProps> = ({
+export default function InformationList ({
   collection,
   season,
   occasion,
   materials
-                                                                }) => {
+                                                                }: InformationListProps){
 
   const renderMaterials = useCallback(() => (
     <Collapsible className='text-sm'>
@@ -73,7 +73,7 @@ interface InformationListItemProps {
   description?: string | React.ReactNode
 }
 
-export const InformationListItem: React.FC<InformationListItemProps> = React.memo(({icon: IconComponent, text, description}) => (
+export const InformationListItem: React.FC<InformationListItemProps> = ({icon: IconComponent, text, description}) => (
   <span className="flex flex-col transition-all group gap-x-1">
     <div className="flex gap-x-1 items-center">
       <IconComponent className="transition-all group-hover:rotate-[10deg]" size={iconSizes.md}/>
@@ -89,4 +89,5 @@ export const InformationListItem: React.FC<InformationListItemProps> = React.mem
       {description}
     </div>
   </span>
-));
+);
+

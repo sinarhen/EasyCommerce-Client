@@ -14,10 +14,16 @@ import {Info, List, ShoppingBag, ShoppingCart, SunMoon} from "lucide-react";
 import StoreNavbarCommand from "@/app/store/components/store-navbar-command";
 import {useTheme} from "next-themes";
 import {ListItem} from "@/components/ui/list-item"
+import { motion } from "framer-motion";
 
 export function StoreNavbarNavigation() {
   const {theme, setTheme} = useTheme()
   return (
+    <motion.div
+      initial={{opacity: 0, y: -10}}
+      animate={{opacity: 1, y: 0}}
+      transition={{duration: 0.8}}
+      className=" flex md:ml-9 gap-x-1.5">
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
@@ -88,5 +94,6 @@ export function StoreNavbarNavigation() {
         {/*</NavigationMenuItem>*/}
       </NavigationMenuList>
     </NavigationMenu>
+    </motion.div>
   )
 }

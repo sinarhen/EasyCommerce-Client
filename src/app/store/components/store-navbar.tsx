@@ -1,4 +1,4 @@
-'use client';
+'use client'; // TODO: Change to server
 
 import Logo from "@/components/ui/logo";
 import {motion} from "framer-motion";
@@ -7,10 +7,9 @@ import StoreNavbarCommand from "./store-navbar-command";
 import {StoreNavbarNavigation} from "@/app/store/components/store-navbar-navigation";
 import {Button} from "@/components/ui/button";
 import {useAuthDialog} from "@/hooks/use-auth-dialog";
-import useAuth from "@/hooks/use-auth";
 import {StoreUserNavigation} from "@/components/ui/store-user-navigation";
+import {TUser} from "@/types/user";
 
-const transitionDuration = 1;
 
 
 const buttonVariants = {
@@ -18,28 +17,25 @@ const buttonVariants = {
   visible: {opacity: 1, x: 0},
 };
 
-export default function StoreNavbar() {
+export default function StoreNavbar({user}: {
+  user?: TUser | null
+}) {
   const {setOpen, setVariant} = useAuthDialog();
 
-  const {user} = useAuth();
+  // const {user} = useAuth(); Separated auth logic on server
   return (
     <>
       <nav className="dark:bg-black fixed w-full z-50 flex py-2  text-white bg-zinc-900">
         <div className="flex justify-between md:flex-row items-center w-full px-4 sm:px-16 md:px-8 lg:px-32 xl:px-72">
           <Logo/>
 
-          <motion.div
-            initial={{opacity: 0, y: -10}}
-            animate={{opacity: 1, y: 0}}
-            transition={{duration: transitionDuration - 0.2}}
-            className=" flex md:ml-9 gap-x-1.5">
-            <StoreNavbarNavigation/>
-          </motion.div>
+
+          <StoreNavbarNavigation/>
 
           <motion.div
             initial={{opacity: 0, y: -10}}
             animate={{opacity: 1, y: 0}}
-            transition={{duration: transitionDuration, delay: 0.2}}
+            transition={{duration: 1, delay: 0.2}}
             className="hidden md:flex w-full px-9 justify-start">
             <StoreNavbarCommand/>
 
@@ -51,7 +47,7 @@ export default function StoreNavbar() {
                   initial="hidden"
                   animate="visible"
                   variants={buttonVariants}
-                  transition={{duration: transitionDuration, delay: 0.4}}
+                  transition={{duration: 1, delay: 0.4}}
                 >
 
                   <Button onClick={() => {
@@ -70,7 +66,7 @@ export default function StoreNavbar() {
                   initial="hidden"
                   animate="visible"
                   variants={buttonVariants}
-                  transition={{duration: transitionDuration, delay: 0.6}}
+                  transition={{duration: 1, delay: 0.6}}
                 >
 
                   <Button onClick={() => {

@@ -14,6 +14,7 @@ export default async function registerUser(data: TRegisterForm) {
 
 }
 
-export async function getCurrentUser(token: string) {
+export async function getCurrentUser(token?: string) {
+  if (!token) return Promise.resolve(null);
   return await apiFetcher.get("/auth/me", token)
 }
