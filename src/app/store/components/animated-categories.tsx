@@ -6,27 +6,36 @@ import {CategoryDto, ProductsSearchParams} from "@/types/product";
 import {Collapsible, CollapsibleContent} from "@/components/ui/collapsible";
 import {Button} from "@/components/ui/button";
 import CategoriesWrapper from "@/components/ui/categories-wrapper";
-import {useParamsStore} from "@/hooks/use-params-store";
-import CategoryCardSkeleton from "@/components/ui/skeletons/category-card-skeleton";
 import {X} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
 import {AnimatePresence, motion} from "framer-motion";
+import {toast} from "react-hot-toast";
+import {useParamsStore} from "@/hooks/use-params-store";
 import {shallow} from "zustand/shallow";
-import toast from "react-hot-toast";
 
 
 export default function AnimatedCategories({
-  params
+  initialCategories,
                                            }: {
-  params?: ProductsSearchParams
+  initialCategories: CategoryDto[]
 }) {
-  // const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const params = useParamsStore(state => ({
+    categories: state.categories,
+    toggleCategory: state.toggleCategory,
+    resetCategories: state.resetCategories
+  }), shallow);
+
+  const categoriesToDisplay = params?.categories?.length === 0 ? initialCategories : params.categories![params.categories!.length - 1].subCategories;
 
 
-  // const onApply = useCallback(async () => {
-  //   toast.success("Categories applied")
-  // }, [])
-
+  const searchParams = new URLSearchParams();
+  const onApply = useCallback(async () => {
+    if (params.categories){
+      searchParams.set('categories', params.categories.map(c => c.id).join(','))
+      toast.success('Categories applied')
+    }
+  }, [])
 
   return (
     <>
@@ -49,58 +58,58 @@ export default function AnimatedCategories({
             </Button>
           ))}
         </div>
-        {/*<div className={"gap-x-1 " + (params.categories?.length === 0 ? "hidden" : "flex ")}*/}
-        {/*     hidden={params.categories!.length === 0}>*/}
-        {/*  <Button variant={"ghost"} onClick={() => params.resetCategories()}>Clear</Button>*/}
-        {/*  <Button variant={"outline"} onClick={onApply}>Apply</Button>*/}
-        {/*</div>*/}
+        <div className={"gap-x-1 " + (params?.categories?.length === 0 ? "hidden" : "flex ")}
+             hidden={params?.categories!.length === 0}>
+          <Button variant={"ghost"} onClick={() => params?.resetCategories()}>Clear</Button>
+          <Button variant={"outline"} onClick={onApply}>Apply</Button>
+        </div>
 
       </div>
-      {/*<Collapsible open={open} onOpenChange={setOpen}>*/}
+      <Collapsible open={open} onOpenChange={setOpen}>
 
-        {/*<CategoriesWrapper*/}
-        {/*  className={categoriesToDisplay?.length === 0 ? "grid-cols-1 sm:grid-cols-1 lg:grid-cols-1" : ""}>*/}
-        {/*  <AnimatePresence mode="wait">*/}
-        {/*    {categoriesToDisplay?.length !== 0 ? categoriesToDisplay?.map((category: CategoryDto, index) => (*/}
-        {/*      <motion.div*/}
-        {/*        key={category.id}*/}
-        {/*        initial={{opacity: 0, x: -10}}*/}
-        {/*        animate={{opacity: 1, x: 0}}*/}
-        {/*        exit={{opacity: 0, x: -10}}*/}
-        {/*        transition={{duration: 0.2, delay: 0.1 * index}}*/}
-        {/*      >*/}
-        {/*        <CategoryCard*/}
-        {/*          title={category.name}*/}
-        {/*          onClick={() => params.toggleCategory(category)}*/}
-        {/*          description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>*/}
+        <CategoriesWrapper
+          className={categoriesToDisplay?.length === 0 ? "grid-cols-1 sm:grid-cols-1 lg:grid-cols-1" : ""}>
+          <AnimatePresence mode="wait">
+            {categoriesToDisplay?.length !== 0 ? categoriesToDisplay?.map((category: CategoryDto, index) => (
+              <motion.div
+                key={category.id}
+                initial={{opacity: 0, x: -10}}
+                animate={{opacity: 1, x: 0}}
+                exit={{opacity: 0, x: -10}}
+                transition={{duration: 0.2, delay: 0.1 * index}}
+              >
+                <CategoryCard
+                  title={category.name}
+                  onClick={() => params.toggleCategory(category)}
+                  description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>
 
-        {/*      </motion.div>*/}
-        {/*    )) : (*/}
-        {/*      <CategoryCard*/}
-        {/*        buttonText="Clear"*/}
-        {/*        buttonIcon={X}*/}
-        {/*        title={"No categories found"}*/}
-        {/*        description={"Try to clear the filters"}*/}
-        {/*        onClick={() => params.resetCategories()}*/}
+              </motion.div>
+            )) : (
+              <CategoryCard
+                buttonText="Clear"
+                buttonIcon={X}
+                title={"No categories found"}
+                description={"Try to clear the filters"}
+                onClick={() => params.resetCategories()}
 
-        {/*      />*/}
-        {/*    )}*/}
+              />
+            )}
 
-        {/*  </AnimatePresence>*/}
-        {/*</CategoriesWrapper>*/}
+          </AnimatePresence>
+        </CategoriesWrapper>
 
-        {/*<CollapsibleContent>*/}
-        {/*  <CategoriesWrapper>*/}
-        {/*    {categoriesToDisplay?.map((category: CategoryDto) => (*/}
-        {/*      <CategoryCard*/}
-        {/*        key={category.id} title={category.name}*/}
-        {/*        description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>*/}
-        {/*    ))}*/}
-        {/*  </CategoriesWrapper>*/}
-        {/*</CollapsibleContent>*/}
+        <CollapsibleContent>
+          <CategoriesWrapper>
+            {categoriesToDisplay?.map((category: CategoryDto) => (
+              <CategoryCard
+                key={category.id} title={category.name}
+                description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>
+            ))}
+          </CategoriesWrapper>
+        </CollapsibleContent>
 
 
-      {/*</Collapsible>*/}
+      </Collapsible>
 
     </>
 
