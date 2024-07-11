@@ -23,9 +23,9 @@ export default function AnimatedCategories({
   // const [open, setOpen] = React.useState(false);
 
 
-  const onApply = useCallback(async () => {
-    toast.success("Categories applied")
-  }, [])
+  // const onApply = useCallback(async () => {
+  //   toast.success("Categories applied")
+  // }, [])
 
 
   return (

@@ -17,11 +17,9 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
 
-  const token = cookies().get(tokenKeyString);
-  const user = (await getCurrentUser(token?.value))?.data;
   return (
     <>
-      <StoreNavbar user={user}/>
+      <StoreNavbar />
       <GridBackground>
         <div className="h-full
           px-6

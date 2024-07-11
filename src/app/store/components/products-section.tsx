@@ -1,42 +1,19 @@
-import {ProductDto} from "@/types/product";
-import ProductCard from "@/components/ui/product-card";
-import {AnimatePresence, motion} from "framer-motion";
 import ProductsWrapper from "@/components/ui/products-wrapper";
 import React from "react";
+import Products from "@/app/store/components/products";
 import {getProducts} from "@/actions/products";
+import {cookies} from "next/headers";
+import {tokenKeyString} from "@/lib/constants";
 
-export default async function ProductsSection({token}: {
-  token?: string
-}) {
-
-  const {products: data, filters} = await getProducts(undefined, token);
-  const {categories, ...otherFilters} = filters
+export default async function ProductsSection() {
+  const token = cookies().get(tokenKeyString)?.value;
+  const response = (await getProducts(undefined, token));
   return (
-
     <>
       {/*<Filters filters={otherFilters}/>*/}
       <ProductsWrapper>
-        <AnimatePresence mode="wait">
-          {(data?.length ?? 0) > 0 && data?.map((product: ProductDto, index) => (
-            <motion.div
-              key={product.id}
-              initial={{opacity: 0, y: 10}}
-              animate={{opacity: 1, y: 0}}
-              exit={{opacity: 0, y: 10}}
-              transition={{duration: 0.2, delay: index * 0.1}}
-              className="w-full"
-
-            >
-              <ProductCard
-                product={product}
-
-              />
-
-            </motion.div>
-          ))}
-        </AnimatePresence>
+        {/*<Products data={response.products}/>*/}
       </ProductsWrapper>
     </>
-
   )
 }

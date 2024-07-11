@@ -5,7 +5,7 @@ export default function ProductsWrapper({
   className
 
                                         }: {
-  children: React.ReactNode,
+  children?: React.ReactNode,
   className?: string
 }){
   return (

@@ -21,16 +21,18 @@ import {useTheme} from "next-themes";
 import {toast} from "react-hot-toast";
 import {useRouter} from "next/navigation";
 import {tokenKeyString} from "@/lib/constants";
+import {TUser} from "@/types/user";
 
-export function StoreUserNavigation() {
-  const router = useRouter();
+export function StoreUserNavigation({user}: {
+  user?: TUser
+}) {
+  // const router = useRouter();
   const onLogout = useCallback(() => {
     Cookie.remove(tokenKeyString)
     toast
       .success("You have been logged out.")
-    router.refresh()
-  }, [router])
-  const {user, setUser} = useAuth();
+    // router.refresh()
+  }, [])
   const {theme, setTheme} = useTheme()
   return (
     <NavigationMenu alignTo="end">

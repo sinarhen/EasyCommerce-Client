@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Command,
   CommandEmpty,
@@ -10,6 +12,7 @@ import {
 import {Archive, Bookmark, List, Settings, Sheet, ShoppingCart, Store, User} from "lucide-react";
 import React, {useState} from "react";
 import {cn} from "@/lib/utils";
+import { motion } from "framer-motion";
 
 const commandGroups = [
   {
@@ -45,6 +48,11 @@ const StoreNavbarCommand = ({
 }) => {
   const [isFocused, setIsFocused] = useState(false)
   return (
+    <motion.div
+      initial={{opacity: 0, y: -10}}
+      animate={{opacity: 1, y: 0}}
+      transition={{duration: 1, delay: 0.2}}
+      className="hidden md:flex w-full px-9 justify-start">
     <Command className={cn("rounded-md border h-9 w-full shadow-md", className)}>
       <CommandInput className="w-full h-9" onBlurCapture={() => setIsFocused(false)} onFocus={() => {
         setIsFocused(true)
@@ -67,6 +75,8 @@ const StoreNavbarCommand = ({
         ))}
       </CommandList>
     </Command>
+
+    </motion.div>
   )
 }
 
