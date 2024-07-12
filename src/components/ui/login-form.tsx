@@ -37,18 +37,8 @@ export default function LoginForm({
         toast.error("Something went wrong");
         return;
       }
-      if (!resp.success ) {
-        console.error(resp.statusText);
-        toast.error(resp?.data?.message || resp.statusText);
-        if (resp.data.field) {
-          setError(resp.data.field, {
-            message: resp.data.message
-          });
 
-        }
-        return;
-      }
-      const token = resp?.data?.token;
+      const token = resp.rawData;
 
       if (token) {
         Cookie.set(tokenKeyString, token);

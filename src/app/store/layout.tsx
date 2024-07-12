@@ -2,7 +2,7 @@ import React from "react";
 import GridBackground from "@/components/ui/grid-background";
 import StoreNavbar from "@/app/store/components/store-navbar";
 import {AuthDialogProvider} from "@/contexts/AuthDialogContext";
-import {getCurrentUser} from "@/actions/auth";
+import {getCurrenUserDto} from "@/actions/auth";
 import {cookies} from "next/headers";
 import {tokenKeyString} from "@/lib/constants";
 import Providers from "@/app/providers";

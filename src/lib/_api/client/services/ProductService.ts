@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { CreateProductDto } from '../models/CreateProductDto';
+import type { ProductDetailsDto } from '../models/ProductDetailsDto';
 import type { ProductDto } from '../models/ProductDto';
 import type { ProductFiltersDto } from '../models/ProductFiltersDto';
 import type { ProductsOrderBy } from '../models/ProductsOrderBy';
@@ -93,12 +94,12 @@ export class ProductService {
     }
     /**
      * @param id
-     * @returns ProductDto Success
+     * @returns ProductDetailsDto Success
      * @throws ApiError
      */
     public static getApiProducts1(
         id: string,
-    ): CancelablePromise<ProductDto> {
+    ): CancelablePromise<ProductDetailsDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/products/{id}',

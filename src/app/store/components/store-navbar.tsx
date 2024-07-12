@@ -5,7 +5,7 @@ import StoreNavbarCommand from "./store-navbar-command";
 import {StoreNavbarNavigation} from "@/app/store/components/store-navbar-navigation";
 import {cookies} from "next/headers";
 import {tokenKeyString} from "@/lib/constants";
-import {getCurrentUser} from "@/actions/auth";
+import {getCurrenUserDto} from "@/actions/auth";
 import StoreNavbarAuth from "@/app/store/components/store-navbar-auth";
 import {AuthService} from "@/lib/_api/client";
 

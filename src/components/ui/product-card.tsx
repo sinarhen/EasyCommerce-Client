@@ -1,7 +1,6 @@
 'use client';
 
 
-import {ColorDto, ProductDto} from "@/types/product";
 import {Button} from "@/components/ui/button";
 import {Bookmark, Info, PersonStanding, Shirt, ShoppingCart, Star, Sun} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
@@ -11,6 +10,7 @@ import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import {useRouter} from "next/navigation";
 import CategoriesBreadcrumbs from "@/components/ui/skeletons/categories-breadcrumbs";
 import useWishlist from "@/hooks/use-wishlist";
+import {ColorDto, ProductDto} from "@/lib/_api/client";
 
 
 export default function ProductCard({
@@ -18,18 +18,18 @@ export default function ProductCard({
                                     }: {
   product: ProductDto
 }) {
-  const [selectedImage, setSelectedImage] = useState<string | undefined>(product.images[0].imageUrls[0])
+  const [selectedImage, setSelectedImage] = useState<string | undefined>(product.images?.at(0)?.imageUrls?.at(0))
   const [imageIsLoading, setImageIsLoading] = useState(true);
-  const [selectedColor, setSelectedColor] = useState<ColorDto | undefined>(product.colors[0]);
+  const [selectedColor, setSelectedColor] = useState<ColorDto | undefined>(product.colors?.at(0));
   const {toggleWish, wishList} = useWishlist();
 
 
-  const isWished = wishList.hasOwnProperty(product.id) ? wishList[product.id] : product.isFavorite;
+  const isWished = wishList.hasOwnProperty(product.id!) ? wishList[product.id!] : product.isFavorite;
 
   const router = useRouter();
   useEffect(() => {
     if (selectedColor) {
-      setSelectedImage(product.images.find(image => image.colorId == selectedColor?.id)?.imageUrls[0])
+      setSelectedImage(product?.images?.find(image => image.colorId == selectedColor?.id)?.imageUrls?.at(0))
     }
   }, [product.images, selectedColor])
 
@@ -50,7 +50,7 @@ export default function ProductCard({
             <Button
               onClick={(e) => {
                 e.stopPropagation()
-                toggleWish(product.id, product.isFavorite)
+                toggleWish(product.id!, product.isFavorite ?? false)
               }}
               size={"sm"} variant="ghost"
                     className='group-hover:translate-y-0 absolute right-2 top-2 group/wish transition-all translate-y-3'>
@@ -83,10 +83,10 @@ export default function ProductCard({
           </span>
             )}
           <div className=" flex justify-center gap-x-1 w-full text-black absolute bottom-2">
-            {(product.colors.length !== 0 ? product.images.filter(image => image.colorId == selectedColor?.id) : product.images).map((image, index) => (
+            {(product.colors?.length !== 0 ? product.images?.filter(image => image.colorId == selectedColor?.id) : product.images)?.map((image, index) => (
               <div key={index}
-                   onClick={() => setSelectedImage(image.imageUrls[0])}
-                   className={`w-2 h-2 ${selectedImage ? (image.imageUrls.includes(selectedImage) ? "bg-gray-500" : "bg-gray-300") : ""} rounded-full cursor-pointer`}/>
+                   onClick={() => setSelectedImage(image.imageUrls?.at(0))}
+                   className={`w-2 h-2 ${selectedImage ? (image.imageUrls?.includes(selectedImage) ? "bg-gray-500" : "bg-gray-300") : ""} rounded-full cursor-pointer`}/>
 
 
             ))}
@@ -94,9 +94,11 @@ export default function ProductCard({
         </div>
         <div className="flex mt-3 px-4 items-center w-full justify-between">
           <h3 className="font-light text-2xl sm:text-lg line-clamp-1 text-black mt-1">{product.name}</h3>
-          <CategoriesBreadcrumbs
-            className={'text-xs'}
-            categories={product.categories}/>
+          {product.categories && (
+            <CategoriesBreadcrumbs
+              className={'text-xs'}
+              categories={product.categories}/>
+          )}
 
         </div>
         <hr className="h-px my-1"/>
@@ -119,7 +121,7 @@ export default function ProductCard({
 
           <div
             className="flex w-full gap-x-1 ">
-            {product.colors.length > 0 ? product.colors.map((color, index) => (
+            {product.colors?.length ?? 0 > 0 ? product.colors?.map((color, index) => (
               <Tooltip key={color.id}>
                 <TooltipTrigger>
                   <div
@@ -159,7 +161,7 @@ export default function ProductCard({
             size={iconSizes.sm}/>
             Occasion
           </div>
-            {product.occasion.name}
+            {product.occasion?.name}
 
         </span>
 

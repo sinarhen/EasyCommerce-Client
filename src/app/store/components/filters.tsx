@@ -80,28 +80,40 @@ export function Filters({
           {params.colors?.map(item => (
             <FilterButton
               key={item.id}
-              item={item}
+              item={{
+                id: item.id!,
+                name: item.name ?? ''
+              }}
               toggleFilter={(data: IdNameDto) => params.toggleFilter("colors", data)}
             />
           ))}
           {params.sizes?.map(item => (
             <FilterButton
               key={item.id}
-              item={item}
+              item={{
+                id: item.id!,
+                name: item.name ?? ''
+              }}
               toggleFilter={(data: IdNameDto) => params.toggleFilter("sizes", data)}
             />
           ))}
           {params.materials?.map(item => (
             <FilterButton
               key={item.id}
-              item={item}
+              item={{
+                id: item.id!,
+                name: item.name ?? ''
+              }}
               toggleFilter={(data: IdNameDto) => params.toggleFilter("materials", data)}
             />
           ))}
           {params.occasions?.map(item => (
             <FilterButton
               key={item.id}
-              item={item}
+              item={{
+                id: item.id!,
+                name: item.name ?? ''
+              }}
               toggleFilter={(data: IdNameDto) => params.toggleFilter("occasions", data)}
             />
           ))}
@@ -126,21 +138,27 @@ export function Filters({
           </div>
           <FilterSection title={"Color"} description={"Filter by color"}>
             <FilterSectionGroup>
-              {colors.map(color => (
+              {colors?.map(color => (
                 <FilterSectionGroupCheckbox
                   key={color.id}
-                  checked={(params?.colors?.filter(c => color.id === c.id).length ?? 0) > 0} onCheck={() => params.toggleFilter("colors", color)}
-                  title={color.name} id={color.id}/>
+                  checked={(params?.colors?.filter(c => color.id === c.id).length ?? 0) > 0} onCheck={() => params.toggleFilter("colors", {
+                    id: color.id!,
+                    name: color.name ?? ''
+                })}
+                  title={color.name} id={color.id!}/>
               ))}
             </FilterSectionGroup>
           </FilterSection>
           <FilterSection title={"Size"} description={"Filter by size"}>
             <FilterSectionGroup>
-              {sizes?.sort((a, b) => (a.value??0) > (b.value ?? 0)).map(size => (
+              {sizes?.sort((a, b) => (a.value ?? 0) - (b.value ?? 0)).map(size => (
                 <FilterSectionGroupCheckbox
                   key={size.id}
                   checked={(params?.sizes?.filter(s => size.id === s.id).length || 0) > 0}
-                  onCheck={() => params.toggleFilter("sizes", size)} title={size.name} id={size.id}/>
+                  onCheck={() => params.toggleFilter("sizes", {
+                    id: size.id!,
+                    name: size.name ?? ''
+                  })} title={size.name ?? 'N/a'} id={size.id!}/>
               ))}
             </FilterSectionGroup>
           </FilterSection>
@@ -157,8 +175,11 @@ export function Filters({
               {occasions?.map(occasion => (
                 <FilterSectionGroupCheckbox
                   key={occasion.id}
-                  checked={params.isFilterActive("occasions", occasion.id)}
-                  onCheck={() => params.toggleFilter("occasions", occasion)} title={occasion.name}
+                  checked={params.isFilterActive("occasions", occasion.id ?? '')}
+                  onCheck={() => params.toggleFilter("occasions", {
+                    id: occasion.id ?? '',
+                    name: occasion.name ?? ''
+                  })} title={occasion.name ?? ''}
                   id={occasion.id ?? ''}/>
               ))}
             </FilterSectionGroup>

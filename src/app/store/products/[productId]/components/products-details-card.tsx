@@ -1,7 +1,6 @@
 'use client'
 
 
-import {ColorDto, ProductDetailsDto, ProductImageDto, SizeDto} from "@/types/product";
 import {Header1} from "@/components/ui/header";
 import {Button} from "@/components/ui/button";
 import React, {useCallback, useEffect, useMemo, useState} from "react";
@@ -12,6 +11,15 @@ import InformationList from "@/app/store/products/[productId]/components/informa
 import {SizeSelection} from "@/app/store/products/[productId]/components/size-selection";
 import {ColorSelection} from "@/app/store/products/[productId]/components/color-selection";
 import useWishlist from "@/hooks/use-wishlist";
+import {
+  ColorDto,
+  ProductDetailsDto,
+  ProductDto,
+  ProductImage,
+  ProductImageDto,
+  ProductStockDto,
+  SizeDto
+} from "@/lib/_api/client";
 
 
 export default function ProductDetailsCard({
@@ -19,20 +27,20 @@ export default function ProductDetailsCard({
                                            }: {
   product: ProductDetailsDto
 }) {
-  const [selectedColor, setSelectedColor] = useState<ColorDto | undefined>(product.colors[0]);
+  const [selectedColor, setSelectedColor] = useState<ColorDto | undefined>(product.colors?.at(0));
   const [selectedSize, setSelectedSize] = useState<SizeDto | null>(null);
   const [selectedImages, setSelectedImages] = useState<ProductImageDto | undefined>();
 
   const {toggleWish, wishList} = useWishlist();
 
-  const inWishlist = wishList.hasOwnProperty(product.id) ? wishList[product.id] : product.isFavorite;
-  const selectedStock = useMemo(() => product.stocks.find(stock => stock.colorId === selectedColor?.id && stock.sizeId === selectedSize?.id), [product.stocks, selectedColor?.id, selectedSize?.id]);
+  const inWishlist = wishList.hasOwnProperty(product.id!) ? wishList[product.id!] : product.isFavorite;
+  const selectedStock = useMemo(() => product.stocks?.find((stock: ProductStockDto) => stock.colorId === selectedColor?.id && stock.sizeId === selectedSize?.id), [product.stocks, selectedColor?.id, selectedSize?.id]);
 
   useEffect(() =>
-    setSelectedImages(product.images.find(pi => pi.colorId == selectedColor?.id)),
+    setSelectedImages(product.images?.find((pi: ProductImage) => pi.colorId == selectedColor?.id)),
     [product.images, selectedColor]);
 
-  const stockForSize = useCallback((sizeId: string) => product.stocks.find(stock => stock.colorId === selectedColor?.id && stock.sizeId === sizeId), [selectedColor?.id]);
+  const stockForSize = useCallback((sizeId: string) => product.stocks?.find((stock: ProductStockDto) => stock.colorId === selectedColor?.id && stock.sizeId === sizeId), [selectedColor?.id]);
 
   return (
     <div
@@ -41,10 +49,10 @@ export default function ProductDetailsCard({
         <div className="w-3/4 md:w-full">
           <ImageFrame
             className="group-hover:scale-125 transition-transform"
-            src={selectedImages?.imageUrls[0] ?? ""}/>
+            src={selectedImages?.imageUrls?.at(0) ?? ""}/>
         </div>
         <div className="md:flex hidden w-full h-full gap-x-1">
-          {selectedImages?.imageUrls.map((image, index) => (
+          {selectedImages?.imageUrls?.map((image, index) => (
             <div key={index} className="w-1/4">
               <ImageFrame src={image}/>
             </div>
@@ -56,32 +64,38 @@ export default function ProductDetailsCard({
         <div>
           <div className="flex  justify-center items-center md:justify-between gap-x-2">
             <p className="justify-center md:justify-start flex gap-x-1">
-              {product.categories.map((category, index) => (
+              {product.categories?.map((category, index) => (
                 <span key={index} className="text-gray-400">{category.name} </span>
               ))}
             </p>
             <Button
-              onClick={() => toggleWish(product.id, product.isFavorite)}
+              onClick={() => toggleWish(product.id!, product.isFavorite ?? false)}
               variant='ghost'
               size="sm">
               <Bookmark fill={inWishlist ? "black" : "white"} size={iconSizes.md}/>
             </Button>
           </div>
           <Header1>
-            {product.name.split(" ").slice(0, -1).join(" ") + " "}
+            {product.name?.split(" ").slice(0, -1).join(" ") + " "}
 
             <span className="animate-gradient text-gradient">
-              {product.name.split(" ").slice(-1)}
+              {product.name?.split(" ").slice(-1)}
             </span>
           </Header1>
           <div className='mt-4 mb-3  items-center md:items-start flex flex-col sm:my-4'>
-            <ColorSelection
-              colors={product.colors}
-              selectedColor={selectedColor}
-              setSelectedColor={setSelectedColor}
-            />
+            {product.colors && (
+              <ColorSelection
+                colors={product.colors}
+                selectedColor={selectedColor}
+                setSelectedColor={setSelectedColor}
+              />
+
+            )}
           </div>
-          <InformationList {...product}/>
+          {/*<InformationList {...product} collection={{*/}
+          {/*  id: product.collection?.id!,*/}
+          {/*  name: product.collection?.name ?? ''*/}
+          {/*}}/>*/}
 
           <hr className="h-px mb-3 mt-2 bg-gray-200 opacity-90 rounded-full bg-gradient animate-gradient border-0 "/>
           <div className="mb-2 flex w-full justify-center md:justify-start text-sm text-gray-400">
@@ -95,12 +109,14 @@ export default function ProductDetailsCard({
               Size guide
             </Button>
           </div>
-          <SizeSelection
-            sizes={product.sizes}
-            selectedSize={selectedSize}
-            setSelectedSize={setSelectedSize}
-            stockForSize={stockForSize}
-          />
+          {product.sizes && (
+            <SizeSelection
+              sizes={product.sizes}
+              selectedSize={selectedSize}
+              setSelectedSize={setSelectedSize}
+              stockForSize={stockForSize}
+            />
+          )}
           <div className="flex md:flex-row md:mt-6 flex-col-reverse md:items-end justify-between gap-x-2">
             <div className="flex items-center flex-col gap-y-1 md:flex-row">
               <Button

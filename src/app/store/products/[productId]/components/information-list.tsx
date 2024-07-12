@@ -4,6 +4,7 @@ import {InspectionPanel, List, LucideIcon, Shirt, Sun} from "lucide-react";
 import {IdNameDto} from "@/types/shared";
 import {MaterialDto} from "@/types/product";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
+import {Collection, CollectionDto, Occasion, Season} from "@/lib/_api/client";
 
 export default function InformationList ({
   collection,
@@ -61,9 +62,9 @@ export default function InformationList ({
 }
 
 interface InformationListProps {
-  collection: IdNameDto,
-  season: string,
-  occasion: IdNameDto,
+  collection: CollectionDto,
+  season: Season,
+  occasion: Occasion,
   materials: MaterialDto[]
 }
 

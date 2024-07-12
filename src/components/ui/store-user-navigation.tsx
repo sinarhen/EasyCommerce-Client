@@ -21,10 +21,10 @@ import {useTheme} from "next-themes";
 import {toast} from "react-hot-toast";
 import {useRouter} from "next/navigation";
 import {tokenKeyString} from "@/lib/constants";
-import {TUser} from "@/types/user";
+import {UserDto} from "@/types/user";
 
 export function StoreUserNavigation({user}: {
-  user?: TUser
+  user?: UserDto
 }) {
   // const router = useRouter();
   const onLogout = useCallback(() => {

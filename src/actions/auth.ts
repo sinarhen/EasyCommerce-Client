@@ -14,6 +14,6 @@ export default async function registerUser(data: TRegisterForm) {
 
 }
 
-export async function getCurrentUser() {
+export async function getCurrenUserDto() {
   return AuthService.getApiAuthMe();
 }

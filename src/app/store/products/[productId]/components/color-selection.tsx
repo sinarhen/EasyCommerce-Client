@@ -1,5 +1,5 @@
-import {ColorDto} from "@/types/product";
 import React from "react";
+import {ColorDto} from "@/lib/_api/client";
 
 export const ColorSelection = ({colors, selectedColor, setSelectedColor}: {
   colors: ColorDto[],

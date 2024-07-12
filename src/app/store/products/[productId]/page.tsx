@@ -1,4 +1,3 @@
-import {getProduct} from "@/actions/products";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import ProductDetailsCard from "@/app/store/products/[productId]/components/products-details-card";
@@ -8,8 +7,8 @@ import {
 } from "lucide-react";
 import {iconSizes, tokenKeyString} from "@/lib/constants";
 import {ProductReviewCard, ProductReviews } from "./components/product-reviews";
-import {TUser} from "@/types/user";
 import {cookies} from "next/headers";
+import {UserDto} from "@/lib/_api/client";
 
 
 const testReviews = [
@@ -17,7 +16,7 @@ const testReviews = [
     createdAt: "2021-09-01",
     user: {
       username: "John Doe",
-    } as TUser,
+    } as UserDto,
     content: "This is the best product ever",
     rating: 5,
   },
@@ -25,7 +24,7 @@ const testReviews = [
     createdAt: "2021-09-01",
     user:{
       username: "Jane Doe",
-    } as TUser,
+    } as UserDto,
     content: "This is good",
     rating: 4
   },
@@ -33,7 +32,7 @@ const testReviews = [
     createdAt: "2021-09-01",
     user: {
       username: "Jack Doe",
-    } as TUser,
+    } as UserDto,
     content: "This is okay",
     rating: 3
   },
@@ -46,7 +45,8 @@ export default async function ProductDetailsPage({
   }
 }) {
   const token = cookies().get(tokenKeyString)?.value
-  const [product] = await Promise.all([getProduct(params.productId, token)]);
+  // const [product] = await Promise.all([(params.productId, token)]);
+  const product = null;
   return (
     <div className="w-full flex flex-col gap-y-10 h-full">
       <div className="gap-y-2 flex flex-col">

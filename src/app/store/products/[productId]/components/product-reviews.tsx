@@ -5,7 +5,6 @@ import {Check, ChevronDown, MessageSquareWarning, Star, User} from "lucide-react
 import {iconSizes} from "@/lib/constants";
 import ImageFrame from "@/components/ui/image-frame";
 import {Button} from "@/components/ui/button";
-import {TUser} from "@/types/user";
 
 export function ProductReviews({
                                  children
@@ -35,7 +34,7 @@ export function ProductReviewCard({
   images,
 }: {
   createdAt: string;
-  user: TUser;
+  user: UserDto;
   content: string;
   rating: number;
   images?: string[];
