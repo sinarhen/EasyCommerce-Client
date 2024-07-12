@@ -8,7 +8,7 @@ import {
 import {iconSizes, tokenKeyString} from "@/lib/constants";
 import {ProductReviewCard, ProductReviews } from "./components/product-reviews";
 import {cookies} from "next/headers";
-import {UserDto} from "@/lib/_api/client";
+import {ProductService, UserDto} from "@/lib/_api/client";
 
 
 const testReviews = [
@@ -44,9 +44,7 @@ export default async function ProductDetailsPage({
     productId: string
   }
 }) {
-  const token = cookies().get(tokenKeyString)?.value
-  // const [product] = await Promise.all([(params.productId, token)]);
-  const product = null;
+  const product = await ProductService.getApiProducts1(params.productId);
   return (
     <div className="w-full flex flex-col gap-y-10 h-full">
       <div className="gap-y-2 flex flex-col">

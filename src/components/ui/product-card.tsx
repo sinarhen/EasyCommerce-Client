@@ -19,10 +19,10 @@ export default function ProductCard({
   product: ProductDto
 }) {
   const [selectedImage, setSelectedImage] = useState<string | undefined>(product.images?.at(0)?.imageUrls?.at(0))
-  const [imageIsLoading, setImageIsLoading] = useState(true);
   const [selectedColor, setSelectedColor] = useState<ColorDto | undefined>(product.colors?.at(0));
-  const {toggleWish, wishList} = useWishlist();
 
+  const [imageIsLoading, setImageIsLoading] = useState(true);
+  const {toggleWish, wishList} = useWishlist();
 
   const isWished = wishList.hasOwnProperty(product.id!) ? wishList[product.id!] : product.isFavorite;
 
@@ -161,7 +161,7 @@ export default function ProductCard({
             size={iconSizes.sm}/>
             Occasion
           </div>
-            {product.occasion?.name}
+          {product.occasion?.name}
 
         </span>
 

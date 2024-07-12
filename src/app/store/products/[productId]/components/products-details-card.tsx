@@ -27,7 +27,7 @@ export default function ProductDetailsCard({
                                            }: {
   product: ProductDetailsDto
 }) {
-  const [selectedColor, setSelectedColor] = useState<ColorDto | undefined>(product.colors?.at(0));
+  const [selectedColor, setSelectedColor] = useState<ColorDto | undefined>(product?.colors?.at(0));
   const [selectedSize, setSelectedSize] = useState<SizeDto | null>(null);
   const [selectedImages, setSelectedImages] = useState<ProductImageDto | undefined>();
 

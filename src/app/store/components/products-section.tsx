@@ -30,9 +30,9 @@ export default async function ProductsSection({
     <>
       {/*<Filters filters={otherFilters}/>*/}
       <ProductsWrapper>
-        {response ? (
+        {response.products ? (
           <>
-            <Products data={response}/>
+            <Products data={response.products}/>
 
           </>
 

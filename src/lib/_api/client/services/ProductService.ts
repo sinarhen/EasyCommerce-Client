@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { CreateProductDto } from '../models/CreateProductDto';
+import type { GetProductsResponseDto } from '../models/GetProductsResponseDto';
 import type { ProductDetailsDto } from '../models/ProductDetailsDto';
 import type { ProductDto } from '../models/ProductDto';
 import type { ProductFiltersDto } from '../models/ProductFiltersDto';
@@ -27,7 +28,7 @@ export class ProductService {
      * @param occasionId
      * @param minPrice
      * @param maxPrice
-     * @returns ProductDto Success
+     * @returns GetProductsResponseDto Success
      * @throws ApiError
      */
     public static getApiProducts(
@@ -45,7 +46,7 @@ export class ProductService {
         occasionId?: string,
         minPrice?: number,
         maxPrice?: number,
-    ): CancelablePromise<Array<ProductDto>> {
+    ): CancelablePromise<GetProductsResponseDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/products',

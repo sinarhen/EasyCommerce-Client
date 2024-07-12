@@ -36,6 +36,7 @@ export type { CryptoProviderCache } from './models/CryptoProviderCache';
 export type { CryptoProviderFactory } from './models/CryptoProviderFactory';
 export type { EncryptingCredentials } from './models/EncryptingCredentials';
 export { Gender } from './models/Gender';
+export type { GetProductsResponseDto } from './models/GetProductsResponseDto';
 export type { ICryptoProvider } from './models/ICryptoProvider';
 export type { IdNameDto } from './models/IdNameDto';
 export type { JwtSecurityToken } from './models/JwtSecurityToken';

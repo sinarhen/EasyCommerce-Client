@@ -1,10 +1,8 @@
 import React, {memo, useCallback} from "react";
 import {iconSizes} from "@/lib/constants";
 import {InspectionPanel, List, LucideIcon, Shirt, Sun} from "lucide-react";
-import {IdNameDto} from "@/types/shared";
-import {MaterialDto} from "@/types/product";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@/components/ui/collapsible";
-import {Collection, CollectionDto, Occasion, Season} from "@/lib/_api/client";
+import {CollectionDto, MaterialDto, Occasion, Season} from "@/lib/_api/client";
 
 export default function InformationList ({
   collection,
@@ -31,15 +29,15 @@ export default function InformationList ({
   const items: InformationListItemProps[] = [
     {
       icon: Sun,
-      text: season,
+      text: season.toString() ?? "Season",
     },
     {
       icon: Shirt,
-      text: occasion.name,
+      text: occasion.name ?? "Occasion",
     },
     {
       icon: List,
-      text: collection.name,
+      text: collection.name ?? 'Collection',
     },
     {
       icon: InspectionPanel,
