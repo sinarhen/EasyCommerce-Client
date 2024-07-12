@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "gen": "npx openapi-typescript-codegen --input ./lib/_api/openapi.json --output ./lib/_api/"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -33,6 +34,8 @@
     "mini-svg-data-uri": "^1.4.4",
     "next": "^14.2.5",
     "next-themes": "^0.2.1",
+    "openapi-typescript": "^7.0.2",
+    "openapi-typescript-codegen": "^0.29.0",
     "query-string": "^9.0.0",
     "react": "^18",
     "react-countup": "^6.5.0",
