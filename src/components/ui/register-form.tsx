@@ -11,6 +11,7 @@ import Cookie from "js-cookie";
 import registerUser from "@/actions/auth";
 import {useRouter} from "next/navigation";
 import {tokenKeyString} from "@/lib/constants";
+import {ApiError} from "@/lib/_api/client";
 
 
 export default function RegisterForm({
@@ -33,17 +34,11 @@ export default function RegisterForm({
       const resp = await registerUser(data);
 
       if (!resp) {
-        console.error(resp.statusText);
+        console.error(resp);
         toast.error("Something went wrong");
-        if (resp.data.field) {
-          setError(resp.data.field, {
-            message: resp.data.message
-          });
-
-        }
         return;
       }
-      const token = resp?.data?.token;
+      const token = resp;
 
       if (token) {
         Cookie.set(tokenKeyString, token);
@@ -56,9 +51,13 @@ export default function RegisterForm({
         console.error("Token not found in response");
         toast.error("Not found");
       }
-    } catch (error: any) {
-      console.error(error);
-      toast.error(error?.message);
+    } catch (e) {
+      const error = e as ApiError;
+      if (error?.message) {
+        toast.error(error.message);
+      } else {
+        toast.error("Something went wrong");
+      }
     }
   }
 

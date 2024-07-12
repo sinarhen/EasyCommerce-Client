@@ -15,12 +15,12 @@ import { request as __request } from '../core/request';
 export class AuthService {
     /**
      * @param requestBody
-     * @returns any Success
+     * @returns string Success
      * @throws ApiError
      */
     public static postApiAuthRegister(
         requestBody?: RegisterDto,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<string> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/auth/register',
@@ -30,12 +30,12 @@ export class AuthService {
     }
     /**
      * @param requestBody
-     * @returns JwtSecurityToken Success
+     * @returns string Success
      * @throws ApiError
      */
     public static postApiAuthLogin(
         requestBody?: LoginDto,
-    ): CancelablePromise<JwtSecurityToken> {
+    ): CancelablePromise<string> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/auth/login',

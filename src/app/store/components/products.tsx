@@ -8,7 +8,6 @@ import { ProductDto } from "@/lib/_api/client";
 export default function Products({data}: {
   data: ProductDto[]
 }){
-  console.log(data)
   return (
     <AnimatePresence mode="wait">
       {(data?.length ?? 0) > 0 && data?.map((product: ProductDto, index) => (

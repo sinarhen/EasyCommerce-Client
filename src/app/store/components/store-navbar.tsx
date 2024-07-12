@@ -5,15 +5,14 @@ import StoreNavbarCommand from "./store-navbar-command";
 import {StoreNavbarNavigation} from "@/app/store/components/store-navbar-navigation";
 import {cookies} from "next/headers";
 import {tokenKeyString} from "@/lib/constants";
-import {getCurrenUserDto} from "@/actions/auth";
 import StoreNavbarAuth from "@/app/store/components/store-navbar-auth";
 import {AuthService} from "@/lib/_api/client";
 
 export default async function StoreNavbar() {
   // const {setOpen, setVariant} = useAuthDialog();
 
-  const user = (await AuthService.getApiAuthMe()
-    .catch(err => console.error(err))) ?? undefined;
+  const user = cookies().get(tokenKeyString) ? (await AuthService.getApiAuthMe()
+    .catch(err => console.error(err))) ?? undefined : undefined;
   return (
     <>
       <nav className="dark:bg-black fixed w-full z-50 flex py-2  text-white bg-zinc-900">
