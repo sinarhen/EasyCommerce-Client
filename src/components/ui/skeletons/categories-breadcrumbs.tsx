@@ -1,7 +1,7 @@
 'use client';
 
-import {ProductCategoryDto} from "@/types/product";
 import {cn} from "@/lib/utils";
+import {ProductCategoryDto} from "@/lib/_api/client";
 
 export default function CategoriesBreadcrumbs({
   categories,

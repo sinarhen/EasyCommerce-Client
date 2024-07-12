@@ -7,12 +7,13 @@ import {cookies} from "next/headers";
 import {tokenKeyString} from "@/lib/constants";
 import {getCurrentUser} from "@/actions/auth";
 import StoreNavbarAuth from "@/app/store/components/store-navbar-auth";
+import {AuthService} from "@/lib/_api/client";
 
 export default async function StoreNavbar() {
   // const {setOpen, setVariant} = useAuthDialog();
 
-  const token = cookies().get(tokenKeyString)?.value;
-  const user = (await getCurrentUser(token))?.data;
+  const user = (await AuthService.getApiAuthMe()
+    .catch(err => console.error(err))) ?? undefined;
   return (
     <>
       <nav className="dark:bg-black fixed w-full z-50 flex py-2  text-white bg-zinc-900">

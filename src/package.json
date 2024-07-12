@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "gen": "npx openapi-typescript-codegen --input ./lib/_api/openapi.json --output ./lib/_api/"
+    "gen": "npx openapi-typescript-codegen --input ./lib/_api/openapi.json --output ./lib/_api/client/"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",

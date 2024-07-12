@@ -1,25 +1,38 @@
 import ProductsWrapper from "@/components/ui/products-wrapper";
 import React from "react";
-import {getProducts} from "@/actions/products";
-import {cookies} from "next/headers";
-import {tokenKeyString} from "@/lib/constants";
 import {Header4} from "@/components/ui/header";
-import {ProductsSearchParams} from "@/types/product";
+import {ProductsSearchParams} from "@/types/products";
+import {ProductService} from "@/lib/_api/client";
+import Products from "@/app/store/components/products";
 
 export default async function ProductsSection({
   params
                                               }: {
   params: ProductsSearchParams
 }) {
-  const token = cookies().get(tokenKeyString)?.value;
-  const response = (await getProducts(undefined, token));
+  const response = (await ProductService.getApiProducts(
+    undefined,
+    params.orderBy,
+    params.filterBy?.toString(),
+    params.pageSize,
+    params.pageNumber,
+    params.searchTerm,
+    params.categoryId,
+    params.colorId,
+    params.sizeId,
+    params.collectionId,
+    params.materialId,
+    params.occasionId,
+    params.minPrice,
+    params.maxPrice,
+  ));
   return (
     <>
       {/*<Filters filters={otherFilters}/>*/}
       <ProductsWrapper>
-        {response?.products ? (
+        {response ? (
           <>
-            {/*<Products data={response.products}/>*/}
+            <Products data={response}/>
 
           </>
 

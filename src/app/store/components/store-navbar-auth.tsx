@@ -4,8 +4,8 @@ import {motion} from "framer-motion";
 import {Button} from "@/components/ui/button";
 import {StoreUserNavigation} from "@/components/ui/store-user-navigation";
 import React from "react";
-import {TUser} from "@/types/user";
 import {useAuthDialog} from "@/hooks/use-auth-dialog";
+import {UserDto} from "@/lib/_api/client";
 
 const buttonVariants = {
   hidden: {opacity: 0, x: 10},
@@ -13,7 +13,7 @@ const buttonVariants = {
 };
 
 export default function StoreNavbarAuth({user}: {
-  user: TUser
+  user?: UserDto;
 }){
 
   const {setVariant, setOpen} = useAuthDialog();

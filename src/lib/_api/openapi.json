@@ -1523,6 +1523,35 @@
         }
       }
     },
+    "/api/products/filters": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductFiltersDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductFiltersDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductFiltersDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/products/{id}": {
       "get": {
         "tags": [
@@ -3514,6 +3543,47 @@
         },
         "additionalProperties": false
       },
+      "ProductFiltersDto": {
+        "type": "object",
+        "properties": {
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Category"
+            },
+            "nullable": true
+          },
+          "sizes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SizeDto"
+            },
+            "nullable": true
+          },
+          "colors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ColorDto"
+            },
+            "nullable": true
+          },
+          "occasions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IdNameDto"
+            },
+            "nullable": true
+          },
+          "materials": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MaterialDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ProductImage": {
         "type": "object",
         "properties": {
@@ -4344,6 +4414,24 @@
               "$ref": "#/components/schemas/Product"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SizeDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

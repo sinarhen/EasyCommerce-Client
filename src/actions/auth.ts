@@ -1,20 +1,19 @@
 'use server'
 
-import apiFetcher from "@/actions/api";
 import {TFormSchema as TLoginForm} from "@/types/login-form";
 import {TFormSchema as TRegisterForm} from "@/types/register-form";
+import {AuthService} from "@/lib/_api/client";
 
 export async function loginUser(data: TLoginForm) {
-  return await apiFetcher.post("/auth/login", data)
+  return AuthService.postApiAuthLogin(data)
 
 }
 
 export default async function registerUser(data: TRegisterForm) {
-  return await apiFetcher.post("/auth/register", data)
+  return AuthService.postApiAuthRegister(data);
 
 }
 
-export async function getCurrentUser(token?: string) {
-  if (!token) return Promise.resolve(null);
-  return await apiFetcher.get("/auth/me", token)
+export async function getCurrentUser() {
+  return AuthService.getApiAuthMe();
 }

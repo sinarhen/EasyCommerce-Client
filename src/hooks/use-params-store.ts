@@ -1,10 +1,35 @@
 import {createWithEqualityFn} from "zustand/traditional";
-import {CategoryDto, ProductsOrderBy, ProductsSearchParams} from "@/types/product";
 import {IdNameDto} from "@/types/shared";
+import {
+  Category,
+  CategoryDto,
+  CollectionDto,
+  ColorDto,
+  MaterialDto,
+  Occasion,
+  ProductsOrderBy,
+  SizeDto
+} from "@/lib/_api/client";
 
+type ParamsStore = {
+  productId?: string;
+  orderBy?: ProductsOrderBy;
+  filterBy?: string;
+  pageSize?: number;
+  pageNumber?: number;
+  searchTerm?: string;
+  categories?: Category[];
+  colors?: ColorDto[];
+  sizes?: SizeDto[];
+  collections?: CollectionDto[];
+  materials?: MaterialDto[];
+  occasions?: Occasion[];
+  minPrice?: number;
+  maxPrice?: number;
+}
 
 export type Products = {
-  setParams: (params: Partial<ProductsSearchParams>) => void;
+  setParams: (params: Partial<ParamsStore>) => void;
   reset: () => void;
   toggleFilter: (filter: "sizes" | "colors" |  "materials" | "occasions", value: IdNameDto) => void;
   toggleCategory: (category: CategoryDto) => void;
@@ -12,11 +37,11 @@ export type Products = {
   isFilterActive: (filter: "sizes" | "colors" |  "materials" | "occasions", valueId: string) => boolean;
 }
 
-export const initialState: ProductsSearchParams = {
+export const initialState: ParamsStore = {
   pageNumber: 1,
   pageSize: 12,
   searchTerm: '',
-  orderBy: ProductsOrderBy.name,
+  orderBy: ProductsOrderBy.Name,
   filterBy: 'live',
   categories: [],
   colors: [],
@@ -28,10 +53,10 @@ export const initialState: ProductsSearchParams = {
   maxPrice: 0
 }
 
-export const useParamsStore = createWithEqualityFn<ProductsSearchParams & Products>()((set, get) => ({
+export const useParamsStore = createWithEqualityFn<ParamsStore & Products>()((set, get) => ({
   ...initialState,
-  setParams: (newParams: Partial<ProductsSearchParams>) => {
-    return set(state => {
+  setParams: (newParams: Partial<ParamsStore>) => {
+    return set((state: Partial<ParamsStore>) => {
       return {...state, ...newParams}
     })
   },
@@ -58,7 +83,7 @@ export const useParamsStore = createWithEqualityFn<ProductsSearchParams & Produc
   resetCategories: () => set(state => ({...state, categories: []})),
   toggleCategory: (category: CategoryDto) => {
     return set(
-      state => {
+      (state: ParamsStore) => {
         const existingCategory = state.categories?.find(c => c.id === category.id);
         if (existingCategory) {
           return {...state, categories: state.categories?.filter(c => c.id !== category.id)}

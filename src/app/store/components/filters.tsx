@@ -21,8 +21,8 @@ import {FilterSectionGroup} from "@/app/store/components/filterSectionGroup";
 import {FilterSection} from "@/app/store/components/filterSection";
 import {useParamsStore} from "@/hooks/use-params-store";
 import {shallow} from "zustand/shallow";
-import {ProductFiltersDto} from "@/types/product";
 import {IdNameDto} from "@/types/shared";
+import {ProductFiltersDto} from "@/lib/_api/client";
 
 function FilterButton({ item, toggleFilter }: {
   item: IdNameDto,
@@ -136,7 +136,7 @@ export function Filters({
           </FilterSection>
           <FilterSection title={"Size"} description={"Filter by size"}>
             <FilterSectionGroup>
-              {sizes.sort(s => s.value).map(size => (
+              {sizes?.sort((a, b) => (a.value??0) > (b.value ?? 0)).map(size => (
                 <FilterSectionGroupCheckbox
                   key={size.id}
                   checked={(params?.sizes?.filter(s => size.id === s.id).length || 0) > 0}
@@ -154,12 +154,12 @@ export function Filters({
           </FilterSection>
           <FilterSection title={"Occasion"} description={"Filter by occasion"}>
             <FilterSectionGroup>
-              {occasions.map(occasion => (
+              {occasions?.map(occasion => (
                 <FilterSectionGroupCheckbox
                   key={occasion.id}
                   checked={params.isFilterActive("occasions", occasion.id)}
                   onCheck={() => params.toggleFilter("occasions", occasion)} title={occasion.name}
-                  id={occasion.id}/>
+                  id={occasion.id ?? ''}/>
               ))}
             </FilterSectionGroup>
           </FilterSection>

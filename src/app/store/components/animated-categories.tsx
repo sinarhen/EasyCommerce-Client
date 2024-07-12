@@ -2,7 +2,6 @@
 
 import CategoryCard from "@/components/ui/category-card";
 import React, {useCallback} from "react";
-import {CategoryDto, ProductsSearchParams} from "@/types/product";
 import {Collapsible, CollapsibleContent} from "@/components/ui/collapsible";
 import {Button} from "@/components/ui/button";
 import CategoriesWrapper from "@/components/ui/categories-wrapper";
@@ -12,12 +11,13 @@ import {AnimatePresence, motion} from "framer-motion";
 import {toast} from "react-hot-toast";
 import {useParamsStore} from "@/hooks/use-params-store";
 import {shallow} from "zustand/shallow";
+import {Category} from "@/lib/_api/client";
 
 
 export default function AnimatedCategories({
   initialCategories,
                                            }: {
-  initialCategories: CategoryDto[]
+  initialCategories: Category[]
 }) {
   const [open, setOpen] = React.useState(false);
   const params = useParamsStore(state => ({
@@ -70,7 +70,7 @@ export default function AnimatedCategories({
         <CategoriesWrapper
           className={categoriesToDisplay?.length === 0 ? "grid-cols-1 sm:grid-cols-1 lg:grid-cols-1" : ""}>
           <AnimatePresence mode="wait">
-            {categoriesToDisplay?.length !== 0 ? categoriesToDisplay?.map((category: CategoryDto, index) => (
+            {categoriesToDisplay?.length !== 0 ? categoriesToDisplay?.map((category: Category, index) => (
               <motion.div
                 key={category.id}
                 initial={{opacity: 0, x: -10}}
@@ -81,7 +81,7 @@ export default function AnimatedCategories({
                 <CategoryCard
                   title={category.name}
                   onClick={() => params.toggleCategory(category)}
-                  description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>
+                  description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl ?? ''}/>
 
               </motion.div>
             )) : (
@@ -100,10 +100,10 @@ export default function AnimatedCategories({
 
         <CollapsibleContent>
           <CategoriesWrapper>
-            {categoriesToDisplay?.map((category: CategoryDto) => (
+            {categoriesToDisplay?.map((category: Category) => (
               <CategoryCard
                 key={category.id} title={category.name}
-                description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl}/>
+                description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl ?? ''}/>
             ))}
           </CategoriesWrapper>
         </CollapsibleContent>

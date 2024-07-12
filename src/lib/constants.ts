@@ -1,4 +1,4 @@
-import {Season} from "@/types/product";
+import {Season} from "@/lib/_api/client";
 
 export const iconSizes = {
   xs: 8,
@@ -7,18 +7,15 @@ export const iconSizes = {
   lg: 20,
   banner: 180,
 }
-
-export const apiBase = 'http://localhost:5000/api'
-
 export const productsPageSizes = ["4", "12", "24", "36", "48", "60"]
 
-export const seasonsDescriptions: Record<Season, string> = {
-  "winter": "Freezing cold, snow, ice, frost, sleet, hail, and high winds.",
-  "spring": "Rain, wind, and flowers.",
-  "summer": "Hot, sunny, and humid.",
-  "autumn": "Cool, crisp, and colorful leaves."
-
-};
+// export const seasonsDescriptions: Record<Season, string> = {
+//   "": "Freezing cold, snow, ice, frost, sleet, hail, and high winds.",
+//   "spring": "Rain, wind, and flowers.",
+//   "summer": "Hot, sunny, and humid.",
+//   "autumn": "Cool, crisp, and colorful leaves."
+//
+// };
 export const partners = [
   {
     id: 1,

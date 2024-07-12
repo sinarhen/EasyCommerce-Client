@@ -5,6 +5,7 @@ import {AuthDialogProvider} from "@/contexts/AuthDialogContext";
 import {getCurrentUser} from "@/actions/auth";
 import {cookies} from "next/headers";
 import {tokenKeyString} from "@/lib/constants";
+import Providers from "@/app/providers";
 
 export const metadata = {
   title: 'Next.js',

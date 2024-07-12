@@ -51,6 +51,7 @@ export type { Product } from './models/Product';
 export type { ProductCategory } from './models/ProductCategory';
 export type { ProductCategoryDto } from './models/ProductCategoryDto';
 export type { ProductDto } from './models/ProductDto';
+export type { ProductFiltersDto } from './models/ProductFiltersDto';
 export type { ProductImage } from './models/ProductImage';
 export type { ProductImageDto } from './models/ProductImageDto';
 export type { ProductMaterial } from './models/ProductMaterial';
@@ -71,6 +72,7 @@ export { SellerUpgradeRequestStatus } from './models/SellerUpgradeRequestStatus'
 export type { SigningCredentials } from './models/SigningCredentials';
 export type { SimplePrincipal } from './models/SimplePrincipal';
 export type { Size } from './models/Size';
+export type { SizeDto } from './models/SizeDto';
 export type { Store } from './models/Store';
 export type { StoreDto } from './models/StoreDto';
 export type { UpdateBillboardDto } from './models/UpdateBillboardDto';

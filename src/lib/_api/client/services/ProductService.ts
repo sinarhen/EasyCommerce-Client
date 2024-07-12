@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { CreateProductDto } from '../models/CreateProductDto';
 import type { ProductDto } from '../models/ProductDto';
+import type { ProductFiltersDto } from '../models/ProductFiltersDto';
 import type { ProductsOrderBy } from '../models/ProductsOrderBy';
 import type { UpdateProductDto } from '../models/UpdateProductDto';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -78,6 +79,16 @@ export class ProductService {
             url: '/api/products',
             body: requestBody,
             mediaType: 'application/json',
+        });
+    }
+    /**
+     * @returns ProductFiltersDto Success
+     * @throws ApiError
+     */
+    public static getApiProductsFilters(): CancelablePromise<ProductFiltersDto> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/products/filters',
         });
     }
     /**
