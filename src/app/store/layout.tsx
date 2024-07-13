@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Suspense} from "react";
 import GridBackground from "@/components/ui/grid-background";
 import StoreNavbar from "@/app/store/components/store-navbar";
 import {AuthDialogProvider} from "@/contexts/AuthDialogContext";
@@ -20,7 +20,12 @@ export default async function RootLayout({
 
   return (
     <>
-      <StoreNavbar />
+      <Suspense fallback={<></>
+        // <StoreNavbarSkeleton></StoreNavbarSkeleton>
+      }>
+        <StoreNavbar />
+      </Suspense>
+
       <GridBackground>
         <div className="h-full
           px-6

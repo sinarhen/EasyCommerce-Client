@@ -1,6 +1,5 @@
 import React, {useCallback} from "react";
 import {toast} from "react-hot-toast";
-import useAuth from "@/hooks/use-auth";
 import {useAuthDialog} from "@/hooks/use-auth-dialog";
 import {addWish, removeWish} from "@/actions/products";
 import Cookie from "js-cookie";
