@@ -16,23 +16,22 @@ import {
 import {Bookmark, DoorOpen, Package, ShoppingCart, Store, SunMoon, User} from "lucide-react";
 import {ListItem} from "@/components/ui/list-item";
 import StoreNavbarUser from "@/components/ui/store-navbar-user";
-import useAuth from "@/hooks/use-auth";
 import {useTheme} from "next-themes";
 import {toast} from "react-hot-toast";
+import {Roles, tokenKeyString} from "@/lib/constants";
+import { UserDto } from "@/lib/_api/client";
 import {useRouter} from "next/navigation";
-import {tokenKeyString} from "@/lib/constants";
-import {UserDto} from "@/types/user";
 
 export function StoreUserNavigation({user}: {
-  user?: UserDto
+  user: UserDto
 }) {
-  // const router = useRouter();
+  const router = useRouter();
   const onLogout = useCallback(() => {
     Cookie.remove(tokenKeyString)
     toast
       .success("You have been logged out.")
-    // router.refresh()
-  }, [])
+    router.refresh()
+  }, [router])
   const {theme, setTheme} = useTheme()
   return (
     <NavigationMenu alignTo="end">
@@ -40,7 +39,7 @@ export function StoreUserNavigation({user}: {
         <NavigationMenuItem>
           <NavigationMenuTrigger
             className="bg-transparent hover:text-gray-100 dark:hover hover:bg-transparent dark:hover:bg-transparent dark:bg-transparent ">
-            <StoreNavbarUser/>
+            <StoreNavbarUser user={user}/>
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul
@@ -74,12 +73,12 @@ export function StoreUserNavigation({user}: {
               <ListItem href="/me/wishlist" Icon={Bookmark} title="Wishlist">
                 Favorite products.
               </ListItem>
-              {user?.roles.includes("Seller") && (
+              {user?.roles?.includes(Roles.Seller) && (
                 <ListItem href="/me/seller" Icon={Store} title="Seller">
                   Manage your stores.
                 </ListItem>
               )}
-              {user?.roles.includes("Admin") && (
+              {user?.roles?.includes(Roles.Admin) && (
                 <ListItem href="/me/admin" Icon={ShoppingCart} title="Admin">
                   Admin panel.
                 </ListItem>

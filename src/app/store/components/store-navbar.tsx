@@ -6,11 +6,12 @@ import {StoreNavbarNavigation} from "@/app/store/components/store-navbar-navigat
 import {cookies} from "next/headers";
 import {tokenKeyString} from "@/lib/constants";
 import StoreNavbarAuth from "@/app/store/components/store-navbar-auth";
-import {AuthService} from "@/lib/_api/client";
+import {AuthService, OpenAPI} from "@/lib/_api/client";
 
 export default async function StoreNavbar() {
   // const {setOpen, setVariant} = useAuthDialog();
 
+  OpenAPI.TOKEN = cookies().get(tokenKeyString)?.value;
   const user = cookies().get(tokenKeyString) ? (await AuthService.getApiAuthMe()
     .catch(err => console.error(err))) ?? undefined : undefined;
   return (

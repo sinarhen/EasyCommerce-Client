@@ -59,3 +59,11 @@ export const partners = [
 ];
 
 export const tokenKeyString: string = "token";
+
+
+export const enum Roles {
+  SuperAdmin = "SuperAdmin",
+  Admin = "Admin",
+  Seller = "Seller",
+  Customer = "Customer",
+}

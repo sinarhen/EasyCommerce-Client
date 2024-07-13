@@ -52,6 +52,7 @@ export default function RegisterForm({
         toast.error("Not found");
       }
     } catch (e) {
+      console.log(e)
       const error = e as ApiError;
       if (error?.message) {
         toast.error(error.message);
