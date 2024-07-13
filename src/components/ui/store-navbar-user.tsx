@@ -1,7 +1,6 @@
 import Image from "next/image";
 import {User} from "lucide-react";
 import React from "react";
-import useAuth from "@/hooks/use-auth";
 import {UserDto} from "@/lib/_api/client";
 
 export default function StoreNavbarUser({user}: {

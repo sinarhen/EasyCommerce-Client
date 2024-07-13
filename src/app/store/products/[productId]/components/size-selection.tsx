@@ -1,6 +1,6 @@
-import {SizeDto} from "@/types/product";
 import {Button} from "@/components/ui/button";
 import React from "react";
+import {SizeDto} from "@/lib/_api/client";
 
 export const SizeSelection = ({sizes, selectedSize, setSelectedSize, stockForSize}: {
   sizes: SizeDto[],
@@ -9,8 +9,8 @@ export const SizeSelection = ({sizes, selectedSize, setSelectedSize, stockForSiz
   stockForSize: (sizeId: string) => any
 }) => (
   <div className={"flex w-full justify-center md:justify-start overflow-auto gap-x-1"}>
-    {sizes.sort((a, b) => a.value > b.value ? 1 : -1).map((size, index) => {
-      const stock = stockForSize(size.id);
+    {sizes.sort((a, b) => a.value! > b.value! ? 1 : -1).map((size, index) => {
+      const stock = stockForSize(size.id!);
       return (
         <div key={stock?.colorId! + stock?.sizeId!} className="flex flex-col gap-y-1">
           <Button

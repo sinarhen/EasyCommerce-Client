@@ -1,17 +1,12 @@
-import {zodResolver} from "@hookform/resolvers/zod";
-import {useForm} from "react-hook-form";
 import {Input} from "@/components/ui/input";
-import React from "react";
+import React, {useEffect} from "react";
 import {Label} from "@/components/ui/label";
 import {DialogFooter} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
+import {useFormState} from "react-dom";
+import {loginUser} from "@/actions/auth";
 import {toast} from "react-hot-toast";
-import {schema, TFormSchema} from "@/types/register-form";
-import Cookie from "js-cookie";
-import registerUser from "@/actions/auth";
-import {useRouter} from "next/navigation";
-import {tokenKeyString} from "@/lib/constants";
-import {ApiError} from "@/lib/_api/client";
+import Loading from "@/components/ui/loading";
 
 
 export default function RegisterForm({
@@ -19,104 +14,63 @@ export default function RegisterForm({
                                      }: {
   onSuccess?: () => void;
 }) {
-  const {register, setError, handleSubmit, formState: {errors}} = useForm<TFormSchema>({
-    resolver: zodResolver(schema),
-    reValidateMode: "onBlur",
-  });
-  const router = useRouter();
-  const onSubmit = async (data: TFormSchema) => {
-    if (Cookie.get(tokenKeyString)) {
-      console.error("Token already exists");
-      toast.error("Token already exists");
-      return;
-    }
-    try {
-      const resp = await registerUser(data);
 
-      if (!resp) {
-        console.error(resp);
-        toast.error("Something went wrong");
-        return;
-      }
-      const token = resp;
-
-      if (token) {
-        Cookie.set(tokenKeyString, token);
-        toast.success("Login successful");
-        router.refresh();
-        if (onSuccess) {
-          onSuccess();
-        }
-      } else {
-        console.error("Token not found in response");
-        toast.error("Not found");
-      }
-    } catch (e) {
-      console.log(e)
-      const error = e as ApiError;
-      if (error?.message) {
-        toast.error(error.message);
-      } else {
-        toast.error("Something went wrong");
-      }
+  const [state, formAction, isPending] = useFormState(
+    loginUser,
+    null)
+  useEffect(() => {
+    if (state?.error){
+      toast.error(state.error)
     }
-  }
-
-  function renderError(field: keyof TFormSchema) {
-    if (errors[field]) {
-      return (
-        <p className="text-red-500 text-xs mt-1">
-          {errors[field]?.message}
-        </p>
-      );
-    }
-  }
+  }, [state]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-4">
-      {/* eslint-disable-next-line react/jsx-no-undef */}
+    <form action={formAction} className="flex flex-col gap-y-4">
       <div>
         <Label htmlFor="email">Email</Label>
         <Input
+          name={"email"}
           type="email"
           placeholder="Email"
-          {...register("email")}
           className="mt-1"
         />
-        {renderError("email")}
       </div>
       <div>
         <Label htmlFor="username">Username</Label>
         <Input
+          name={"username"}
           type="text"
           placeholder="Username"
-          {...register("username")}
           className="mt-1"
         />
-        {renderError("username")}
       </div>
       <div>
         <Label htmlFor="password" className="">Password</Label>
         <Input
           type="password"
+          name={"password"}
           placeholder="Password"
-          {...register("password")}
           className="mt-1"
         />
-        {renderError("password")}
       </div>
       <div>
         <Label htmlFor="confirmPassword" className="">Confirm Password</Label>
         <Input
           type="password"
           placeholder="Confirm Password"
-          {...register("confirmPassword")}
           className="mt-1"
+          name={"confirmPassword"}
         />
-        {renderError("confirmPassword")}
       </div>
-      <DialogFooter>
-        <Button type="submit">Register</Button>
+      <DialogFooter
+      >
+        <Button
+          disabled={isPending}
+
+          type="submit">
+          {(isPending) ? <Loading/> : "Register"}
+
+        </Button>
       </DialogFooter>
     </form>
   );

@@ -1,4 +1,4 @@
-// 'use server'
+'use server'
 //
 // import apiFetcher from "@/actions/api";
 // import {ProductDetailsDto, ProductsResponse, ProductsSearchParams} from "@/types/product";
@@ -13,14 +13,17 @@
 //   return product?.data
 // }
 
-import {CustomerService} from "@/lib/_api/client";
+import {CustomerService, OpenAPI} from "@/lib/_api/client";
+import {cookies} from "next/headers";
 
-export async function addWish(productId: string) {
+export async function addWish(productId: string, token: string) {
+  OpenAPI.TOKEN = token;
   return CustomerService.postApiCustomerWishlist({
     productId
   })
 }
 
-export async function removeWish(productId: string) {
-  await CustomerService.deleteApiCustomerWishlist({productId})
+export async function removeWish(productId: string, token: string) {
+  OpenAPI.TOKEN = token;
+  return CustomerService.deleteApiCustomerWishlist({productId})
 }

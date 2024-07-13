@@ -41,7 +41,7 @@ export const initialState: ParamsStore = {
   pageNumber: 1,
   pageSize: 12,
   searchTerm: '',
-  orderBy: ProductsOrderBy.Name,
+  orderBy: ProductsOrderBy._0,
   filterBy: 'live',
   categories: [],
   colors: [],

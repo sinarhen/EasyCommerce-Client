@@ -15,12 +15,11 @@ export const WishListContext = React.createContext<null | WishListContextType>(n
 
 
 export function WishListProvider({children}: {children: React.ReactNode}) {
-    const {user} = useAuth();
     const {setOpen, setVariant} = useAuthDialog();
     const [wishList, setWishList] = React.useState<Record<string, boolean>>({});
     const token = Cookie.get(tokenKeyString);
     const toggleWish = useCallback((productId: string, isInitialWished: boolean = false) => {
-        if (!user || !token){
+        if (!token){
             setOpen(true);
             setVariant("login");
             toast.error("You need to login to add to wishlist");
@@ -35,7 +34,7 @@ export function WishListProvider({children}: {children: React.ReactNode}) {
             setWishList(prevWishList => ({...prevWishList, [productId]: true}));
             toast.success("Added to wishlist");
         }
-    }, [setOpen, setVariant, token, user, wishList]);
+    }, [setOpen, setVariant, token, wishList]);
 
     return (
         <WishListContext.Provider value={{wishList, toggleWish}}>
