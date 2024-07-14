@@ -4,7 +4,6 @@ import CategoryCard from "@/components/ui/category-card";
 import React, {useCallback} from "react";
 import {Collapsible, CollapsibleContent} from "@/components/ui/collapsible";
 import {Button} from "@/components/ui/button";
-import CategoriesWrapper from "@/components/ui/categories-wrapper";
 import {X} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
 import {AnimatePresence, motion} from "framer-motion";
@@ -21,7 +20,6 @@ export default function AnimatedCategories({
                                            }: {
   initialCategories: Category[]
 }) {
-  const [open, setOpen] = React.useState(false);
   const params = useParamsStore(state => ({
     categories: state.categories,
     toggleCategory: state.toggleCategory,
@@ -48,9 +46,6 @@ export default function AnimatedCategories({
 
   return (
     <div>
-        <p className="font-semibold">
-          Selected categories
-        </p>
       <div className="flex justify-between  mb-3">
         <div className="gap-x-1 flex">
           <Button
@@ -86,7 +81,9 @@ export default function AnimatedCategories({
         <CarouselContent>
           {/*<AnimatePresence mode={"wait"}>*/}
             {categoriesToDisplay?.length !== 0 ? categoriesToDisplay?.map((category: Category, index) => (
-              <CarouselItem className="basis-1/3">
+              <CarouselItem
+                key={category.id}
+                className="basis-1/2 lg:basis-1/3">
                 {/*<motion.div*/}
                 {/*  className="basis-1/2"*/}
                 {/*  key={category.id}*/}
@@ -100,8 +97,8 @@ export default function AnimatedCategories({
                 {/*    title={category.name}*/}
                 {/*    onClick={() => params.toggleCategory(category)}*/}
                 {/*    description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl ?? ''}/>*/}
-                <div className="bg-white px-6 py-4 rounded border w-full h-52">
-                  <h1 className="font-semibold text-2xl">{category.name}</h1>
+                <div className="bg-white dark:bg-neutral-950 text-gradient animate-gradient dark:border-neutral-800 cursor-pointer px-6 py-4 rounded border w-full h-52">
+                  <h1 className="font-semibold animate-gradient text-gradient text-2xl">{category.name}</h1>
                 </div>
                 {/*</motion.div>*/}
               </CarouselItem>
@@ -118,8 +115,8 @@ export default function AnimatedCategories({
 
           {/*</AnimatePresence>*/}
         </CarouselContent>
-        <CarouselPrevious/>
-        <CarouselNext/>
+        <CarouselPrevious className="hidden lg:flex"/>
+        <CarouselNext className="hidden lg:flex"/>
       </Carousel>
         {/*<CategoriesWrapper*/}
         {/*  className={categoriesToDisplay?.length === 0 ? "grid-cols-1 sm:grid-cols-1 lg:grid-cols-1" : ""}>*/}

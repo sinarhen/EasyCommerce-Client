@@ -24,12 +24,13 @@ export default async function Store({searchParams}: {
       {/*  Products*/}
       {/*</Header1>*/}
 
-      <hr className="h-px mt-1 mb-3 bg-gray-200 rounded-full bg-gradient animate-gradient border-0 "/>
+      {/*<hr className="h-px mt-1 mb-3 bg-gray-200 rounded-full bg-gradient animate-gradient border-0 "/>*/}
 
       <Suspense fallback={
           <ProductsSectionSkeleton/>
         }>
-        <ProductsSection params={searchParams} />
+          <ProductsSection params={searchParams} />
+
       </Suspense>
       <div className="flex justify-between">
         {/*<ProductsPageSizeSelector/>*/}

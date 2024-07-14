@@ -8,7 +8,6 @@ import Image from "next/image";
 import {useEffect, useMemo, useState} from "react";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import {useRouter} from "next/navigation";
-import CategoriesBreadcrumbs from "@/components/ui/skeletons/categories-breadcrumbs";
 import useWishlist from "@/hooks/use-wishlist";
 import {ColorDto, ProductDto} from "@/lib/_api/client";
 
@@ -36,13 +35,10 @@ export default function ProductCard({
 
   return (
     <div className="group  relative">
-      {product.isNew && (
-        <div className="absolute -top-3 -left-4 px-2 py-1 z-20 bg-purple-800 rounded bg-opacity-90 text-sm">New</div>
-      )}
-      <div className="bg-white overflow-hidden rounded w-full flex-col flex h-full drop-shadow-lg ">
-
-
-
+      {/*{product.isNew && (*/}
+      {/*  <div className="absolute -top-3 -left-4 px-2 py-1 z-20 bg-purple-800 rounded bg-opacity-90 text-sm">New</div>*/}
+      {/*)}*/}
+      <div className="bg-white dark:bg-neutral-950 text-black dark:text-white overflow-hidden rounded w-full flex-col flex h-full drop-shadow-lg ">
         <div onClick={() => router.push(`/store/products/${product.id}`)}
              className="relative cursor-pointer group min-h-[300px] overflow-hidden w-full bg-gray-300 ">
           <div
@@ -55,7 +51,7 @@ export default function ProductCard({
               size={"sm"} variant="ghost"
                     className='group-hover:translate-y-0 absolute right-2 top-2 group/wish transition-all translate-y-3'>
               <div className="">
-                <Bookmark fill={isWished ? "black" : "transparent"} size={iconSizes.md}></Bookmark>
+                <Bookmark fill={isWished ? "black" : "transparent"} size={iconSizes.lg}></Bookmark>
               </div>
             </Button>
 
@@ -93,19 +89,15 @@ export default function ProductCard({
           </div>
         </div>
         <div className="flex mt-3 px-4 items-center w-full justify-between">
-          <h3 className="font-light text-2xl sm:text-lg line-clamp-1 text-black mt-1">{product.name}</h3>
-          {product.categories && (
-            <CategoriesBreadcrumbs
-              className={'text-xs'}
-              categories={product.categories}/>
-          )}
+          <h3 className="font-light text-2xl sm:text-lg line-clamp-1 mt-1">{product.name}</h3>
+
 
         </div>
-        <hr className="h-px my-1"/>
+        {/*<hr className="h-px dark:bg-gray-800 my-1"/>*/}
         <div className="justify-self-end px-4 flex justify-between items-center">
           <span className=" text-gradient animate-gradient  text-lg ">${product.minPrice}</span>
           <div>
-            <Button size={"sm"} variant="outline" className='mt-2 group'>
+            <Button size={"sm"} variant="outline" className='mt-2 opacity-80 hover:opacity-100 group'>
 
               <div className="hover:translate-x-0.5  transition-transform flex gap-x-2 ease-out ">
                 <ShoppingCart size={iconSizes.md}></ShoppingCart>
@@ -141,7 +133,7 @@ export default function ProductCard({
         </div>
 
         <div
-          className="w-full text-black dark:text-black pb-4 px-4 mt-3 bg-white justify-between flex flex-col font-semibold text-xs">
+          className="w-full text-black dark:text-white pb-4 px-4 mt-3  justify-between flex flex-col font-semibold text-xs">
 
         <span
           className=" opacity-40 hover:opacity-100 w-full transition-opacity cursor-pointer items-center flex justify-between ">
