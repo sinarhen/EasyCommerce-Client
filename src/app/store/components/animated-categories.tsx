@@ -12,6 +12,7 @@ import {toast} from "react-hot-toast";
 import {useParamsStore} from "@/hooks/use-params-store";
 import {shallow} from "zustand/shallow";
 import {Category} from "@/lib/_api/client";
+import {usePathname, useRouter} from "next/navigation";
 
 
 export default function AnimatedCategories({
@@ -28,14 +29,20 @@ export default function AnimatedCategories({
 
   const categoriesToDisplay = params?.categories?.length === 0 ? initialCategories : params.categories![params.categories!.length - 1].subCategories;
 
-
-  const searchParams = new URLSearchParams();
+  const router = useRouter()
+  const pathname = usePathname();
   const onApply = useCallback(async () => {
+
     if (params.categories){
-      searchParams.set('categories', params.categories.map(c => c.id).join(','))
+      const searchParams = new URLSearchParams();
+
+      searchParams.set('categoryId', params.categories.map(c => c.id).join(','))
+
+      const url = `${pathname}?${searchParams.toString()}`
+      router.push(url)
       toast.success('Categories applied')
     }
-  }, [])
+  }, [params.categories, pathname, router])
 
   return (
     <>
@@ -50,7 +57,7 @@ export default function AnimatedCategories({
             <Button
               variant="outline"
               key={category.id}
-              // onClick={() => params.toggleCategory(category)}
+              onClick={() => params.toggleCategory(category)}
               className="group flex items-center gap-x-1"
             >
               {category.name}

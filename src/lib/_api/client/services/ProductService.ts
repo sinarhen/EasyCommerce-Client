@@ -32,7 +32,6 @@ export class ProductService {
      * @throws ApiError
      */
     public static getApiProducts(
-        productId?: string,
         orderBy?: ProductsOrderBy,
         filterBy?: string,
         pageSize?: number,
@@ -51,7 +50,6 @@ export class ProductService {
             method: 'GET',
             url: '/api/products',
             query: {
-                'ProductId': productId,
                 'OrderBy': orderBy,
                 'FilterBy': filterBy,
                 'PageSize': pageSize,

@@ -12,20 +12,19 @@ export default async function Store({searchParams}: {
   searchParams: ProductsSearchParams
 }) {
   return (
-    <div className='w-full min-h-screen '>
+    <div className='w-full h-full'>
       <Suspense fallback={
-
         <CategoriesSectionSkeleton/>
       }>
         <CategoriesSection />
 
       </Suspense>
 
-      <Header1>
-        Products
-      </Header1>
+      {/*<Header1>*/}
+      {/*  Products*/}
+      {/*</Header1>*/}
 
-      <hr className="h-px my-3 bg-gray-200 rounded-full bg-gradient animate-gradient border-0 "/>
+      <hr className="h-px mt-1 mb-3 bg-gray-200 rounded-full bg-gradient animate-gradient border-0 "/>
 
       <Suspense fallback={
           <ProductsSectionSkeleton/>
