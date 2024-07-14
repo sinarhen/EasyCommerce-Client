@@ -10,7 +10,7 @@ const CategoriesWrapper = ({
 }) => (
   <div
 
-    className={cn("grid overflow-y-hidden mb-6 gap-y-2 lg:grid-cols-4 sm:grid-cols-2  overflow-x-auto gap-x-2", className)}>
+    className={cn("grid overflow-y-hidden mb-6 gap-2.5 lg:grid-cols-4 sm:grid-cols-2  overflow-x-auto ", className)}>
 
     {children}
   </div>

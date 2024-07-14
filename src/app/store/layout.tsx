@@ -26,7 +26,7 @@ export default async function RootLayout({
         <StoreNavbar />
       </Suspense>
 
-      <GridBackground>
+      {/*<GridBackground>*/}
         <div className="h-full
           px-6
           overflow-x-hidden
@@ -35,7 +35,7 @@ export default async function RootLayout({
           xl:px-44 flex w-full py-24 md:py-30 ">
           {children}
         </div>
-      </GridBackground>
+      {/*</GridBackground>*/}
     </>
   )
 }

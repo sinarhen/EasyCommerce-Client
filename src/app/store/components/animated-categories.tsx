@@ -13,6 +13,7 @@ import {useParamsStore} from "@/hooks/use-params-store";
 import {shallow} from "zustand/shallow";
 import {Category} from "@/lib/_api/client";
 import {usePathname, useRouter} from "next/navigation";
+import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from "@/components/ui/carousel";
 
 
 export default function AnimatedCategories({
@@ -31,6 +32,7 @@ export default function AnimatedCategories({
 
   const router = useRouter()
   const pathname = usePathname();
+
   const onApply = useCallback(async () => {
 
     if (params.categories){
@@ -45,14 +47,19 @@ export default function AnimatedCategories({
   }, [params.categories, pathname, router])
 
   return (
-    <>
-      {params?.categories?.length !== 0 && (
+    <div>
         <p className="font-semibold">
           Selected categories
         </p>
-      )}
-      <div className="flex justify-between  mb-1">
+      <div className="flex justify-between  mb-3">
         <div className="gap-x-1 flex">
+          <Button
+            disabled
+            variant="outline"
+            className="group flex items-center gap-x-1"
+          >
+            All
+          </Button>
           {params?.categories?.map(category => (
             <Button
               variant="outline"
@@ -65,32 +72,39 @@ export default function AnimatedCategories({
             </Button>
           ))}
         </div>
-        <div className={"gap-x-1 " + (params?.categories?.length === 0 ? "hidden" : "flex ")}
-             hidden={params?.categories!.length === 0}>
-          <Button variant={"ghost"} onClick={() => params?.resetCategories()}>Clear</Button>
+        <div className={"gap-x-1 flex "}>
+          <Button variant={"ghost"} onClick={() => {
+            params?.resetCategories()
+          }}>Clear</Button>
           <Button variant={"outline"} onClick={onApply}>Apply</Button>
         </div>
 
       </div>
-      <Collapsible open={open} onOpenChange={setOpen}>
-
-        <CategoriesWrapper
-          className={categoriesToDisplay?.length === 0 ? "grid-cols-1 sm:grid-cols-1 lg:grid-cols-1" : ""}>
-          <AnimatePresence mode="wait">
+      <Carousel
+        className={"w-full"}
+      >
+        <CarouselContent>
+          {/*<AnimatePresence mode={"wait"}>*/}
             {categoriesToDisplay?.length !== 0 ? categoriesToDisplay?.map((category: Category, index) => (
-              <motion.div
-                key={category.id}
-                initial={{opacity: 0, x: -10}}
-                animate={{opacity: 1, x: 0}}
-                exit={{opacity: 0, x: -10}}
-                transition={{duration: 0.2, delay: 0.1 * index}}
-              >
-                <CategoryCard
-                  title={category.name}
-                  onClick={() => params.toggleCategory(category)}
-                  description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl ?? ''}/>
-
-              </motion.div>
+              <CarouselItem className="basis-1/3">
+                {/*<motion.div*/}
+                {/*  className="basis-1/2"*/}
+                {/*  key={category.id}*/}
+                {/*  initial={{opacity: 0, x: -10}}*/}
+                {/*  animate={{opacity: 1, x: 0}}*/}
+                {/*  exit={{opacity: 0, x: -10}}*/}
+                {/*  transition={{duration: 0.2, delay: 0.1 * index}}*/}
+                {/*>*/}
+                {/*  <CategoryCard*/}
+                {/*    className={"basis-1/2"}*/}
+                {/*    title={category.name}*/}
+                {/*    onClick={() => params.toggleCategory(category)}*/}
+                {/*    description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl ?? ''}/>*/}
+                <div className="bg-white px-6 py-4 rounded border w-full h-52">
+                  <h1 className="font-semibold text-2xl">{category.name}</h1>
+                </div>
+                {/*</motion.div>*/}
+              </CarouselItem>
             )) : (
               <CategoryCard
                 buttonText="Clear"
@@ -102,23 +116,19 @@ export default function AnimatedCategories({
               />
             )}
 
-          </AnimatePresence>
-        </CategoriesWrapper>
+          {/*</AnimatePresence>*/}
+        </CarouselContent>
+        <CarouselPrevious/>
+        <CarouselNext/>
+      </Carousel>
+        {/*<CategoriesWrapper*/}
+        {/*  className={categoriesToDisplay?.length === 0 ? "grid-cols-1 sm:grid-cols-1 lg:grid-cols-1" : ""}>*/}
 
-        <CollapsibleContent>
-          <CategoriesWrapper>
-            {categoriesToDisplay?.map((category: Category) => (
-              <CategoryCard
-                key={category.id} title={category.name}
-                description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl ?? ''}/>
-            ))}
-          </CategoriesWrapper>
-        </CollapsibleContent>
+        {/*</CategoriesWrapper>*/}
 
 
-      </Collapsible>
 
-    </>
+    </div>
 
   )
 }

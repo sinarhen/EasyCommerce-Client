@@ -4,12 +4,14 @@ import {iconSizes} from "@/lib/constants";
 import {AspectRatio} from "@/components/ui/aspect-ratio";
 import Image from "next/image";
 import React from "react";
+import {cn} from "@/lib/utils";
 
 export default function CategoryCard({
   title,
   description,
   image,
   onClick,
+  className,
   buttonText,
   buttonIcon
                                      }: {
@@ -18,13 +20,14 @@ export default function CategoryCard({
   image?: string,
   onClick?: () => void
   buttonText?: string
+  className?: string;
   buttonIcon?: LucideIcon
 }) {
   const Icon = buttonIcon ?? Eye;
   return (
     <div
       onClick={onClick}
-      className="group  overflow-hidden cursor-pointer relative bg-gray-300 rounded-md min-w-[200px] h-[200px]">
+      className={cn("group  overflow-hidden cursor-pointer relative bg-gray-300 rounded-md w-full h-full", className)}>
       <div
         className=" flex-col justify-between flex group-hover:bg-black/90 transition-all px-4 py-5 bg-black/70 absolute rounded-md z-20 w-full h-full">
         <div>

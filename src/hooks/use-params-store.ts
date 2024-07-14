@@ -12,7 +12,6 @@ import {
 } from "@/lib/_api/client";
 
 type ParamsStore = {
-  productId?: string;
   orderBy?: ProductsOrderBy;
   filterBy?: string;
   pageSize?: number;
@@ -93,5 +92,5 @@ export const useParamsStore = createWithEqualityFn<ParamsStore & Products>()((se
       }
     )
   },
-  reset: () => set(initialState),
+  reset: () => set(initialState)
 }))
