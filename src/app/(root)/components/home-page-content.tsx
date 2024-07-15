@@ -141,13 +141,14 @@ export default function HomePageContent() {
                 </Link>
               </motion.div>
             </div>
-            <motion.div
-              initial={{opacity: 0, y: 20}}
-              animate={{opacity: 1, y: 0}}
-              transition={{duration: transitionDuration, delay: 1}}
-              className=' mt-28 sm:mt-28 md:mt-32  w-full'>
-              <ShoppingEarnings className="flex w-full justify-center md:justify-end"/>
-            </motion.div>
+
+            {/*<motion.div*/}
+            {/*  initial={{opacity: 0, y: 20}}*/}
+            {/*  animate={{opacity: 1, y: 0}}*/}
+            {/*  transition={{duration: transitionDuration, delay: 1}}*/}
+            {/*  className=' mt-28 sm:mt-28 md:mt-32  w-full'>*/}
+            {/*  <ShoppingEarnings className="flex w-full justify-center md:justify-end"/>*/}
+            {/*</motion.div>*/}
           </div>
           <div className={`
           h-full
