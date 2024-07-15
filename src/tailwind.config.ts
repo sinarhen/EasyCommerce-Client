@@ -41,12 +41,22 @@ const config = {
           "0%": {opacity: "0"},
           "100%": {opacity: "1"}
         },
+        "left-to-right": {
+          "0%": {transform: "translateX(-40px)", opacity: "0"},
+          "100%": {transform: "translateX(0)", opacity: "1"}
+        },
+        "bottom-to-top": {
+          "0%": {transform: "translateY(20px)", opacity: "0"},
+          "100%": {transform: "translateY(0)", opacity: "1"}
+        }
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-        gradient: "gradient 4s linear infinite",
-        "fade-in": "fade-in 1s ease-in-out",
+        "accordion-down": "accordion-down 0.2s ease-out forwards",
+        "accordion-up": "accordion-up 0.2s ease-out forwards",
+        gradient: "gradient 4s linear infinite forwards",
+        "fade-in": "fade-in 1s ease-out forwards",
+        "left-to-right": "left-to-right var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-easing, ease-out) forwards",
+        "bottom-to-top": "bottom-to-top var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-easing, ease-out) forwards"
       },
     },
   },
@@ -73,6 +83,7 @@ const config = {
         },
         {values: flattenColorPalette(theme("backgroundColor")), type: "color"}
       );
+
     },
   ],
 } satisfies Config
