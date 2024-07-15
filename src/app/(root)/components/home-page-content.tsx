@@ -59,7 +59,7 @@ export default function HomePageContent() {
             <MaskContainer isMobile={isMobile} mousePosition={mousePosition} isHovered={isHovered}>
               <div
                 className={cn(
-                  `inline z-20 px-4  
+                  `z-20 px-4  
                   text-center md:text-start
           md:px-12
           lg:px-28 

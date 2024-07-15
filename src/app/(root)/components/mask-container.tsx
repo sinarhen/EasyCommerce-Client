@@ -12,6 +12,8 @@ interface MaskContainerProps {
 
 
 const MaskContainer = memo(({isMobile, mousePosition, isHovered, children}: MaskContainerProps) => {
+  if (isMobile) return null;
+
   const maskSize = isHovered && !isMobile ? 200 : 0;
 
   const animations = !isMobile ? {
