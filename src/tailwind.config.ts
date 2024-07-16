@@ -24,6 +24,9 @@ const config = {
       },
     },
     extend: {
+      transitionDuration: {
+        "1300": "1300ms",
+      },
       keyframes: {
         "accordion-down": {
           from: {height: "0"},
