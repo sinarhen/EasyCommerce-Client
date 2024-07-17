@@ -3,7 +3,7 @@
 import CategoryCard from "@/components/ui/category-card";
 import React, {useCallback} from "react";
 import {Button} from "@/components/ui/button";
-import {X} from "lucide-react";
+import {DollarSign, X} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
 import {toast} from "react-hot-toast";
 import {useParamsStore} from "@/hooks/use-params-store";
@@ -69,7 +69,9 @@ export default function AnimatedCategories({
           <Button variant={"ghost"} onClick={() => {
             params?.resetCategories()
           }}>Clear</Button>
-          <Button variant={"outline"} onClick={onApply}>Apply</Button>
+          <Button onClick={onApply} variant="outline" className="gap-x-2 hover:shadow-lg hover:text-purple-800 transition-all hover:border-purple-800 hover:shadow-purple-800/[0.1] w-full ">
+            Apply
+          </Button>
         </div>
 
       </div>
@@ -98,7 +100,7 @@ export default function AnimatedCategories({
         : (
           <div onClick={() => params.resetCategories()}
                className="bg-white  dark:bg-neutral-950 text-gradient animate-gradient dark:border-neutral-800 cursor-pointer px-6 py-4 rounded border w-full h-52">
-            <h1 className="font-semibold animate-gradient text-gradient text-2xl">Categories not found. Reset?</h1>
+            <h1 className="font-semibold animate-gradient text-gradient text-2xl">No subcategories. Reset?</h1>
           </div>
         )
 

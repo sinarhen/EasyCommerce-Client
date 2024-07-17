@@ -34,7 +34,7 @@ export default function ProductCard({
 
 
   return (
-    <div className="group border-black/[0.1] dark:border-white/[0.1] border relative">
+    <div className="group hover:shadow-xl transition-all hover:shadow-purple-800/[0.1] border-black/[0.1] dark:border-white/[0.1] border relative">
       {/*{product.isNew && (*/}
       {/*  <div className="absolute -top-3 -left-4 px-2 py-1 z-20 bg-purple-800 rounded bg-opacity-90 text-sm">New</div>*/}
       {/*)}*/}
@@ -66,7 +66,7 @@ export default function ProductCard({
           </div>
 
           {selectedImage ? <Image
-              className={`${imageIsLoading ? "animate-pulse bg-gray-200 blur-md" : ""} transition-all object-cover group-hover:scale-110 `}
+              className={`${imageIsLoading ? "animate-pulse bg-gray-200 blur-md" : ""} transition-all object-cover  `}
               loading="lazy"
               onError={() => setImageIsLoading(false)}
               onLoad={() => setImageIsLoading(false)}
