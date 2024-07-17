@@ -101,14 +101,14 @@ export default function Home() {
                     <AnimatedTooltip items={partners}/>
                   </div>
                   <div
-                    className="ml-2 animate-fade-in opacity-0 delay-2000  mb-1 text-gray-800  font-semibold mt-2">
+                    className="ml-2 animate-left-to-right opacity-0 delay-1000  mb-1 text-gray-800  font-semibold mt-2">
                     Our Partners
                   </div>
                 </div>
               </div>
 
             </div>
-            <div className="text-base mt-4 hidden md:flex justify-end lg:items-center items-end h-full w-full">
+            <div className="text-base animate-right-to-left opacity-0 transition-opacity delay-1000 mt-4 hidden md:flex justify-end lg:items-center items-end h-full w-full">
               <CardContainer>
                 <CardBody
                   className="w-full h-full bg-gray-50 relative group/card  dark:bg-black transition-all dark:border-white/[0.2] border-black/[0.1] hover:shadow-2xl hover:shadow-purple-800/[0.4] duration-500     rounded-xl p-6 border  ">

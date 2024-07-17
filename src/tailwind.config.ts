@@ -51,7 +51,12 @@ const config = {
         "bottom-to-top": {
           "0%": {transform: "translateY(20px)", opacity: "0"},
           "100%": {transform: "translateY(0)", opacity: "1"}
-        }
+        },
+        "right-to-left": {
+          "0%": {transform: "translateX(20px)", opacity: "0"},
+          "100%": {transform: "translateX(0)", opacity: "1"}
+        },
+
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out forwards",
@@ -59,7 +64,8 @@ const config = {
         gradient: "gradient 4s linear infinite forwards",
         "fade-in": "fade-in 1s ease-out forwards",
         "left-to-right": "left-to-right var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-easing, ease-out) forwards",
-        "bottom-to-top": "bottom-to-top var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-easing, ease-out) forwards"
+        "bottom-to-top": "bottom-to-top var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-easing, ease-out) forwards",
+        "right-to-left": "right-to-left var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-easing, ease-out) forwards",
       },
     },
   },
