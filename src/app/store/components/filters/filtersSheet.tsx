@@ -15,14 +15,16 @@ import {
 } from "@/components/ui/sheet"
 import {Filter, X} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
-import React, {useMemo} from "react";
-import {FilterSectionGroupCheckbox} from "@/app/store/components/filterSectionGroupCheckbox";
-import {FilterSectionGroup} from "@/app/store/components/filterSectionGroup";
-import {FilterSection} from "@/app/store/components/filterSection";
+import React, {useCallback, useMemo} from "react";
+import {FilterSectionGroupCheckbox} from "@/app/store/components/filters/filterSectionGroupCheckbox";
+import {FilterSectionGroup} from "@/app/store/components/filters/filterSectionGroup";
+import {FilterSection} from "@/app/store/components/filters/filterSection";
 import {useParamsStore} from "@/hooks/use-params-store";
 import {shallow} from "zustand/shallow";
 import {IdNameDto} from "@/types/shared";
 import {ProductFiltersDto} from "@/lib/_api/client";
+import {usePathname, useRouter} from "next/navigation";
+import {toast} from "react-hot-toast";
 
 function FilterButton({ item, toggleFilter }: {
   item: IdNameDto,
@@ -43,7 +45,7 @@ function FilterButton({ item, toggleFilter }: {
 
 type FiltersProps = Omit<ProductFiltersDto, 'categories'>
 
-export function Filters({
+export function FiltersSheet({
                           filters
                         }: {
   filters: FiltersProps
@@ -67,16 +69,46 @@ export function Filters({
   }), shallow);
   const setParams = useParamsStore(state => state.setParams);
 
+  const router = useRouter()
+  const pathname = usePathname();
+
+  const onApply = useCallback(async () => {
+    const searchParams = new URLSearchParams();
+    if (params.colors){
+      searchParams.set('colors', params.colors.map(c => c.id).join(','))
+    }
+    if (params.sizes){
+      searchParams.set('sizes', params.sizes.map(c => c.id).join(','))
+    }
+    if (params.materials){
+      searchParams.set('materials', params.materials.map(c => c.id).join(','))
+    }
+    if (params.occasions){
+      searchParams.set('occasions', params.occasions.map(c => c.id).join(','))
+    }
+    if (params.minPrice){
+      searchParams.set('minPrice', params.minPrice.toString())
+    }
+    if (params.maxPrice){
+      searchParams.set('maxPrice', params.maxPrice.toString())
+    }
+
+    const url = `${pathname}?${searchParams.toString()}`
+    router.push(url)
+    toast.success('Filters applied')
+    
+  }, [params.colors, params.materials, params.maxPrice, params.minPrice, params.occasions, params.sizes, pathname, router])
+
   return (
     <Sheet>
       <div className="flex items-center gap-x-3">
         <SheetTrigger asChild>
-          <Button size={"sm"}>
+          <Button variant="ghost" className="mt-2">
             <Filter size={iconSizes.sm}/>
             Filter
           </Button>
         </SheetTrigger>
-        <div className="flex gap-x-1 items-center">
+        <div className="flex  mt-2 gap-x-1 items-center">
           {params.colors?.map(item => (
             <FilterButton
               key={item.id}
@@ -190,9 +222,8 @@ export function Filters({
           <SheetClose asChild>
             <Button
               className="mt-2 w-full"
-              onClick={() => {
-              }}
-              type="submit">Apply</Button>
+              onClick={onApply}
+              >Apply</Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

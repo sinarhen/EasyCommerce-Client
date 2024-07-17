@@ -30,7 +30,7 @@ export default async function ProductsSection({
   ).catch(err => console.log(err)));
   return (
     <>
-      {/*<Filters filters={otherFilters}/>*/}
+      {/*<FiltersSheet filters={otherFilters}/>*/}
         {response && response.products ? (
           <ProductsWrapper>
             <Products data={response.products}/>
