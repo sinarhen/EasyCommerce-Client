@@ -78,33 +78,18 @@ export default function AnimatedCategories({
         <Carousel
           className={"w-full"}
         >
-          <CarouselContent>
+          <CarouselContent >
             {/*<AnimatePresence mode={"wait"}>*/}
             {categoriesToDisplay?.map((category: Category, index) => (
               <CarouselItem
                 key={category.id}
                 className="basis-1/2 lg:basis-1/3">
-                {/*<motion.div*/}
-                {/*  className="basis-1/2"*/}
-                {/*  key={category.id}*/}
-                {/*  initial={{opacity: 0, x: -10}}*/}
-                {/*  animate={{opacity: 1, x: 0}}*/}
-                {/*  exit={{opacity: 0, x: -10}}*/}
-                {/*  transition={{duration: 0.2, delay: 0.1 * index}}*/}
-                {/*>*/}
-                {/*  <CategoryCard*/}
-                {/*    className={"basis-1/2"}*/}
-                {/*    title={category.name}*/}
-                {/*    onClick={() => params.toggleCategory(category)}*/}
-                {/*    description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl ?? ''}/>*/}
-                <div onClick={() => params.toggleCategory(category)} className="bg-white  dark:bg-neutral-950 text-gradient animate-gradient dark:border-neutral-800 cursor-pointer px-6 py-4 rounded border w-full h-52">
+                <div onClick={() => params.toggleCategory(category)} className="bg-white hover:border-purple-800 dark:hover:border-purple-800  dark:bg-neutral-950 text-gradient animate-gradient dark:border-neutral-800 cursor-pointer px-6 py-4 rounded border w-full h-52">
                   <h1 className="font-semibold animate-gradient text-gradient text-2xl">{category.name}</h1>
                 </div>
-                {/*</motion.div>*/}
               </CarouselItem>
             ))}
 
-            {/*</AnimatePresence>*/}
           </CarouselContent>
           <CarouselPrevious className="hidden lg:flex"/>
           <CarouselNext className="hidden lg:flex"/>
@@ -118,13 +103,6 @@ export default function AnimatedCategories({
         )
 
       }
-      {/*<CategoriesWrapper*/}
-      {/*  className={categoriesToDisplay?.length === 0 ? "grid-cols-1 sm:grid-cols-1 lg:grid-cols-1" : ""}>*/}
-
-      {/*</CategoriesWrapper>*/}
-
-
     </div>
-
   )
 }
