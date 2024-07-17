@@ -2,11 +2,9 @@
 
 import CategoryCard from "@/components/ui/category-card";
 import React, {useCallback} from "react";
-import {Collapsible, CollapsibleContent} from "@/components/ui/collapsible";
 import {Button} from "@/components/ui/button";
 import {X} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
-import {AnimatePresence, motion} from "framer-motion";
 import {toast} from "react-hot-toast";
 import {useParamsStore} from "@/hooks/use-params-store";
 import {shallow} from "zustand/shallow";
@@ -75,12 +73,14 @@ export default function AnimatedCategories({
         </div>
 
       </div>
-      <Carousel
-        className={"w-full"}
-      >
-        <CarouselContent>
-          {/*<AnimatePresence mode={"wait"}>*/}
-            {categoriesToDisplay?.length !== 0 ? categoriesToDisplay?.map((category: Category, index) => (
+      {categoriesToDisplay?.length !== 0 ? (
+
+        <Carousel
+          className={"w-full"}
+        >
+          <CarouselContent>
+            {/*<AnimatePresence mode={"wait"}>*/}
+            {categoriesToDisplay?.map((category: Category, index) => (
               <CarouselItem
                 key={category.id}
                 className="basis-1/2 lg:basis-1/3">
@@ -97,32 +97,31 @@ export default function AnimatedCategories({
                 {/*    title={category.name}*/}
                 {/*    onClick={() => params.toggleCategory(category)}*/}
                 {/*    description={`Look at ${category.name.toLowerCase()} collection`} image={category.imageUrl ?? ''}/>*/}
-                <div className="bg-white dark:bg-neutral-950 text-gradient animate-gradient dark:border-neutral-800 cursor-pointer px-6 py-4 rounded border w-full h-52">
+                <div onClick={() => params.toggleCategory(category)} className="bg-white  dark:bg-neutral-950 text-gradient animate-gradient dark:border-neutral-800 cursor-pointer px-6 py-4 rounded border w-full h-52">
                   <h1 className="font-semibold animate-gradient text-gradient text-2xl">{category.name}</h1>
                 </div>
                 {/*</motion.div>*/}
               </CarouselItem>
-            )) : (
-              <CategoryCard
-                buttonText="Clear"
-                buttonIcon={X}
-                title={"No categories found"}
-                description={"Try to clear the filters"}
-                onClick={() => params.resetCategories()}
+            ))}
 
-              />
-            )}
+            {/*</AnimatePresence>*/}
+          </CarouselContent>
+          <CarouselPrevious className="hidden lg:flex"/>
+          <CarouselNext className="hidden lg:flex"/>
+        </Carousel>
+      )
+        : (
+          <div onClick={() => params.resetCategories()}
+               className="bg-white  dark:bg-neutral-950 text-gradient animate-gradient dark:border-neutral-800 cursor-pointer px-6 py-4 rounded border w-full h-52">
+            <h1 className="font-semibold animate-gradient text-gradient text-2xl">Categories not found. Reset?</h1>
+          </div>
+        )
 
-          {/*</AnimatePresence>*/}
-        </CarouselContent>
-        <CarouselPrevious className="hidden lg:flex"/>
-        <CarouselNext className="hidden lg:flex"/>
-      </Carousel>
-        {/*<CategoriesWrapper*/}
-        {/*  className={categoriesToDisplay?.length === 0 ? "grid-cols-1 sm:grid-cols-1 lg:grid-cols-1" : ""}>*/}
+      }
+      {/*<CategoriesWrapper*/}
+      {/*  className={categoriesToDisplay?.length === 0 ? "grid-cols-1 sm:grid-cols-1 lg:grid-cols-1" : ""}>*/}
 
-        {/*</CategoriesWrapper>*/}
-
+      {/*</CategoriesWrapper>*/}
 
 
     </div>

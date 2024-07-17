@@ -56,6 +56,10 @@ const config = {
           "0%": {transform: "translateX(20px)", opacity: "0"},
           "100%": {transform: "translateX(0)", opacity: "1"}
         },
+        "top-to-bottom": {
+          "0%": {transform: "translateY(-20px)", opacity: "0"},
+          "100%": {transform: "translateY(0)", opacity: "1"}
+        }
 
       },
       animation: {
@@ -66,6 +70,7 @@ const config = {
         "left-to-right": "left-to-right var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-easing, ease-out) forwards",
         "bottom-to-top": "bottom-to-top var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-easing, ease-out) forwards",
         "right-to-left": "right-to-left var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-easing, ease-out) forwards",
+        "top-to-bottom": "top-to-bottom var(--animation-duration, 1s) var(--animation-delay, 0s) var(--animation-easing, ease-out) forwards"
       },
     },
   },
