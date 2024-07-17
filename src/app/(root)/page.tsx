@@ -29,10 +29,6 @@ export default function Home() {
 
               pt-20
               pb-24
-              sm:pt 
-              lg:py 
-              md:py
-              xl:py-
               px-4  
               md:px-12
               lg:px-28 
@@ -51,14 +47,14 @@ export default function Home() {
                     Welcome to
                   </div>
                   <div
-                    className="animate-left-to-right delay-700 opacity-0  ">
+                    className="animate-left-to-right delay-300 opacity-0  ">
 
                     <span className="animate-gradient text-gradient">{" EasyCommerce."}</span>
                   </div>
                 </div>
 
                 <div
-                  className={`animate-fade-in delay-1000 opacity-0 md:text-base text-sm font-light px-[20%] md:px-0 w-full md:w-1/2 mt-5`}
+                  className={`animate-fade-in delay-700 opacity-0 md:text-base text-sm font-light px-[20%] md:px-0 w-full md:w-1/2 mt-5`}
                   // initial={{opacity: 0}}
                   // animate={{opacity: 1}}
                   // transition={{duration: transitionDuration, delay: 0.8}}
@@ -68,15 +64,15 @@ export default function Home() {
                 </div>
 
                 <div
-                  className="flex relative animate-bottom-to-top delay-1000 opacity-0 flex-col sm:flex-row w-full mt-8 sm:mt-5  md:w-fit gap-x-2 z-10">
+                  className="flex relative animate-bottom-to-top delay-700 opacity-0 flex-col sm:flex-row w-full mt-8 sm:mt-5  md:w-fit gap-x-2 z-10">
                   <Link className="w-full flex" href={"/store"}>
-                    <Button size="lg" variant="ghost" className="gap-x-2 shadow-2xl border border-transparent  hover:text-pink-300 transition-all duration-500 hover:border-pink-300 hover:shadow-pink-800/[0.7] w-full">
+                    <Button size="lg" variant="ghost" className="gap-x-2 hover:shadow-2xl border border-transparent  hover:text-pink-300 transition-all duration-500 hover:border-pink-300 hover:shadow-pink-800/[0.4] w-full">
                       <ShoppingBag/> Shop Now
                     </Button>
                   </Link>
                   <span className="text-sm my-3 sm:hidden font-medium text-center ">or</span>
                   <Link href={"/seller"} className="w-full flex">
-                    <Button size="lg" variant="outline" className="gap-x-2 shadow-2xl hover:text-purple-300 transition-all duration-500 hover:border-purple-300 hover:shadow-purple-800/[0.7] w-full ">
+                    <Button size="lg" variant="outline" className="gap-x-2 hover:shadow-2xl hover:text-purple-300 transition-all duration-500 hover:border-purple-300 hover:shadow-purple-800/[0.4] w-full ">
                       <DollarSign/> Become a Seller
                     </Button>
                   </Link>
@@ -101,14 +97,14 @@ export default function Home() {
                     <AnimatedTooltip items={partners}/>
                   </div>
                   <div
-                    className="ml-2 animate-left-to-right opacity-0 delay-1000  mb-1 text-gray-800  font-semibold mt-2">
+                    className="ml-2 animate-left-to-right opacity-0 delay-700  mb-1 text-gray-800  font-semibold mt-2">
                     Our Partners
                   </div>
                 </div>
               </div>
 
             </div>
-            <div className="text-base animate-right-to-left opacity-0 transition-opacity delay-1000 mt-4 hidden md:flex justify-end lg:items-center items-end h-full w-full">
+            <div className="text-base animate-right-to-left opacity-0 transition-opacity delay-700 mt-4 hidden md:flex justify-end lg:items-center items-end h-full w-full">
               <CardContainer>
                 <CardBody
                   className="w-full h-full bg-gray-50 relative group/card  dark:bg-black transition-all dark:border-white/[0.2] border-black/[0.1] hover:shadow-2xl hover:shadow-purple-800/[0.4] duration-500     rounded-xl p-6 border  ">

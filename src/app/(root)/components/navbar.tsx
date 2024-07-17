@@ -1,14 +1,11 @@
-'use client'
 import React from "react";
 import {Info, Phone, ShoppingCart} from "lucide-react";
 import NavButton from "../../../components/ui/nav-button";
 import Logo from "../../../components/ui/logo";
 import {NavButtonProps} from "@/types/nav-button";
-import {motion} from "framer-motion";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
-import dynamic from 'next/dynamic';
+import ThemeToggle from "@/components/ui/theme-toggle";
 
-const ThemeToggle = dynamic(() => import('../../../components/ui/theme-toggle'), {ssr: false})
 
 const navButtons = [
   {href: "/store", Icon: ShoppingCart, text: "Store", variant: "secondary"},
@@ -16,12 +13,6 @@ const navButtons = [
   {href: "/contact", Icon: Phone, text: "Contact", variant: "ghost"},
 ] as NavButtonProps[];
 
-const transitionDuration = 1;
-
-const buttonVariants = {
-  hidden: {opacity: 0, x: 10},
-  visible: {opacity: 1, x: 0},
-};
 
 export default function Navbar() {
   return (
@@ -30,16 +21,13 @@ export default function Navbar() {
         <Logo/>
         <div className="flex gap-x-1.5">
           {navButtons.map((button, idx) => (
-            <motion.div
+            <div
               key={idx}
-              initial="hidden"
-              animate="visible"
-              variants={buttonVariants}
-              transition={{delay: idx * 0.2, duration: transitionDuration}}
+              className={`animate-fade-in  opacity-0 `}
             >
               <NavButton {...button} />
 
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
