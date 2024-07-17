@@ -34,7 +34,7 @@ export default function ProductCard({
 
 
   return (
-    <div className="group  relative">
+    <div className="group border-black/[0.1] dark:border-white/[0.1] border relative">
       {/*{product.isNew && (*/}
       {/*  <div className="absolute -top-3 -left-4 px-2 py-1 z-20 bg-purple-800 rounded bg-opacity-90 text-sm">New</div>*/}
       {/*)}*/}
