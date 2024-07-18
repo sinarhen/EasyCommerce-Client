@@ -4,7 +4,7 @@ import {Label} from "@/components/ui/label";
 import {DialogFooter} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 import {useFormState} from "react-dom";
-import {loginUser} from "@/actions/auth";
+import {registerUser} from "@/actions/auth";
 import {toast} from "react-hot-toast";
 import Loading from "@/components/ui/loading";
 
@@ -16,8 +16,8 @@ export default function RegisterForm({
 }) {
 
   const [state, formAction, isPending] = useFormState(
-    loginUser,
-    null)
+    registerUser,
+    undefined)
   useEffect(() => {
     if (state?.error){
       toast.error(state.error)

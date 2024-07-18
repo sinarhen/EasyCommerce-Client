@@ -19,7 +19,7 @@ export default function LoginForm({
 
   const [state, formAction, isPending] = useFormState(
     loginUser,
-    null)
+    undefined)
   useEffect(() => {
     if (state?.error){
       toast.error(state.error)

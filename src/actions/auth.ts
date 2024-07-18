@@ -18,7 +18,9 @@ import {redirect} from "next/navigation";
 //     return { message: 'Failed to create' }
 //   }
 // }
-export async function loginUser(successUrl: any, data: FormData) {
+export async function loginUser(prevState: {
+  error: string
+}| undefined, data: FormData) {
 
   const body = await loginSchema.safeParseAsync({
     email: data.get('email'),
@@ -32,7 +34,8 @@ export async function loginUser(successUrl: any, data: FormData) {
   try {
     const token = await AuthService.postApiAuthLogin(body.data);
     cookies().set(tokenKeyString, token);
-    return revalidatePath('/store')
+    revalidatePath('/store')
+
   } catch(e) {
     return {
       error: "Email or password is incorrect."
@@ -41,7 +44,9 @@ export async function loginUser(successUrl: any, data: FormData) {
 
 }
 
-export async function register(data: FormData) {
+export async function registerUser(initialState: {
+  error: string
+}| undefined, data: FormData) {
 
   const body = await registerSchema.safeParseAsync({
     email: data.get('email'),
@@ -57,7 +62,8 @@ export async function register(data: FormData) {
   try {
     const token = await AuthService.postApiAuthRegister(body.data);
     cookies().set(tokenKeyString, token);
-    return revalidatePath('/store')
+    revalidatePath('/store')
+
   } catch(e) {
     console.log(e)
     return {
