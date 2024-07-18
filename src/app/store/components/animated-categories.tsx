@@ -30,15 +30,21 @@ export default function AnimatedCategories({
   const pathname = usePathname();
 
   const onApply = useCallback(async () => {
+    const lastCategory = params.categories?.at(params.categories?.length - 1)
+    const searchParams = new URLSearchParams();
 
-    if (params.categories){
-      const searchParams = new URLSearchParams();
+    if (lastCategory?.id){
 
-      searchParams.set('categoryId', params.categories.map(c => c.id).join(','))
+      searchParams.set('categoryId', lastCategory.id!)
 
       const url = `${pathname}?${searchParams.toString()}`
       router.push(url)
       toast.success('Categories applied')
+    } else {
+      searchParams.delete('categoryId')
+
+      const url = `${pathname}?${searchParams.toString()}`
+      router.push(url)
     }
   }, [params.categories, pathname, router])
 
