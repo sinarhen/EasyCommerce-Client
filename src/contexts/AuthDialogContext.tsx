@@ -22,7 +22,6 @@ export const AuthDialogProvider = ({children}: {
   return (
     <AuthDialogContext.Provider value={{...dialog, variant, setVariant}}>
       <AuthDialog isOpen={dialog.isOpen} setVariant={setVariant} variant={variant} setOpen={dialog.setOpen}/>
-
       {children}
     </AuthDialogContext.Provider>
   );

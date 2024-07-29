@@ -12,7 +12,7 @@ import Loading from "@/components/ui/loading";
 export default function RegisterForm({
                                        onSuccess
                                      }: {
-  onSuccess?: () => void;
+  onSuccess: () => void;
 }) {
 
   const [state, formAction, isPending] = useFormState(
@@ -21,8 +21,10 @@ export default function RegisterForm({
   useEffect(() => {
     if (state?.error){
       toast.error(state.error)
+    } else {
+      onSuccess?.()
     }
-  }, [state]);
+  }, [onSuccess, state]);
 
   return (
     <form action={formAction} className="flex flex-col gap-y-4">
