@@ -1,7 +1,7 @@
 'use client'
 
 import CategoryCard from "@/components/ui/category-card";
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect} from "react";
 import {Button} from "@/components/ui/button";
 import {DollarSign, X} from "lucide-react";
 import {iconSizes} from "@/lib/constants";
@@ -14,9 +14,9 @@ import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious}
 
 
 export default function AnimatedCategories({
-  initialCategories,
+  categories,
                                            }: {
-  initialCategories: Category[]
+  categories?: Category[] | null,
 }) {
   const params = useParamsStore(state => ({
     categories: state.categories,
@@ -24,7 +24,7 @@ export default function AnimatedCategories({
     resetCategories: state.resetCategories
   }), shallow);
 
-  const categoriesToDisplay = params?.categories?.length === 0 ? initialCategories : params.categories![params.categories!.length - 1].subCategories;
+  const categoriesToDisplay = params?.categories?.length === 0 ? categories : params.categories![params.categories!.length - 1].subCategories;
 
   const router = useRouter()
   const pathname = usePathname();
@@ -87,16 +87,18 @@ export default function AnimatedCategories({
           className={"w-full"}
         >
           <CarouselContent >
-            {/*<AnimatePresence mode={"wait"}>*/}
-            {categoriesToDisplay?.map((category: Category, index) => (
-              <CarouselItem
-                key={category.id}
-                className="basis-1/2 lg:basis-1/3">
-                <div onClick={() => params.toggleCategory(category)} className="bg-white hover:border-purple-800 dark:hover:border-purple-800  dark:bg-neutral-950 text-gradient animate-gradient dark:border-neutral-800 cursor-pointer px-6 py-4 rounded border w-full h-52">
-                  <h1 className="font-semibold animate-gradient text-gradient text-2xl">{category.name}</h1>
-                </div>
-              </CarouselItem>
-            ))}
+            {categoriesToDisplay?.map((category: Category) => {
+              return (
+                <CarouselItem
+                  key={category.id}
+                  className="basis-1/2 lg:basis-1/3">
+                  <div onClick={() => params.toggleCategory(category)}
+                       className="bg-white hover:border-purple-800 dark:hover:border-purple-800  dark:bg-neutral-950 text-gradient animate-gradient dark:border-neutral-800 cursor-pointer px-6 py-4 rounded border w-full h-52">
+                    <h1 className="font-semibold animate-gradient text-gradient text-2xl">{category.name}</h1>
+                  </div>
+                </CarouselItem>
+              )
+            })}
 
           </CarouselContent>
           <CarouselPrevious className="hidden lg:flex"/>

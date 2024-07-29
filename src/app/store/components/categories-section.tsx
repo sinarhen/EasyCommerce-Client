@@ -1,13 +1,14 @@
 import AnimatedCategories from "@/app/store/components/animated-categories";
-import {ProductService} from "@/lib/_api/client";
+import {Category, ProductService} from "@/lib/_api/client";
+
 
 export default async function CategoriesSection(){
-  const filters = await ProductService.getApiProductsFilters().catch(err => console.error(err))
+  const allCategories = (await ProductService.getApiProductsFilters().catch(err => console.error(err)))?.categories
+
+
   return (
     <>
-      {filters?.categories && (
-        <AnimatedCategories initialCategories={filters.categories}/>
-      )}
+        <AnimatedCategories categories={allCategories}  />
     </>
 
   )

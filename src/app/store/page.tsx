@@ -20,7 +20,7 @@ export default async function Store({searchParams}: {
       <Suspense fallback={
         <CategoriesSectionSkeleton/>
       }>
-        <CategoriesSection />
+        <CategoriesSection/>
 
       </Suspense>
       <Suspense fallback={
